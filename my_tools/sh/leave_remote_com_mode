@@ -1,0 +1,10 @@
+#!/bin/sh
+
+killall -9 remote_com_server
+killall -9 socat
+
+#rmmod opvxg4xx
+#rmmod dahdi
+#/etc/init.d/dahdi start
+/etc/init.d/asterisk start
+

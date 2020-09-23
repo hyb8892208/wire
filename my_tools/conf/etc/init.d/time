@@ -1,0 +1,90 @@
+#!/bin/sh
+
+. /etc/functions.sh
+
+auto_sync_from_ntp(){
+	NTPSRV=""
+	for i in 1 2 3; do
+		NTP=`/my_tools/set_config /etc/asterisk/gw/time.conf get option_value general ntp$i 2> /dev/null`
+		if [ $? -eq 0 ];then
+			if [ "$NTP" != "" ];then
+				#NTPSRV=$NTPSRV,$NTP
+				killps ntpclient $$
+				/my_tools/ntpclient -h $NTP -s -i 5 -d
+			fi
+		fi
+	done
+}
+
+auto_sync_from_base_station(){
+	result=`/my_tools/station_time 2> /dev/null`
+}
+
+time_setting()
+{
+	AUTO_SYNC=`/my_tools/set_config /etc/asterisk/gw/time.conf get option_value general auto_sync 2> /dev/null`
+	if [ $? -eq 0 ];then
+		if [ "$AUTO_SYNC" != "on" ];then
+			exit
+		fi
+	fi
+
+	touch /tmp/TZ
+	TIMEZONE=`/my_tools/set_config /etc/asterisk/gw/time.conf get option_value general timezone 2> /dev/null`
+	if [ $? -eq 0 ];then
+		if [ -n $TIMEZONE ];then
+			#Like "Asia/Chongqing@CST-8",only need put "CST-8" to /etc/TZ 
+			echo -n $TIMEZONE | cut -d "@" -f2 > /etc/TZ
+			if [ ! -h /etc/asterisk/localtime ];then
+				timezone=`echo -n $TIMEZONE | cut -d "@" -f1 | cut -d "/" -f2`
+				if [ "$timezone" = "-" ];then
+					timezone="UTC"
+				fi
+				if [ -e /usr/share/zoneinfo/$timezone ];then
+					cat /usr/share/zoneinfo/$timezone > /tmp/localtime
+					hwclock -s 
+				fi
+			fi
+		fi
+	fi
+
+	AUTO_SYNC_TYPE=`/my_tools/set_config /etc/asterisk/gw/time.conf get option_value general auto_sync_type 2> /dev/null`
+	if [ x"$AUTO_SYNC_TYPE" = x"ntp" ];then
+		auto_sync_from_ntp
+	elif [ x"$AUTO_SYNC_TYPE" = x"station" ];then
+		auto_sync_from_base_station
+	else
+		auto_sync_from_ntp
+	fi
+
+#	AUTO_SYNC_BASE_STATION=`/my_tools/set_config /etc/asterisk/gw/time.conf get option_value general auto_sync_from_station 2> /dev/null`
+#	if [ x"$AUTO_SYNC_BASE_STATION" = x"on" ];then
+#		auto_sync_from_base_station
+#	fi
+
+	#if [ "$NTPSRV" != "" ];then
+	#	echo "NTPSVR is $NTPSRV"
+	#	killps ntpclient $$
+	#	/my_tools/ntpclient -h $NTPSRV -s -i 10 -d &
+	#fi
+}
+
+case "$1" in
+	start)
+		time_setting
+		#/my_tools/cluster_mode sync_time_to_slave
+		;;
+	stop)
+		killps ntpclient $$
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+        echo "Usage: $0 {start|stop|restart|reload}"
+        exit 2
+		;;
+esac
+
+exit 0

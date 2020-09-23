@@ -1,0 +1,439 @@
+#!/bin/php
+<?php 
+require_once("/www/cgi-bin/php/system_fc.php");
+include_once("/www/cgi-bin/inc/function.inc");
+?>
+<?php
+require_once("/www/cgi-bin/inc/redis.inc");
+include_once("/www/cgi-bin/inc/smsinboxdb.php"); 
+include_once("/www/cgi-bin/inc/smsoutboxdb.php"); 
+
+
+$redis_client = new Predis\Client();
+
+/* 检查短信是否要发送给simbank */
+// 检查短信是否襳imbank
+function sms_to_simbank($PORT,$PHONENUMBER,$TIME,$MESSAGE)
+{
+	global $redis_client;
+
+	/*
+	 * simbank.collect.sim.info used to send SMS of collecting the SIM information
+	 */
+	$redis_sms_table = array("simbank.collect.sim.info");
+	foreach ($redis_sms_table as $sim_list) {
+		if("" != $sim_list){
+			// 判断对应的端口是否要传回短信内容
+/*			$str = $PORT."-send-stat";
+			$ret = $redis_client->hget($sim_list, $str);
+			if ($ret != "2") // 状态"2"代表已发送
+				continue;
+
+			//判断信息内容是否匹配
+			$len=strlen($MESSAGE);
+			$data='';
+			for ($i=0; $i<$len; $i++)
+				$data.=sprintf("%02x",ord(substr($MESSAGE,$i,1)));
+			
+			$match_str = $PORT."-match-str";
+			$ret = $redis_client->hget($sim_list, $match_str);
+			$len=strlen($ret);
+			$data_='';
+			for($i=0;$i<$len;$i++)
+				$data_.=sprintf("%02x",ord(substr($ret,$i,1)));
+			
+			if( isset($ret) && FALSE === strstr($data,$data_))
+			{
+				continue;
+			}
+			// 判断电话号码是否一致
+			$str = $PORT."-recv-num";
+			$ret = $redis_client->hget($sim_list, $str);
+			$pos_1 = strpos($ret, $PHONENUMBER);
+			$pos_2 = strpos($PHONENUMBER, $ret);
+			if (($pos_1==='') || ($pos_2===''))
+				continue;
+*/
+			// 设置接收号 
+			$str = $PORT."-recv-num";
+			$ret = $redis_client->hset($sim_list, $str, $PHONENUMBER);
+
+			// 设置接收到的短信
+			$str = $PORT."-recv-msg";
+			$ret = $redis_client->hset($sim_list, $str, $MESSAGE);
+			
+			// 设置接收time 
+			$str = $PORT."-recv-time";
+			$ret = $redis_client->hset($sim_list, $str, $TIME);
+			
+			// 设置状态
+//			$str = $PORT."-send-stat";
+//			$ret = $redis_client->hset($sim_list, $str, "3");
+		}
+	}
+	
+
+	return;
+}
+
+function sms_to_simquery($PORT,$PHONENUMBER,$TIME,$MESSAGE)
+{
+	global $redis_client;
+
+	/*
+	 * simquery.collect.balance.info used to send SMS of collecting the SIM balance
+	 * simquery.collect.phonenum.info used to send SMS of collecting the SIM number
+	 */
+	$redis_sms_table = array("simquery.collect.balance.info", "simquery.collect.phonenum.info");
+	foreach ($redis_sms_table as $sim_list) {
+		if("" != $sim_list){
+			// 判断对应的端口是否要传回短信内容
+			$str = $PORT."-send-stat";
+			$ret = $redis_client->hget($sim_list, $str);
+			if ($ret != "2") // 状态"2"代表已发送
+				continue;
+
+			//判断信息内容是否匹配
+			$len=strlen($MESSAGE);
+			$data='';
+			for ($i=0; $i<$len; $i++)
+				$data.=sprintf("%02x",ord(substr($MESSAGE,$i,1)));
+			
+			$match_str = $PORT."-match-str";
+			$ret = $redis_client->hget($sim_list, $match_str);
+			$len=strlen($ret);
+			$data_='';
+			for($i=0;$i<$len;$i++)
+				$data_.=sprintf("%02x",ord(substr($ret,$i,1)));
+			
+			if( isset($ret) && FALSE === strstr($data,$data_))
+			{
+				continue;
+			}
+			// 判断电话号码是否一致
+			$str = $PORT."-recv-num";
+			$ret = $redis_client->hget($sim_list, $str);
+			$pos_1 = strpos($ret, $PHONENUMBER);
+			$pos_2 = strpos($PHONENUMBER, $ret);
+			if (($pos_1==='') || ($pos_2===''))
+				continue;
+			
+			// 设置接收到的短信
+			$str = $PORT."-recv-msg";
+			$ret = $redis_client->hset($sim_list, $str, $MESSAGE);
+			
+			// 设置状态
+			$str = $PORT."-send-stat";
+			$ret = $redis_client->hset($sim_list, $str, "3");
+		}
+	}
+	
+
+	return;
+}
+
+
+function sms_to_email($PORT,$PHONENUMBER,$TIME,$MESSAGE,$sms_info){
+	$aql = new aql();
+	$aql->set('basedir','/etc/asterisk/gw');
+	$email_info = $aql->query("select * from email.conf where section='$PORT'");
+	
+	$sw = $email_info[$PORT]['enabled'];
+	if($sw == 'on') {
+		$smail1 = trim($email_info[$PORT]['email1']);
+		$smail2 = trim($email_info[$PORT]['email2']);
+		$smail3 = trim($email_info[$PORT]['email3']);
+		$title = trim($email_info[$PORT]['title']);
+		$content = trim($email_info[$PORT]['content']);
+	}else{
+		$smail1 = trim($sms_info['mail']['smail1']);
+		$smail2 = trim($sms_info['mail']['smail2']);
+		$smail3 = trim($sms_info['mail']['smail3']);
+		$title = trim($sms_info['mail']['mail_title']);
+		$content = trim($sms_info['mail']['mail_content']);
+	}
+		
+	$sender = trim($sms_info['mail']['sender']);
+	$smtp_server = trim($sms_info['mail']['smtpserver']);
+	$smtp_port = trim($sms_info['mail']['smtpport']);
+	if($smtp_port == "") $smtp_port=25;
+	$smtp_user = trim($sms_info['mail']['smtpuser']);
+	$smtp_pwd = trim($sms_info['mail']['smtppwd']);
+	$tls_ssl = trim($sms_info['mail']['tls_ssl']);
+	
+	$EMAIL_PORT = get_gsm_name_by_channel($PORT);
+
+	if($title == '') {
+		$title="$PHONENUMBER send sms to port $EMAIL_PORT in $TIME";
+	} else {
+		$title = str_replace("\$PHONENUMBER","$PHONENUMBER",$title);
+		$title = str_replace("\$PORT","$EMAIL_PORT",$title);
+		$title = str_replace("\$TIME","$TIME",$title);
+		$title = str_replace("\$MESSAGE","$MESSAGE",$title);
+	}
+
+	if($content == '') {
+		$content = "$MESSAGE";
+	} else {
+		$content = str_replace("\$PHONENUMBER","$PHONENUMBER",$content);
+		$content = str_replace("\$PORT","$EMAIL_PORT",$content);
+		$content = str_replace("\$TIME","$TIME",$content);
+		$content = str_replace("\$MESSAGE","$MESSAGE",$content);
+	}
+	
+	if( ($smail1 != "" || $smail2 != "" || $smail3 != "") && 
+		$sender != "" && 
+		$smtp_server != "" &&
+		$smtp_user != "" &&
+		$smtp_pwd != ""
+	) {
+		require_once('/my_tools/PHPMailer_5.2.2/class.phpmailer.php');
+		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
+		try {
+			$mail->IsSMTP(); // telling the class to use SMTP
+			$mail->SMTPAuth   = true;                  // enable SMTP authentication
+
+			if($tls_ssl == 'tls') {
+				#If you want to use TLS, try adding:
+				$mail->SMTPSecure = 'tls';
+			}else if($tls_ssl == 'ssl'){
+				#If you want to use SSL, try adding:
+				$mail->SMTPSecure = 'ssl';
+			}
+
+			$mail->CharSet	  = 'utf-8';
+			$mail->Host       = $smtp_server; // SMTP server
+			$mail->SetFrom($sender);
+
+			//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+			$mail->Port       = $smtp_port;                    // set the SMTP port for the GMAIL server
+
+			$mail->Username   = $smtp_user; // SMTP account username
+			$mail->Password   = $smtp_pwd;        // SMTP account password
+			if($smail1 != "")
+				$mail->AddAddress($smail1);
+
+			if($smail2 != "")
+				$mail->AddAddress($smail2);
+
+			if($smail3 != "")
+				$mail->AddAddress($smail3);
+
+			$mail->Subject = $title;
+			$mail->Body = $content; 
+			$mail->Send();
+		    // echo "Message Sent OK</p>\n";
+		} catch (phpmailerException $e) {
+			echo $e->errorMessage(); //Pretty error messages from PHPMailer
+		} catch (Exception $e) {
+			echo $e->getMessage(); //Boring error messages from anything else!
+		}
+	}
+	
+	return;
+}
+
+while(true) {
+	 // 接收到的短信
+	$blpop_arr = $redis_client->lrange("app.asterisk.smsreceive.list",0,-1);
+	
+	if(count($blpop_arr)>0){
+		$flock = lock_file("/data/log/smsinbox.db");
+		$sms_info = get_sms_info();
+		
+		$db = new SMSINBOXDB(); 
+		$db->try_exec("BEGIN");
+		for($i=0;$i<count($blpop_arr);$i++){
+			$blpop_str = $blpop_arr[$i];
+
+			if (!$blpop_str){	
+				continue;
+			}
+
+			// 已接收到短信处理
+			if (isset($blpop_str)){
+				$pop_str=$blpop_str;
+			}
+			
+			if ($pop_str<>""){
+				//add by liubin:
+				//replace "\r,\n,\r\n" to " ",and make sure the fun:json_decode() run fine.
+				if (strstr($pop_str,"\r\n")) {
+					//echo $pop_str;
+					$pop_str = str_replace("\r\n","\\n",$pop_str);
+				}
+				if (strstr($pop_str,"\r")) {
+					//echo $pop_str;
+					$pop_str = str_replace("\r"," ",$pop_str);
+				}
+				if (strstr($pop_str,"\n")) {
+					//echo $pop_str;
+					$pop_str = str_replace("\n","\\n",$pop_str);
+				}
+			
+				$pop_array=json_decode($pop_str,true);
+						
+				$PORT=$pop_array["port"];
+				$PHONENUMBER=$pop_array["src"];
+				$TIME=$pop_array["time"];
+				$MESSAGE=$pop_array["text"];
+				$SMSC=$pop_array["smsc"];
+				//echo $PORT;
+			}else{
+				continue;
+			}
+
+			/*短信发送给simbank */
+			sms_to_simbank($PORT,$PHONENUMBER,$TIME,$MESSAGE);
+
+			/*短信发送给simquery */
+			sms_to_simquery($PORT,$PHONENUMBER,$TIME,$MESSAGE);
+
+		//	preg_match_all('/\d+/',$PORT,$arr);
+		//	$PORT = "Board-".$arr[0][0]."-gsm-".$arr[0][1];
+		//	echo "$PORT";
+		//	echo "\n";
+
+			/* 客户定制短信处理， custom_sms脚本需要客户实现并放在指定目录下 */
+			if(file_exists("/etc/asterisk/gw/custom_sms")) {
+				@system("/etc/asterisk/gw/custom_sms \"$PORT\" \"$PHONENUMBER\" \"$TIME\" \"$MESSAGE\" > /dev/null 2>&1 &");
+			}
+			
+			/* Save to database */
+			if(is_true($sms_info['local_store']['enable'])){ 
+				$db->insert_sms("$PORT","$PHONENUMBER","$TIME","$MESSAGE","$SMSC");
+			}
+			
+			/* SMS to Email */
+			$sw = $sms_info['mail']['sw'];
+			if($sw == 'on') {
+				sms_to_email($PORT,$PHONENUMBER,$TIME,$MESSAGE,$sms_info);
+			}
+			
+			//-----------------------fanchao 2015-6-24 ---------------------------//
+			/* SMS Commands */
+			
+			$sw = $sms_info['control']['sw'];
+			$send_uuid_list = array();
+			if($sw == 'on') {
+				$password = trim($sms_info['control']['password']);
+				
+				if(substr($MESSAGE,0,3) == pack("CCC",0xef,0xbb,0xbf)){
+					 $MESSAGE = substr($MESSAGE,3);
+				}
+				
+				if( $MESSAGE == "reboot system $password") {
+					$db->try_exec("COMMIT");
+					$db->close();
+					unlock_file($flock);
+					system_reboot();
+				} else if( $MESSAGE == "reboot asterisk $password") {
+					ast_reboot();
+				} else if( $MESSAGE == "restore config $password") {
+					$db->try_exec("COMMIT");
+					$db->close();
+					unlock_file($flock);
+					res_def_cfg_file();
+				} else if( $MESSAGE == "get info $password") {
+					$PORT_VALUE = '';
+					$SPAN=$PORT;
+					if(strpos($PORT,'gsm')){
+						preg_match_all('/\d+/',$SPAN,$arr);
+						$PORT_VALUE = 'gsm'.$arr[0][0].'.'.$arr[0][1];
+					} else {
+						$PORT_VALUE = 'gsm1.'.$SPAN;
+					}
+					$SMSSRC=$PHONENUMBER;
+					exec("/my_tools/add_syslog \"Send SMS to $SMSSRC by $SPAN (get ip)\" 2>&1");
+					$str = "";
+					if($cluster_info['mode'] == "master" || $cluster_info['mode'] == "stand_alone"){
+						$filename = "/etc/cfg/gw/network/lan.conf";
+						$handle = fopen($filename, "r");
+						$content = fread($handle, filesize($filename));
+						preg_match("/\d*\.\d*\.\d*\.\d*/",$content,$matches);
+						if (isset($matches[0])) {
+							$str = "IP : ".$matches[0];
+						} else {
+							$slot_num = get_slotnum();
+							$default_ip = "172.16.99.".$slot_num;
+							$str = "IP : ".$default_ip;
+						}
+					}
+					echo $str;
+					$STR=$str;	
+					//exec("asterisk -rx \"gsm send sms $SPAN $SMSSRC \\\"$STR\\\"\" > /dev/null 2>&1");
+					$uuid = create_uuid();
+					$send_uuid_list[] = $uuid;
+					$push_array = array();
+					$push_array['id'] = $uuid;
+					$push_array['type'] = 'http_sms';
+					$push_array['port'] = $PORT_VALUE;
+					$push_array['message'] = $STR;
+					$push_array['to'] = $SMSSRC;
+					$push_array['switch'] = "0";
+					$push_array['retry'] = "1";
+					$push_array['exten'] = "1";
+					$push_array['from'] = $PORT_VALUE; 
+					//print_r($push_array);
+					$push_str = json_encode($push_array);
+					$redis_client->rpush("app.asterisk.php.sendlist",$push_str);
+					
+				}
+			}
+			
+			/*  Phone Number Query */
+			$sw=$sms_info['phonenumber']['sw'];
+			$password=$sms_info['phonenumber']['password'];
+			if( $sw == 'on' ){
+				$PORT_VALUE = '';
+				$SPAN=$PORT;
+				if(strpos($PORT,'gsm')){
+					preg_match_all('/\d+/',$SPAN,$arr);
+					$PORT_VALUE = 'gsm'.$arr[0][0].'.'.$arr[0][1];
+				} else {
+					$PORT_VALUE = 'gsm1.'.$SPAN;
+				}
+				
+				if(substr($MESSAGE,0,3) == pack("CCC",0xef,0xbb,0xbf)){
+					 $MESSAGE = substr($MESSAGE,3);
+				}
+				
+				if( $MESSAGE == "get phonenumber $password"){
+					
+					$str= "Your phonenumber is $PHONENUMBER";
+					$STR = $str;
+					$uuid = create_uuid();
+					$send_uuid_list = $uuid;
+					$push_array = array();
+					$push_array['id'] = $uuid;
+					$push_array['type'] = 'http_sms';
+					$push_array['port'] = $PORT_VALUE;
+					$push_array['message'] = $STR;
+					$push_array['to'] = $PHONENUMBER;
+					$push_array['switch'] = "0";
+					$push_array['retry'] = '1';
+					$push_array['exten'] = "1";
+					$push_array['from'] = $PORT_VALUE;
+					$push_str = json_encode($push_array);
+					$redis_client->rpush("app.asterisk.php.sendlist", $push_str);
+				}
+			}
+		}
+		$db->try_exec("COMMIT");
+		
+		for($j=0;$j<$i;$j++){//统一删除redis中的数据，保证数据的统一性
+			$redis_client->lpop("app.asterisk.smsreceive.list");//把数据插入数据库后删除redis那条数据
+		}
+		
+		$db->close();
+		unlock_file($flock);
+	}
+	
+	if(count($blpop_arr) == 0){
+		sleep(4);
+	}
+	
+	unset($blpop_arr);
+	unset($sms_info);
+}
+?>

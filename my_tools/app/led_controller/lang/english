@@ -1,0 +1,86 @@
+[main_menu]
+Menu="Menu"
+SystemStatus="System Status"
+NetworkInfo="Network Info"
+DeviceInfo="Device Info"
+WebAccess="Web Access"
+SSHAccess="SSH Access"
+NetworkSettings="Network Settings"
+SystemControl="System Control"
+PowerSave="Power Save"
+Language="Language"
+Back="Back"
+
+[web]
+Access="Access"
+ResetPassword="Reset Password"
+
+
+[system_status]
+ActiveWirelessChannels="Available Wireless Channels"
+ConcurrentCalls="Concurrent Calls"
+StorageUsage="Storage Usage"
+MemoryUsage="Memory Usage"
+
+
+[network_info]
+Wan="WAN"
+Lan="LAN"
+Mode="Mode"
+Mac="MAC"
+IP="IP"
+Mask="Mask"
+DNS="DNS"
+
+
+[network_settings]
+WanMode="WAN MODE"
+LanMode="LAN MODE"
+
+
+[system_control]
+Reboot="Reboot"
+FactoryReset="Factory Reset"
+
+
+[network_mode]
+DHCP="DHCP"
+Static="Static"
+Factory="Factory"
+Disable="Disable"
+
+
+[device_info]
+ProductName="Product Name"
+ModelDescription="Model Description"
+SoftwareVersion="Software Version"
+HardwareVersion="Hardware Version"
+SystemTime="SystemTime"
+UpTime="Up Time"
+
+
+[web_access]
+Protocol="Protocol"
+Port="Port"
+
+
+[language]
+english="English"
+chinese="ÖÐÎÄ"
+
+
+[confirm]
+Confirm="Confirm"
+Cancel="Cancel"
+
+
+[switch]
+Enable="Enable"
+Disable="Disable"
+
+
+[control_result]
+Success="success"
+Fail="fail"
+
+

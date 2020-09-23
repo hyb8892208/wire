@@ -1,0 +1,218 @@
+#!/bin/sh
+#-----------------------------------------------------------------
+# the script used for start/stop/restart cloud service 
+#-----------------------------------------------------------------
+	usage()
+	{
+		echo "Usage : $0 [start]|[stop]|[status]|[restart]|[update]"
+		echo "Example :"
+		echo "        $0 restart"
+	}
+	
+	if [ $# -ne 1 ]; then 
+			echo "Please check the argument! "
+			usage
+			exit 0
+	fi
+
+	check_status()
+	{
+		PIDNAME=$1
+		FULLNAME=`ps w |grep "${PIDNAME}" |awk '{print $5}'`
+		for i in ${FULLNAME}; do
+			if [ "`basename $i`" = "$PIDNAME" ]; then
+				return 1
+			else	
+				continue
+			fi
+		done
+	   return 2
+	}
+	
+	get_model_name() 
+	{
+		mode_type=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys sys_type`
+		chan_count=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys total_chan_count`
+
+		if [ x"$mode_type" = x"1" ]; then
+			if [ x"$chan_count" = x"16" ]; then
+				ver_type=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys hw_ver`
+				if [ x"$ver_type" = x"1.0" ]; then
+					model_name="SWG-1016"
+				else
+					model_name="SWG-2016"
+				fi
+				echo $model_name
+			elif [ x"$chan_count" = x"32" ]; then
+				model_name="SWG-2032"
+				echo $model_name
+			fi
+		elif [ x"$mode_type" = x"2" ];then
+			if [ x"$chan_count" = x"16" ];then
+				model_name="SWG-2016-4S"
+				echo $model_name
+			elif [ x"$chan_count" = x"32" ];then
+				model_name="SWG-2016-4S"
+				echo $model_name
+			fi
+		elif [ x"$mode_type" = x"3" ]; then
+			if [ x"$chan_count" = x"20" ]; then
+				model_name="VS_USB-1020"
+				echo $model_name
+			elif [ x"$chan_count" = x"44" ]; then
+				model_name="VS_USB-1044"
+				echo $model_name
+			elif [ x"$chan_count" = x"8" ]; then
+				model_name="SWG-2008"
+				echo $model_name
+			fi
+		fi
+	}
+
+	case "$1" in
+			start|Start)  
+				check_status cloudMain
+				RET=`echo $?`
+				#if [ "$RET" = "1" ]; then
+				#		echo -ne " service status ......"
+				#		echo -ne "\t\t\t[\033[32m Alive \033[0m]\n"
+				#else 
+					echo -ne "starting cloud service ......"
+					enable=`/my_tools/set_config /etc/config/cloud.conf get  option_value cloud enable`
+					server_url=`/my_tools/set_config /etc/config/cloud.conf get  option_value cloud server_url`
+					
+					if [ x"$server_url" = x"" ]; then
+						cloud_url="http://cloud.openvox.com.cn/cloud"
+					else
+						cloud_url=http://${server_url}/cloud
+					fi
+
+					if [ "X$enable" = "Xyes" ]; then
+						#### Get local IP address and port for this gateway ####
+						LOCAL_IP_ADDR=`ifconfig eth0 |grep "inet" | grep -v "inet6" |awk '{print $2}'`
+						if [ "X${LOCAL_IP_ADDR}" != "X" ]; then 
+							CONNT_REQ_URL="http://${LOCAL_IP_ADDR}:7547"
+							#proc_config -s -c acs -k connection_request_url -v ${CONNT_REQ_URL} -e 1 -f /etc/config/cloud.conf
+						else
+							echo "_]Warning : failed to get IP address (eth0)" >> /var/log/messages
+							exit 1
+						fi
+
+						uci -q  -c /etc/config  set  cloud_nat.@stun[0].server_address="$server_url"
+						uci commit
+
+						uci -q  -c /etc/config  set  cloud_main.@acs[0].url="$cloud_url"
+						cloud_username=`/my_tools/set_config /etc/config/cloud.conf get  option_value cloud username`	
+						[ "X$cloud_username" = "X" ] && cloud_username=""
+						uci -q  -c /etc/config  set  cloud_main.@acs[0].username="$cloud_username"
+						
+						cloud_password=`/my_tools/set_config /etc/config/cloud.conf get  option_value cloud password`
+						uci -q  -c /etc/config  set  cloud_main.@acs[0].password="$cloud_password"
+						
+						periodic_interval='1600'
+						uci -q  -c /etc/config  set  cloud_main.@acs[0].periodic_interval="$periodic_interval"
+						
+						periodic_enable='yes'
+						[ "X$periodic_enable" = "Xyes" ] && periodic_enable="true"
+						[ "X$periodic_enable" = "Xno" ] && periodic_enable="false"
+						uci -q  -c /etc/config  set  cloud_main.@acs[0].periodic_enable="$periodic_enable"
+						
+						
+						manufacturer=`/my_tools/redis-cli get  app.com.name`
+						uci -q  -c /etc/config  set  cloud_main.@device[0].manufacturer="$manufacturer"
+						
+						uci -q  -c /etc/config  set  cloud_main.@device[0].product_class="Wireless Gateway"
+						mac=`ifconfig |grep -E "eth0.*HWaddr"|grep -v "eth0:" |awk '{print $5}'`
+						serial_number=`echo ${mac//:/}`
+						uci -q  -c /etc/config  set  cloud_main.@device[0].serial_number="$serial_number"
+						
+						oui=${serial_number:0:6}
+						uci -q  -c /etc/config  set  cloud_main.@device[0].oui="$oui"
+						
+						hardware_version=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys hw_ver`
+						uci -q  -c /etc/config  set  cloud_main.@device[0].hardware_version="$hardware_version"
+						
+						software_version=`/my_tools/redis-cli get product.sw.version` 
+						uci -q  -c /etc/config set  cloud_main.@device[0].software_version="$software_version"
+						#model_name=`/my_tools/redis-cli get product.board.type`
+						uci -q  -c /etc/config set  cloud_main.@device[0].model_name=`get_model_name`
+						cloudExternal apply value > /dev/null 2>&1	
+						
+						ubusd -s /var/run/cloud.sock &					
+						cloudMain  -b	> /dev/null 2>&1 &
+						cloudNat   > /dev/null 2>&1   &
+						sleep 2
+#						/etc/init.d/remoteweb start                                                                                                    
+#						/etc/init.d/remotessh start
+						remotemonitor &
+						if [ "$?" = "0" ] ; then
+							echo -ne "\t\t\t[\033[32m OK \033[0m]\n"
+						else
+							echo -ne "\t\t\t[\033[31m Failed \033[0m]\n"
+							sleep 0.5
+						fi
+					else
+						echo -ne "\t\t\t[\033[32m No Enable or No ACS URL \033[0m]\n"
+						sleep 0.5
+					fi
+				#fi
+					;;
+			stop|Stop)
+				ubus -s /var/run/cloud.sock  call tr069 inform '{"event": "4 value change"}'
+				sleep 5
+				check_status cloudMain
+				RET=`echo $?`
+				#if [ "$RET" != "1" ]; then
+				#	echo -ne "cloud service status ......"
+				#	echo -ne "\t\t\t[\033[31m Stoped \033[0m]\n"
+				#else 
+					echo -ne "stopping cloud service ......"
+					kill -9 `pidof remotemonitor`
+					/etc/init.d/remoteweb stop
+					/etc/init.d/remotessh stop
+					kill -9 `pidof cloudMain`
+					kill -9 `pidof  ubusd`
+					kill -9 `pidof cloudNat`
+					if [ "$?" = "0" ] ; then 
+						echo -ne "\t\t\t[\033[32m OK \033[0m]\n"
+					else
+						echo -ne "\t\t\t[\033[31m Failed \033[0m]\n"
+						sleep 0.5
+					fi
+				#fi
+				;;
+			status)
+				echo -ne "cloud service status ......"
+				check_status cloudMain
+				RET=`echo $?`
+				if [ "$RET" = "1" ]; then
+					echo -ne "\t\t\t[\033[32m Alive \033[0m]\n"
+				else 
+					echo -ne "\t\t\t[\033[31m Stoped \033[0m]\n"
+				fi
+				;;	
+		restart|reload|Restart)
+				echo "restarting cloud service"
+				$0 stop
+				$0 start
+				;;	
+			update)
+				echo -ne "cloud service status ......" 
+				check_status easycwmpd
+				RET=`echo $?`
+				if [ "$RET" = "1" ]; then
+					ubus -s /var/run/cloud.sock call tr069 inform '{ "event": "value_change" }'
+					echo -ne "\t\t\t[\033[31m Update OK\033[0m]\n"
+					
+				else
+					echo -ne "\t\t\t[\033[31m Stoped \033[0m]\n"
+				fi 
+				;;				
+				
+			*) 
+				echo "invalid argument!"
+				usage
+				;;
+	esac	
+
+	exit 0

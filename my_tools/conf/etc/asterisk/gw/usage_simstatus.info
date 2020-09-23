@@ -1,0 +1,22 @@
+﻿----------------------------------------------------
+Usage: http://IP/simstatus?port=xxx
+	
+1. Parameter Description
+	
+1.1 port
+	Description:    0 means all port, other means designated port
+	Default Value:  None
+	Necessity:  Required
+	
+2. Report Format (charset: UTF-8)
+	
+2.1 JSON
+	{
+		"1":[{
+			"imsi":"xxxx",
+			"status":"Registered (Home network)"
+		}]
+		...
+	}
+
+---------------------------------------------------

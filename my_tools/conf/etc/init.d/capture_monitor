@@ -1,0 +1,30 @@
+#!/bin/sh
+
+mon_start()
+{
+	monStr=`grep checkCapture /etc/asterisk/gw/crontabs_root |awk '{print $7}'`
+	if [ x"${monStr}" = x ]; then
+		# sleep 3 min
+		echo "*/3 * * * * root /my_tools/checkCapture.sh" >> /etc/asterisk/gw/crontabs_root
+	fi
+}
+
+mon_stop()
+{
+	sed -i '/checkCapture/d' /etc/asterisk/gw/crontabs_root
+}
+
+case "$1" in
+	start)
+		mon_start
+		;;
+	stop)
+		mon_stop
+		;;
+	*)
+		echo "Usage: $0 {start|stop}"
+		exit 2
+		;;
+esac
+
+exit 0

@@ -1,0 +1,27 @@
+#!/bin/sh
+/my_tools/add_syslog "Power off"
+echo
+echo "Stop..................................."
+
+#stop asterisk
+#/etc/init.d/asterisk stop
+
+#stop dahdi
+#/etc/init.d/dahdi stop
+
+
+# stop MSP
+###############################################
+. /etc/functions.sh
+#rmmod fci
+#echo 0 > /sys/class/net/eth2/fast_path_enable  
+#echo 0 > /sys/class/net/eth0/fast_path_enable
+#rmmod comcerto_fpp
+#rmmod fpp_csme
+#rmmod csmencaps
+#ifconfig eth1 down
+#killps spu_daemon -9 > /dev/null 2>&1
+###############################################
+
+
+exit 0

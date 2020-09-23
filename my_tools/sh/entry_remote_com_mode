@@ -1,0 +1,10 @@
+#!/bin/sh
+
+killall remote_com_server
+killall socat
+
+/etc/init.d/asterisk stop
+#/etc/init.d/dahdi stop
+
+
+/my_tools/remote_com_server "0=5000 1=5001 2=5002 3=5003 4=5004 5=5005 6=5006 7=5007" 

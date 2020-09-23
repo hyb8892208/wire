@@ -1,0 +1,4 @@
+此固件修复了emu端mini52芯片跑飞后无法通信的问题
+先升级SimEmu_20180809_.bin，再升级SimCardEmuAdaptor1800809_.bin
+升级前需要关闭SimEmuSvr程序，升级过程中需要查看屏幕打印结果，如果错误需要重新升级。
+

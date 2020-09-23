@@ -1,0 +1,20 @@
+
+目录及文件说明
+
+rri_cli        客户端命令行相关，用于测试rri_api.so
+
+rri_api.c      客户接口调用实现，实现了gsoap_api.h的客户端部分
+
+rri_server.c   server端的main入口及pipe通道数据流控制主进程。
+
+czmq           第三方工具，用于进程间消息通信，目前使用到的功能不多。
+
+gsoap          gsoap的支持
+
+gsoap_api.c    gsoap server端接口实现文件
+
+Makefile       你懂的
+
+release        所有的目标文件输出目录，包括rri_server程序，对外接口(librri_api.so, librri_api.a, rri_api.h) rri_cli程序
+
+

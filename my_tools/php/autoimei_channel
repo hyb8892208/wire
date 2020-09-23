@@ -1,0 +1,44 @@
+#!/bin/php
+
+<?php
+
+require_once("/www/cgi-bin/inc/define.inc");
+require_once("/www/cgi-bin/inc/function.inc");
+require_once("/www/cgi-bin/inc/cluster.inc");
+
+$imei_run_state_file= "/tmp/imei_run_state.conf";
+
+$debug		= false;
+$channel="$argv[1]";
+$imei="$argv[2]";
+$force="$argv[3]";
+
+/* modify IMEI*/
+if($debug)echo "start modify IMEI ...\n chan=$channel, imei=$imei, force=$force\n";
+$ret = modify_imei($channel, $imei, 'power_reset', $force);
+
+/* handle result */
+if($debug)echo "first time: ret=$ret\n";
+if($ret == 'succeed'){
+	if($debug)echo "channel $channel imei modify success. new imei = $imei\n";
+}else if(!check_netreg($channel)){
+	if($debug)echo "net not reg\n";
+	gsm_power_reset($channel);
+	sleep(1);
+	$ret = modify_imei($channel, $imei, 'power_reset', $force);
+	if($debug)echo "second time: ret=$ret\n";
+}else{
+	if($debug)echo "$channel is abnormal\n";
+}
+
+for($i=1;$i<30;$i++){
+	$state = trim(`/my_tools/set_config "$imei_run_state_file" get option_value state "$channel" 2>/dev/null`);
+	if($state == "off"){ 
+		break;
+	}
+	$ret = trim(`/my_tools/set_config "$imei_run_state_file" set option_value state "$channel" off 2>/dev/null`);
+	sleep(1);
+}
+
+///////////////////////////////////////////////////////////
+?>

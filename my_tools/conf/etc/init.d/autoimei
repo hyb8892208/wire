@@ -1,0 +1,29 @@
+#!/bin/sh
+
+. /etc/functions.sh
+start()
+{
+	if ! ps | grep "/my_tools/autoimei" | grep "/bin/php" > /dev/null 2>&1 ; then
+		/my_tools/autoimei &
+	fi
+}
+
+stop()
+{
+	killps autoimei $$
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart|reload)
+		stop
+		start
+		;;
+esac
+
+exit 0

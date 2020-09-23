@@ -1,0 +1,51 @@
+#!/bin/sh
+
+. /etc/functions.sh
+
+ddns_start()
+{
+	SW=`/my_tools/set_config /etc/asterisk/gw/ddns.conf get option_value general ddns 2> /dev/null`
+	if [ $? -eq 0 ];then
+		if [ x"$SW" = x"1" ];then
+			TYPE=`/my_tools/set_config /etc/asterisk/gw/ddns.conf get option_value general type 2> /dev/null`
+			if [ $? -eq 0 ];then
+				if [ x"$TYPE" != x"phddns" ];then
+					inadyn &
+				else
+					phddns &
+				fi
+			else
+				inadyn &
+			fi
+		fi
+	fi
+}
+
+ddns_stop()
+{
+	#Kill phddns
+	killps phddns $$
+
+	#Kill inadyn
+	killps inadyn $$
+}
+
+case "$1" in
+	start)
+		ddns_stop
+		ddns_start
+		;;
+	stop)
+		ddns_stop
+		;;
+	restart|reload)
+		ddns_stop
+		ddns_start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|reload}"
+		exit 2
+		;;
+esac
+
+exit 0

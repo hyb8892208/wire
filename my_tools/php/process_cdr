@@ -1,0 +1,96 @@
+#!/bin/php
+<?php 
+
+if (!isset($argv[7])) exit(1);
+
+if(file_exists("/etc/asterisk/gw/custom_cdr")) {
+	@system("/etc/asterisk/gw/custom_cdr \"$argv[1]\" \"$argv[2]\" \"$argv[3]\" \"$argv[4]\" \"$argv[5]\" \"$argv[6]\" \"$argv[7]\" > /dev/null 2>&1 &");
+}
+
+$SW = `/my_tools/set_config /etc/asterisk/gw.conf get option_value cdr switch 2> /dev/null`;
+if ($SW == "off") exit(0);
+
+$CALLERID="$argv[1]";
+$CALLEEID="$argv[2]";
+$SRC="$argv[3]";
+$DST="$argv[4]";
+$START_TIME="$argv[5]";
+$DURATION="$argv[6]";
+$RESULT="$argv[7]";
+
+include_once("/www/cgi-bin/inc/cdrdb.php"); 
+include_once("/www/cgi-bin/inc/define.inc"); 
+include_once("/www/cgi-bin/inc/cluster.inc"); 
+include_once("/www/cgi-bin/inc/function.inc"); 
+
+/* append IMEI */
+function gsm_append_imei($str)
+{
+	global $__GSM_HEAD__;
+	global $__BRD_HEAD__;
+	global $__GSM_SUM__;
+	global $__BRD_SUM__;
+	$slaveip = NULL;
+	$board = 1;
+	$port = "";
+
+	/*if(preg_match("/^${__GSM_HEAD__}[1-${__GSM_SUM__}]{1}/",$str)){
+		$port = substr($str, strlen($__GSM_HEAD__), 1);
+	}else if(preg_match("/^${__BRD_HEAD__}[1-${__BRD_SUM__}]{1}-${__GSM_HEAD__}[1-${__GSM_SUM__}]{1}/",$str)){
+		$board = substr($str, strlen($__BRD_HEAD__), 1);
+		$port = substr($str, strlen("${__BRD_HEAD__}1-${__GSM_HEAD__}"), 1);
+	}else{
+		return $str;
+	}*/
+
+	/* get board port */
+	$gsm_head_len = strlen($__GSM_HEAD__);
+	$gsm_sum_len = strlen($__GSM_SUM__);
+	$brd_head_len = strlen($__BRD_HEAD__);
+	$brd_sum_len = strlen($__BRD_SUM__);
+	if(strncmp($str, $__GSM_HEAD__, $gsm_head_len)==0){
+		$tmp = substr($str, $gsm_head_len, $gsm_sum_len);
+		if($tmp>=1 && $tmp<=$__GSM_SUM__){
+			$port = $tmp;
+		}   
+	}else if(strncmp($str, $__BRD_HEAD__, $brd_head_len)==0 && ($pos=strpos($str, $__GSM_HEAD__))==($brd_head_len+$brd_sum_len+1)){
+		$tmp = substr($str, $brd_head_len, $brd_sum_len);
+		if($tmp>=1 && $tmp<=$__BRD_SUM__){
+			$board = $tmp;
+			$tmp = substr($str, $brd_head_len+$brd_sum_len+1+$gsm_head_len, $gsm_sum_len);
+			if($tmp>=1 && $tmp<=$__GSM_SUM__){
+				$port = $tmp;
+			}   
+		}   
+	}else{
+		return $str;
+	}
+
+	/* get imei */	
+	if($port >=1 && $port <= $__GSM_SUM__ && $board >=1 && $board <= $__BRD_SUM__){
+		if($board >= 2){
+			$cluster_info = get_cluster_info();
+			if($cluster_info['mode'] == 'master') {
+				if($cluster_info[$__BRD_HEAD__.$board.'_ip'] != '') {
+					$slaveip = $cluster_info[$__BRD_HEAD__.$board.'_ip'];
+				}
+			}
+		}
+		if($imei = get_imei($port, $slaveip))$str .= "\n($imei)";
+	}
+	return $str;
+}
+
+$append_imei_sw = `/my_tools/set_config /etc/asterisk/gw.conf get option_value cdr append_imei_sw 2> /dev/null`;
+if(trim($append_imei_sw)=='on') {
+	$SRC = gsm_append_imei($SRC);
+	$DST = gsm_append_imei($DST);
+}
+
+$db = new CDRDB(); 
+$db->insert_cdr("$CALLERID","$CALLEEID","$SRC","$DST","$START_TIME","$DURATION","$RESULT");
+
+?>
+
+
+

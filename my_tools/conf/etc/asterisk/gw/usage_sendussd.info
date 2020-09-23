@@ -1,0 +1,76 @@
+HTTP to USSD
+-------------------------
+Usage: http://ip:port/sendussd?username=xxx&password=xxx&message=xxx&port=xxx&timeout=xxx
+	
+1. Parameter Description
+	
+1.1 username
+        Description:	The login username. Set in USSD settings page
+        Default Value:	None
+	Necessity:	Required
+	
+1.2 password
+	Description:	The login password. Set in USSD settings page
+	Default Value:	None
+	Necessity:	Required
+	
+1.3 message
+	Description:	Message to be sent.
+	Default Value:	None
+	Necessity:	Required
+	
+1.4 port
+	Description:	Gsm port from which the message will be sent. 
+	Default Value:	By default, the message will be send from any ready gsm port of the gateway.
+	Necessity:	Optional
+	Example:	1 or 1,2
+	
+1.5 timeout
+	Description:	The module sends the USSD timeout
+	Default Value:	0
+	Necessity:	Optional
+	
+1.6 id
+	Description:	The identity of USSD
+	Default Value:  null 
+	Necessity:   	Optional
+	
+2. Report Format (charset: UTF-8)
+	
+2.1 JSON
+	{
+		"message":"xxx",
+		"report":[{
+			"0":[{
+				"port":"1",
+				"time":"2014-04-29 11:11:11",
+				"id":"1122",
+				"result":"sending"
+			}],
+			"1":[{
+				"port":"2",
+				"time":"2014-04-29 11:11:12",
+				"id":"1123",
+				"result":"fail"
+			}],
+		}]
+	}
+	
+2.2 STRING
+	
+	message:xxx
+	
+	--record 1 start--
+	port: 1
+	time: 2014-04-29 11:11:11
+	id: 1122
+	result: sending
+	--record 1 end--
+	
+	--record 2 start--
+	port: 2
+	time: 2014-04-29 11:11:12
+	id: 1123
+	result: fail
+	--record 2 end--
+-------------------------

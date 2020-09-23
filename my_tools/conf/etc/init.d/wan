@@ -1,0 +1,220 @@
+#!/bin/sh
+
+WG_MAC_HEAD="A098050A"
+
+wan_disable()
+{
+	ifconfig eth1 down
+}
+
+wan_mac_setting()
+{
+	#Check mac head
+	mac=`ifconfig eth1 | grep HWaddr | awk '{print $5}'`
+#	mac_head=`ifconfig eth1 | grep HWaddr | awk '{print $5}' | awk -F: '{print $1 $2 $3 $4}'`
+	mac_head=`echo $mac | awk -F: '{print $1 $2 $3 $4}'`
+	if [ x"$mac" = x"" ];then
+		wan_factory_mac_setting
+	else
+		echo $mac > /tmp/.wanfactorymac
+		return 1
+	fi
+
+}
+
+wan_factory_mac_setting()
+{
+	# Setting factory MAC
+	FACTORY_DEFAULT_MAC=00:02:E7:F5:02:03
+	FACTORY_WAN_MAC=`cat /tmp/.wanfactorymac 2> /dev/null`
+	if [ x"$FACTORY_WAN_MAC" != "x" ];then
+		if ( echo "$FACTORY_WAN_MAC" | egrep "^([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}$" > /dev/null 2>&1 );then
+			ifconfig eth1 hw ether $FACTORY_WAN_MAC
+		else
+			ifconfig eth1 hw ether $FACTORY_DEFAULT_MAC
+			echo $FACTORY_DEFAULT_MAC > /tmp/.wanfactorymac
+		fi
+	else
+		ifconfig eth1 hw ether $FACTORY_DEFAULT_MAC
+		echo $FACTORY_DEFAULT_MAC > /tmp/.wanfactorymac
+	fi
+}
+
+wan_factory_ip_setting()
+{
+	#Setting factory IP
+	REP_STR="1"
+#	SLOT_NUM=`cat /tmp/.slotnum 2> /dev/null`
+	SLOT_NUM=1
+	if [ $? -eq 0 ];then
+		if ( echo "$SLOT_NUM" | egrep "^[0-9]{1,2}$" >/dev/null 2>&1 ); then
+			REP_STR="$SLOT_NUM"
+		fi
+	fi
+
+	IP=`echo "192.168.98.X" | sed "s/X/$REP_STR/g" 2> /dev/null`
+
+	ifconfig eth1 $IP netmask 255.255.255.0 > /dev/null 2>&1
+	echo "WAN:$IP"
+	route del default dev eth1 > /dev/null 2>&1
+	route add default gw 192.168.1.1 dev eth1 > /dev/null 2>&1
+}
+
+wan_factory_setting()
+{
+	wan_mac_setting
+	wan_factory_ip_setting
+}
+
+wan_static_setting()
+{
+	#WAN IP Settings
+	SET_OK="false"
+	IP=`/my_tools/set_config /etc/asterisk/gw/network/wan.conf get option_value ipv4 ipaddr 2> /dev/null`
+	if [ $? -eq 0 ];then
+		if [ x"$IP" != "x" ];then
+			MASK=`/my_tools/set_config /etc/asterisk/gw/network/wan.conf get option_value ipv4 netmask 2> /dev/null`
+			if [ $? -eq 0 ];then
+				if [ x"$MASK" != "x" ];then
+					GW=`/my_tools/set_config /etc/asterisk/gw/network/wan.conf get option_value ipv4 gateway 2> /dev/null`
+					if ( echo "$IP" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) ;then
+						if ( echo "$MASK" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) ;then
+							ifconfig eth1 $IP netmask $MASK > /dev/null 2>&1
+							echo "WAN:$IP"
+							SET_OK="true"
+							if [ x"$GW" != "x" ];then
+								if ( echo "$GW" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) ;then
+									route del default dev eth1 > /dev/null 2>&1
+									route add default gw $GW dev eth1 > /dev/null 2>&1
+								fi
+							fi
+						fi
+					fi
+				fi
+			fi
+		fi
+	fi
+
+	# Set Factory IP
+	if [ "$SET_OK" = "false" ]; then
+		wan_factory_ip_setting
+	fi
+}
+
+stop_wan_dhcp()
+{
+	ps | grep udhcpc | while read line;do
+		NAME=`echo $line | awk '{print $3$5}'`
+		if [ "$NAME" = "udhcpceth1" ]; then
+			PID=`echo $line | awk '{print $1}'`
+			kill -9 $PID
+		fi
+	done
+}
+
+wan_dhcp_setting()
+{
+#	udhcpc -i eth1 -t 3 -n &
+	udhcpc -i eth1 -s /my_tools/udhcpc.sh > /dev/null 2>&1 &
+}
+
+stop_wan_pppoe()
+{
+	pppoe-status > /dev/null 2>&1 && pppoe-stop > /dev/null 2>&1
+}
+
+wan_pppoe_setting()
+{
+	USERNAME=`/my_tools/set_config /etc/asterisk/gw/network/wan.conf get option_value pppoe username 2> /dev/null`
+	if [ x"$USERNAME" = x"" ] ;then
+		return;
+	fi
+
+	PASSWORD=`/my_tools/set_config /etc/asterisk/gw/network/wan.conf get option_value pppoe password 2> /dev/null`
+	if [ x"$PASSWORD" = x"" ] ;then
+		return;
+	fi
+
+#Create pppoe.conf file
+cat > /etc/ppp/pppoe.conf <<__EOF
+ETH='eth1'
+USER='$USERNAME'
+DEMAND=no
+DNSTYPE=
+CONNECT_TIMEOUT=30
+CONNECT_POLL=2
+PING="."
+CF_BASE=\`basename \$CONFIG\`
+PIDFILE="/var/run/\$CF_BASE-pppoe.pid"
+SYNCHRONOUS=no
+CLAMPMSS=1412
+LCP_INTERVAL=10
+LCP_FAILURE=3
+PPPOE_TIMEOUT=60
+FIREWALL=NONE
+__EOF
+
+#Create pap-secrets file
+cat > /etc/ppp/pap-secrets <<__EOF
+# Secrets for authentication using PAP
+# client	server	secret			IP addresses
+"$USERNAME"	*	"$PASSWORD"		*
+__EOF
+
+#Create chap-secrets file
+cat > /etc/ppp/chap-secrets <<__EOF
+# Secrets for authentication using PAP
+# Secrets for authentication using PAP
+# client	server	secret			IP addresses
+"$USERNAME"	*	"$PASSWORD"		*
+__EOF
+
+
+pppoe-start &
+
+}
+
+
+wan_setting()
+{
+#	ifconfig eth1 down
+
+	TYPE=`/my_tools/set_config /etc/asterisk/gw/network/wan.conf get option_value general type 2> /dev/null`
+
+	if [ x"$TYPE" = x"dhcp" ];then
+		wan_mac_setting
+		wan_dhcp_setting
+	elif [ x"$TYPE" = x"static" ];then
+		wan_mac_setting
+		wan_static_setting
+	elif [ x"$TYPE" = x"pppoe" ];then
+		wan_mac_setting
+		wan_pppoe_setting
+	elif [ x"$TYPE" = x"factory" ];then
+		wan_factory_setting
+	else
+		wan_disable
+	fi
+
+#	ifconfig eth1 up
+}
+
+stop_wan_dhcp
+stop_wan_pppoe
+
+case "$1" in
+	start)
+		wan_setting
+		;;
+	stop)
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+        echo "Usage: $0 {start|stop|restart|reload}"
+        exit 2
+		;;
+esac
+

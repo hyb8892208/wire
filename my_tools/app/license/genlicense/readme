@@ -1,0 +1,15 @@
+﻿genlicense 
+   
+   1.作用
+     将明文license文件加密成密文license文件
+   2.工作流程
+     a.解析JSON格式的license明文文件，判断其内容格式是否正确
+     b.用rsa秘钥加密明文文件
+     c.用AES秘钥加密序列号
+     d.合并bc两部分
+     e.用两级签名进行签名
+   3.编译
+     make 
+     make install
+   4.说明
+     明文license文件的位置、debug目录位置、密文license文件位置由license.conf配置文件指定

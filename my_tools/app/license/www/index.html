@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Openvox License Management</title>
+<style type="text/css">
+	body {
+            margin:0;
+            padding:0;
+            background:white url('images/header-background.png') repeat-x;
+            font:12px/1.6 arial;	
+	}
+        ul {
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        a{
+            text-decoration:none;
+            color:#3D81B4;
+        }
+	p{
+	    font-size:120%;
+	    color:#5897C6;
+	}
+
+        .header{
+            position:relative;
+            width:760px;
+            height:138px;
+            margin:0 auto;
+            font:14px/1.6 arial;
+        }
+        .header h1{
+	    color:#5897C6;
+	    height:63px;
+	    margin:20px 30px 0 0;
+	    text-align:center;	
+        }
+        .header .mainNavigation{
+            position:absolute;
+            color:white;
+            top:68px;
+            left:185px;
+        }
+        .header .mainNavigation li{
+            float:left;
+            padding:5px;
+        }
+        .header .mainNavigation li a {
+            display: block;
+            line-height: 25px;
+            padding: 0 0 0 14px;
+            color: white;
+            float: left;
+        } 
+        .header .mainNavigation a strong{
+            display:block;
+            padding:0 14px 0 0;
+	    font-size:120%;
+        }
+        .header .mainNavigation .current a{
+            background:transparent url('images/main-navi.gif') no-repeat;
+        }
+        .header .mainNavigation .current a strong{
+            background:transparent url('images/main-navi.gif') no-repeat right;
+        }
+        .header .mainNavigation a:hover{
+        		color:white;
+            background:transparent url('images/main-navi-hover.gif') no-repeat;
+        }
+        .header .mainNavigation a:hover strong{
+            background:transparent url('images/main-navi-hover.gif') no-repeat right;
+        }
+
+	.footer {
+            clear:both;
+            height:53px;
+            margin:100px 0 0 0;
+            background:transparent url('images/footer-background.png') repeat-x;
+            text-indent: 0px;
+            text-align:center;
+	}
+	.license {margin: 0 auto;width:80%}
+	.gen1 {text-align:right;float:left;width:48%;margin-top:20px;margin-bottom:20px;padding-right:20px;border-right:#BDD6E8 1px solid}
+	.gen2 {text-align:left;float:left;width:48%;margin-top:20px;padding-left:20px}
+			
+	.gen3 {
+	     text-align:center;
+             clear:both;
+         }
+	.th1 {padding-right:60px}
+	.th2 {padding-left:80px}
+	textarea {resize: none;}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+function check(){
+	if($("#sipendpoint").val() == "") {
+		alert("Sip Endpoint should not be null");
+		return false;
+	}
+	if($("#macs").val() == ""){
+		alert("MACs should not be null");
+		return false;
+	}
+	var patt = new RegExp('[0123456789abcdefABCDEF]{12}')
+	var s_macs = $("#macs").val();
+	var a_macs = s_macs.split('\n');
+	for(var i = 0; i < a_macs.length; i++){
+		var mac = $.trim(a_macs[i]);
+		//var mac = a_macs[i];
+		if(mac.length == 0)
+			continue;
+		if(mac.length != 12){
+			alert("The length of the " + (i+1) + " MAC (" + mac + ") is not right, should be 12!");
+			return false;
+		}
+		if(mac.match(patt)==null) {
+			alert("The content of the " + (i+1) + " MAC (" + mac + ") is not right, shoule be 012345689abcdefABCDEF!")
+			return false;
+		}
+	}
+		
+	return true;
+}
+</script>
+</head>
+<body>
+        <div class="header">
+        	<h1><span>Openvox PBX 许可证管理系统</span></h1>
+        	<ul class="mainNavigation">
+        		<li class="current"><a href="index.html"><strong>生成</strong></a></li>
+				<li><a href="analyze.php"><strong>解析</strong></a></li>
+        		<li><a href="query.php" ><strong>查询</strong></a></li>
+        		<li><a href="load.php"><strong>添加</strong></a></li>
+        		<li><a href="delete.php"><strong>删除</strong></a></li>
+				<li><a href="createuuid.php"><strong>生成UUID</strong></a></li>
+        	</ul>
+    	</div>
+	<form id="manform"  action="/generate.php" method="post" onsubmit="return check();">
+	<div class="license">
+		<div class="gen1">
+			<p class="th1">Limits:</p>
+			<p>Sip Endpoint:<input type="number" name="sipendpoint" id="sipendpoint" min="0" value="0"><p>
+			<p>Iax Endpoint:<input type="number" name="iaxendpoint" id="iaxendpoint" min="0" value="0"><p>
+			<p>Concurrent:<input type="number" name="concurrent" id="concurrent" min="0" value="0"><p>
+			<p>Time1:<input type="number" name="time1" id="time1" min="0" value="0"><p>
+			<p>Time2:<input type="number" name="time2" id="time2" min="0" value="0"><p>
+			<p>Reserve1:<input type="text" name="reserve1" id="reserve1"><p>
+			<p>Reserve2:<input type="text" name="reserve2" id="reserve2"><p>
+			<p>Reserve3:<input type="text" name="reserve3" id="reserve3"><p>
+			<p>Reserve4:<input type="text" name="reserve4" id="reserve4"><p>
+			<p>Reserve5:<input type="text" name="reserve5" id="reserve5"><p>
+			<p>Reserve6:<input type="text" name="reserve6" id="reserve6"><p>
+			<p>Reserve7:<input type="text" name="reserve7" id="reserve7"><p>
+			<p>Reserve8:<input type="text" name="reserve8" id="reserve8"><p>
+
+		</div>
+       		<div class="gen2">
+                	<p class="th2">MACs:<p>
+			<textarea cols="30" rows="30" name="macs" id="macs"></textarea>
+        	</div>
+        	<div class="gen3">	
+			<input type="submit" name="submit" value="生成许可证" />
+			&nbsp;
+			<input type="reset"  name="reset" value="重置" />
+		</div>
+	</div>
+	</form>
+	<div class="footer">
+		<p>&nbsp;</p>
+	</div>
+</body>
+</html>

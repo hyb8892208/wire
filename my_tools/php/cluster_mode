@@ -1,0 +1,1154 @@
+#!/bin/php
+
+<?php
+include_once("/www/cgi-bin/inc/define.inc");
+include_once("/www/cgi-bin/inc/aql.php");
+include_once("/www/cgi-bin/inc/function.inc");
+include_once("/www/cgi-bin/inc/cluster.inc");
+include_once("/www/cgi-bin/inc/wrcfg.inc");
+
+//Get Cluster Information
+//////////////////////////////////////////////////////////////////
+//$aql = new aql();
+//$aql->set('basedir','/etc/asterisk/gw');
+//$res = $aql->query("select * from cluster.conf");
+$file_path = '/etc/asterisk/gw/cluster.conf';
+if(!file_exists($file_path)){
+	fclose(fopen($file_path,"w"));
+}
+$res = parse_ini_file("/etc/asterisk/gw/cluster.conf",true);
+
+/*
+if(isset($res['general']['mode'])) {
+	$mode = trim($res['general']['mode']);
+} else {
+	$mode = 'stand_alone';
+}
+//*/
+// 32-port modify mode = stand_alone
+$mode = 'stand_alone';
+if(isset($res['slave']['password'])) {
+	$slave_password = trim($res['slave']['password']);
+} else {
+	$slave_password = '';
+}
+
+if(isset($res['slave']['ip'])) {
+	$slave_ip = trim($res['slave']['ip']);
+} else {
+	$slave_ip = '';
+}
+
+if(isset($res['slave']['masterip'])) {
+	$slave_masterip = trim($res['slave']['masterip']);
+} else {
+	$slave_masterip = '';
+}
+
+if(isset($res['slave']['remain_ori_ip'])) {
+	$remain_ori_ip = trim($res['slave']['remain_ori_ip']);
+} else {
+	$remain_ori_ip = 1;
+}
+
+if(isset($res['master']['password'])) {
+	$master_password = trim($res['master']['password']);
+} else {
+	$master_password = '';
+}
+
+if(isset($res['master']['ip'])) {
+	$master_ip = trim($res['master']['ip']);
+} else {
+	$master_ip = '';
+}
+
+for($b=2; $b<=$__BRD_SUM__; $b++) {
+	if(isset($res['slavelist'][$__BRD_HEAD__.$b."_ip"])) {
+		$master_slaveips[$b] = trim($res['slavelist'][$__BRD_HEAD__.$b."_ip"]);
+	} else {
+		$master_slaveips[$b] = '';
+	}
+}
+//////////////////////////////////////////////////////////////////
+
+
+function get_udpbindport()
+{
+	$port='5060';
+	$sip_gen_path = '/etc/asterisk/sip_general.conf';
+	$sip_gen_ary = parse_ini_file($sip_gen_path, true);
+	if(isset($sip_gen_ary['general']['udpbindaddr'])) {
+		$addr_ary = explode(':', $sip_gen_ary['general']['udpbindaddr'], 2);
+		if(isset($addr_ary[1])) {
+			$port = $addr_ary[1];
+		}
+	}
+
+	return $port;
+}
+
+function sync_time_from_master()
+{
+	global $slave_masterip;
+
+	//Synchronous time from master
+	//////////////////////////////////////////////////////////////////
+	$year = trim(`date +%Y 2> /dev/null`);
+	if($year == '' || $year == '1970') {
+		$data = "syscmd:date +%m%d%H%M%Y.%S 2> /dev/null";
+		$time = trim(request_slave($slave_masterip, $data, 5, true));
+		//100909472013.27
+		if(preg_match("/[0-9]{12}\.[0-9]{2}$/",$time)) {
+			exec("date -s $time > /dev/null 2>&1 &");
+		}
+	}
+	//////////////////////////////////////////////////////////////////
+}
+
+function sync_time_to_slave()
+{
+	global $__BRD_SUM__;
+	global $master_slaveips;
+
+	//Synchronous time to slave
+	//////////////////////////////////////////////////////////////////
+	for($b=2; $b<=$__BRD_SUM__; $b++) {
+		if(isset($master_slaveips[$b]) && $master_slaveips[$b]!= '') {
+			$master_slaveips[$b];
+			$str = trim(`date +%m%d%H%M%Y.%S`);
+			$cmd = "date -s \"$str\"";
+			$data = "syscmd:$cmd > /dev/null 2>&1";
+			request_slave($master_slaveips[$b], $data, 5, false);
+		}
+	}
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_sip_conf_for_stand_alone()
+{
+	//Modify sip.conf
+	//////////////////////////////////////////////////////////////////
+	$sip_conf = '/etc/asterisk/sip.conf';
+	$lock = lock_file($sip_conf);
+	$fh = fopen($sip_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include sip_general.conf
+#include sip_general_tls.conf
+#include sip_endpoints.conf
+#include sip_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_iax_conf_for_stand_alone()
+{
+	//Modify iax.conf
+	//////////////////////////////////////////////////////////////////
+	$iax_conf = '/etc/asterisk/iax.conf';
+	$lock = lock_file($iax_conf);
+	$fh = fopen($iax_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include iax_general.conf
+#include iax_endpoints.conf
+#include iax_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+}
+
+function gen_extensions_conf_for_stand_alone()
+{
+	//Modify extensions.conf
+	//////////////////////////////////////////////////////////////////
+	$extensions_conf = '/etc/asterisk/extensions.conf';
+	$lock = lock_file($extensions_conf);
+	$fh = fopen($extensions_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include extensions_macro.conf
+#include extensions_routing.conf
+#include extensions_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function stand_alone()
+{
+	//Don't Modify IP
+	//exec('/etc/init.d/lan start > /dev/null 2>&1');
+
+	//Modify sip.conf
+	gen_sip_conf_for_stand_alone();
+	gen_iax_conf_for_stand_alone();
+	
+	//Modify extensions.conf
+	gen_extensions_conf_for_stand_alone();
+
+
+	//Clear IP
+	//////////////////////////////////////////////////////////////////
+	$modifyip_cmd = "ifconfig eth0:1 down > /dev/null 2>&1";
+	exec($modifyip_cmd);
+
+	$custom_sh = "/etc/asterisk/gw/custom.sh";
+	$write = '';
+
+	$lock = lock_file($custom_sh);
+	$fh = @fopen($custom_sh,"r");
+	if($fh) {
+		while(!feof($fh) && ($line = fgets($fh))) {
+			if(substr($line,0,strlen("ifconfig eth0:1")) != "ifconfig eth0:1") {
+				$write .= $line;
+			}
+		}
+		fclose($fh);
+	} else {
+		$write .= "#!/bin/sh\n";
+	}
+
+	$fh = @fopen($custom_sh,"w");
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+
+
+	//lighttpd proxy.
+	gen_lighttpd_proxy_for_stand_alone();
+
+	//http to sms
+	$sms_info = get_sms_info();
+	if(is_true($sms_info['http_to_sms']['enable'])){
+		gen_astmanproxy_conf();
+		exec("/etc/init.d/astmanproxy restart > /dev/null 2>&1");
+	} 
+
+	//Start slave_cluster process
+	//////////////////////////////////////////////////////////////////
+	//exec("/my_tools/cluster_slave stand > /dev/null 2>&1 &");
+	//exec("/my_tools/keeper \"start:cluster_slave:/my_tools/cluster_slave stand > /dev/null 2>&1\"");
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_sip_conf_for_slave()
+{
+	//Modify sip.conf
+	//////////////////////////////////////////////////////////////////
+	$sip_conf = '/etc/asterisk/sip.conf';
+	$lock = lock_file($sip_conf);
+	$fh = fopen($sip_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include sip_general.conf
+#include sip_slave.conf
+#include sip_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_iax_conf_for_slave()
+{
+		//Modify iax.conf
+	//////////////////////////////////////////////////////////////////
+	$iax_conf = '/etc/asterisk/iax.conf';
+	$lock = lock_file($iax_conf);
+	$fh = fopen($iax_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include iax_general.conf
+#include iax_endpoints.conf
+#include iax_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	
+}
+
+function gen_extensions_conf_for_slave()
+{
+	//Modify extensions.conf
+	//////////////////////////////////////////////////////////////////
+	$extensions_conf = '/etc/asterisk/extensions.conf';
+	$lock = lock_file($extensions_conf);
+	$fh = fopen($extensions_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include extensions_macro.conf
+#include extensions_slave.conf
+#include extensions_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_sip_slave_conf()
+{
+	global $slave_masterip;
+	global $slave_password;
+	global $__GSM_SUM__;
+
+	//Generate sip_slave.conf
+	//////////////////////////////////////////////////////////////////
+	$port = get_udpbindport();
+	$write = '';
+	for($i=1; $i<=$__GSM_SUM__; $i++) {
+		$sip_extension = $slave_password.$i;
+		$write .= <<<EOF
+[$sip_extension-$slave_masterip]
+username=$sip_extension
+secret=$sip_extension
+fromuser=$sip_extension
+type=friend
+host=$slave_masterip
+insecure=port,invite
+;allow=all
+;disallow=all
+;allow=alaw,ulaw,gsm,g722,g726,g729
+qualify=no
+siphold=yes
+directmedia=no
+port=$port
+transport=udp
+call-limit=2
+;textsupport=yes
+context=sip-$sip_extension
+
+
+EOF;
+//EOF
+	}
+
+	$sip_slave_conf = '/etc/asterisk/sip_slave.conf';
+	$lock = lock_file($sip_slave_conf);
+	$fh = fopen($sip_slave_conf,"w");
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_extensions_slave_conf()
+{
+	global $__GSM_SUM__;
+	global $__GSM_HEAD__;
+	global $__MODULE_HEAD_ARRAY__; 
+	global $slave_password;
+	global $slave_masterip;
+	global $slave_ip;
+	
+	$sms_info = get_sms_info();
+		
+	$aql = new aql();
+	$setok = $aql->set('basedir','/etc/asterisk');
+	if (!$setok) {
+		echo $aql->get_error();
+		return;
+	}
+	
+	$sms_conf_path = '/etc/asterisk/extra-global.conf';
+	$hlock = lock_file($sms_conf_path);
+	if(!$aql->open_config_file($sms_conf_path)){
+		echo $aql->get_error();
+		unlock_file($hlock);
+		return;
+	}
+	
+	$exist_array = $aql->query("select * from extra-global.conf");
+	if(isset($exist_array['channels']['processsms'])) {
+		$processsms=$exist_array['channels']['processsms'];
+	}else{
+		$processsms='no';
+	}
+	unlock_file($hlock);
+	
+	
+	
+	
+	
+	$board = get_slotnum();
+	$sms_to_http_url = '';
+	$username = '';
+	$password = '';
+	$web_port = 80;
+	if(is_true($sms_info['sms_to_http']['enable'])){
+		if($sms_info['sms_to_http']['url'] != ''){ 
+			$user = get_web_user();
+			$username = $user['name'];
+			$password = $user['password'];
+			$web_info = get_web_info();
+			if(is_numeric($web_info['general']['port']) &&  $web_info['general']['port'] > 0){
+				$web_port = $web_info['general']['port'];
+			}
+			//$sms_to_http_url = $sms_info['sms_to_http']['url'];
+			if($sms_info['sms_to_http']['url_path'] != '' 
+				&& $sms_info['sms_to_http']['url_from_num'] != '' 
+				&& $sms_info['sms_to_http']['url_message'] != ''
+				&& $sms_info['sms_to_http']['url_time'] != ''
+			){
+				$sms_to_http_url = 'http://'.trim($sms_info['sms_to_http']['url_host']).':'.$web_port.trim($sms_info['sms_to_http']['url_path']).'?'
+					.trim($sms_info['sms_to_http']['url_from_num'])."=\${phonenumber}&"
+					.trim($sms_info['sms_to_http']['url_to_num'])."=\${port}&"
+					.trim($sms_info['sms_to_http']['url_message'])."=\${message}&"
+					.trim($sms_info['sms_to_http']['url_time'])."=\${time}&"
+					.trim($sms_info['sms_to_http']['url_user_defined']);
+			}
+		}    
+	}
+
+	//Generate extensions_slave.conf
+	//////////////////////////////////////////////////////////////////
+	$extensions_slave_conf = '/etc/asterisk/extensions_slave.conf';
+
+	$gsm_contexts='';
+	for($i=1; $i<=$__GSM_SUM__; $i++) {
+		$sip_extension = $slave_password.$i;
+		$gsm_contexts .= <<<EOF
+[gsm-$i]
+exten => s,1,Dial(SIP/$sip_extension-$slave_masterip)
+exten => s,n,Hangup()
+;;exten => h,1,System(/my_tools/process_cdr \"\${CDR(src)}\" \"\${CDR_CALLEEID}\" \"gsm-$i\" \"\${CDR(dstchannel)}\" \"\${CDR(start)}\" \"\${CDR(billsec)}\" \"\${CDR(disposition)}\")
+;;exten => sms, 1, System(/my_tools/process_sms \"$i\" \"\${SMSSRC}\" \"\${SMSTIME}\" \"\${SMSTXT}\")
+;;exten => sms, 1, Set(SMSTXT=\${REPLACE(SMSTXT,\\\\r,\\030)})
+;;exten => sms, n, Set(SMSTXT=\${REPLACE(SMSTXT,\\\\n,\\031)})
+;;exten => sms, n, SIPAddHeader(SMSSRC: \${SMSSRC})
+;;exten => sms, n, SIPAddHeader(SMSTIME: \${SMSTIME})
+;;exten => sms, n, SIPAddHeader(SMSTXT: \${SMSTXT})
+;;exten => sms, n, Set(CALLERID(all)=$sip_extension)
+;;exten => sms, n, Dial(SIP/$sip_extension-$slave_masterip/smsfromsip)
+;;exten => sms, n, Hangup()
+;;exten => sms_send_ok, 1, System(touch /tmp/sms/S\${SMS_SEND_ID})
+;;exten => sms_send_failed, 1, System(touch /tmp/sms/F\${SMS_SEND_ID})
+
+EOF;
+//EOF
+		$gsm_contexts .= "exten => sms,1,NoOp(SMS In)\n";
+		if($sms_to_http_url != ''){
+			$board_head = $__MODULE_HEAD_ARRAY__[1][$i];
+			$gsm_contexts .= <<<EOF
+exten => sms,n,NoOp(SMS CURL)
+exten => sms,n,Set(CURLOPT(conntimeout)=5)
+exten => sms,n,Set(CURLOPT(httptimeout)=5)
+exten => sms,n,Set(CURLOPT(ssl_verifypeer)=0)
+exten => sms,n,Set(CURLOPT(userpwd)=$username:$password)
+exten => sms,n,Set(phonenumber=\${URIENCODE(\${SMSSRC})})
+;;;;exten => sms,n,Set(port=\${URIENCODE($__GSM_HEAD__$board.$i)})
+exten => sms,n,Set(port=\${URIENCODE($board_head$board.$i)})
+exten => sms,n,Set(message=\${URIENCODE(\${SMSORITXT})})
+exten => sms,n,Set(time=\${URIENCODE(\${SMSTIME})})
+;;exten => sms,n,Set(RET=\${CURL($sms_to_http_url)})
+exten => sms,n,System(cd /my_tools/lua/info_access/ && lua ./http_to_master.lua \"$sms_to_http_url\" > /dev/null 2>&1 &)
+
+EOF;
+//EOF
+                }
+
+		if($processsms=="yes"){
+			$gsm_contexts .= <<<EOF
+exten => sms,n,System(/my_tools/process_slavesms \"$slave_masterip\" \"$slave_ip\" \"$i\" \"\${SMSSRC}\" \"\${SMSTIME}\" \"\${SMSTXT}\" > /dev/null 2>&1 &)
+EOF;
+//EOF
+		}else{
+			 $gsm_contexts .= "\n";			
+		}
+	
+		
+		if($processsms=="yes"){
+		$gsm_contexts .= "\n";		
+		$gsm_contexts .= <<<EOF
+exten => sms,n,System(cd /my_tools/lua/sms_routing/ && lua ./dialplan2redis.lua \"$i\" \"\${SMSTXT}\" > /dev/null 2>&1 &)
+EOF;
+//EOF
+		}else{
+			 $gsm_contexts .= "\n";			
+		}
+		$gsm_contexts .= "\n\n";			
+	}
+
+	
+	$write = '';
+	for($i=1; $i<=$__GSM_SUM__; $i++) {
+		$sip_extension = $slave_password.$i;
+		$gsm_dchan = $i*2-1;
+		$write .= <<<EOF
+[sip-$sip_extension]
+exten => _[*#+0-9].,1,GotoIf(\$["\${SIP_HEADER(X-Best-Codec)}" = ""]?dial)
+exten => _[*#+0-9].,n,Set(SIP_CODEC=\${SIP_HEADER(X-Best-Codec)})
+exten => _[*#+0-9].,n(dial),Dial(extra/$gsm_dchan/\${EXTEN})
+exten => _[*#+0-9].,n,Hangup()
+exten => s,1,GotoIf(\$["\${SIP_HEADER(X-Best-Codec)}" = ""]?dial)
+exten => s,n,Set(SIP_CODEC=\${SIP_HEADER(X-Best-Codec)})
+exten => s,n(dial),Dial(extra/$gsm_dchan/\${EXTEN})
+exten => s,n,Hangup()
+
+
+EOF;
+//EOF
+	}
+
+	$write .= $gsm_contexts;
+
+	$lock = lock_file($extensions_slave_conf);
+	$fh = fopen($extensions_slave_conf,"w");
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_lighttpd_proxy_for_slave()
+{
+	//lighttpd proxy.
+	//////////////////////////////////////////////////////////////////
+	$write = <<<EOF
+url.rewrite-once = ("^/([0-9]*)/(.*)\$" => "/\$2")
+
+EOF;
+//EOF
+	file_put_contents("/tmp/proxy.conf",$write,LOCK_EX);
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_lighttpd_proxy_for_stand_alone()
+{
+	//lighttpd proxy.
+	//////////////////////////////////////////////////////////////////
+	$write  = 'url.rewrite-once = ('."\n";
+	$write .= "\t".'"^/([0-9]*)/(.*)$" => "/$2",'."\n";
+	$sms_info = get_sms_info();
+	if(is_true($sms_info['http_to_sms']['enable'])){
+		$write .= "\t".'"^/sendsms\?(.*)$" => "/service?action=sendsms&$1",'."\n";
+	}
+
+//	if(is_true($sms_info['sms_to_http']['get_smsstatus_enable'])){
+		$write .= "\t".'"^/smsstatus\?(.*)$" => "/service?action=smsstatus&$1",'."\n";
+//	}
+	$write .= "\t".'"^/simstatus\?(.*)$" => "/service?action=simstatus&$1",'."\n";
+	$write .= "\t".'"^/smsremain" => "/service?action=smsremain",'."\n";
+	
+	$ussd_info = get_ussd_info();
+	if(is_true($ussd_info['http_to_ussd']['enable'])){
+		$write .= "\t".'"^/sendussd\?(.*)$" => "/service?action=sendussd&$1",'."\n";
+	}
+	
+	$write .= ")\n";
+
+	file_put_contents("/tmp/proxy.conf",$write,LOCK_EX);
+	//////////////////////////////////////////////////////////////////
+}
+
+
+function slave()
+{
+	global $slave_ip;
+	global $remain_ori_ip;
+
+	if($slave_ip == '') {
+		return;
+	}
+
+	//Modify sip.conf
+	gen_sip_conf_for_slave();
+	gen_iax_conf_for_slave();
+	//Modify extensions.conf
+	gen_extensions_conf_for_slave();
+
+	//Generate sip_slave.conf
+	gen_sip_slave_conf();
+
+	//Generate extensions_slave.conf
+	gen_extensions_slave_conf();
+
+	//Modify IP
+	//////////////////////////////////////////////////////////////////
+	$ip = $slave_ip;
+
+	if($remain_ori_ip) {  //Only add new IP address.
+		$modifyip_cmd = "ifconfig eth0:1 $ip netmask 255.255.255.0 up > /dev/null 2>&1";
+		exec($modifyip_cmd);
+/*
+		$custom_sh = "/etc/asterisk/gw/custom.sh";
+		$write = '';
+
+		$lock = lock_file($custom_sh);
+		$fh = @fopen($custom_sh,"r");
+		if($fh) {
+			while(!feof($fh) && ($line = fgets($fh))) {
+				if(substr($line,0,strlen("ifconfig eth0:1")) != "ifconfig eth0:1") {
+					$write .= $line;
+				}
+			}
+			fclose($fh);
+		} else {
+			$write .= "#!/bin/sh\n";
+		}
+
+		$write .= $modifyip_cmd;
+
+		$fh = @fopen($custom_sh,"w");
+		fwrite($fh,$write);
+		fclose($fh);
+		unlock_file($lock);
+*/
+	} else {  //Change IP address.
+		$modifyip_cmd = "ifconfig eth0 $ip netmask 255.255.255.0 up > /dev/null 2>&1";
+		exec($modifyip_cmd);
+
+		$aql = new aql();
+		$aql->set('basedir','/etc/asterisk/gw/network');
+		$lan_conf_path = '/etc/asterisk/gw/network/lan.conf';
+		$hlock = lock_file($lan_conf_path);
+
+		if(!file_exists($lan_conf_path)) {
+			fclose(fopen($lan_conf_path,"w"));
+		}
+
+		if(!$aql->open_config_file($lan_conf_path)){
+			echo $aql->get_error();
+			unlock_file($hlock);
+			return false;
+		}
+
+		$exist_array = $aql->query("select * from lan.conf");
+
+		if(!isset($exist_array['general'])) {
+			$aql->assign_addsection('general','');
+		}
+
+		if(isset($exist_array['general']['type'])) {
+			$aql->assign_editkey('general','type','static');
+		} else {
+			$aql->assign_append('general','type','static');
+		}
+
+		if(!isset($exist_array['ipv4'])) {
+			$aql->assign_addsection('ipv4','');
+		}
+
+		if(isset($exist_array['ipv4']['ipaddr'])) {
+			$aql->assign_editkey('ipv4','ipaddr',$ip);
+		} else {
+			$aql->assign_append('ipv4','ipaddr',$ip);
+		}
+
+		if(isset($exist_array['ipv4']['netmask'])) {
+			$aql->assign_editkey('ipv4','netmask','255.255.255.0');
+		} else {
+			$aql->assign_append('ipv4','netmask','255.255.255.0');
+		}
+
+		if (!$aql->save_config_file('lan.conf')) {
+			echo $aql->get_error();
+			unlock_file($hlock);
+			return false;
+		}
+		unlock_file($hlock);
+		//exec('/etc/init.d/lan restart > /dev/null 2>&1'); 
+	}
+	//////////////////////////////////////////////////////////////////
+
+
+	//lighttpd proxy.
+	gen_lighttpd_proxy_for_slave();
+
+
+	//Start slave_cluster process
+	//////////////////////////////////////////////////////////////////
+	//exec("/my_tools/cluster_slave slave $slave_ip > /dev/null 2>&1 &");
+	//exec("/my_tools/keeper \"start:cluster_slave:/my_tools/cluster_slave slave $slave_ip > /dev/null 2>&1\"");
+	//////////////////////////////////////////////////////////////////
+
+	sync_time_from_master();
+}
+
+function gen_sip_conf_for_master()
+{
+	//Modify sip.conf
+	//////////////////////////////////////////////////////////////////
+	$sip_conf = '/etc/asterisk/sip.conf';
+	$lock = lock_file($sip_conf);
+	$fh = fopen($sip_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include sip_general.conf
+#include sip_cluster_localnet.conf
+#include sip_endpoints.conf
+#include sip_master.conf
+#include sip_custom.conf
+
+EOF;
+//EOF
+
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+
+	$file_path = '/etc/asterisk/sip_cluster_localnet.conf';
+	if(file_exists($file_path)){
+		fclose(fopen($file_path, 'w'));
+	}
+	save_cluster_localnet();
+}
+
+function gen_iax_conf_for_master()
+{
+		//Modify iax.conf
+	//////////////////////////////////////////////////////////////////
+	$iax_conf = '/etc/asterisk/iax.conf';
+	$lock = lock_file($iax_conf);
+	$fh = fopen($iax_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include iax_general.conf
+#include iax_endpoints.conf
+#include iax_custom.conf
+EOF;
+//EOF
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+}
+
+function gen_extensions_conf_for_master()
+{
+	//Modify extensions.conf
+	//////////////////////////////////////////////////////////////////
+	$extensions_conf = '/etc/asterisk/extensions.conf';
+	$lock = lock_file($extensions_conf);
+	$fh = fopen($extensions_conf,"w");
+	$write = <<<EOF
+;; Read only,Don't Edit!
+#include extensions_macro.conf
+#include extensions_routing.conf
+#include extensions_custom.conf
+EOF;
+//EOF
+
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+
+function gen_sip_master_conf()
+{
+	global $__BRD_SUM__;
+	global $__GSM_SUM__;
+	global $__BRD_HEAD__;
+	global $__GSM_HEAD__;
+	global $master_slaveips;
+	global $master_password;
+
+	//Generate sip_master.conf
+	//////////////////////////////////////////////////////////////////
+	$port = get_udpbindport();
+	$write = '';
+	for($b=2; $b<=$__BRD_SUM__; $b++) {
+		if(isset($master_slaveips[$b]) && $master_slaveips[$b]!= '') {
+			$slaveip = $master_slaveips[$b];
+			for($i=1; $i<=$__GSM_SUM__; $i++) {
+				$sip_extension = $master_password.$i;
+
+				$write .= <<<EOF
+[$sip_extension-$slaveip]
+username=$sip_extension
+secret=$sip_extension
+fromuser=$sip_extension
+type=friend
+host=$slaveip
+insecure=port,invite
+qualify=no
+directmedia=no
+port=$port
+transport=udp
+call-limit=2
+siphold=yes
+;textsupport=yes
+context=${__BRD_HEAD__}${b}-${__GSM_HEAD__}${i}
+;allow=all
+;disallow=all
+;allow=alaw,ulaw,gsm,g722,g726,g729
+;#include sip_codec.conf
+
+
+EOF;
+//EOF
+			}
+		}
+	}
+
+	$sip_master_conf = '/etc/asterisk/sip_master.conf';
+	$lock = lock_file($sip_master_conf);
+	$fh = fopen($sip_master_conf,"w");
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+	//////////////////////////////////////////////////////////////////
+}
+
+function port_mapped()
+{
+	global $__BRD_SUM__;
+	global $master_slaveips;
+
+	//////////////////////////////////////////////////////////////////
+	exec("/my_tools/net_tool eth0 2> /dev/null",$output);
+	$hostip = '';
+	if(isset($output[3])) {
+		$hostip = $output[3];
+	}
+
+	if($hostip != '') {
+		$write = '';
+//		$webport = 81;
+		$sshport = 12346;
+		$amiport = 5039;
+		for($b=2; $b<=$__BRD_SUM__; $b++) {
+			if(isset($master_slaveips[$b]) && $master_slaveips[$b]!= '') {
+				$slaveip = $master_slaveips[$b];
+				$write .= <<<EOF
+$hostip $sshport $slaveip 12345
+$hostip $amiport $slaveip 5038
+
+EOF;
+//EOF
+
+/*				$write .= <<<EOF
+$hostip $webport $slaveip 80
+$hostip $sshport $slaveip 12345
+$hostip $amiport $slaveip 5038
+
+EOF;
+//EOF
+*/
+
+//				$webport++;
+				$sshport++;
+				$amiport++;
+			}
+		}
+
+		$rinetd_conf = "/tmp/rinetd.conf";
+		$lock = lock_file($rinetd_conf);
+		$fh = @fopen($rinetd_conf,"w");
+		fwrite($fh,$write);
+		fclose($fh);
+		unlock_file($lock);
+		exec("/my_tools/rinetd -c $rinetd_conf > /dev/null 2>&1");
+		exec("/my_tools/keeper \"start:rinetd:/my_tools/rinetd -c $rinetd_conf > /dev/null 2>&1\"");
+	}
+	//////////////////////////////////////////////////////////////////
+}
+
+function gen_lighttpd_proxy_for_master()
+{
+	global $__BRD_SUM__;
+	global $master_slaveips;
+
+	//lighttpd proxy.
+	//slave only use port 80
+	//////////////////////////////////////////////////////////////////
+	//$webport=`/my_tools/set_config /etc/asterisk/gw/web_server.conf get option_value general port 2> /dev/null`;
+	//if(!is_numeric($webport)){
+	//	$webport = '80';
+	//}
+	$webport = 80;
+	$write = '';
+	$ip_list = '';
+	for($b=2; $b<=$__BRD_SUM__; $b++) {
+		if(isset($master_slaveips[$b]) && $master_slaveips[$b]!= '') {
+			$ip_list .= "$master_slaveips[$b]|";
+			$write .= <<<EOF
+\$HTTP["url"] =~ "(^/$b/)" {
+	proxy.server = ( 
+		"" => ( 
+			"" => ( 
+				"host" => "$master_slaveips[$b]", 
+				"port" => $webport 
+			) 
+		) 
+	) 
+}
+
+EOF;
+//EOF
+		}
+	}
+
+	/* for http to sms */
+	$sms_info = get_sms_info();
+	if(is_true($sms_info['http_to_sms']['enable'])){
+		$write .= <<<EOF
+url.rewrite-once = ("^/sendsms\?(.*)\$" => "/service?action=sendsms&\$1")
+
+EOF;
+//EOF
+	}
+	
+	/* Received for sms to http */
+	if(is_true($sms_info['sms_to_http']['enable'])){
+		$url_host = $sms_info['sms_to_http']['url_host'];
+		$url_host = gethostbyname($url_host);
+		$url_port = intval($sms_info['sms_to_http']['url_port']);
+		$url_path = $sms_info['sms_to_http']['url_path'];
+		if($url_host != '' && $url_path != '' && $url_port > 0){
+			$ip_list = trim($ip_list, "|");
+			$write .= <<<EOF
+\$HTTP["url"] =~ "(^$url_path)" { 
+	\$HTTP["remoteip"] =~ "$ip_list"{
+		proxy.server = ( "" => ( "" => ( "host" => "$url_host", "port" => $url_port ) ) ) 
+	}
+}
+
+EOF;
+//EOF
+		}
+	}
+
+	file_put_contents("/tmp/proxy.conf",$write,LOCK_EX);
+	/////////////////////////////////////////////////////////////////
+}
+
+function gen_astmanproxy_conf()
+{
+/* astmanproxy.conf
+host = localhost, 5038, admin, admin, on, off 
+host = 192.168.5.57, 5038, admin, admin, on, off 
+listenaddress = * 
+listenport = 1234
+inputformat = standard
+outputformat = standard
+autofilter = off 
+
+retryinterval = 2
+maxretries = 10
+...
+*/
+	global $__BRD_SUM__;
+	global $__BRD_HEAD__;
+	$cfg_path = '/etc/asterisk/gw/astmanproxy.conf';	
+	$usr_path = '/etc/asterisk/gw/astmanproxy.users';
+	$default_ast_username = 'internalspecifyuser';
+	$default_ast_password = '2rujzdndyznbg7u6xju';
+	$default_amp_username = 'internalspecifyuser';
+	$default_amp_password = 'xn60qvh9dqx1j6ekcj1';
+
+	if(!file_exists($cfg_path)){
+		touch($cfg_path);
+	}
+
+	$cluster_info = get_cluster_info();
+
+	$lock = lock_file($cfg_path);
+	$contents = "host = 127.0.0.1, 5038, $default_ast_username, $default_ast_password, off, off\n";
+	if($cluster_info['mode'] == 'master') {
+		for($b=2; $b<=$__BRD_SUM__; $b++) {
+			if(isset($cluster_info[$__BRD_HEAD__.$b.'_ip']) && $cluster_info[$__BRD_HEAD__.$b.'_ip'] != '') {
+				$ip = $cluster_info[$__BRD_HEAD__.$b.'_ip'];
+				$contents .= "host = $ip, 5038, $default_ast_username, $default_ast_password, off, off\n";
+			}    
+		}    
+	}  
+
+	$contents .= "listenaddress = *\n";
+	$contents .= "listenport = 1234\n";
+	$contents .= "inputformat = standard\n";
+	$contents .= "outputformat = standard\n";
+	$contents .= "autofilter = off\n";
+	$contents .= "authrequired = yes\n";
+	$contents .= "retryinterval = 2\n";
+	$contents .= "maxretries = 0\n";
+	$contents .= "sslclienthellotimeout = 200\n";
+	$contents .= "acceptencryptedconnection = yes\n";
+	$contents .= "acceptunencryptedconnection = yes\n";
+	$contents .= "asteriskwritetimeout=100\n";
+	$contents .= "clientwritetimeout=200\n";
+
+	file_put_contents($cfg_path, $contents);
+	unlock_file($lock);
+
+	/* generate astmanproxy.users */
+	$lock = lock_file($usr_path);
+	file_put_contents($usr_path, "$default_amp_username=$default_amp_password\n");
+	unlock_file($lock);
+}
+
+function master()
+{
+	global $master_ip;
+	global $__BRD_SUM__;
+	global $master_slaveips;
+
+	//Modify sip.conf
+	gen_sip_conf_for_master();
+	gen_iax_conf_for_master();
+	//Modify extensions.conf
+	gen_extensions_conf_for_master();
+
+	//Generate sip_master.conf
+	gen_sip_master_conf();
+
+
+	//Modify IP
+	//////////////////////////////////////////////////////////////////
+	$modifyip_cmd = "ifconfig eth0:1 $master_ip netmask 255.255.255.0 up > /dev/null 2>&1";
+	exec($modifyip_cmd);
+
+/*
+	$custom_sh = "/etc/asterisk/gw/custom.sh";
+	$write = '';
+
+	$lock = lock_file($custom_sh);
+	$fh = @fopen($custom_sh,"r");
+	if($fh) {
+		while(!feof($fh) && ($line = fgets($fh))) {
+			if(substr($line,0,strlen("ifconfig eth0:1")) != "ifconfig eth0:1") {
+				$write .= $line;
+			}
+		}
+		fclose($fh);
+	} else {
+		$write .= "#!/bin/sh\n";
+	}
+
+	$write .= $modifyip_cmd;
+
+	$fh = @fopen($custom_sh,"w");
+	fwrite($fh,$write);
+	fclose($fh);
+	unlock_file($lock);
+*/
+	//////////////////////////////////////////////////////////////////
+
+
+	//Port mapped start
+	port_mapped();
+
+	//lighttpd proxy.
+	gen_lighttpd_proxy_for_master();
+	
+	//http to sms
+	$sms_info = get_sms_info();
+	if(is_true($sms_info['http_to_sms']['enable'])){
+		gen_astmanproxy_conf();
+		exec("/etc/init.d/astmanproxy restart > /dev/null 2>&1");
+	}
+	//Start slave_cluster process
+	//////////////////////////////////////////////////////////////////
+	$slaveips = '';
+	for($b=2; $b<=$__BRD_SUM__; $b++) {
+		if(isset($master_slaveips[$b]) && $master_slaveips[$b]!= '') {
+			$slaveips .= "$b=".$master_slaveips[$b].' ';
+		}
+	}
+	//exec("/my_tools/cluster_slave master $slaveips > /dev/null 2>&1 &");
+	//exec("/my_tools/keeper \"start:cluster_slave:/my_tools/cluster_slave master $slaveips > /dev/null 2>&1\"");
+	//////////////////////////////////////////////////////////////////
+
+	//Restart krtpd
+	///////////////////////////////////////////////////////////////////
+	exec("/etc/init.d/krtpd restart > /dev/null 2>&1 &");
+	///////////////////////////////////////////////////////////////////
+	sync_time_to_slave();
+}
+
+function do_slave()
+{
+	slave();
+	save_to_flash('/etc/asterisk','/etc/cfg');
+}
+
+function do_master()
+{
+	master();
+	save_to_flash('/etc/asterisk','/etc/cfg');
+}
+
+function do_stand_alone()
+{
+	stand_alone();
+	save_to_flash('/etc/asterisk','/etc/cfg');
+}
+
+if (isset($argv[1])) {
+	switch($argv[1]) {
+	case 'sync_time_to_slave':
+		sync_time_to_slave();
+		exit(0);
+	case 'sync_time_from_master':
+		sync_time_from_master();
+		exit(0);
+	case 'gen_sip_cluster_conf':
+		switch($mode) {
+			case 'slave': gen_sip_slave_conf();break;
+			case 'master':gen_sip_master_conf();break;
+		}
+		exit(0);
+	case 'lighttpd_change':
+		switch($mode) {
+			case 'slave': gen_lighttpd_proxy_for_slave();break;
+			case 'master': gen_lighttpd_proxy_for_master();break;
+			default: gen_lighttpd_proxy_for_stand_alone();break;
+		}
+		exit(0);
+	case 'extensions_slave_change':
+		if($mode == 'slave'){
+			gen_extensions_slave_conf();
+			exec("cp /etc/asterisk/extensions_slave.conf /etc/cfg/extensions_slave.conf > /dev/null 2>&1 &");
+			ast_dialplan_reload();
+		}
+		exit(0);
+	}	
+}
+
+
+//Port mapped stop
+//////////////////////////////////////////////////////////////////
+exec('/my_tools/keeper "stop:rinetd"');
+exec('killall -9 rinetd > /dev/null 2>&1');
+//////////////////////////////////////////////////////////////////
+
+//Stop cluster_slave
+//////////////////////////////////////////////////////////////////
+//exec('/my_tools/keeper "stop:cluster_slave"');
+//exec('killall -9 cluster_slave > /dev/null 2>&1');
+//////////////////////////////////////////////////////////////////
+
+switch($mode) {
+	case 'slave':do_slave();
+		exec("echo 0 > /tmp/.slot_type");
+		break;
+	case 'master':do_master();
+		exec("echo 1 > /tmp/.slot_type");
+		break;
+	default:do_stand_alone();
+		exec("echo 1 > /tmp/.slot_type");
+		break;
+}
+
+ast_reload();
+
+?>

@@ -1,0 +1,45 @@
+#!/bin/php
+
+<?php
+include_once("/www/cgi-bin/inc/function.inc");
+$url = $argv[1];
+
+$store_file = '/data/update_file_online_fireware';
+
+$remote_fh = @fopen ($url, "rb");
+$store_fh = @fopen ($store_file, "wb");
+
+$downlen = 0;
+if ($store_fh){
+	while(!feof($remote_fh)) {
+		$data=fread($remote_fh, 1024 * 8 );
+		if($data==false){
+			break;
+		}else{
+			$downlen += strlen($data);
+			fwrite($store_fh, $data, 1024 * 8 );
+		}
+	}
+	fclose($store_fh);
+}else{
+	$error_reports = "Download system file failed. Please check the network connection!\n";
+	file_put_contents('/tmp/schedule_firmware.log',$error_reports,FILE_APPEND);
+	return false;
+}
+
+exec("/my_tools/unpack.sh $store_file  > /data/log/update.txt || echo $?",$output);
+
+if (isset($output)) {
+	if($output) {
+		$error_reports = "Error code: $output[0]\n";
+		file_put_contents('/tmp/schedule_firmware.log',$error_reports,FILE_APPEND);
+		return false;
+	} else {
+		exec("/my_tools/add_syslog \"System Update\"");
+	}
+}
+
+exec("rm -rf /data/update_file_*");
+save_user_record("","System->Scheduled Firmware Update:Update and Reboot");
+
+exec("/sbin/reboot");

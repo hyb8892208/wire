@@ -1,0 +1,83 @@
+#!/bin/php
+
+<?php
+
+/*
+* argument 1: Email title 
+* argument 2: Email context 
+*/
+
+if($argc != 3) exit(-1);
+
+$sms_cfg="/etc/asterisk/gw/sms.conf";
+
+$sw=trim(`/my_tools/set_config "$sms_cfg" get option_value mail sw`);
+
+if($sw != 'on') exit(0);
+
+$title=$argv[1];
+$context=$argv[2];
+
+$smail1=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smail1`);
+$smail2=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smail2`);
+$smail3=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smail3`);
+
+if($smail1 == "" && $smail2 == "" && $smail3 == "") exit(-2);
+
+$sender=trim(`/my_tools/set_config "$sms_cfg" get option_value mail sender`);
+if($sender == "") exit(-3);
+
+$smtp_server=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtpserver`);
+if($smtp_server == "") exit(-4);
+
+$smtp_port=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtpport`);
+if($smtp_port == "") $smtp_port=25;
+
+
+$smtp_user=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtpuser`);
+if($smtp_user == "") exit(-5);
+
+$smtp_pwd=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtppwd`);
+if($smtp_pwd == "") exit(-6);
+
+require_once('class.phpmailer.php');
+
+$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
+
+try {
+	$mail->IsSMTP(); // telling the class to use SMTP
+	$mail->SMTPAuth   = true;                  // enable SMTP authentication
+	$mail->CharSet	  = 'utf-8';
+	$mail->Host       = $smtp_server; // SMTP server
+	$mail->SetFrom($sender);
+
+	#$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+	$mail->Port       = $smtp_port;                    // set the SMTP port for the GMAIL server
+
+	$mail->Username   = $smtp_user; // SMTP account username
+	$mail->Password   = $smtp_pwd;        // SMTP account password
+
+	if($smail1 != "")
+		$mail->AddAddress($smail1);
+
+	if($smail2 != "")
+		$mail->AddAddress($smail2);
+
+	if($smail3 != "")
+		$mail->AddAddress($smail3);
+
+	$mail->Subject = $title;
+	$mail->Body = $context; 
+	$mail->Send();
+#  echo "Message Sent OK</p>\n";
+} catch (phpmailerException $e) {
+	echo $e->errorMessage(); //Pretty error messages from PHPMailer
+	exit(-7);
+} catch (Exception $e) {
+	echo $e->getMessage(); //Boring error messages from anything else!
+	exit(-8);
+}
+
+exit(0);
+
+?>

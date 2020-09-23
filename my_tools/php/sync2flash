@@ -1,0 +1,5 @@
+#!/bin/php
+<?php
+include_once("/www/cgi-bin/inc/function.inc");
+save_to_flash('/etc/asterisk','/etc/cfg');
+?>

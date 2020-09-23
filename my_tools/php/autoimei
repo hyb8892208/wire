@@ -1,0 +1,330 @@
+#!/bin/php
+
+<?php
+
+require_once("/www/cgi-bin/inc/define.inc");
+require_once("/www/cgi-bin/inc/function.inc");
+require_once("/www/cgi-bin/inc/cluster.inc");
+
+/*************************************************************************************************
+
+File name: autoimei
+
+According to the configuration file /etc/asterisk/gw/autoimei.conf:
+
+	[general]
+	sw=on/off
+	interval=60
+	channel=1,2,4
+	immediately=no/yes
+	force=yes/no
+
+	[1] 
+	imei=358279xxxxxxxxx
+
+	[2]
+	imei=368279xxxxxxxxx
+
+	[3]
+	imei=378279xxxxxxxxx
+
+	[4]
+	imei=388279xxxxxxxxx
+
+The "enable" control this program can run (enable=yes) or not(enable=no);
+The "interval" units are seconds, indicate the every modify of the interval;
+The "channel" is separated by ",", the number is less than $channel_sum;
+The "immediately" decide the modification occured immediately(yes) or delay for "interval" (no);
+The "force" decide whether to wait for channel ready or not when modifying;
+The "imei" consisit of 14 digital number, if some bit is not sure, replace by "x" or "X";
+ 
+*************************************************************************************************/
+//$debug		= true;
+$debug			= false;
+$channel_sum 		= $__GSM_SUM__;
+$reg_interval		= 60;    //gsm power reset interval
+$check_interval		= 1;  //check for channel state interval (second)
+$imei_conf_file		= "/etc/asterisk/gw/autoimei.conf";
+$imei_run_state_file= "/tmp/imei_run_state.conf";
+
+$sw			= trim(`/my_tools/set_config "$imei_conf_file" get option_value general sw 2>/dev/null`);
+$interval		= trim(`/my_tools/set_config "$imei_conf_file" get option_value general interval 2>/dev/null`);
+$channel_org		= trim(`/my_tools/set_config "$imei_conf_file" get option_value general channel 2>/dev/null`);
+$immediately		= trim(`/my_tools/set_config "$imei_conf_file" get option_value general immediately 2>/dev/null`);
+$force			= trim(`/my_tools/set_config "$imei_conf_file" get option_value general force 2>/dev/null`);
+$mac			= trim(`cat /tmp/.lanfactorymac 2>/dev/null`);
+
+$channel_array		= preg_split("/[,]/", "$channel_org");
+
+if($debug) {
+	echo "\n";
+	echo "channel_sum = $channel_sum\n";
+	echo "check_interval = $check_interval\n";
+	echo "imei_conf_file = $imei_conf_file\n";
+	echo "sw = $sw\n";
+	echo "interval = $interval\n";
+	echo "channel_conf = $channel_org\n";
+	echo "immediately = $immediately\n";
+	echo "force = $force\n";
+	echo "mac = $mac\n";
+	echo "\n";
+}
+
+/****************************************************************
+ *
+ *	function:
+ *		get_random_digital(): generate random digital
+ *		calc_imei_checkbit(): calculate the check digit
+ *		get_valid_imei(): obtain the valid IMEI number
+ *
+ ****************************************************************/
+
+function get_random_digital($seed1, $seed2)
+{
+	$seed1 = hexdec(substr(md5($seed1), -8)) & 0x7fffffff;
+	$seed2 = hexdec(substr(md5($seed2), -8)) & 0x7fffffff;
+	
+	mt_srand(($seed1+$seed2) & 0x7fffffff);
+	$random_digital = mt_rand(0, 9);
+
+	return $random_digital;
+}
+
+function calc_imei_checkbit($_14bit_imei)
+{ 
+
+	if(!preg_match('/[0-9]{14}/',$_14bit_imei)) {
+		return 'x';
+	}
+
+	for($i=0;$i<14;$i++) {
+		$a[$i+1] = substr($_14bit_imei,$i,1);
+	}
+
+	$count = 0;
+	for($i=2;$i<=14;$i+=2) {
+		$t = $a[$i]*2;
+		$count += floor($t/10) + $t%10;
+	}
+	for($i=1;$i<=13;$i+=2) {
+		$count += $a[$i];
+	}
+
+	$checkbit = 10 - $count%10;
+	$checkbit = $checkbit%10;
+
+	return $checkbit;
+}
+
+function get_valid_imei($imei, $seed)
+{
+	global $debug;
+
+	for($i=0; $i<15; $i++){
+		if($i == 14){
+			$imei0_14 = substr($imei, 0, 14);
+			$imei15 = calc_imei_checkbit($imei0_14);
+			if('x' == $imei15 )
+				$imei = "";
+			else
+				$imei = $imei0_14.$imei15;
+		}else if($imei[$i] == 'x'|| $imei[$i] == 'X'){
+			$imei[$i] = get_random_digital($seed, microtime());
+		}
+	}
+	if($debug)echo "get valid imei = $imei\n";
+
+	return $imei;
+}
+
+////////////////////////////////////////////
+/******************************************
+ *
+ *	main program
+ *
+ ******************************************/
+////////////////////////////////////////////
+
+/*****************************************************
+ *
+ *	Main  program execution :
+ *		
+ *      1. get valid IMEI number;
+ *      2. modify IMEI;
+ *      3. handle result.
+ *
+ *      flow for every channel 
+ *
+ *      [generate valid IMEI number]
+ *               | 
+ *               |                    --
+ *               |                   |        
+ *               |                   |               modify_imei()
+ *               |                   |                     | 
+ *               |                   |               <force==yes?>-------yes-----><state is ready>-----no------>[return]
+ *               |                   |                     |                               |                           
+ *               |                   |                     no                              yes                          
+ *               |                   |                     |                               |
+ *               |                   |                     |<------------------------------ 
+ *               |                   |                     |
+ *               |                   |                <write IMEI?>-----no----->[return]
+ *               |                   |                     |
+ *               |                   |                    yes
+ *               |                   |                     |
+ *               |                   |         <power reset/cfun reset?>-----no----->[return]
+ *         [modify IMEI] =========>  |                               |
+ *               |                   |                     yes
+ *               |                   |                     |
+ *               |                   |     <check for IMEI(read)=IMEI(write)>----no--->[return]
+ *               |                   |                     |
+ *               |                   |                    yes
+ *               |                   |                     |
+ *               |                   |        <check for net registeration>----no------>[return] 
+ *               |                   |                     |
+ *               |                   |                    yes
+ *               |                   |                     |
+ *               |                   |              [return succeed]
+ *               |                   |                                             
+ *               |                   |                                                
+ *               |                    --
+ *               |
+ *               |                    --
+ *               |                   |                                                
+ *               |                   |               |
+ *               |                   |     <result == succeed?>----yes----->[end this channel for this period]
+ *               |                   |               |
+ *               |                   |               no
+ *               |                   |               |
+ *               |                   |               | 
+ *               |                   |               |
+ *               |                   |               |
+ *               |                   |               |
+ *               |                   |  <check for net registeration>----yes----->[next channel]
+ *       [handle result] =========>  |               |
+ *                                   |               no
+ *                                   |               |
+ *                                   |     <channel is abnormal?>-----yes------>[end this channel for this period]
+ *                                   |               |
+ *                                   |               no
+ *                                   |               |
+ *                                   |         [power reset]  
+ *                                   |               |
+ *                                   |         [next channel]
+ *                                   |
+ *                                    -- 
+ *                                         
+ ****************************************************/
+///////////////////////////////////////////////////////////
+                                
+if($sw != "on"){                
+	if($debug)echo "sw = $sw, imei modify disabled\n";
+	exit(0);
+}
+if(!preg_match('/^[0-9]+$/', $interval)){
+	if($debug)echo "interval = $interval, invalid value\n";
+	exit(0);
+}
+if($mac == "")
+	$mac = 00-00-00-00-00-00;
+
+$imei_array = array();
+foreach($channel_array as $channel) {
+	//if(!preg_match("/^[1-$channel_sum]$/", $channel) ){
+	if(!preg_match("/^[0-9]*$/", $channel) ){
+		if($debug)echo "channel $channel is not a valid channel\n";
+		continue;
+	}
+	$imei = trim(`/my_tools/set_config "$imei_conf_file" get option_value $channel imei 2>/dev/null`);
+	if(!preg_match('/^[0-9xX]{14}$/', $imei)){
+		if($debug)echo "imei_org = $imei_org, invalid value\n";
+		continue;
+	}
+	$imei_array[$channel]=$imei;
+}
+$channel_sum = count($imei_array);
+if(!$channel_sum)
+	exit(0);
+
+/* init run state */
+@system("echo [state] > $imei_run_state_file");
+
+for($i=1; $i<=$__GSM_SUM__; $i++)
+{
+	@system("echo $i=off >> $imei_run_state_file");
+	//$ret = trim(`/my_tools/set_config "$imei_run_state_file" set option_value state "$i" off 2>/dev/null`);
+}
+
+if($immediately != "yes")
+	sleep($interval);
+
+/**************** loop *********************/
+sleep(30);				//Wait chan_extra start
+$channel_flag = array();
+for(;;){
+	$start_time = time();
+	$stop_time = $start_time + $interval;	
+
+	for($i=1; $i<=$__GSM_SUM__; $i++){
+		$channel_modified_flag[$i] = false;
+		$channel_abnormal_flag[$i] = false;
+	}
+	$flag_sum = $channel_sum;
+	
+	//while($flag_sum){
+		foreach($imei_array as $channel =>$imei_org){
+			if($channel_modified_flag[$channel]){
+				continue;
+			}
+			if($debug)echo "\n\n\nin channel $channel, flag_sum = $flag_sum, start time = $start_time, stop time = $stop_time, cur time = ".time()."\n";
+			
+			$state = trim(`/my_tools/set_config "$imei_run_state_file" get option_value state "$channel" 2>/dev/null`);
+			if($state != "off"){ 
+				echo "$channel is running: $state"; 
+				continue;
+			}
+		
+			/* get valid IMEI*/
+			for($i=10;$i>0;$i--){
+				$imei = get_valid_imei($imei_org, $mac);
+				if($imei != "")break;
+			}	
+			if($imei == "")continue;
+			$ret = trim(`/my_tools/set_config "$imei_run_state_file" set option_value state "$channel" on 2>/dev/null`);
+			@system("/my_tools/autoimei_channel $channel $imei $force > /dev/null &");
+/*
+			// modify IMEI
+			if($debug)echo "start modify IMEI ...\n";
+			$ret = modify_imei($channel, $imei, 'power_reset', $force);
+
+			// handle result
+			if($debug)echo "ret=$ret\n";
+			if($ret == 'succeed'){
+				$channel_modified_flag[$channel] = true;
+				$flag_sum--;
+				if($debug)echo "channel $channel imei modify success. new imei = $imei\n";
+			}else if(!check_netreg($channel)){
+				if($debug)echo "net not reg\n";
+				if($channel_abnormal_flag[$channel]){
+					$channel_modified_flag[$channel] = true;
+					$flag_sum--;
+					if($debug)echo "channel $channel is abnormal\n";
+				}else{
+					$channel_abnormal_flag[$channel] = true;
+					if($debug)echo "power reset\n";
+					gsm_power_reset($channel);
+				}
+			}else{
+				sleep(10);//wait for channel state ready
+			}
+*/
+		}
+		//if($stop_time <= time())break;
+	//}
+
+	if($debug)echo "Modify is over in one period, rest time = ".($stop_time-time())."\n";
+	$cur_time = time();
+	if($stop_time > $cur_time)sleep($stop_time-$cur_time);
+}
+
+///////////////////////////////////////////////////////////
+?>

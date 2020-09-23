@@ -1,0 +1,34 @@
+all: client server
+
+
+# need to exec source gcc_path.sh in shell first
+CFLAGS   = -Wall -g
+
+CLIENT_COBJS   = ./gsoap/stdsoap2.o ./gsoap/soapC.o ./gsoap/soapClient.o client.o
+SERVER_COBJS   = stdsoap2.o soapC.o soapServer.o ./serial/serial.o server.o
+
+OBJS      = $(COBJS)
+LIBS      = -L./czmq/lib -lczmq -lpthread
+INCLUDES  = -I./czmq/include -I./serial/ -I./gsoap
+
+
+client: $(CLIENT_COBJS)
+	$(CC) $(CFLAGS) $^ $(LIBS) $(INCLUDES) -o client
+$(CLIENT_COBJS): %.o: %.c
+	$(CC) $(CFLAGS) -c $(INCLUDES) $(LIBS) $< -o $@
+
+
+server: $(SERVER_COBJS)
+	$(CC) $(CFLAGS) $^ $(LIBS) $(INCLUDES) -o server
+$(SERVER_COBJS): %.o: %.c
+	$(CC) $(CFLAGS) -c $(INCLUDES) $(LIBS) $< -o $@
+
+clean: clean_server clean_client
+
+clean_client:
+	rm -f $(CLIENT_COBJS) client
+	
+clean_server:
+	rm -f $(SERVER_COBJS) server
+
+.PHONY: clean

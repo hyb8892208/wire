@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while :; do
+	if ! ps | awk '{print $5}' | grep "^$1$" > /dev/null 2>&1 ; then
+		/etc/init.d/$1 start
+	fi
+	sleep 5
+done &

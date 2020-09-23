@@ -1,0 +1,137 @@
+#!/bin/sh
+# Copyright (C) 2015 PIVA Software <www.pivasoftware.com>
+# 	Author: MOHAMED Kallel <mohamed.kallel@pivasoftware.com>
+
+#############################
+#   Entry point functuons   #
+#############################
+
+prefix_list="$prefix_list $DMROOT.ManagementServer."
+entry_execute_method_list="$entry_execute_method_list entry_execute_method_root_ManagementServer"
+entry_execute_method_list_forcedinform="$entry_execute_method_list_forcedinform  entry_execute_method_root_ManagementServer"
+
+entry_execute_method_root_ManagementServer() {
+	case "$1" in ""|"$DMROOT."|"$DMROOT.ManagementServer."*)
+		common_execute_method_obj "$DMROOT.ManagementServer." "0"
+		common_execute_method_param "$DMROOT.ManagementServer.URL" "0" "$UCI_GET cloud_main.@acs[0].url" ""  "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.Username" "0" "$UCI_GET cloud_main.@acs[0].username" "" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.Password" "0" "$UCI_GET cloud_main.@acs[0].password" ""  "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.PeriodicInformEnable" "1" "$UCI_GET cloud_main.@acs[0].periodic_enable" "management_server_set cloud_main.@acs[0].periodic_enable" "xsd:boolean" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.PeriodicInformInterval" "1" "$UCI_GET cloud_main.@acs[0].periodic_interval" "management_server_set cloud_main.@acs[0].periodic_interval" "xsd:unsignedInt" "1"
+#		common_execute_method_param "$DMROOT.ManagementServer.PeriodicInformTime" "1" "$UCI_GET cloud_main.@acs[0].periodic_time" "management_server_set cloud_main.@acs[0].periodic_time" "xsd:dateTime" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.ConnectionRequestURL" "0" "management_server_get_connection_request_url" "" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.ConnectionRequestUsername" "1" "$UCI_GET cloud_main.@local[0].username" "management_server_set cloud_main.@local[0].username" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.ConnectionRequestPassword" "1" "$UCI_GET cloud_main.@local[0].password" "management_server_set cloud_main.@local[0].password" "" "1"
+#		common_execute_method_param "$DMROOT.ManagementServer.ParameterKey" "0" "$UCI_GET cloud_main.@acs[0].parameter_key" "" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.UDPConnectionRequestAddress" "0" "management_server_get_udp_connection_request_url" "" "" "1" 
+		common_execute_method_param "$DMROOT.ManagementServer.STUNEnable" "0" "echo 1" "" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.STUNServerAddress" "1" "management_server_get_stun_server_address" "management_server_set_stun_server_address" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.STUNServerPort" "1" "management_server_get_stun_port" "management_server_set_stun_port" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.STUNUsername" "1" "management_server_get_stun_username" "management_server_set_stun_username" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.STUNPassword" "1" "management_server_get_stun_password" "management_server_set_stun_password" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.STUNMaximumKeepAlivePeriod" "1" "management_server_get_stun_max_keepalive_period" "management_server_set_stun_max_keepalive_period" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.STUNMinimumKeepAlivePeriod" "1" "management_server_get_stun_min_keepalive_period" "management_server_set_stun_min_keepalive_period" "" "1"
+		common_execute_method_param "$DMROOT.ManagementServer.NATDetected" "1" "management_server_get_stun_nat_detected" "management_server_set_stun_nat_detected" "" "1"
+		
+		return 0;
+		;;
+	esac
+	return $E_INVALID_PARAMETER_NAME;
+}
+
+#######################################
+#   Data model parameters functions   #
+#######################################
+management_server_set_url() {
+	local val=$1
+	
+	local chk=`echo $val | grep "[a-zA-Z0-9_]://.*"`
+	[ "$chk" = "" ] && return $E_INVALID_PARAMETER_VALUE
+
+	$UCI_SET cloud_main.@acs[0].url=$val
+	return 0
+}
+
+management_server_set() {
+	local cfg=$1
+	local val=$2
+	$UCI_SET $cfg="$val"
+	return 0
+}
+
+management_server_get_connection_request_url() {
+	local val
+	if [ -z "$default_management_server_connection_request_url" ]; then
+		local intf=`$UCI_GET cloud_main.@local[0].interface 2> /dev/null`
+		local ip=`ifconfig "$intf" | grep inet | sed 's/^ *//g' | cut -f 2 -d ' '|cut -f 2 -d ':'`
+		local port=`$UCI_GET cloud_main.@local[0].port 2> /dev/null`
+
+		if [ -n "$ip" -a -n "$port" ]; then
+			val="http://$ip:$port/"
+		fi
+	else
+		val=$default_management_server_connection_request_url
+	fi
+	echo $val
+}
+
+management_server_get_udp_connection_request_url()
+{
+	echo `$UCI_GET cloud_nat.@stun[0].crudp_address`
+}
+management_server_get_stun_server_address(){
+	echo `$UCI_GET cloud_nat.@stun[0].server_address`
+} 
+management_server_set_stun_server_address(){
+	$UCI_SET cloud_nat.@stun[0].server_address=$1                       
+	return 0
+}                   
+management_server_get_stun_port() {
+	echo `$UCI_GET cloud_nat.@stun[0].server_port`
+}
+management_server_set_stun_port(){
+
+	$UCI_SET cloud_nat.@stun[0].server_port=$1 
+	return 0
+}                
+                           
+management_server_get_stun_username(){
+	echo `$UCI_GET cloud_nat.@stun[0].username`
+} 
+management_server_set_stun_username(){
+	$UCI_SET cloud_nat.@stun[0].username=$1
+	return 0
+}                                      
+management_server_get_stun_password() {
+	echo `$UCI_GET cloud_nat.@stun[0].password`
+	
+}
+management_server_set_stun_password() {
+	$UCI_SET cloud_nat.@stun[0].password=$1
+	return 0  
+}                                       
+management_server_get_stun_max_keepalive_period()
+{
+	echo `$UCI_GET cloud_nat.@stun[0].max_keepalive`  
+}
+management_server_set_stun_max_keepalive_period()
+{
+        $UCI_SET cloud_nat.@stun[0].max_keepalive=$1            
+	return 0
+}
+management_server_get_stun_min_keepalive_period() {
+	echo `$UCI_GET cloud_nat.@stun[0].min_keepalive`
+}
+management_server_set_stun_min_keepalive_period() {
+
+	$UCI_SET cloud_nat.@stun[0].min_keepalive=$1
+	return 0
+}
+management_server_get_stun_nat_detected() 
+{
+	echo "1"
+}
+management_server_set_stun_nat_detected()
+{
+	return 0
+}

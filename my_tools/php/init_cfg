@@ -1,0 +1,144 @@
+#!/bin/php
+
+<?php
+function istrue($str)
+{
+	if ( strlen($str) <= 0 )
+		return false;
+
+	/* Determine if this is a true value */
+	if (0 == strcasecmp($str, "yes") ||
+	    0 == strcasecmp($str, "true") ||
+	    0 == strcasecmp($str, "y") ||
+	    0 == strcasecmp($str, "t") ||
+	    0 == strcasecmp($str, "1") ||
+	    0 == strcasecmp($str, "on"))
+		return true;
+
+	return false;
+}
+
+//Check hwinfo
+///////////////////////////////////////////
+function check_hwinfo($hwinfo)
+{
+/*
+[general]
+id=1-5 
+cpu= 
+memsize= 
+flashsize= 
+ 
+[gsm]
+sum=
+port= 
+ 
+[interface]
+type=PCI,TDM 
+ 
+[cluster] 
+auto= 
+enable= 
+*/
+
+	$check = array(
+		'general'=>array('id','cpu','memsize','flashsize'),
+		'gsm'=>array('sum'),
+		'interface'=>array('type'),
+	);
+
+	foreach($check as $key => $keyvalue) {
+		foreach($keyvalue as $value) {
+			if(!isset($hwinfo[$key][$value])) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+///////////////////////////////////////////
+
+
+function gen_web_conf($hwinfo)
+{
+	if(!istrue($hwinfo['cluster']['enable'])) {
+		/* No cluster */
+		$ret = `sed -i '/system-cluster.php/d' /www/cgi-bin/inc/head.inc`;
+		$ret = `sed -i '/system-cluster.php/d' /www/cgi-bin/inc/menu.inc`;
+		$ret = `rm /www/cgi-bin/php/system-cluster.php -f`;
+	}
+}
+
+function gen_define_inc($hwinfo)
+{
+	$file_path = '/www/cgi-bin/inc/define.inc';
+
+	$gsm_sum = $hwinfo['gsm']['sum'];
+	$contents = <<<EOF
+<?php
+require_once("/www/cgi-bin/inc/wrcfg.inc");
+\$__MODULE_HEAD_ARRAY__ = get_module_type();
+\$__GSM_SUM__=$gsm_sum;
+\$__BRD_SUM__=1;
+\$__BRD_HEAD__="Board-";
+\$__GSM_HEAD__="gsm-";
+\$__UMTS_HEAD__ ="umts-";
+\$__CDMA_HEAD__ ="cdma-";
+\$__SIP_HEAD__="sip-";
+\$__IAX_HEAD__="iax-";
+\$__RTG_HEAD__="rtg-";
+\$__GRP_HEAD__="grp-";
+?>
+EOF;
+//EOF
+
+	file_put_contents($file_path, $contents, LOCK_EX);
+}
+
+
+function gen_dahdi_system_conf($hw_info)
+{
+	$file_path = '/etc/dahdi/system.conf';
+
+	$gsm_sum = $hw_info['gsm']['sum'];
+	$contents = '';
+	for($i = 1; $i <= $gsm_sum; $i++){
+		$contents .= "# Span $i: opvxg4xx/0/$i \"OpenVox G400P GSM/CDMA PCI Card 0\" AMI/CCS\n";
+		$contents .= "span=$i,$i,0,ccs,ami\n";
+		$contents .= "# termtype: gsm\n";
+		$contents .= "bchan=".($i*2-1)."\n";
+		$contents .= "hardhdlc=".($i*2)."\n\n";
+	}
+	$contents .= "# Global data\n";
+	$contents .= "loadzone = us\n";
+	$contents .= "defaultzone = us\n";
+
+	file_put_contents($file_path, $contents, LOCK_EX);
+}
+
+
+$debug = 0;
+if (isset($argv[1]) && !strcasecmp($argv[1],"debug")) {
+	$debug = 1;
+}
+
+$hwinfo_path = '/tmp/hwinfo';
+$hwinfo = parse_ini_file('/tmp/hwinfo',true);
+if(!check_hwinfo($hwinfo)) {
+	if($debug) {
+		print_r($hwinfo);
+	}
+	echo "Check Hardward has error!!!\n";
+	exit(255);
+}
+
+gen_web_conf($hwinfo);
+gen_dahdi_system_conf($hwinfo);
+gen_define_inc($hwinfo);
+
+include_once('/www/cgi-bin/inc/wrcfg.inc');
+save_gsm_to_extra_conf();
+save_endpoints_to_sips();
+save_routings_to_extensions();
+?>

@@ -1,0 +1,59 @@
+#!/bin/sh                                                                                                                                                                                 
+
+CONFIG_FILE=/etc/syslog/syslog.conf
+
+SYSLOG=syslogd
+KLOG=klogd
+start()
+{
+    /my_tools/syslogd -h -r -f $CONFIG_FILE >> /tmp/mylog 2>&1 &
+    /my_tools/keeper "start:syslogd:/my_tools/syslogd $syslogd_options >> /tmp/mylog 2>&1 &"
+    sleep 1
+    /my_tools/klogd -x /boot/System.map -n -s >> /tmp/mylog 2>&1 &
+    /my_tools/keeper "start:klogd:/my_tools/klogd -x /boot/System.map -n -s >> /tmp/mylog 2>&1 &"
+}
+
+stop()
+{
+    syslog_pid=`pidof syslogd`
+
+    klog_pid=`ps -ef |grep "$KLOG" |grep -v "grep" | awk -F ' ' '{print $1}'`
+
+    if [ ! -z "$syslog_pid" ];then
+		/my_tools/keeper "stop:syslogd"
+        kill -9 $syslog_pid
+    fi  
+
+    sleep 1
+
+    if [ ! -z "$klog_pid" ];then
+		/my_tools/keeper "stop:klogd"
+        kill -9 $klog_pid
+    fi  
+
+}
+
+restart()
+{
+
+    stop
+    sleep 1
+    start
+}
+
+case "$1" in
+    start)
+        start
+        ;;  
+    stop)
+        stop
+        ;;  
+    restart)
+        restart
+        ;;  
+    *)  
+        echo "$1 {start|stop|restart}" 
+        ;;  
+esac
+
+exit 0

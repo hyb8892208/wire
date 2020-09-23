@@ -1,0 +1,37 @@
+﻿----------------------------------------------------
+Usage: http://IP/service?action=chan_state&username=xxx&password=xxx
+	
+1. Parameter Description
+	
+1.1 username
+	Description:    The login username. Set in Web Login page
+	Default Value:  None
+	Necessity:  Required
+1.2 password
+	Description:    The login password. Set in Web Login page
+	Default Value:  None
+	Necessity:  Required
+	
+2. Report Format (charset: UTF-8)
+	
+2.1 JSON
+	{
+		"The total idle channels":"xxx",
+		"Detialed channel status":[{
+			"1":"0",
+			"2":"0",
+			"3":"0",
+			"4":"0",
+			"5":"0",
+			"6":"0",
+			"7":"0",
+			"8":"0",
+			"9":"0",
+			"10":"0",
+			"11":"0",
+			"12":"0",
+			.......
+		}]
+	}
+
+---------------------------------------------------

@@ -1,0 +1,213 @@
+#!/bin/sh
+
+WG_MAC_HEAD="A098050A"
+
+lan_mac_setting()
+{
+	#Check mac head
+	mac=`ifconfig eth0 | grep HWaddr | awk '{print $5}'`
+#	mac_head=`ifconfig eth0 | grep HWaddr | awk '{print $5}' | awk -F: '{print $1 $2 $3 $4}'`
+	mac_head=`echo $mac | awk -F: '{print $1 $2 $3 $4}'`
+	if [ x"$mac" = x"" ];then
+		lan_factory_mac_setting
+	else
+		echo $mac > /tmp/.lanfactorymac
+		return 1
+	fi
+}
+
+lan_factory_mac_setting()
+{
+	# Setting factory MAC
+	FACTORY_DEFAULT_MAC=00:02:E7:F5:02:02
+	FACTORY_LAN_MAC=`cat /tmp/.lanfactorymac 2> /dev/null`
+	if [ x"$FACTORY_LAN_MAC" != "x" ];then
+		if ( echo "$FACTORY_LAN_MAC" | egrep "^([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}$" > /dev/null 2>&1 );then
+			ifconfig eth0 hw ether $FACTORY_LAN_MAC
+		else
+			ifconfig eth0 hw ether $FACTORY_DEFAULT_MAC
+			echo $FACTORY_DEFAULT_MAC > /tmp/.lanfactorymac
+		fi
+	else
+		ifconfig eth0 hw ether $FACTORY_DEFAULT_MAC
+		echo $FACTORY_DEFAULT_MAC > /tmp/.lanfactorymac
+	fi
+}
+
+lan_factory_ip_setting()
+{
+	#Setting factory IP
+	REP_STR="1"
+	SLOT_NUM=`cat /tmp/.slotnum 2> /dev/null`
+	if [ $? -eq 0 ];then
+		if ( echo "$SLOT_NUM" | egrep "^[0-9]{1,2}$" >/dev/null 2>&1 ); then
+			REP_STR="$SLOT_NUM"
+		fi
+	fi
+
+	IP=`echo "172.16.98.X" | sed "s/X/$REP_STR/g" 2> /dev/null`
+
+	ifconfig eth0 $IP netmask 255.255.0.0 > /dev/null 2>&1
+	echo "LAN:$IP"
+	route del default dev eth0 > /dev/null 2>&1
+	route add default gw 172.16.0.1 dev eth0 > /dev/null 2>&1
+}
+
+lan_factory_setting()
+{
+	lan_mac_setting
+	lan_factory_ip_setting
+}
+
+lan_reserved_setting()
+{
+	#LAN Reserved IP Settings
+	ifconfig eth0:0 down
+
+	SW=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value reserved switch 2> /dev/null`
+	if [ $? -eq 0 ];then
+		if [ x"$SW" == "xon" ];then
+			REP_STR="1"
+			SLOT_NUM=`cat /tmp/.slotnum 2> /dev/null`
+			if [ $? -eq 0 ];then
+				if ( echo "$SLOT_NUM" | egrep "^[0-9]{1,2}$" >/dev/null 2>&1 ); then
+					REP_STR="$SLOT_NUM"
+				fi
+			fi
+			IP=`echo "192.168.99.X" | sed "s/X/$REP_STR/g" 2> /dev/null`
+			ifconfig eth0:0 $IP netmask 255.255.255.0 > /dev/null 2>&1
+			echo "LAN_RES:$IP"
+		fi
+	fi
+}
+
+lan_static_setting()
+{
+	#LAN IP Settings
+	SET_OK="false"
+	IPV4_ENABLE=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv4 enabled`
+	IPV6_ENABLE=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv6 enabled`
+	if [ x"$IPV4_ENABLE" = x"on" -o x"$IPV4_ENABLE"=x"" ];then
+		IP=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv4 ipaddr 2> /dev/null`
+		if [ $? -eq 0 ];then
+			if [ x"$IP" != "x" ];then
+				MASK=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv4 netmask 2> /dev/null`
+				if [ $? -eq 0 ];then
+					if [ x"$MASK" != "x" ];then
+						GW=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv4 gateway 2> /dev/null`
+						if ( echo "$IP" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) ;then
+							if ( echo "$MASK" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) ;then
+								ifconfig eth0 $IP netmask $MASK > /dev/null 2>&1
+								echo "LAN:$IP"
+								SET_OK="true"
+								if [ x"$GW" != "x" ];then
+									if ( echo "$GW" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) ;then
+										route del default dev eth0 > /dev/null 2>&1
+										route add default gw $GW dev eth0 > /dev/null 2>&1
+									fi
+								fi
+							fi
+						fi
+					fi
+				fi
+			fi
+		fi
+	elif [ x"$IPV4_ENABLE" = x"off" ];then
+		IPV4_ADDR=`ifconfig eth0 |grep "inet "|awk -F ':' '{print $2}'|awk '{print $1}'`
+		ip addr del $IPV4_ADDR dev eth0
+	fi
+
+	if [ x"$IPV6_ENABLE" = x"on" ];then
+		OLD_IP=`ifconfig eth0 |grep "inet6.*Link"|awk '{print $3}'`
+		NEW_IP=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv6 ipaddr 2> /dev/null`
+		GW=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value ipv6 gateway 2> /dev/null`
+		echo "LAN:$IP"
+		
+		ip addr add $NEW_IP dev eth0
+		if [ $? -eq 0 ];then
+			if [ x"$OLD_IP" != x"" ];then
+				ip addr del $OLD_IP dev eth0
+			fi
+			ip addr del $NEW_IP dev eth0
+			ip addr add $NEW_IP dev eth0
+		fi
+		if [ x"$IPV4_ENABLE" = x"on" ];then
+			if [ x"$GW" != "x" ];then
+				route -A inet6 $GW dev eth0
+			fi
+		else
+			route -A inet6 del default dev eth0 > /dev/null 2>&1
+			route -A inet6 add default gw $GW dev eth0 > /dev/null 2>&1
+		fi
+		SET_OK="true"
+	elif [ x"$IPV6_ENABLE" = x"off" ];then
+		OLD_IP=`ifconfig eth0 |grep "inet6.*Link"|awk '{print $3}'`
+		if [ x"$OLD_IP" != x"" ];then
+			ip addr del $OLD_IP dev eth0
+		fi
+	fi
+	
+	# Set Factory IP
+	if [ "$SET_OK" = "false" ]; then
+		lan_factory_ip_setting
+	fi
+}
+
+stop_lan_dhcp()
+{
+	ps | grep udhcpc | while read line;do
+		NAME=`echo $line | awk '{print $3$5}'`
+		if [ "$NAME" = "udhcpceth0" ]; then
+			PID=`echo $line | awk '{print $1}'`
+			kill -9 $PID
+		fi
+	done
+}
+
+lan_dhcp_setting()
+{
+	#udhcpc -i eth0 -t 3 -n &
+	udhcpc -i eth0 -s /my_tools/udhcpc.sh > /dev/null 2>&1 &
+}
+
+lan_setting()
+{
+#	ifconfig eth0 down
+
+	TYPE=`/my_tools/set_config /etc/asterisk/gw/network/lan.conf get option_value general type 2> /dev/null`
+
+	if [ "$TYPE" = "dhcp" ];then
+		lan_mac_setting
+		lan_dhcp_setting
+	elif [ "$TYPE" = "static" ];then
+		lan_mac_setting
+		lan_static_setting
+	else
+		lan_factory_setting
+	fi
+
+	lan_reserved_setting
+
+#	ifconfig eth0 up
+}
+
+stop_lan_dhcp
+
+case "$1" in
+	start)
+		lan_setting
+		;;
+	stop)
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+        echo "Usage: $0 {start|stop|restart|reload}"
+        exit 2
+		;;
+esac
+
+exit 0
+

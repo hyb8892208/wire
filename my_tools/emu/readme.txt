@@ -1,0 +1,2 @@
+cd SimEmuSvr
+./build.sh

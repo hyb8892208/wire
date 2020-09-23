@@ -1,0 +1,41 @@
+#!/bin/sh
+
+mon_start()
+{
+	taskName=`grep AutoGetPublicIP /etc/crontabs/root |awk '{print $7}'`
+	if [ x"${taskName}" = x ]; then
+		# Adding a task of AutoGetPublicIP to crontabs, execute it per sleep 60 seconds
+		echo "*/1 * * * * sh /my_tools/AutoGetPublicIP.sh" >> /etc/crontabs/root
+	#	echo "*/1 * * * * sh /tmp/AutoGetPublicIP.sh" >> /etc/crontabs/root
+		sh /etc/init.d/cron restart > /dev/null 2>&1 &
+	fi
+}
+
+mon_stop()
+{
+	# Deleting the task of AutoGetPublicIP
+	sed -i '/AutoGetPublicIP/d' /etc/asterisk/gw/crontabs_root
+
+	sh /etc/init.d/cron restart > /dev/null 2>&1 &
+	#Kill AutoGetPublicIP
+#	monStr=`ps -ef |grep AutoGetPublicIP | grep -v grep | awk '{print $1}'`
+#	echo "${monStr}"
+#	if [ -n "${monStr}" ]; then
+#		kill -9 ${monStr}
+#	fi
+}
+
+case "$1" in
+	start)
+		mon_start
+		;;
+	stop)
+		mon_stop
+		;;
+	*)
+		echo "Usage: $0 {start|stop}"
+		exit 2
+		;;
+esac
+
+exit 0

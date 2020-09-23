@@ -1,0 +1,11 @@
+[Unit]
+Description=Wireless Gateway Start
+After=remote-fs.target
+Requires=remote-fs.target
+
+[Service]
+Type=forking
+ExecStart=/etc/start
+
+[Install]
+WantedBy=multi-user.target

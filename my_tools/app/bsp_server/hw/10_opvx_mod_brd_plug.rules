@@ -1,0 +1,9 @@
+
+#If is ttyUSBx device run script
+#   /root/opvx_gen_udev_rule.sh 
+# and the argument is 
+#   /dev/ttyUSBx
+#
+#Install this file to : /etc/udev/rules.d/
+#
+KERNEL=="ttyUSB*", RUN+="/my_tools/opvx_gen_device.sh /dev/%k"

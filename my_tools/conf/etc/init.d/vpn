@@ -1,0 +1,379 @@
+#!/bin/sh
+
+# Location of openvpn binary
+openvpn=""
+openvpn_locations="/usr/sbin/openvpn /usr/local/sbin/openvpn"
+for location in $openvpn_locations
+do
+  if [ -f "$location" ]
+  then
+    openvpn=$location
+  fi
+done
+
+# Lockfile
+lock="/var/lock/openvpn"
+
+# PID directory
+piddir="/var/run/openvpn"
+
+# Our working directory
+work=/etc/openvpn
+
+# Source function library.
+. /etc/functions.sh
+
+openvpn_start()
+{
+	SW1=`/my_tools/set_config /etc/asterisk/gw/openvpn.conf get option_value general openvpn 2>/dev/null`
+	if [ $? -ne 0 ];then
+		echo "Can't open /etc/asterisk/gw/openvpn.conf"
+		exit 1
+	fi
+	if [ x"$SW1" = x"0" ];then
+		exit 1
+	fi
+	echo  -n "Starting openvpn: "
+
+	if [ -f $work/openvpn-startup ]; then
+		$work/openvpn-startup
+	fi
+
+	if [ ! -d  $piddir ]; then
+		mkdir $piddir
+	fi
+
+	if [ -f $lock ]; then
+		# we were not shut down correctly
+		for pidf in `/bin/ls $piddir/*.pid 2>/dev/null`; do
+			if [ -s $pidf ]; then
+				kill `cat $pidf` >/dev/null 2>&1
+			fi
+			rm -f $pidf
+		done
+		rm -f $lock
+		sleep 2
+	fi
+
+	rm -f $piddir/*.pid
+	cd $work
+
+	# Start every .conf in $work and run .sh if exists
+	errors=0
+	successes=0
+	if [ -f ${work}/openvpn-conn.ovpn ]; then
+		$openvpn --daemon --writepid $piddir/ovpn.pid --config ${work}/openvpn-conn.ovpn --log /tmp/log/openvpn.log
+		if [ $? = 0 ]; then
+			successes=1
+		else
+			errors=1
+		fi
+	else
+	for c in `/bin/ls *.conf 2>/dev/null`; do
+		bn=${c%%.conf}
+		if [ -f "$bn.sh" ]; then
+			. ./$bn.sh
+		fi
+		rm -f $piddir/$bn.pid
+		# Handle backward compatibility, see Red Hat Bugzilla ID #458594
+		script_security=''
+		if [ -z "$( grep '^[[:space:]]*script-security[[:space:]]' $c )" ]; then
+			script_security="--script-security 2"
+		fi
+		$openvpn --daemon --writepid $piddir/$bn.pid --config $c --cd $work $script_security --log /tmp/log/openvpn.log
+		if [ $? = 0 ]; then
+			successes=1
+		else
+			errors=1
+		fi
+	done
+	fi
+
+	if [ $errors = 1 ]; then
+		echo -n "FAILED"; echo
+	else
+		echo -n "OK"; echo
+	fi
+
+	if [ $successes = 1 ]; then
+		touch $lock
+	fi
+}
+
+openvpn_stop()
+{
+	echo -n "Shutting down openvpn: "
+	for pidf in `/bin/ls $piddir/*.pid 2>/dev/null`; do
+	  if [ -s $pidf ]; then
+	    kill `cat $pidf` >/dev/null 2>&1
+	  fi
+	  rm -f $pidf
+	done
+
+	# Run shutdown script, if defined
+	if [ -f $work/openvpn-shutdown ]; then
+	    $work/openvpn-shutdown
+	fi
+	echo "" > /tmp/log/openvpn.log
+
+	echo -n "OK"; echo
+	rm -f $lock
+}
+
+pptpvpn_start()
+{
+	echo  -n "Starting pptpvpn: "
+	pppd call vpn >/dev/null 2>&1 &
+	/my_tools/keeper "start:pptpgw:pppd call vpn > /dev/null 2>&1 &"
+	sleep 1
+	echo -n "OK"; echo
+}
+
+pptpvpn_stop()
+{
+	echo -n "Shutting down pptpvpn: "
+	/my_tools/keeper "stop:pptpgw"
+	killall pppd >/dev/null 2>&1
+	echo -n "OK"; echo
+}
+
+n2n_stop()
+{
+	/my_tools/keeper "stop:edge"
+	n2n_pid=`pidof edge`
+	if [ ! -z $n2n_pid ]; then
+		kill -9 $n2n_pid
+	fi
+	echo '' > /tmp/n2n.status
+}
+
+n2n_start()
+{
+	CONF_FILE=/etc/asterisk/gw/n2n/n2n.conf
+	switch=`/my_tools/set_config $CONF_FILE get option_value n2n enable`
+
+	if [ x"$switch" == x"on" ]; then
+		echo '' > /tmp/n2n.status
+
+		server_addr=`/my_tools/set_config $CONF_FILE get option_value n2n server_addr`
+		port=`/my_tools/set_config $CONF_FILE get option_value n2n port`
+		local_ip=`/my_tools/set_config $CONF_FILE get option_value n2n local_ip`
+		subnet_mask=`/my_tools/set_config $CONF_FILE get option_value n2n subnet_mask`
+		user_name=`/my_tools/set_config $CONF_FILE get option_value n2n user_name`
+		password=`/my_tools/set_config $CONF_FILE get option_value n2n password`
+
+		edge -l $server_addr:$port -a $local_ip -s $subnet_mask -c $user_name -k $password
+		/my_tools/keeper "start:edge:edge -l $server_addr:$port -a $local_ip -s $subnet_mask -c $user_name -k $password"
+	else
+		n2n_stop
+	fi
+}
+
+function calc_network_from_dev()
+{
+	dev=$1
+	result=`ifconfig ${dev} 2>/dev/null|grep "inet "`
+	ipaddr=`echo ${result}| awk  "{print$2}" | awk -F' ' '{print$2}'|awk -F ':' '{print $2}'`
+	netw=`echo ${ipaddr} |cut -d "." -f1,2,3`
+	net1=`echo ${netw}|cut -d "." -f1`
+
+	if [[ -z "$ipaddr" ]];then
+		return 1 
+	fi 
+	[ $net1 -le 127 ] && netmask=8
+	[ $net1 -ge 128 -a $net1 -le 191 ] && netmask=16
+	[ $net1 -ge 192 ] && netmask=24
+	gateway=`echo ${result}| awk  "{print$2}" | awk -F' ' '{print$6}'`
+	if [ "$netmask" -eq '8' ];then
+		net=`echo $netw | cut -d "." -f1`
+		host="$net.0.0.1"
+		network="$net.0.0.0"
+		mask="255.0.0.0"
+	elif [ "$netmask" -eq '16' ];then
+		net=`echo $netw | cut -d "." -f1,2`
+		host="$net.0.1"
+		network="$net.0.0"
+		mask="255.255.0.0"
+	else
+		net=`echo $netw | cut -d "." -f1,2,3`
+		host="$net.1"
+		network="$net.0"
+		mask="255.255.255.0"
+	fi
+	
+	if [[ "${gateway}" == "1.0.0.1" ]];then
+		gateway=$host        
+	fi
+	echo "${network} ${mask} ${gateway}"
+	return 0
+}
+
+xl2tp_set_default_gw()
+{
+	default_gw=$1
+	defaultgw=`route |grep default|grep eth0|awk '{print $2}'`
+	result=`calc_network_from_dev ppp30`
+	if [ $? -ne 0 ];then
+		return 1
+	fi
+	network=`echo $result|awk '{print $1}'`
+	mask=`echo $result|awk '{print $2}'`
+	geteway=`echo $result|awk '{print $3}'`
+	route -n|grep "^${network}" |  grep "ppp30$" >/dev/null 2>&1
+	if [ x"$default_gw" = x"on" ];then
+		route -n|grep "^$gateway" >/dev/null 2>&1
+		if [ $? -eq 0 ];then
+			echo "Exist route"
+		else
+			route add -host $gateway dev ppp30 >/dev/null 2>&1
+		fi
+		route -n|grep "${gateway}"|awk '{print $2}'|grep "${gateway}" >/dev/null 2>&1
+		if [ $? -ne 0 ];then
+			route add default gw $gateway dev ppp30 >/dev/null 2>&1
+			route del default gw ${defaultgw}  >/dev/null 2>&1
+		fi
+	else
+		if [ $? -ne 0 ] ;then
+			route -n|grep "^1.0.0.1" >/dev/null 2>&1
+			if [ $? -ne 0 ] ;then
+				route del -host 1.0.0.1 dev ppp30 >/dev/null 2>&1
+			fi
+			echo "${network} ${mask}"
+			route add -net ${network} netmask ${mask} dev ppp30 >/dev/null 2>&1
+		else
+			return 1
+		fi
+	fi
+	return 0
+}
+
+xl2tp_start()
+{
+	CONF_FILE=/etc/asterisk/gw/xl2tpd/xl2tp_vpn.conf
+	xl2tp_switch=`/my_tools/set_config $CONF_FILE get option_value l2tp enable`
+	default_gw=`/my_tools/set_config $CONF_FILE get option_value l2tp default_gw`
+	ipsec_switch=`/my_tools/set_config $CONF_FILE get option_value l2tp ipsec`
+	xl2tp_pid=`pidof xl2tpd`
+	try_count=30
+	if [ x"${xl2tp_pid}" != x ];then
+		return
+	fi
+
+	if [ x"${ipsec_switch}" = x"on" ];then
+		/etc/init.d/ipsec start
+		sleep 1
+		ipsec auto --up testvpn
+	else
+		ipsec auto --down testvpn
+		/etc/init.d/ipsec stop	
+	fi
+
+	if [ x"${xl2tp_switch}" == x"on" ]; then
+		/usr/sbin/xl2tpd > /tmp/log/xl2tpd_vpn.log &
+		sleep 2
+		echo "c testvpn" > /var/run/xl2tpd/l2tp-control
+	fi
+
+	sleep 1
+	while [ $try_count -gt 0 ]
+	do
+		status=`ifconfig ppp30`
+		if [ $? -eq 0 ];then 
+			sleep 4
+			xl2tp_set_default_gw $default_gw
+			break
+		fi
+		try_count=`expr $try_count - 1`
+		sleep 1
+	done
+}
+
+xl2tp_stop()
+{
+	xl2tp_pid=`pidof xl2tpd`
+	if [ x"$xl2tp_pid" != x ];then
+		echo "d testvpn" > /var/run/xl2tpd/l2tp-control
+		kill -9 $xl2tp_pid
+	fi
+	ipsec auto --down testvpn
+	/etc/init.d/ipsec stop
+}
+
+# Check that binary exists
+if ! [ -f  $openvpn ] 
+then
+  echo "openvpn binary not found"
+  exit 0
+fi
+
+SW=`/my_tools/set_config /etc/asterisk/gw/vpn.conf get option_value general vpntype 2>/dev/null`
+if [ $? -ne 0 ];then
+	echo "Can't open /etc/asterisk/gw/vpn.conf"
+	exit 1
+fi
+if [ x"$SW" = x"nonevpn" ];then
+	openvpn_stop
+	pptpvpn_stop
+	n2n_stop
+	xl2tp_stop
+	exit 0
+fi
+
+# See how we were called.
+case "$1" in
+  start)
+	if [ x"$SW" = x"pptpvpn" ];then
+		openvpn_stop
+		n2n_stop
+		xl2tp_stop
+		pptpvpn_start
+		exit 0
+	elif [ x"$SW" = x"openvpn" ];then
+		pptpvpn_stop
+		n2n_stop
+		xl2tp_stop
+		openvpn_start
+		exit 0
+	elif [ x"$SW" = x"n2nvpn" ];then
+		pptpvpn_stop
+		openvpn_stop
+		xl2tp_stop
+		n2n_start
+		exit 0
+	elif [ x"$SW" = x"l2tpvpn" ];then
+		pptpvpn_stop
+		openvpn_stop
+		n2n_stop
+		xl2tp_start
+	fi
+	;;
+  stop)
+  	openvpn_stop
+	pptpvpn_stop
+	xl2tp_stop
+	n2n_stop
+	;;
+  restart)
+	$0 stop
+	sleep 2
+	$0 start
+	;;
+  status)
+	if [ -f $lock ]; then
+	    for pidf in `/bin/ls $piddir/*.pid 2>/dev/null`; do
+		if [ -s $pidf ]; then
+		    kill -USR2 `cat $pidf` >/dev/null 2>&1
+		fi
+	    done
+	    echo "Status written to /var/log/messages"
+	else
+	    echo "openvpn: service not started"
+	    exit 1
+	fi
+        ;;
+  *)
+	echo "Usage: openvpn {start|stop|restart|status}"
+	exit 1
+	;;
+esac
+exit 0

@@ -1,0 +1,52 @@
+#!/bin/sh
+
+CRT_DIR=/data/crt
+LIC_DIR=/data/license
+lic_crt=${CRT_DIR}/license.crt
+board_count=11
+uuid=
+
+check_mac()
+{
+	mac=`ifconfig eth0 | grep HWaddr | awk '{print $5}' | awk -F: '{print $1 $2 $3 $4 $5 $6}'`
+	lic_crt=${CRT_DIR}/license_$mac.crt
+	if [ ! -f $lic_crt ]; then
+		echo "ERROR: License file is invalid"
+		exit 0
+	fi
+}
+
+get_uuid()
+{
+	i=1
+	while [ $i -le $board_count ]; do
+		uuid=`/my_tools/bsp_cli module uid $i | grep uid | awk '{print($6)}' | awk -F: '{print($2)}'`
+		if [ x"$uuid" != x ]; then
+			break
+		fi
+		(( i++ ))
+	done
+	if [ x"$uuid" == x ]; then
+		echo "ERROR: uuid is invalid"
+		exit 0
+	fi
+}
+
+replace_license()
+{
+	if [ -d ${LIC_DIR} ]; then
+		rm -rf ${LIC_DIR}
+	fi
+
+	mkdir -p ${LIC_DIR}
+	unzip $lic_crt -d ${LIC_DIR} >/dev/null 2>&1
+}
+
+check_mac
+
+replace_license
+
+get_uuid
+
+echo $uuid
+

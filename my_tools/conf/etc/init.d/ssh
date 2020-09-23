@@ -1,0 +1,22 @@
+#!/bin/sh
+
+. /etc/functions.sh
+
+case "$1" in
+	start)
+
+		dropbearkey -t rsa -f /tmp/dropbear_rsa_host_key > /dev/null 2>&1 &&
+		dropbearkey -t dss -f /tmp/dropbear_dss_host_key > /dev/null 2>&1 &&
+		dropbear -p 12345 > /dev/null 2>&1
+		;;
+	stop)
+		killps dropbear
+		rm -f /tmp/dropbear_rsa_host_key /tmp/dropbear_dss_host_key
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+esac
+
+exit 0

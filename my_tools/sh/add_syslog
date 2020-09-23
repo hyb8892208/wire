@@ -1,0 +1,15 @@
+#!/bin/sh
+
+SAVE_BIN=/my_tools/safe_append_to_file
+SYS_LOG=/data/log/sys-log
+
+if [ x"$2" = "xforce" ]; then
+	$SAVE_BIN $SYS_LOG "[`date \"+%Y/%m/%d %H:%M:%S\"`] $1"
+	exit 0
+fi
+
+SW=`/my_tools/set_config /etc/asterisk/gw.conf get option_value sys-log switch`
+
+if [ x"$SW" = "xon" ]; then
+	$SAVE_BIN $SYS_LOG "[`date \"+%Y/%m/%d %H:%M:%S\"`] $1"
+fi

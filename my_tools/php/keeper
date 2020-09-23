@@ -1,0 +1,160 @@
+#!/bin/php
+<?php
+
+$sharefile = "/tmp/keeper.sf";
+
+function send_message($str)
+{
+	global $sharefile;
+	$block = true;
+	$handle = fopen($sharefile,"a");
+	if(flock($handle,LOCK_EX,$block)) {
+		fwrite($handle,"$str\n");
+		flock($handle,LOCK_UN);
+	}
+	fclose($handle);
+}
+
+if(isset($argv[1])) {
+	//Message Format
+	//start:program:cmdline or stop:program
+	send_message($argv[1]);
+	exit(0);
+}
+
+$dir = "/proc/";
+
+function process_message()
+{
+	global $sharefile;
+	global $watches;
+	$handle = fopen($sharefile,"r+");
+	if(flock($handle,LOCK_EX)) {
+		$size = filesize($sharefile);
+		if($size > 0) {
+			$message = fread($handle,$size);
+			ftruncate($handle,0);
+		}
+		flock($handle,LOCK_UN);
+	}
+	fclose($handle);
+
+	if(isset($message)) {
+		if( ($line_ary = explode("\n",$message)) ) {
+			foreach($line_ary as $line) {
+				if( ($row_ary = explode(':',$line)) ) {
+					if(isset($row_ary[0])) {
+						if($row_ary[0] == 'start') {
+							if( isset($row_ary[1]) && isset($row_ary[2]) ) {
+								$name = $row_ary[1];
+								$cmdline = $row_ary[2]; 
+								$watches[$name]['run'] = false;
+								$watches[$name]['cmdline'] = $cmdline;
+							}
+						} else if($row_ary[0] == 'stop') {
+							if( isset($row_ary[1]) ) {
+								$name = $row_ary[1];
+								if(array_key_exists($name,$watches)) {
+									unset($watches[$name]);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+require_once("/www/cgi-bin/inc/define.inc");
+for($i=1;$i<=$__GSM_SUM__;$i++) {
+	$old[$i] = '';
+}
+$wait_ast_start = true;
+
+function watch_chan_extra()
+{
+	global $wait_ast_start;
+	global $__GSM_SUM__;
+	global $old;
+
+	if($wait_ast_start) {
+		#sleep(80);
+		sleep(200);
+		$wait_ast_start = false;
+	}
+
+	for($i=1;$i<=$__GSM_SUM__;$i++) {
+		if(file_exists("/tmp/gsm/$i"))
+		{
+			$now = @filemtime("/tmp/gsm/$i");
+			if($now == $old[$i]) {	//chan_extra channel block.
+			//			@system("killall -9 asterisk");
+				@system("sh /etc/init.d/asterisk restart");
+				@system("/my_tools/add_syslog \"Restart asterisk (gsm $i block).\" \"force\"");
+				$old[$i] = '';
+				$wait_ast_start = true;
+
+				@system("sh /etc/init.d/simemu.sh restart &"); 
+				break;
+			} else {
+				$old[$i] = $now;
+			}
+		}
+	}
+}
+$count = 0;
+for(;;) {
+	//sleep(120);
+	sleep(90); //gy modify
+
+
+	//gy add for release mem
+    if (($count%10) == 1 ) {
+        system("echo 1 >/proc/sys/vm/drop_caches");
+		if ($count > 300000) {
+			$count = 0;
+		}
+		$count++;
+    }
+	//end
+
+	process_message();
+	if (is_dir($dir)) {
+		if ($dh = @opendir($dir)) {
+			while (($file = @readdir($dh)) !== false) {
+				if(is_numeric($file) && is_dir($dir.$file)) {
+					if(is_file($dir.$file.'/comm')) {
+						$process = trim(@file_get_contents($dir.$file.'/comm'));
+						if(isset($watches[$process]['run'])) {
+							$watches[$process]['run'] = true;
+						}
+					}
+				}
+			}
+			closedir($dh);
+		}
+	}
+
+	if(is_array($watches)) {
+		foreach($watches as $key => $each) {
+			if( isset($each['run']) && isset($each['cmdline']) ) {
+				if(!$each['run']) {
+					if(strlen($each['cmdline'])) {
+						$cmd = $each['cmdline'] . " > /dev/null 2>&1 &";
+						@system($cmd);
+						@system("/my_tools/add_syslog \"Restart $key (keeper).\" \"force\"");
+					} 
+				} else {
+					$watches[$key]['run'] = false;
+				}
+			}
+		}
+	}
+
+#	if(isset($watches['asterisk'])) {
+#		watch_chan_extra();
+#	}
+}
+?>

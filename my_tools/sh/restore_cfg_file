@@ -1,0 +1,29 @@
+#!/bin/sh
+
+#lock_file=/tmp/$(echo "$(cd $(dirname $0);pwd)_$(basename $0)" | sed 's/\//_/g')
+
+CFG_VER_FILE=/etc/cfg/cfg_version
+DEF_CFG_PACKAGE=/version/def_cfg.tar.gz
+
+if [ ! -e $CFG_VER_FILE ]; then
+	exit 255
+fi
+
+if [ ! -e $DEF_CFG_PACKAGE ]; then
+	exit 255
+fi
+
+cat /dev/null > $CFG_VER_FILE
+
+if [ -s $CFG_VER_FILE ]; then
+	exit 255
+fi
+
+/etc/init.d/asterisk stop
+
+#Play LED
+#/my_tools/play_all_led 200 3
+
+/my_tools/add_syslog "Restore configuration files"
+
+reboot

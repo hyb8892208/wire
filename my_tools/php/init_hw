@@ -1,0 +1,224 @@
+#!/bin/php
+
+<?php
+/*
+/tmp/hwinfo 
+[general] 
+id=1-5 
+cpu= 
+memsize= 
+flashsize= 
+ 
+[gsm]
+sum=
+port=
+dev-1=/dev/ttyUSB0
+dev-2=/dev/ttyUSB1
+........
+ 
+[interface] 
+type=PCI,TDM 
+ 
+*/
+
+
+$hwinfo_path = '/tmp/hwinfo';
+
+$__GSM_SUM__ = 32;
+
+$slotnum_path = '/tmp/.slotnum';
+
+// board mcu usb serial
+function init_board_mcu_usb_serial(&$hwinfo)
+{
+	$__BOARD_MCU_MIN__ = 33;
+	$__BOARD_MCU_MAX__ = 34;
+	
+	$usbserial_info_path = '/tmp/usbserial_info';
+	$usbserial_info = parse_ini_file($usbserial_info_path,true);
+	
+	$hwinfo['brd_mcu']['brd-1'] = "/dev/null";
+	$hwinfo['brd_mcu']['brd-2'] = "/dev/null";
+
+	if(is_array($usbserial_info)) {
+		for($i=$__BOARD_MCU_MIN__;$i<=$__BOARD_MCU_MAX__;$i++) {
+			if(isset($usbserial_info[$i]['dev'])) {
+				
+				$devinfo =  explode(',',$usbserial_info[$i]['dev']);
+
+				if($usbserial_info[$i]['PID'] == '0x7523' && $usbserial_info[$i]['VID'] == '0x1A86') {
+					if(isset($devinfo[0])) {
+						if(1 == sscanf($devinfo[0],"/dev/ttyUSB%d",$id)) {
+							if(!file_exists($devinfo[0])) {
+								posix_mknod($devinfo[0],POSIX_S_IFCHR|0777,188,$id);
+								//mknod $devinfo[0] c 188 \$id
+							}
+							$port = $i - $__BOARD_MCU_MIN__ + 1;
+							$hwinfo['brd_mcu']["brd-$port"] = $devinfo[0];
+						}
+					}
+				} 
+			}
+		}
+	}
+}
+init_board_mcu_usb_serial($hwinfo);
+
+function init_usb_serial(&$hwinfo)
+{
+	global $__GSM_SUM__;
+	$usbserial_info_path = '/tmp/usbserial_info';
+	$usbserial_info = parse_ini_file($usbserial_info_path,true);
+
+	if(is_array($usbserial_info)) {
+		$port = 1;
+		for($i=1;$i<=$__GSM_SUM__;$i++) {
+			if(isset($usbserial_info[$i]['dev'])) {
+
+				$devinfo =  explode(',',$usbserial_info[$i]['dev']);
+
+				if($usbserial_info[$i]['PID'] == '0x7523' && $usbserial_info[$i]['VID'] == '0x1A86') {
+					if(isset($devinfo[0])) {
+						if(1 == sscanf($devinfo[0],"/dev/ttyUSB%d",$id)) {
+							if(!file_exists($devinfo[0])) {
+								posix_mknod($devinfo[0],POSIX_S_IFCHR|0777,188,$id);
+								//mknod $devinfo[0] c 188 \$id
+							}
+							$hwinfo['gsm']["dev-$port"] = $devinfo[0];
+							
+							$port++;
+						}
+					}
+				} 
+			}
+		}
+	}
+}
+
+function init_module_board_serial(&$hwinfo)
+{
+	global $__GSM_SUM__;
+	$usbserial_info_path = '/tmp/mcu_module_map';
+	$usbserial_info = parse_ini_file($usbserial_info_path,true);
+
+	if(is_array($usbserial_info)) {
+		$port = 1;
+		for($i=1;$i<=$__GSM_SUM__;$i++) {
+			if(isset($usbserial_info['mcu_module']["dev-$port"])) {
+
+				$devinfo =  explode(',',$usbserial_info['mcu_module']["dev-$port"]);
+
+					if(isset($devinfo[0])) {
+						if(1 == sscanf($devinfo[0],"/dev/ttyACM%d",$id)) {
+							if(!file_exists($devinfo[0])) {
+								posix_mknod($devinfo[0],POSIX_S_IFCHR|0777,188,$id);
+								//mknod $devinfo[0] c 188 \$id
+							}
+							++$hwinfo['gsm']['sum'];
+							$hwinfo['module']["dev-$port"] = $devinfo[0];
+							
+							if(isset($usbserial_info['hwport_map']["dev-$port"])) {
+								$hwport = explode(',',$usbserial_info['hwport_map']["dev-$port"]);
+								if(isset($hwport[0])) {
+									if(1 == sscanf($hwport[0],"%d",$id)) {
+										if($id<=16) {
+											$hwinfo['mcu_dev']["dev-$port"] = $hwinfo['brd_mcu']['brd-1'];
+										} else {
+											$hwinfo['mcu_dev']["dev-$port"] = $hwinfo['brd_mcu']['brd-2'];
+										}
+										$hwinfo['port_map']["dev-$port"] = "$id";
+									}
+								}
+							}
+							$port++;
+						}
+					}
+				
+			}
+		}
+	}
+}
+
+// save slot number
+@file_put_contents($slotnum_path,1,LOCK_EX);
+
+$hwinfo['general']['id'] = 8;
+$hwinfo['gsm']['sum'] = 0;
+init_usb_serial($hwinfo);
+init_module_board_serial($hwinfo);
+$hwinfo['cluster']['auto'] = 'no';
+$hwinfo['cluster']['enable'] = 'no';
+$hwinfo['interface']['type']='TDM';
+
+//CPU
+$cpu_path = '/proc/cpuinfo';
+if(file_exists($cpu_path)) {
+	$handle = @fopen($cpu_path,'r');
+
+	while(!feof($handle)) {
+		$line = fgets($handle);
+		if(!strncmp($line,'model name',sizeof('model name'))) {
+			if(sscanf($line,"model name%*[^:]:%[^\n]\n",$cpu)==2) {
+				$cpu = trim(preg_replace("/(\(\w+\))/i","",$cpu));
+				
+				$hwinfo['general']['cpu'] = $cpu;
+				break;
+			}
+		}
+	}
+	@fclose($handle);
+}
+
+//Memory
+$mem_path = '/proc/meminfo';
+if(file_exists($mem_path)) {
+	$handle = @fopen($mem_path,'r');
+	while(!feof($handle)) {
+		$line = fgets($handle);
+		if(!strncmp($line,'MemTotal:',sizeof('MemTotal:'))) {
+			if(sscanf($line,"MemTotal:%[^\n]\n",$mem)==1) {
+				$mem = trim($mem);
+				$hwinfo['general']['memsize'] = $mem;
+				break;
+			}
+		}
+	}
+	@fclose($handle);
+}
+
+//Flash
+$hwinfo['general']['flashsize'] = '10000kB';
+$flash_path = '/proc/mtd';
+if(file_exists($flash_path)) {
+	$handle = @fopen($flash_path,'r');
+	$count = 0;
+	while(!feof($handle)) {
+		$line = fgets($handle);
+		if(!strncmp($line,'mtd',sizeof('mtd'))) {
+			if(sscanf($line,"mtd%*[0-9]: %x",$size)==2) {
+				$count += $size;
+			}
+		}
+	}
+	@fclose($handle);
+
+	$count /= (1024*1024);
+	$hwinfo['general']['flashsize'] = "${count} MB";
+}
+
+$write = '';
+if(is_array($hwinfo)) {
+	foreach($hwinfo as $section => $keyvalue) {
+		$write .= "[$section]\n";
+		if(is_array($keyvalue)) {
+			foreach($keyvalue as $key => $value ) {
+				$write .= "$key=$value\n";
+			}
+		}
+		$write .= "\n";
+	}
+}
+
+file_put_contents($hwinfo_path,$write,LOCK_EX);
+
+?>

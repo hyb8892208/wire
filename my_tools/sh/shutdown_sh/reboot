@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "The system is going down for reboot NOW!"
+/etc/init.d/led reboot
+/my_tools/gpio_set_run.sh off
+/my_tools/bsp_cli led all off
+/my_tools/add_syslog "Power off"
+/my_tools/database_sync.sh once
+/my_tools/calllimit_cli set chn reflesh
+/my_tools/callmonitor_cli flush status
+/bin/reboot

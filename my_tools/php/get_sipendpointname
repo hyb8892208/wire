@@ -1,0 +1,64 @@
+#!/bin/php
+<?php
+
+//Useage
+//get_sipendpointname sip_username [sip_ip]
+
+$get_username = '';
+$get_ip = '';
+if (isset($argv[0])) {
+	$get_username = trim($argv[0]);
+}
+if (isset($argv[1])) {
+	$get_username = trim($argv[1]);
+}
+
+if($get_username == '') exit(1);
+
+
+//AQL
+include_once("/www/cgi-bin/inc/aql.php");
+include_once("/www/cgi-bin/inc/function.inc");
+
+/* /etc/asterisk/gw_endpoints.conf */
+// [endpoint_name]
+// username = 
+// registration =  
+// register =    like sip.conf [general]
+// .......       like all sip.conf
+// username=102
+// registration=server
+// host=dynamic
+
+
+$aql = new aql();
+$aql->set('basedir','/etc/asterisk');
+$hlock = lock_file('/etc/asterisk/gw_endpoints.conf');
+$sips = $aql->query('select * from gw_endpoints.conf');
+
+if($sips) {
+	foreach($sips as $endpoint_name=>$content) {
+		if(!isset($content['username'])) continue;
+		$username = trim($content['username']);
+		if($username == $get_username) {
+			if($get_ip == '') {
+				if(!isset($content['registration'])) continue;
+				$registration = trim($content['registration']);
+				if($registration == 'server') {
+					$output = trim($endpoint_name);
+					echo $output;
+					exit(0);
+				}
+			} else {
+				if(!isset($content['host'])) continue;
+				$host = trim($content['host']);
+				if($host == $get_ip) {
+					$output = trim($endpoint_name);
+					echo $output;
+					exit(0);
+				}
+			}
+		}
+	}
+}
+?>

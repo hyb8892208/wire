@@ -1,0 +1,532 @@
+#!/bin/sh
+
+check_cfg_update()
+{
+CFG_VER_LIST=/version/cfg_ver_list
+FLASH_ERASE_TOOL=auto_update
+MTD_PART=/dev/mtd7
+MTD_BLOCK=/dev/mtdblock7
+#CFG_DIR=/etc/asterisk
+CFG_DIR=/etc/cfg
+CFG_VERSION=$CFG_DIR/cfg_version
+DEF_CFG_PACKAGE=/version/def_cfg.tar.gz
+
+	##if [ ! -e $MTD_BLOCK ];then
+	##	return;
+	##fi
+	##mount -t ext4 $MTD_BLOCK $CFG_DIR > /dev/null 2>&1
+	CUR_VER=`cat $CFG_VERSION 2> /dev/null`
+
+	if [ "x$CUR_VER" == "x" ];then
+		echo "cfg version no support, update new cfg"
+		echo " backup file grubenv ..."
+		if [ -f $CFG_DIR/grubcfg/grubenv ]; then
+			cp $CFG_DIR/grubcfg/grubenv /tmp/grubenv
+		fi
+		if [ -f $CFG_DIR/gw/system_type.conf ];then
+			cp $CFG_DIR/gw/system_type.conf /tmp
+		fi
+		\rm -rf $CFG_DIR/* > /dev/null 2>&1
+		##umount $MTD_BLOCK > /dev/null 2>&1
+		##$FLASH_ERASE_TOOL -e $MTD_PART
+		##mount -t ext4 $MTD_BLOCK $CFG_DIR  > /dev/null 2>&1
+		tar zxf $DEF_CFG_PACKAGE -C /etc
+		if [ -f /tmp/grubenv ]; then
+			mv /tmp/grubenv $CFG_DIR/grubcfg/
+		fi
+		if [ -f /tmp/system_type.conf ];then
+			cp /tmp/system_type.conf $CFG_DIR/gw/
+		fi
+		if [ -d /data/log/network ];then
+			mv -f /data/log/network/ /etc/cfg/gw/network/
+		fi
+		
+		/my_tools/add_syslog "Auto restore configuration files" "force"
+	elif ( cat $CFG_VER_LIST 2> /dev/null | grep "$CUR_VER" > /dev/null 2>&1 ) ; then
+		echo "cfg version support"
+	else
+		echo "cfg version no support, update new cfg, remain a few files."
+		mkdir -p /tmp/updatecfg_tmp/
+		cat /dev/null > /tmp/updatecfg_tmp/valid_list
+		i=1
+		cat /etc/remain_cfg_list | while read line;do
+			if [ "x$line" != "x" ] && [ -e $line ];then
+				cp $line /tmp/updatecfg_tmp/$i -f
+				#echo "cp $line /tmp/updatecfg_tmp/$i -f"
+				echo "$line" >> /tmp/updatecfg_tmp/valid_list
+				i=`expr $i + 1` 
+			fi
+		done
+
+		tar zxf $DEF_CFG_PACKAGE -C /etc
+		i=1
+		cat /tmp/updatecfg_tmp/valid_list | while read line;do
+			if [ "x$line" != "x" ];then
+				cp /tmp/updatecfg_tmp/$i $line -f
+				#echo "cp /tmp/updatecfg_tmp/$i $line -f" 
+				i=`expr $i + 1` 
+			fi
+		done
+		rm -rf /tmp/updatecfg_tmp/
+		/my_tools/add_syslog "Auto update configuration files, remain a few files." "force"
+	fi
+}
+
+echo "........................................."
+echo ".........Wireless Gateway Start.........."
+echo "........................................."
+echo "Version: `cat /version/version`"
+echo "BuildTime: `cat /version/build_time`"
+
+echo "point /tmp to tmpfs"
+rm -f /etc/shadow
+#rm /tmp /var -rf
+#ln -s /dev/shm /tmp
+mkdir /tmp/var
+ln -s /tmp/var /var
+mkdir /tmp/log
+mkdir /tmp/log/lua
+mkdir /tmp/log/SimEmuSvr
+mkdir /tmp/simcards
+echo "determine grubenv status ..."
+curr_area=`cat /etc/cfg/grubcfg/grubenv | grep curr_area |  cut -d "=" -f 1`
+curr_area_value=`cat /etc/cfg/grubcfg/grubenv | grep curr_area |  cut -d "=" -f 2`
+boot_stat=`cat /etc/cfg/grubcfg/grubenv | grep boot_stat |  cut -d "=" -f 1`
+boot_stat_value=`cat /etc/cfg/grubcfg/grubenv | grep boot_stat |  cut -d "=" -f 2`
+
+tar zxf /version/def_cfg.tar.gz -C /tmp > /dev/null 2>&1
+if [ ! -f /etc/cfg/grubcfg/grubenv ]; then
+        # grubenv does not exist, set to default
+        cp /tmp/cfg/grubcfg/grubenv /etc/cfg/grubcfg/grunenv.bak
+	rm /etc/cfg/grubcfg/grubenv -f
+        cp /etc/cfg/grubcfg/grubenv.bak /etc/cfg/grubcfg/grunenv
+        /my_tools/add_syslog "File grubenv does not exist, modify it to the default file"
+else
+        if [ x"${boot_stat}" != xboot_stat ] || [ x"${curr_area}" != xcurr_area ]; then
+                # grubenv value error, set to default
+        	cp /tmp/cfg/grubcfg/grubenv /etc/cfg/grubcfg/grunenv.bak
+		rm /etc/cfg/grubcfg/grubenv -f
+        	cp /etc/cfg/grubcfg/grubenv.bak /etc/cfg/grubcfg/grunenv
+                /my_tools/add_syslog "File grubenv variable exception, modify it to the default file"
+        else
+                if [ x"${curr_area_value}" != x2 ]; then
+                        # set curr_area to 1
+                        grub-editenv /etc/cfg/grubcfg/grubenv set curr_area=1
+                        /my_tools/add_syslog "Current area is 1"
+                else
+                        /my_tools/add_syslog "Current area is 2"
+                fi
+                # run here, mean system start success, set boot_stat to 1
+                grub-editenv /etc/cfg/grubcfg/grubenv set boot_stat=1
+                /my_tools/add_syslog "Boot status is 1"
+        fi
+fi
+
+#Don't generate core file
+echo "/tmp/core-%e-openvox" > /proc/sys/kernel/core_pattern
+ulimit -s 102400
+echo "ulimit -n 10240" >> /etc/profile
+source /etc/profile
+
+HOSTNAME=`cat /etc/.hostname`
+echo "$HOSTNAME" > /proc/sys/kernel/hostname
+touch /tmp/hosts
+echo "127.0.0.1 localhost $HOSTNAME" > /etc/hosts
+
+mkdir -p /var/run
+mkdir -p /var/log
+mkdir -p /var/log/lua
+mkdir -p /var/log/asterisk/at
+mkdir -p /var/run/xl2tpd
+mkdir -p /var/lock
+mkdir -p /tmp/sms
+mkdir -p /tmp/gsm
+mkdir -p /tmp/web
+mkdir -p /tmp/lock
+mkdir -p /tmp/auto_lock_cell
+mkdir -p /tmp/memcfg/etc/asterisk
+mkdir -p /tmp/memcfg/etc/asterisk/pin
+mkdir -p /tmp/memcfg/etc/dahdi
+mkdir -p /tmp/module_pipe
+touch /tmp/TZ
+touch /var/log/wtmp
+touch /var/log/lastlog
+
+if [ x"lighttpd" == x"lighttpd" ] ; then
+	mkdir -p /var/log/lighttpd
+	mkdir -p /var/run
+	mkdir -p /var/cache/lighttpd
+	mkdir -p /var/lib/lighttpd/sockets
+	mkdir -p /var/tmp
+fi
+
+#mount for data files(SMS inbox,LOGS) or upload from php update files temp
+##################################
+#DATA_NOD=/dev/mmcblk0p7
+#DATA_DIR=/data
+#[ -d /data ] || mkdir -p /data > /dev/null 2>&1
+#mount -t ext4 $DATA_NOD $DATA_DIR
+[ -d /data/sms ] || mkdir -p /data/sms > /dev/null 2>&1
+[ -d /data/log ] || mkdir -p /data/log > /dev/null 2>&1
+[ -d /data/info ] || mkdir -p /data/info > /dev/null 2>&1
+[ -d /data/diallimit ] || mkdir -p /data/diallimit > /dev/null 2>&1
+[ -d /data/crt ] || mkdir -p /data/crt > /dev/null 2>&1
+if [ -d /data ]; then
+	cd /data
+	rm -rf $(ls |grep -v ^sms$|grep -v ^log$|grep -v ^info$|grep -v ^diallimit$|grep -v ^crt$)
+	cd -
+fi
+##################################
+
+#mount for user configs files
+##################################
+check_cfg_update
+##################################
+
+#upgrade to another area
+##############################################################
+#if [ -f "/data/info/firmware.tar.gz" ];then
+#	tar -xzvf /data/info/firmware.tar.gz -C /
+#	/tmp/firmware/upgrade.sh second_time > /tmp/second_upgrade.log
+#else
+#	echo "do not need to upgrade."
+#fi
+##############################################################
+
+#Copy webs and configs to memory
+##################################
+\cp -af /gateway/usr/www /tmp/web
+\cp -af /etc/cfg/* /etc/asterisk
+##################################
+
+#Create SQLite Database
+##################################
+php -r "include_once(\"/www/cgi-bin/inc/cdrdb.php\");\$db=new CDRDB();\$db->checkdb();"
+php -r "include_once(\"/www/cgi-bin/inc/smsinboxdb.php\");\$db=new SMSINBOXDB();\$db->checkdb();"
+php -r "include_once(\"/www/cgi-bin/inc/smsoutboxdb.php\");\$db=new SMSOUTBOXDB();\$db->checkdb();"
+sh /my_tools/database_sync.sh &
+##################################
+
+## Setting Rebooting times
+##################################
+RTIMES=`cat /data/info/rtimes 2> /dev/null`
+if [ $? -eq 0 ];then
+		if echo -n "$RTIMES" | egrep "^[0-9]+$" > /dev/null 2>&1 ;then
+			expr $RTIMES + 1 > /data/info/rtimes
+		else
+			echo -n "0" > /data/info/rtimes
+		fi
+else
+	echo -n "0" > /data/info/rtimes
+fi
+##################################
+
+## general /tmp/.boardtype
+##################################
+#board_type=44
+#if [ ! -s /tmp/.boardtype ];then
+#cat >/tmp/.boardtype <<end
+#$board_type
+#end
+#fi
+
+# Network config
+#################################
+echo 1 > /tmp/.slotnum
+
+# save factory mac
+#/my_tools/net_tool eth0 | sed -n 3p 1> /tmp/.lanfactorymac 2> /dev/null
+cp /boot/.lanfactorymac /tmp/
+cp /boot/.wanfactorymac /tmp/
+
+/etc/init.d/lan start
+/etc/init.d/wan start
+/etc/init.d/dns start
+#ifconfig lo up
+################################
+
+# ssh start
+#configure ipaddress for test
+/etc/init.d/ssh start &
+
+# Fixed usb interrrupt to CPU3
+usb_irq_id=`/my_tools/check_usb_irq.sh`
+echo 8 > /proc/irq/${usb_irq_id}/smp_affinity
+
+## probe USB serials & USB soundcards & Initial HW and configure files
+#call gen_device_link.sh
+##################################
+sleep 8
+/my_tools/gen_device_link.sh
+
+## insmod option.ko, qcserial.ko, usb_wwan.ko for ec20 module upgrade.
+modprobe option
+
+### insmod GobiNet.ko
+insmod /lib/modules/`uname -r`/kernel/drivers/net/usb/GobiNet.ko
+
+## insmod vfat.ko fat.ko for mount EFI partion
+modprobe vfat
+
+/etc/init.d/bsp_server.sh start > /dev/null 2>&1 &
+sleep 18
+/etc/init.d/rri_server.sh start > /dev/null 2>&1 &
+/my_tools/module_set_qdai.sh > /dev/null 2>&1 &
+##################################
+
+/my_tools/gen_config.sh 
+
+######emu dectect
+#####################
+/my_tools/probe_emu > /tmp/.emu_status 2>&1 &
+
+## generate module usb udev rules
+##################################
+/my_tools/gen_channel_rules.sh 
+
+## generate network udev rules
+##################################
+/my_tools/gen_internet_rules.sh
+
+#For ppp 
+##################################
+if [ ! -c /dev/ppp ]; then
+	mknod /dev/ppp -m 644 c 108 0
+fi
+##################################
+
+#For G729 Codec
+#################################
+echo "/sbin/hotplug-call" > /proc/sys/kernel/hotplug
+#echo "Starting csmencaps"
+#ifconfig eth1 169.254.0.1 up
+#insmod csmencaps
+#################################
+
+#Start Keeper
+/my_tools/keeper &
+
+## start lcd controll app or detect vs_usb_xx reset from sys_type
+##################################
+get_sys_type=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys sys_type 2> /dev/null`
+if [ x"$get_sys_type" = x"1" -o x"$get_sys_type" = x"2" ];then
+	/etc/init.d/led start
+#	/my_tools/start_udev_check_led.sh
+elif [ x"$get_sys_type" = x"3" -o x"$get_sys_type" = x"0" -o x"$get_sys_type" = x ];then
+#else
+	/my_tools/gpio_detect_reset.sh > /dev/null 2>&1 &
+fi
+
+#Start gwpingd
+#/my_tools/gwpingd eth0 /my_tools/eth_server.conf &
+#/my_tools/keeper "start:gwpingd:/my_tools/gwpingd"
+
+# Reset key program
+#mknod -m 644 /dev/led_key c 172 0
+/my_tools/set_default /my_tools/restore_cfg_file &
+
+# Start network monitor
+#/my_tools/if_monitor -i eth0 -u "/etc/init.d/lan start" -d "/etc/init.d/lan stop" -e eth2  -m "/etc/init.d/wan start" -o "/etc/init.d/wan stop" -s
+
+# Start log file monitor
+/etc/init.d/logfile_monitor start
+
+# Start VPN of openvpn or pptp vpn or n2n vpn
+get_vpn_type=`/my_tools/set_config /etc/asterisk/gw/vpn.conf get option_value general vpntype 2>/dev/null`
+if [ x"$get_vpn_type" != x -a x"$get_vpn_type" != x"nonevpn" ]; then
+	/etc/init.d/vpn start &
+fi
+
+# time settings
+if [ "`/my_tools/set_config /etc/asterisk/gw/time.conf get option_value general auto_sync 2> /dev/null`" = "on" ];then
+	/etc/init.d/time start &
+fi
+
+#copy extensions_macro.conf
+#cp /tmp/cfg/extensions_macro.conf /etc/asterisk
+cp /tmp/cfg/gw/m35.conf /etc/asterisk/gw
+cp /tmp/cfg/gw/sim840w.conf /etc/asterisk/gw
+cp /tmp/cfg/gw/uc15.conf /etc/asterisk/gw
+cp /tmp/cfg/gw/sim6320.conf /etc/asterisk/gw
+
+cp /tmp/cfg/asterisk.conf /etc/asterisk
+cp /tmp/cfg/modules.conf /etc/asterisk
+cp /tmp/cfg/redis.conf /etc/asterisk
+
+#update manager.conf 
+if [ `grep "\[send\]" /etc/cfg/manager.conf` ] && [ `grep "\[event\]" /etc/cfg/manager.conf` ] ; then
+	echo "manager.conf is OK"
+else
+	cp /tmp/cfg/manager.conf /etc/cfg/manager.conf
+	cp /etc/cfg/manager.conf /etc/asterisk/
+fi
+
+#copy disa sounds file
+cp -af /tmp/cfg/sounds /etc/asterisk/
+
+
+# cluster
+/my_tools/cluster_mode
+
+/my_tools/redis-server /etc/redis.conf > /dev/null 2>&1 &
+
+# Start redis-server
+while read slot_nbr
+do
+        if [ $slot_nbr = 1 ];then
+                cd /my_tools
+#                ./redis-server /etc/redis.conf > /dev/null 2>&1 &
+        fi
+done < /tmp/.slot_type
+
+#get module type
+# set default value "sim840"
+cd /my_tools/lua/info_access/ && lua printmod.lua
+lua set_local_info.lua  > /dev/null 2>&1
+
+# musiconhold.conf
+sed -i "s/^mode=.*$/mode=files/g" /etc/asterisk/musiconhold.conf
+sed -i "s/^directory=.*$/directory=\/etc\/asterisk\/sounds\/moh/g" /etc/asterisk/musiconhold.conf
+sed -i "s/^random=.*$/random=yes/g" /etc/asterisk/musiconhold.conf
+
+# asterisk start
+/etc/init.d/asterisk start
+
+#init web language
+[ -d /etc/asterisk/gw/web_language ] || mkdir -p /etc/asterisk/gw/web_language
+/my_tools/web_language_init
+
+#cd /my_tools/lua/info_access
+#lua save_module_type.lua
+
+# refresh slave: extensions_slave.conf
+/my_tools/cluster_mode extensions_slave_change
+#lua /my_tools/lua/my_lua_tools/save_module_type.lua
+## webserver start
+
+slot_num=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys total_chan_count`
+sed -i "s/evasive.max-conns-per-ip=20/evasive.max-conns-per-ip=$slot_num/" /etc/asterisk/gw/lighttpd.conf
+/etc/init.d/lighttpd start
+
+# ddns start
+#/etc/init.d/ddns start
+
+#Time to Crond
+CRON_PATH="/etc/asterisk/gw/crontabs_root";
+if ! grep '/etc/init.d/time start' $CRON_PATH > /dev/null 2>&1 ;then
+	echo "*/30 * * * * root /etc/init.d/time start" >> $CRON_PATH
+fi
+
+#Crond
+mkdir -p /var/spool/cron
+ln -s /etc/crontabs /var/spool/cron/crontabs
+/usr/bin/crontab -u root /etc/crontabs/root
+sh /etc/init.d/cron restart
+
+#Autoimei
+/etc/init.d/autoimei start
+
+
+# start sysylogd
+flagSyslog=''
+flagSyslog=`/my_tools/set_config /etc/asterisk/gw/gw_syslog.conf get option_value syslog syslog`
+if [ x"${flagSyslog}" = xon ]; then
+	/etc/init.d/sysklog start /dev/null 2>&1
+fi	
+#################################
+
+#Start tftpd
+#/usr/bin/tftpd &
+#/my_tools/keeper "start:tftpd:/usr/bin/tftpd"
+
+#Start custom script
+if [ -e /etc/asterisk/gw/custom.sh ];then
+	chmod +x /etc/asterisk/gw/custom.sh
+	/etc/asterisk/gw/custom.sh &
+fi
+
+#fanchao---------
+cd /my_tools/lua/
+./execute_lua.sh > /dev/null 2>&1 &
+#fanchao---------
+
+#sleep 5
+#enable stk function
+#cd /my_tools/lua/sms_routing/
+#lua enable_stk.lua > /dev/null 2>&1 &
+
+#pengzhongwei-------------
+/my_tools/push_system_info.sh
+#pengzhongwei-------------
+
+if [ "`/my_tools/set_config /etc/asterisk/simemusvr.conf get option_value SimEmuSvr simemusvr_switch 2> /dev/null`" = "yes" ];then
+	sh /etc/init.d/OPlink start
+	sh /etc/init.d/simemu.sh switch > /dev/null 2>&1 &
+fi
+
+##/etc/init.d/callEventHdl start
+# checking whether or not to enable AutoGetPublicIP
+ENABLE_AUTOGETPUBLICIP=''
+ENABLE_AUTOGETPUBLICIP=`/my_tools/set_config /etc/asterisk/gw.conf get option_value update-externaddr auto_update_externaddr`
+if [ x"${ENABLE_AUTOGETPUBLICIP}" = xon ]; then
+	/etc/init.d/checkAutoUpdatePublicIP start > /dev/null 2>&1
+fi	
+echo 1 >/proc/sys/vm/drop_caches
+
+#sysctl -w vm.oom_kill_allocating_task=1
+#sysctl -w vm.oom_dump_tasks=1
+asterisk -rx "dialplan reload"
+
+/my_tools/module_check > /dev/null 2>&1 &
+
+## async sms
+/etc/init.d/async_sms.sh start > /dev/null 2>&1 &
+
+## async ussd
+/etc/init.d/async_ussd.sh start > /dev/null 2>&1 &
+
+## handle mms
+/etc/init.d/handle_mms.sh start > /dev/null 2>&1 &
+
+# callmonitor
+/etc/init.d/callmonitor.sh start > /dev/null 2>&1 &
+
+## call_limit start
+/etc/init.d/call_limit.sh start > /dev/null 2>&1 &
+
+## sim query
+/etc/init.d/sim_query.sh start > /dev/null 2>&1 &
+
+## set vs_usb_1008 or swg2008 run lamp
+##################################
+get_product_type=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys product_type 2> /dev/null`
+if [ "$get_product_type" = "10" ];then
+	/my_tools/gpio_set_run.sh > /dev/null 2>&1 &
+fi
+
+## license check
+start_lic_flag=`ls /data/crt/license*.crt 2> /dev/null | wc -l`
+if [ "$start_lic_flag" != "0" ]; then
+	/etc/init.d/license.sh start > /dev/null 2>&1 &
+fi
+
+#liyezhen------------
+/etc/init.d/cloud start > /dev/null 2>&1 &
+#/my_tools/screen.sh &
+
+##arp start
+/my_tools/arp.sh > /dev/null 2>&1 &
+
+if [ -f /my_tools/install.sh  ];then
+	cp -af /my_tools/install.sh /tmp/
+fi
+
+/my_tools/mac_check.sh  > /dev/null 2>&1 &
+
+/my_tools/add_syslog "Power on"
+echo "........................................."
+echo "...........Wireless Gateway End.........."
+echo "........................................."
+#ulimit -c unlimited
+#echo "/data/log/core-%e-openvox" > /proc/sys/kernel/core_pattern
+exit 0

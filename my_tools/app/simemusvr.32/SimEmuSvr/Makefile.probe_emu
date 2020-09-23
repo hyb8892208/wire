@@ -1,0 +1,19 @@
+all: probe_emu
+
+# need to exec source gcc_path.sh in shell first
+CFLAGS=-g
+
+CPPOBJS=../common/zprint.o ../common/serial.o probe_emu.o
+OBJS=$(CPPOBJS)
+INCLUDES=-I ../common/ -L ../common/ -lpthread 
+
+probe_emu: $(OBJS)
+	$(CXX) $(CFLAGS) $^ $(INCLUDES) -o probe_emu
+
+$(CPPOBJS): %.o: %.cpp
+	$(CXX) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) probe_emu
+
+.PHONY: clean

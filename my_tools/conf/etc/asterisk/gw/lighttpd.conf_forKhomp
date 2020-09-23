@@ -1,0 +1,118 @@
+include "/etc/asterisk/gw/lighttpd_https.conf"
+server.use-ipv6 = "disable"
+server.document-root = "/www"
+server.event-handler = "linux-sysepoll"
+server.max-connections = 50
+server.max-request-size = 81920
+server.upload-dirs = ( "/tmp/web/lighttpd" )
+server.pid-file = "/var/run/lighttpd.pid"
+
+server.stat-cache-engine = "simple"
+server.max-keep-alive-requests = 0
+
+server.modules = (
+#	"mod_auth",
+	"mod_fastcgi",
+	"mod_cgi",
+	"mod_proxy",
+	"mod_rewrite",
+	"mod_setenv",
+	"mod_access",
+	"mod_evasive"
+) 
+
+evasive.max-conns-per-ip=20
+setenv.add-environment = ("PATH" => env.PATH)
+
+auth.backend  = "htdigest"
+auth.backend.htdigest.userfile = "/etc/asterisk/gw/lighttpdpassword_digest"
+$HTTP["url"] !~ "^/service" {
+    auth.require = (
+        "/" =>(
+            "method" => "digest",
+            "realm" => "Wireless-Gateway",
+            "require" => "valid-user"
+        ),
+    )
+}
+$HTTP["url"] =~ "^/service" {
+    $HTTP["querystring"] =~ "^action=sendussd"{
+    }
+    else $HTTP["querystring"] =~ "^action=smsstatus"{
+    }
+    else $HTTP["querystring"] =~ "^action=simstatus"{
+    } 
+    else $HTTP["querystring"] =~ "^action=chan_state"{
+    } 
+    else $HTTP["querystring"] =~ "^action=smsremain"{
+    } 
+    else $HTTP["querystring"] !~ "^action=sendsms" {
+        auth.require = (
+            "/" =>(
+            "method" => "digest",
+            "realm" => "Wireless-Gateway",
+            "require" => "valid-user"
+            ),
+		)
+	}
+}
+
+include "/tmp/proxy.conf"
+
+fastcgi.server = (
+	"/service" => (
+		"service.handler" => (
+			"socket" => "/tmp/web/lighttpd/service.socket",
+			"check-local" => "disable",
+			"bin-path" => "/webservice/service",
+			"min-procs" => 1,
+			"max-procs" => 6,
+			"idle-timeout" => 30,
+#			"kill-signal" => 9,
+		)
+	)
+)
+
+
+#fastcgi.server = ( 
+#	".php" => (
+#		(
+#			"socket"=>"/tmp/web/lighttpd/php-fastcgi.socket",
+#			"bin-path"=>"/bin/php-cgi",
+#			"max-procs" => 1,
+#			"bin-environment" => (
+#				"PHP_FCGI_CHILDREN" => "3",
+#				"PHP_FCGI_MAX_REQUESTS" => "1000"
+#			),
+#			"broken-scriptfilename" => "enable"
+#		)
+#	)
+#)
+
+cgi.assign = (".php" => "/bin/php-cgi")
+
+index-file.names = (
+	"index.xhtml", "index.html", "index.htm", "default.htm", "index.php"
+)
+
+url.access-deny = ( "~", ".inc", )
+static-file.exclude-extensions = ( ".php" )
+
+## mimetype mapping
+mimetype.assign = (
+  ".tar.gz"       =>      "application/x-tgz",
+  ".gif"          =>      "image/gif",
+  ".jpg"          =>      "image/jpeg",
+  ".jpeg"         =>      "image/jpeg",
+  ".png"          =>      "image/png",
+  ".css"          =>      "text/css",
+  ".html"         =>      "text/html",
+  ".htm"          =>      "text/html",
+  ".js"           =>      "text/javascript",
+  ".conf"         =>      "text/plain",
+  ".text"         =>      "text/plain",
+  ".txt"          =>      "text/plain",
+  ".xml"          =>      "text/xml",
+  # make the default mime type application/octet-stream.
+  ""              =>      "application/octet-stream",
+ )

@@ -1,0 +1,31 @@
+描述：
+client:
+	客户端源代码
+	callmonitor_client.c             #客户端实现
+	cli.c                            #交互式命令行
+	gsoap_cli.c                      #客户端gsoap API接口
+
+server:
+	服务端源代码
+	ami_interface.c                  #接收asterisk ami事件
+	callmonitor_autocall.c           #自动发起呼叫
+	callmonitor.c                    #程序入口在这个文件，配置文件初始化，呼叫数据统计
+	callmonitor_log.c                #日志记录
+	config.c                         #用于解析配置文件
+	queue.c                          #event事件队列实现
+	redis_interface.c                #redis接口，主要从redis获取号码
+
+gsoap:
+	generate_apis.sh                 #生成gsoap代码
+	gsoap_api.c                      #提供给客户端调用的接口
+	gsoap_api.h                      #gsoap接口头文件
+
+include:
+	ami_interface.h                  #ami事件接口
+	callmonitor.h                    #主要数据结构和公用接口
+	callmonitor_log.h                #日志接口
+	config.h                         #配置文件接口
+	queue.h                          #event事件接口
+	redis_interface.h                #redis接口
+	hiredis.h                        #hiredis库的接口，方便使用
+	

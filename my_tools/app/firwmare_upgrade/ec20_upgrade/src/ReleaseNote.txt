@@ -1,0 +1,18 @@
+Release Notes
+V1.3.2
+Release Data: 2017 - 11 - 09
+bug: fastboot升级成功但是提示错误的bug
+
+V1.3.3
+Release Data: 2017 - 11 - 13
+bug: 修复sahara进入streaming download忙等问题
+enhancement:
+feature: 增加整个升级过程时间统计
+
+V1.3.4
+Release Data: 2017 - 11 - 16
+bug: 修复升级分区不一样的版本，异常中断，模块无法启动的bug。
+
+V1.3.5
+Release Data: 2017 - 11 - 16
+bug: 修复主机驱动需要加入0包的问题。

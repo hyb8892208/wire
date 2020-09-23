@@ -1,0 +1,79 @@
+SIM6320C模块linux升级使用说明
+
+1 将"QDL_LINUX_SIM5320_V2"文件复制到linux系统
+  文件内容
+  config.ini    file.cpp  os_linux.cpp    os_windows.h    qcn.h 
+  download.cpp  file.h    os_linux.h      platform_def.h  serialif.cpp 
+  download.h    Makefile  os_windows.cpp  qcn.cpp         serialif.h 
+
+2 然后开始编译生成QDL文件
+  make
+
+  编译成功后文件内容如下
+  bin           download.h  Makefile      os_linux.h      platform_def.h  serialif.cpp 
+  config.ini    file.cpp    obj           os_windows.cpp  qcn.cpp         serialif.h 
+  download.cpp  file.h      os_linux.cpp  os_windows.h    qcn.h 
+
+3 将编译成功的"QDL"文件从bin文件夹中复制
+  bin           download.h  Makefile      os_linux.h      platform_def.h  QDL 
+  config.ini    file.cpp    obj           os_windows.cpp  qcn.cpp         serialif.cpp 
+  download.cpp  file.h      os_linux.cpp  os_windows.h    qcn.h           serialif.h 
+
+4 将SIM5320E模块软件版本复制到当前QDL目录中
+  amsshd.mbn  download.cpp  Makefile      oemsbl.mbn      os_windows.h    qcn.h                serialif.cpp 
+  amss.mbn    download.h    NPRG60X5.hex  os_linux.cpp    partition.mbn   qcsblhd_cfgdata.mbn  serialif.h 
+  bin         file.cpp      obj           os_linux.h      platform_def.h  qcsbl.mbn 
+  config.ini  file.h        oemsblhd.mbn  os_windows.cpp  qcn.cpp         QDL 
+
+5 运行QDL工具升级模块软件
+
+  注意:模块版本升级前,务必确保模块开机状态,USB设备可以正常识别
+
+  /dev/ttyUSB0  /dev/ttyUSB1  /dev/ttyUSB2  /dev/ttyUSB3  /dev/ttyUSB4 
+
+  sudo ./QDL
+
+  具体升级过程如下
+
+fae@SIMCOM:~/Desktop/QDL_LINUX_SIM6320_V2/QDL_LINUX_SIM6320_V2$ sudo ./QDL      // 开始升级
+SIMTech download tool, Thu Jun  2 16:45:14 2016 
+
+config data, QCN: backup[0], restore[0], FILE SYSTEM: erase efs[0] 
+start open com port: /dev/ttyUSB0 
+send_sync ReadABuffer 0x15,0x6,0x58,0x81 
+in normal mode 
+read version: 
+Version:Jan 05 201614:03:08Oct 01 201003:00:00SNAVARZ4*	wd 
+
+switch to download mode 
+start close com port 
+start open com port: /dev/ttyUSB0, but no such device, try again[6] 
+start open com port: /dev/ttyUSB1 
+send_sync ReadABuffer 0x16,0x0,0x0,0x0 
+in STATE_UNSPECIFIED 
+start reading firmware :./ 
+nop 
+timeout[0] 
+send nop error, try again[4] 
+preq 
+hex 
+progress : 100% finish 
+go 
+start close com port 
+start open com port: /dev/ttyUSB0, but no such device, try again[6] 
+start open com port: /dev/ttyUSB1 
+send_sync ReadABuffer 0x16,0x0,0x0,0x0 
+in STATE_UNSPECIFIED 
+hello                                                              // 注意:如下阶段务必保证模块不能异常断电,不管模块最终升级成功或失败.
+Flash_type:ESMT_FM64D1G56A, len :578, size :15 
+qcsblhdcfg downloading... 
+progress : 100% finish 
+qcsbl downloading... 
+progress : 100% finish 
+oemsbl downloading... 
+progress : 100% finish 
+amss downloading... 
+progress : 100% finish 
+SIMTech download finished, Thu Jun  2 16:48:14 2016                // 升级成功
+
+fae@SIMCOM:~/Desktop/QDL_LINUX_SIM6320_V2/QDL_LINUX_SIM6320_V2$ 

@@ -1,0 +1,24 @@
+all: SimEmuTest
+
+# need to exec source gcc_path.sh in shell first
+#CC	 = arm-openwrt-linux-gcc
+CFLAGS   ?= -Wall -g
+
+#CXX	= arm-openwrt-linux-g++
+CXXFLAGS ?= -Wall -g -DSLOT8
+
+CPPOBJS   = ../common/zprint.o ../common/msg.o ../common/config.o ../common/CSocketEx.o ../common/serial.o ../common/EmuVcard_g2.o ../common/VcardGenerator_Translator.o SimEmuTest.o
+OBJS      = $(CPPOBJS)
+LIBS      = 
+INCLUDES ?= -I ../common/ -L ../common/ -lpthread -lastapi -lrt -lhiredis 
+
+SimEmuTest: $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ $(LIBS) $(INCLUDES) -o SimEmuTest
+
+$(CPPOBJS): %.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $(LIBS) $< -o $@
+
+clean:
+	rm -f $(OBJS) SimEmuTest
+
+.PHONY: clean

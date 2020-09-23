@@ -1,0 +1,37 @@
+[SimEmuSvr]
+
+# SimEmuSvr序列号，唯一标志Emu板卡，不可重复，长度：10个字节
+seri=e000000009
+# 注册密码
+passwd=123456
+
+
+# 本机IP地址
+local_ip=172.16.6.101
+
+# SimProxySvr服务器IP地址
+server_ip =172.16.6.103
+
+# SimProxySvr服务器端口
+server_port= 6201
+
+
+# 心跳时间间隔，单位：秒
+heartbeat_interval = 120
+
+# 串口号，连接Emu板卡
+comm=/dev/ttyS0
+
+
+# net_hdl_port, 网络处理线程用于和slot线程池通讯的端口
+net_hdl_port = 2303
+# comm_hdl_port, 串口处理线程用于和slot线程池通讯的端口
+comm_hdl_port=2304
+# ast_hdl_port, 接收asterisk消息(开始呼叫，结束呼叫)的端口
+net_hdl_port = 2305
+
+slot_port_rdr=3101
+# slot_port_comm，slot线程池用于和串口处理线程通讯的端口，4001～4001+Slot_Nbr
+slot_port_comm=4001
+# slot_port_net, slot线程池用于和网络处理线程通讯的端口，5001～5001+Slot_Nbr
+slot_port_net=5001

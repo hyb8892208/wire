@@ -1,0 +1,101 @@
+#!/bin/php
+<?php 
+require_once("/www/cgi-bin/php/system_fc.php");
+include_once("/www/cgi-bin/inc/function.inc");
+require_once("/www/cgi-bin/inc/redis.inc");
+include_once("/www/cgi-bin/inc/smsinboxdb.php"); 
+include_once("/www/cgi-bin/inc/smsoutboxdb.php"); 
+
+
+$redis_client = new Predis\Client();
+
+while(true) {
+	$blpop_sms_out_arr = $redis_client->lrange("app.asterisk.smssend.list",0,-1);//已发出短信
+	$blpop_sms_report_arr = $redis_client->lrange("app.sms.reports.list",0,-1);
+
+	if ((count($blpop_sms_out_arr) > 0) || (count($blpop_sms_report_arr) > 0)) {
+		$sms_info = get_sms_info_for_smssend();
+	}
+
+	// 已发出短信存数据库
+	if (count($blpop_sms_out_arr) > 0){
+		$flock = lock_file("/data/log/smsoutbox.db");
+		
+		$db_out = new SMSOUTBOXDB(); 
+		$db_out->try_exec("BEGIN");
+		for($i=0;$i<count($blpop_sms_out_arr);$i++){
+			$sms_out = $blpop_sms_out_arr[$i];
+			
+			if ($sms_out <> "") {
+				$sms_out = str_replace("\r\n", " ", $sms_out);
+				$sms_out = str_replace("\r", " ", $sms_out);
+				$sms_out = str_replace("\n", " ", $sms_out);
+				$sms_out_decoded = json_decode($sms_out, true);
+				$sms_out_port = $sms_out_decoded["port"];
+				$sms_out_number = $sms_out_decoded["number"];
+				$sms_out_date = $sms_out_decoded["date"];
+				$sms_out_content = $sms_out_decoded["content"];
+				$sms_out_status = $sms_out_decoded["status"];
+				$sms_out_uuid = $sms_out_decoded["uuid"];
+				$sms_out_imsi = $sms_out_decoded["imsi"];
+				if ($sms_out <> "" && is_true($sms_info['local_store']['enable'])) {
+					$db_out->insert_sms("$sms_out_port", "$sms_out_number", "$sms_out_date", "$sms_out_content", "$sms_out_status", "$sms_out_uuid", "$sms_out_imsi", "");
+				}
+			}
+		}
+		$db_out->try_exec("COMMIT");
+		
+		$db_out->close();
+		unlock_file($flock);
+		
+		for($j=0;$j<$i;$j++){//统一删除redis中的数据，保证数据的统一性
+			$redis_client->lpop("app.asterisk.smssend.list");//把数据插入数据库后删除redis那条数据
+		}
+	}
+	
+	//短信报告（先把redis的数据插入到sms_out_report中，再同步到flash）
+	if(count($blpop_sms_report_arr)>0){
+		$flock = lock_file("/var/log/smsoutbox.db");
+		
+		$sms_out_db = new SMSOUTBOXDB_CACHE();
+		$sms_out_db->try_exec("BEGIN");
+		for($i=0;$i<count($blpop_sms_report_arr);$i++){
+			$sms_report = $blpop_sms_report_arr[$i];
+			
+			$sms_report_decode = json_decode($sms_report, true);
+			$sms_report_port = $sms_report_decode['port'];
+			$sms_report_status = $sms_report_decode['status'];
+			$phonenumber_len = strlen($sms_report_decode['phonenumber']);
+			$cause = $sms_report_decode['cause'];
+			
+			$sms_report_sender = '';
+			if ($phonenumber_len > 8) {
+				//Matching the last 8 digits of phonebumber
+				$sms_report_sender = substr($sms_report_decode['phonenumber'], -8); 
+			} else {
+				$sms_report_sender = $sms_report_decode['phonenumber'];
+			}
+			
+			//$sql = "UPDATE sms_out SET status = '2' where id = (select id from sms_out where port = '" . $sms_report_port . "' AND phonenumber like '%" . $sms_report_sender . "' AND status = '1' ORDER BY time DESC limit 1)";
+			// $sms_out_db->check_report_db();
+			$sms_out_db->insert_sms_report("$sms_report_port", "$sms_report_sender", "$sms_report_status", "$cause");
+		}
+		$sms_out_db->try_exec("COMMIT");
+		
+		for($j=0;$j<$i;$j++){//统一删除redis中的数据，保证数据的统一性
+			$redis_client->lpop("app.sms.reports.list");//把数据插入数据库后删除redis那条数据
+		}
+		
+		$sms_out_db->close();
+		unlock_file($flock);
+	}
+	
+	if((count($blpop_sms_out_arr) == 0) && (count($blpop_sms_report_arr) == 0)){
+		sleep(4);
+	}
+	
+	unset($blpop_sms_out_arr);
+	unset($blpop_sms_report_arr);
+	unset($sms_info);
+}
+?>

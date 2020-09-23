@@ -1,0 +1,52 @@
+USSD to HTTP
+-----------------------------------------
+
+Usage: http://host:port/path?param1=${port}&param2=${message}&param3=${time}&param4=${status}&param5=${code}&param6=${id}&
+
+a Parameter Description
+
+1. host
+    Description: HTTP server IP address or domain
+    Example: 172.16.6.171 
+
+2. port
+    Description: HTTP server's port 
+    Example: 80
+
+3. path
+    Description: a path of file that Used to receive and handle request of USSD data
+    Example: smsreceive.php
+
+4. param1:
+    Description: a name of parameter used to handle the value of 'port' 
+    Example: port
+
+5. param2
+    Description: a name of parameter used to handle the value of 'message'
+    Example: message
+
+6. param3
+    Description: a name of parameter used to handle the value of 'time'
+    Example: time
+
+7. param4
+    Description: a name of parameter used to handle the value of 'status'
+    Example: status
+
+8. param5
+    Description: a name of parameter used to handle the value of 'code'
+    Example: code
+
+9. param6
+    Description: a name of parameter used to handle the value of 'id'
+    Example: id
+
+b Result Description
+    Example: 
+        Time: 2018/12/29 17:47:34 
+        ID: 1234
+        Port: 1
+        Message: Your blance is 0.00 
+        code: 15
+        status: 2
+		 

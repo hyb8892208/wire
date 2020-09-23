@@ -1,0 +1,75 @@
+#!/bin/sh
+
+. /etc/functions.sh
+
+ast_start()
+{
+	#Delete the channel info file
+	rm -f /tmp/gsm/*
+	asterisk -g 
+
+	/my_tools/keeper "start:asterisk:/etc/init.d/asterisk start"
+
+	#Add "asterisk -r" command permission to admin user
+	chown 500 /var/run/asterisk.ctl 
+}
+
+ast_stop()
+{
+	/my_tools/keeper "stop:asterisk"
+
+	#Kill Asterisk
+#	( ps | grep 'asterisk' | grep -v 'grep' | grep -v '/bin/sh' > /dev/null 2>&1 ) && asterisk -rx "core stop now"
+	if ! kill -9 `cat /var/run/asterisk.pid 2> /dev/null` > /dev/null 2>&1 ;then
+		killps asterisk $$
+	fi
+
+	#Turn off all LED
+}
+
+ast_restart()
+{
+	#Kill Asterisk
+	if ! kill -9 `cat /var/run/asterisk.pid 2> /dev/null` > /dev/null 2>&1 ;then
+		killps asterisk $$
+	fi
+	
+	rm -f /tmp/gsm/*
+
+	i=0
+	while ((i < 5 ))
+	do
+		let "i += 1"
+		ps | grep 'asterisk \-g'
+		if [ $? -eq 0 ]; then
+			sleep 2
+			killps asterisk $$
+		else
+			break
+		fi
+	done	
+	
+	#start asterisk
+	asterisk -g
+	sleep 1
+	chown 500 /var/run/asterisk.ctl 
+}
+
+case "$1" in
+	start)
+		ast_start
+		;;
+	stop)
+		ast_stop
+		;;
+	restart)
+		ast_restart
+		exit 0
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|reload}"
+		exit 2
+		;;
+esac
+
+exit 0

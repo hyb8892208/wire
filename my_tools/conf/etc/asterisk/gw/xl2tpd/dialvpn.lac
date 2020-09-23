@@ -1,0 +1,14 @@
+remotename testvpn
+user "openvox " 
+password "asterisk2018"
+unit 30                   
+lock                       
+nodeflate                
+nobsdcomp            
+noauth                    
+persist                    
+nopcomp               
+noaccomp              
+maxfail 5                
+mtu 1410               
+connect-delay 5000

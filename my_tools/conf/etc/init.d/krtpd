@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		if lsmod | grep krtpd > /dev/null 2>&1 ;then
+			rmmod krtpd
+		fi
+		insmod krtpd
+		;;
+	stop)
+		rmmod krtpd
+		;;
+	restart|reload)
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|reload}"
+		exit 2
+		;;
+esac

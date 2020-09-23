@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "The system is going down for poweroff NOW!"
+/etc/init.d/led stop
+/my_tools/gpio_set_run.sh off
+/my_tools/bsp_cli led all off
+/my_tools/add_syslog "Power off"
+/my_tools/database_sync.sh once
+/bin/poweroff

@@ -1,0 +1,75 @@
+#!/bin/sh
+
+insert_module()
+{
+	MODINFO=`lsmod`
+
+	if ! expr match "$MODINFO" '.*nls_base.*' > /dev/null 2>&1; then
+		insmod nls_base
+	fi
+
+	if ! expr match "$MODINFO" '.*usbcore.*' > /dev/null 2>&1; then
+		insmod usbcore
+	fi
+
+	if ! expr match "$MODINFO" '.*ehci_hcd.*' > /dev/null 2>&1; then
+		insmod ehci-hcd
+	fi
+
+	if ! expr match "$MODINFO" '.*usbserial.*' > /dev/null 2>&1; then
+		insmod usbserial
+	fi
+
+	if ! expr match "$MODINFO" '.*ch341.*' > /dev/null 2>&1; then
+		insmod ch341
+		sleep 5    #Wait some time
+	fi
+
+	for i in 0 1 2 3 4 5 6 7; do
+		if [ ! -e /dev/ttyUSB${i} ]; then
+			mknod /dev/ttyUSB${i} c 188 $i
+		fi
+	done
+}
+
+rmmod_module()
+{
+	MODINFO=`lsmod`
+
+	if expr match "$MODINFO" '.*ch341.*' > /dev/null 2>&1; then
+		rmmod ch341
+	fi
+
+	if expr match "$MODINFO" '.*usbserial.*' > /dev/null 2>&1; then
+		rmmod usbserial
+	fi
+
+	if expr match "$MODINFO" '.*ehci_hcd.*' > /dev/null 2>&1; then
+		rmmod ehci-hcd
+	fi
+
+	if expr match "$MODINFO" '.*usbcore.*' > /dev/null 2>&1; then
+		rmmod usbcore
+	fi
+
+	if expr match "$MODINFO" '.*nls_base.*' > /dev/null 2>&1; then
+		rmmod nls_base
+	fi
+}
+
+case "$1" in
+	start)
+		insert_module
+		;;
+	stop)
+		rmmod_module
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+        echo "Usage: $0 {start|stop|restart|reload}"
+        exit 2
+		;;
+esac

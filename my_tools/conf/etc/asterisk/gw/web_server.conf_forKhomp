@@ -1,0 +1,7 @@
+[general]
+port=80
+login_mode=http_https
+username=admin
+password=admin
+login_username=admin
+login_password=32ff9ee7e841b26a966870c144fdcaec

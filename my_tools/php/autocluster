@@ -1,0 +1,199 @@
+#!/bin/php
+
+<?php
+require_once("/www/cgi-bin/inc/define.inc");
+/*
+$Server a0:98:05:01:08:33
+serverinfo:productname=OpenVox 4 port GSM Gateway
+serverinfo:slotnum=3
+
+serverinfo:ip=172.16.66.3
+
+------
+*/
+
+function searching()
+{
+	global $__BRD_SUM__;
+
+	$sflag = '$Server';
+	$eflag = '------';
+	$str = `/my_tools/gwping eth0 list 2> /dev/null`;
+
+	while($str) {
+		$find = strstr($str,$sflag);
+		if(!$find) break;
+
+		$pos = strpos($find,$eflag);
+		if(!$pos) break;
+
+		$section = substr($find,0,$pos);
+		if(!$section) break;
+
+		$allsection[] = $section;
+
+		$str = substr($find,$pos);
+	}
+
+	if(!isset($allsection)) return false;
+
+	foreach( $allsection as $section ) {
+		$line = explode("\n",$section);
+		if(is_array($line)) {
+			$mac = '';
+			$productname = '';
+			$slotnum = '';
+			$ip = '';
+			foreach($line as $each) {
+				if(($pos = strpos($each,'$Server '))!==false) {
+					$mac = trim(substr($each,$pos+strlen('$Server ')));
+				} else if(($pos = strpos($each,'serverinfo:productname='))!==false) {
+					$productname = trim(substr($each,$pos+strlen('serverinfo:productname=')));
+				} else if(($pos = strpos($each,'serverinfo:slotnum='))!==false) {
+					$slotnum = trim(substr($each,$pos+strlen('serverinfo:slotnum=')));
+				} else if(($pos = strpos($each,'serverinfo:ip='))!==false) {
+					$ip = trim(substr($each,$pos+strlen('serverinfo:ip=')));
+				}
+			}
+
+			if( $mac && $productname && $slotnum && $ip && $slotnum > 1 && $slotnum <= $__BRD_SUM__ && $productname == 'OpenVox 4 port GSM Gateway') {
+				if(isset($ret[$slotnum]['mac'])) {
+					echo "(((Please turn off the other gateways while scanning the network ..<br/>)))\n";
+					exit(1);
+				}
+				$ret[$slotnum]['mac'] = $mac;
+				$ret[$slotnum]['productname'] = $productname;
+				$ret[$slotnum]['slotnum'] = $slotnum;
+				$ret[$slotnum]['ip'] = $ip;
+			}
+		}
+	}
+
+	if(isset($ret)) {
+		ksort($ret);
+		return $ret;
+	}
+
+	return false;
+}
+
+
+function random_ip($how)
+{
+	$s3 = rand(10,254);
+	$s4 = rand(1,254-$how);
+
+	for($i=0; $i<$how; $i++) {
+		$tmp = $s4 + $i;
+		$ret[$i] = "192.168.$s3.$tmp";
+	}
+
+	return $ret;
+}
+
+
+function random_pwd()
+{
+	return rand(1000,999999);
+}
+
+function save_master_cfg($masterip, $pwd, $ips, $gws, $remain_ori_ip='1')
+{
+	global $__BRD_HEAD__;
+
+	$_slave_list = '';
+	$_slave_ori_list = '';
+	$i = 1;
+	foreach($gws as $gw) {
+		$b = $gw['slotnum'];
+		$ip = $ips[$i++];
+		$ori_ip = $gw['ip'];
+		$_slave_list .= $__BRD_HEAD__.$b.'_ip='.$ip."\n";
+		$_slave_ori_list .= $__BRD_HEAD__.$b.'_ori_ip='.$ori_ip."\n";
+	}
+
+	$write = <<<EOF
+[general]
+mode=master
+
+[master]
+password=$pwd
+ip=$masterip
+
+[slave]
+remain_ori_ip=$remain_ori_ip
+
+[slavelist]
+$_slave_list
+$_slave_ori_list
+
+EOF;
+//EOF
+
+	$cfg_file = "/etc/asterisk/gw/cluster.conf"; 
+	//$hlock = lock_file($cfg_file);
+	$fh=fopen($cfg_file,"w");
+	fwrite($fh,$write);
+	fclose($fh);
+	//unlock_file($hlock);
+
+	system("/my_tools/cluster_mode > /dev/null 2>&1 &"); 
+}
+
+
+function save_slave_cfg($mac, $slaveip, $pwd, $masterip, $remain_ori_ip=1)
+{
+	$cfg_content = "'[general]\\nmode=slave\\n[slave]\\npassword=$pwd\\nip=$slaveip\\nmasterip=$masterip\\nremain_ori_ip=$remain_ori_ip\\n'";
+	$cmd = "\"echo -e $cfg_content > /etc/asterisk/gw/cluster.conf\"";
+	system("/my_tools/gwping eth0 $cmd $mac");
+
+	$cmd = "/my_tools/cluster_mode";
+	system("/my_tools/gwping eth0 $cmd $mac > /dev/null 2>&1 &"); 
+}
+
+$show = true;
+
+//Start ......
+
+$gws = searching();
+
+if(!$gws) {
+	echo "(((Not found gateway<br/>)))\n";
+	exit(1);
+}
+
+$gw_count = count($gws) + 1;
+
+$ips = random_ip($gw_count);
+$pwd = random_pwd();
+
+$masterip = $ips[0];
+
+//Setting master
+///////////////////////////////////////////////
+if($show) {
+	echo "(((Master:<br/>)))\n";
+	echo "((($masterip<br/><br/>)))\n";
+}
+save_master_cfg($masterip, $pwd, $ips, $gws);
+///////////////////////////////////////////////
+
+//Setting slave
+///////////////////////////////////////////////
+if($show) {
+	echo "(((Slave:<br/>)))\n";
+}
+$i = 1;
+foreach($gws as $gw) {
+	if($show) {
+		echo "(((Board:".$gw['slotnum']."<br/>)))\n";
+		echo "(((MAC:".$gw['mac']."<br/>)))\n";
+		echo "(((Original IP:".$gw['ip']."<br/>)))\n";
+		echo "(((Set IP:".$ips[$i]."<br/><br/>)))\n";
+	}
+	save_slave_cfg($gw['mac'],$ips[$i],$pwd,$masterip);
+	$i++;
+}
+///////////////////////////////////////////////
+
+?>

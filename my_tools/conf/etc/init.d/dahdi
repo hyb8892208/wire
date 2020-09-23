@@ -1,0 +1,59 @@
+#!/bin/sh
+
+insert_module()
+{
+	[ -d /dev/dahdi ] || mkdir /dev/dahdi
+
+	insmod dahdi
+	if [ $? -eq 0 ];then
+
+		TYPE=`/my_tools/set_config /tmp/hwinfo get option_value interface type 2> /dev/null`
+
+		if [ x"$TYPE" != "PCI" ];then
+			insmod opvxg4xx_tdm.ko
+		else
+			insmod opvxg4xx.ko
+		fi
+
+		if [ $? -eq 0 ];then
+			[ -e /dev/dahdi!channel ] && mv /dev/dahdi!channel /dev/dahdi/channel
+			[ -e /dev/dahdi!ctl ] && mv /dev/dahdi!ctl /dev/dahdi/ctl
+			[ -e /dev/dahdi!pseudo ] && mv /dev/dahdi!pseudo /dev/dahdi/pseudo
+			[ -e /dev/dahdi!timer ] && mv /dev/dahdi!timer /dev/dahdi/timer
+
+			[ -e /dev/dahdi/ctl ] || mknod /dev/dahdi/ctl c 196 0
+			[ -e /dev/dahdi/timer ] || mknod /dev/dahdi/timer c 196 253
+			[ -e /dev/dahdi/channel ] || mknod /dev/dahdi/channel c 196 254
+			[ -e /dev/dahdi/pseudo ] || mknod /dev/dahdi/pseudo c 196 255
+
+			PORT=`/my_tools/set_config /tmp/hwinfo get option_value gsm sum 2> /dev/null`
+			C=`expr 2 \* $PORT 2> /dev/null`
+			I=1
+			while [[ $I -le $C ]]; do
+				[ -e /dev/dahdi!${I} ] && mv /dev/dahdi!${I} /dev/dahdi/${I}
+				[ -e /dev/dahdi/${I} ] || mknod /dev/dahdi/${I} c 196 ${I}
+				I=`expr $I + 1`
+			done
+		fi
+	fi
+}
+
+case "$1" in
+	start)
+		insert_module
+		dahdi_cfg
+		;;
+	stop)
+		/etc/init.d/asterisk stop
+		( lsmod | grep 'opvxg4xx' > /dev/null 2>&1 ) && rmmod opvxg4xx
+		( lsmod | grep 'dahdi' > /dev/null 2>&1 ) && rmmod dahdi
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+        echo "Usage: $0 {start|stop|restart|reload}"
+        exit 2
+		;;
+esac

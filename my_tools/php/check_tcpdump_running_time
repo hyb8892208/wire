@@ -1,0 +1,17 @@
+#!/bin/php
+
+<?php
+$time = 0;
+
+while($time <= 600){
+	file_put_contents("/tmp/pcap_capture",$time);
+	
+	if($time == 600){
+		exec("kill -s 2 `pidof tcpdump` > /dev/null 2>&1");
+		exec("rm -rf /tmp/pcap_capture");
+	}
+	
+	$time++;
+	sleep(1);
+}
+?>

@@ -1,0 +1,3376 @@
+language#portuguese#Português
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     Language Package Description
+;
+;     Format:
+;		   [page name]
+;          key1="value1"
+;		   key2="value2"
+;		   ...
+;
+;     Notice:
+;          1.Package head line format: language#xxx#XXXX
+;            xxx is the Internal identification.
+;            XXX is the web view.
+;          2.Package must save format: UTF-8(No BOM)
+;          3.If there is ["] in value, please use [\"]. For example: 
+;            language help="This is \"Portuguese\""
+;		   4.[page name] must be set.Same as URL address.
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    general
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[general]
+portuguese="Português"
+Name="Nome"
+User Name="Nome de Usuário"
+Password="Senha"
+Port="Porta"
+From="Para"
+Type="Tipo"
+To="Para"
+Enable="Ativado"
+Enable help="ON(ativado),OFF(desativado)"
+All="Todos"
+All help="Seleciona todas opções."
+Report="Relatório"
+Total="Total"
+does not exist="não existe"
+_On="Ligado"
+_None="Nenhum"
+_No="Não"
+_Yes="Sim"
+SUCCESS="SUCESSO"
+success="SUCESSO"
+Mobile Number="Número móvel"
+English="Inglês"
+Chinese="Chinês."
+Save Successful="Salvo com Sucesso!"
+Username="Usuário"
+
+js check domain="Domínio ou Endereço IP Inválido."
+js check diyname="Os Caracteres permitidos podem ser qualquer um de [-_+.<>&0-9a-zA-Z],1 - 32 caracteres."
+js check diypwd="Os Caracteres permitidos podem ser qualquer um de [0-9a-zA-Z`~!@$%^&*()_+{}|<>?-=[],./],4 - 32 caracteres."
+js limit aminame="limit the input string to \"send\", \"event\", \"general\". "
+js check the password complexity="The password you enter must consist of letters, numbers, and special characters, \"0-9a-zA-Z!@#$%^&*\".Length: 8-32 characters."
+js check gsmgain="Faixa de Volume：-1-65535"
+js check gsmvol="Faixa de Volume: 0-100."
+js check gsmmic="Faixa de Volume : 0-15."
+js check adcchipgain="Faixa de Ganho:  -42 - 20."
+js check dialprefix="Deve ser de 0-9 ou +,*,#"
+js check gsmpin="Deve ser de 4 - 12 dígitos."
+js check email="Por favor, insira um endereço de e-mail válido."
+js check sipendp="Os Caracteres permitidos podem ser qualquer um de [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 caracteres."
+js check sipname="Os Caracteres permitidos podem ser qualquer um de [0-9a-zA-Z$*()-=_.], 1-32 caracteres."
+js check sippwd="Os Caracteres permitidos podem ser qualquer um de  [0-9a-zA-Z`~!#$%^&*()_+{}|<>-=,.], 0-32 caracteres."
+js check routingname="Os Caracteres permitidos podem ser qualquer um de [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 caracteres."
+js check networkport="Por favor, insira um número de Porta válida (1-65535)"
+js check smtpuser="Por favor, insira um usuário SMTP válido."
+js check smtppwd="Os Caracteres permitidos podem ser qualquer um de [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-64 caracteres."
+js check phonenum="Por favor, insira um número de telefone válido!"
+js check ussd="Por favor, insira um número USSD válido!"
+js check ip="Por favor, insira um endereço IP válido"
+js check mac="Por favor, insira um endereço de MAC válido!"
+js check pppoeuser="Por favor, insira um usuário válido"
+js check pppoepwd="Por favor, insira uma senha válida!"
+js check float="Por favor, insira número flutuante"
+js check integer="Por favor, insira dados inteiros"
+js check smail="Você deve definir um endereço de e-mail."
+
+js check dtmf float 1="Por favor, insira número flutuante"
+js check dtmf float 2="A entrada deve ser menor que 100.0"
+js check dtmf integer 1="Por favor, insira dados inteiros"
+js check dtmf integer 2="A entrada deve ser menor que 100"
+js check null="Não pode ser nulo."
+js check send_msg="O caractere permitido deve ter de 1 à 128 caracteres."
+js check match_key="O caractere permitido deve ter de 1 à 32 caracteres."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    week
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[week]
+Monday="Segunda-feira"
+Tuesday="Terça-feira"
+Wednesday="Quarta-feira"
+Thursday="Quinta-feira"
+Friday="Sexta-feira"
+Saturday="Sábado"
+Sunday="Domingo"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    month
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[month]
+January="Janeiro"
+February="Fevereiro"
+March="Março"
+April="Abril"
+May="Maio"
+June="Junho"
+July="Julho"
+August="Agosto"
+September="Setembro"
+October="Outubro"
+November="Novembro"
+December="Dezembro"
+
+Month="Mês"
+Week="Semana"
+Day="Dia"
+Hour="Hora"
+Minute="Acta"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    menu
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[menu]
+system="Sistema"
+module="Módulo"
+voip="VoIP"
+routing="Roteamento"
+sms="SMS"
+network="Rede"
+advanced="Avançado"
+logs="Logs"
+
+;system
+Status="Estado"
+Time="Data e Hora"
+Login Settings="Configurações de Login"
+SSH="SSH"
+General="Geral"
+Tools="Ferramentas"
+User="Usuario"
+Information="Informações"
+Setting Wizard="Configurações de Wizard"
+
+;module
+Module Settings="Configuração do Módulo"
+Call Forwarding="Encaminhamento de chamadas"
+Call Waiting="Chamada em Espera"
+DTMF="DTMF"
+BCCH="BCCH"
+Toolkit="Diagnósticos"
+Module Update="Atualização do Módulo"
+Call And SMS Limit="Limite de chamadas e SMS"
+
+;voip
+VoIP Endpoints="Contas VoIP"
+Batch SIP Endpoints="Batch SIP Endpoints"
+Advanced SIP Settings="Configurações SIP Avançadas"
+Advanced IAX2 Settings="Configurações IAX2 Avançadas"
+SIP Account Security="Seguraça na Conta SIP"
+
+;routing
+Call Routing Rules="Regras de Rotemanto de Chamadas"
+Groups="Grupos de Roteamento"
+Batch Creating Rules="Batch Regras de Roteamento"
+MNP Settings="Configurações MNP"
+Routing Blacklist="Blacklist de Roteamento"
+Advanced="Avançado"
+
+;sms
+SMS Settings="Configurações de SMS"
+SMS Sender="Enviar SMS"
+SMS Inbox="Caixa de Entrada SMS"
+SMS Outbox="Caixa de Saída SMS"
+SMS Forwarding="Encaminhamento de SMS"
+USSD="USSD"
+MMS Settings="Configurações MMS"
+Email="E-mail"
+
+;network
+LAN Settings="Configurações da LAN"
+WAN Settings="Configurações da WAN"
+VPN Settings="Configurações da VPN"
+DDNS Settings="Configurações da DDNS"
+Security Settings="Configurações de Segurança"
+Security Rules="Regras de Segurança"
+SIP Capture="Captura de pacotes SIP"
+
+;advanced
+Asterisk API="Asterisk API"
+Asterisk CLI="Asterisk CLI"
+Asterisk File Editor="Editor de Arquivos do Asterisk"
+Cloud="Cloud"
+Balance="Consulta Saldo"
+PhoneNumber="Número de Telefone"
+ARP="ARP"
+
+;logs
+Log Settings="Configurações de Log"
+System="Sistema"
+Asterisk="Asterisk"
+SIP="SIP"
+CDR="CDR"
+IAX2="IAX2"
+BSP="BSP"
+RRI="RRI"
+AT Commands="Comandos AT"
+Statistics="Estatísticas"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    Time Zone
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Time Zone]
+Australia="Australia"
+Melbourne,Canberra,Sydney="Melbourne,Canberra,Sydney"
+Perth="Perth"
+Brisbane="Brisbane"
+Adelaide="Adelaide"
+Darwin="Darwin"
+Hobart="Hobart"
+
+Europe="Europe"
+Amsterdam,Netherlands="Amsterdam,Netherlands"
+Athens,Greece="Athens,Greece"
+Berlin,Germany="Berlin,Germany"
+Brussels,Belgium="Brussels,Belgium"
+Bratislava,Slovakia="Bratislava,Slovakia"
+Budapest,Hungary="Budapest,Hungary"
+Copenhagen,Denmark="Copenhagen,Denmark"
+Dublin,Ireland="Dublin,Ireland"
+Helsinki,Finland="Helsinki,Finland"
+Kyiv,Ukraine="Kyiv,Ukraine"
+Lisbon,Portugal="Lisbon,Portugal"
+London,GreatBritain="London,GreatBritain"
+Madrid,Spain="Madrid,Spain"
+Oslo,Norway="Oslo,Norway"
+Paris,France="Paris,France"
+Prague,CzechRepublic="Prague,CzechRepublic"
+Roma,Italy="Roma,Italy"
+Moscow,Russia="Moscow,Russia"
+Stockholm,Sweden="Stockholm,Sweden"
+Zurich,Switzerland="Zurich,Switzerland"
+
+New Zealand="New Zealand"
+Auckland, Wellington="Auckland, Wellington"
+
+USA and Canada="USA and Canada"
+Hawaii Time="Hawaii Time"
+Alaska Time="Alaska Time"
+Pacific Time="Pacific Time"
+Mountain Time="Mountain Time"
+Mountain Time @Arizona, no DST="Mountain Time (Arizona, no DST)"
+Central Time="Central Time"
+Eastern Time="Eastern Time"
+
+Atlantic="Atlantic"
+Bermuda="Bermuda"
+
+Asia="Asia"
+;Asia (UTC+1)
+Anadyr="Anadyr"
+
+;Asia (UTC+2)
+Amman="Amman"
+Beirut="Beirut"
+Damascus="Damascus"
+Gaza="Gaza"
+Jerusalem="Jerusalem"
+Nicosia="Nicosia"
+
+;Asia (UTC+3)
+Aden="Aden"
+Baghdad="Baghdad"
+Bahrain="Bahrain"
+Kuwait="Kuwait"
+Qatar="Qatar"
+Riyadh="Riyadh"
+
+;Asia (UTC+3:30)
+Tehran="Tehran"
+
+;Asia (UTC+4)
+Baku="Baku"
+Dubai="Dubai"
+Muscat="Muscat"
+Tbilisi="Tbilisi"
+Yerevan="Yerevan"
+
+;Asia (UTC+4:30)
+Kabul="Kabul"
+
+;Asia (UTC+5)
+Aqtobe="Aqtobe"
+Ashgabat="Ashgabat"
+Dushanbe="Dushanbe"
+Karachi="Karachi"
+Oral="Oral"
+Samarkand="Samarkand"
+Tashkent="Tashkent"
+Yekaterinburg="Yekaterinburg"
+
+;Asia (UTC+5:30)
+Calcutta="Calcutta"
+Colombo="Colombo"
+Almaty="Almaty"
+Bishkek="Bishkek"
+Dhaka="Dhaka"
+Novosibirsk="Novosibirsk"
+Omsk="Omsk"
+Qyzylorda="Qyzylorda"
+Thimphu="Thimphu"
+
+;Asia (UTC+7)
+Jakarta="Jakarta"
+Bangkok="Bangkok"
+Vientiane="Vientiane"
+Phnom Penh="Phnom Penh"
+
+;Asia (UTC+8)
+Chongqing="Chongqing"
+Hong Kong="Hong Kong"
+Shanghai="Shanghai"
+Singapore="Singapore"
+Urumqi="Urumqi"
+Taiwan="Taiwan"
+Ulaanbaatar="Ulaanbaatar"
+
+;Asia (UTC+9)
+Dili="Dili"
+Jayapura="Jayapura"
+Pyongyang="Pyongyang"
+Seoul="Seoul"
+Tokyo="Tokyo"
+Yakutsk="Yakutsk"
+
+Central and South America="Central and South America"
+Sao Paulo,Brazil="Sao Paulo,Brazil"
+Fernando de Noronha,Brazil="Fernando de Noronha,Brazil"
+Manaus,Brazil="Manaus,Brazil"
+Rio Branco,Brazil="Rio Branco,Brazil"
+Buenos_Aires,Argentina="Buenos_Aires,Argentina"
+Central America @no DST="Central America (no DST)"
+Caracas,Venezuela="Caracas,Venezuela"
+
+Italy="Italy"
+Japan="Japan"
+Sweden="Sweden"
+Thailand="Thailand"
+Norway="Norway"
+Mexico="Mexico"
+Philippines="Philippines"
+Poland="Poland"
+Portugal="Portugal"
+United Kingdom="United Kingdom"
+United States="United States"
+South Africa="South Africa"
+Malaysia="Malaysia"
+Netherlands="Netherlands"
+Hungrary="Hungrary"
+Israel="Israel"
+Brazil="Brazil"
+Austria="Austria"
+Belgium="Belgium"
+Switzerland="Switzerland"
+Chile="Chile"
+China="China"
+Spain="Spain"
+Finland="Finland"
+Germany="Germany"
+Denmark="Denmark"
+Czech Republic="Czech Republic"
+Czech_republic="Czech_republic"
+Estonia="Estonia"
+France="France"
+Greece="Greece"
+Hungary="Hungary"
+Bulgaria="Bulgaria"
+Lithuania="Lithuania"
+Venezuela="Venezuela"
+;Russian Federation / ex Soviet Union="Russian Federation / ex Soviet Union"
+Russian Federation="Russian Federation"
+Colombia="Colombia"
+Ecuador="Ecuador"
+Indonesia="Indonesia"
+ITU="ITU"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    button
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[button]
+Save="Salvar"
+Cancel="Cancelar"
+
+Action="Ação"
+Actions="Ações"
+Manual="Manual"
+Send="Enviar"
+Stop="Parar"
+Add="Adicionar"
+
+Download="Baixar"
+Modify="Modificar"
+
+Filter="Filtro"
+Clean Filter="Limpar Filtro"
+
+Delete="Excluir"
+Delete confirm="Você tem certeza que deseja excluir o item selecionado?"
+Clean Up="Limpar"
+Clean Up confirm="Você tem certeza que deseja limpar esses logs?"
+Clean All="Limpar Tudo"
+Clean All confirm="Você tem certeza que deseja limpar todos os logs?"
+Export="Exportar"
+Refresh="Atualizar"
+
+Apply="Aplicar"
+Apply Bar help="As configurações foram alteradas. As chamadas podem ser finalizadas quando você aplicar essas configurações. Você deseja aplicar agora? "
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    pages
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[pages]
+Previous page="Página anterior"
+Next page="Próxima página"
+input page help="Por favor insira o número da página e pressione [Enter] para ir para a página."
+total pages="páginas totais"
+goto input page="ir para a página inicial"
+go="ir"
+Cancel Apply help="Configuration settings can be cancelled before Apply."
+Apply Back help="Are you sure you want to cancel the configuration settings?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-status.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-status]
+;Module-Information
+Module Information="Informações do Módulo"
+Type="Tipo"
+Signal="Sinal"
+Band="Banda"
+BER="BER"
+Carrier="Operadora"
+Registration Status="Estado do Registro"
+PDD="PDD"
+ACD="ACD"
+ASR="ASR"
+Module Status="Estado do Módulo"
+Remain Time="LDC"
+Times="LNCD"
+
+Model IMEI="Número IMEI"
+Network Name="Nome da Rede"
+Network Status="Estado da Rede"
+Signal Quality="Qualidade do Sinal"
+BER value="Valor BER"
+SIM IMSI="SIM IMSI"
+SIM SMS Center Number="Número Central SMS do SIM"
+Own Number="Número do SIM"
+Phone Number="Número do Telefone"
+State="Estado"
+Call Limit="Limite de Chamadas"
+Lock Status="Lock Status"
+Mark Status="Mark Status"
+SMS Status="SMS Status"
+Limited="Limited"
+Unlimited="Unlimited"
+Locked="Locked"
+Locking="Locking"
+Unlocked="Unlocked"
+Marked="Marked"
+Unmarked="Unmarked"
+
+Undetected SIM Card="SIM Card não detectado"
+Not registered="Não Registrado"
+READY="PRONTO"
+INIT="INICIALIZANDO"
+DOWN="DOWN"
+UP="UP"
+Ready="Pronto"
+READY="PRONTO"
+CALL PROGRESS="CHAMADA EM EXECUÇÃO"
+CALL ACTIVE="CHAMADA ATIVA"
+RINGING="CHAMANDO"
+HANGUP="DESLIGAR"
+UNKNOW="DESCONHECIDO"
+Undetected SIM Card="SIM Card não detectado"
+Not registered="Não Registrado"
+Searching="Procurando"
+Registration denied="Registro negado"
+Unknown="Desconhecido"
+Registered="Registrado"
+Unknown Network Status="Status de rede desconhecido"
+
+;SIP/IAX/Routing Information
+SIP Information="Informações SIP"
+IAX2 Information="IAX2 Information"
+Routing Information="Informações de Roteamento"
+Endpoint Name="Dispositivo"
+User Name="Nome de Usuário"
+Host="Endereço"
+Registration="Registro"
+SIP Status="Estado SIP"
+IAX2 Status="Estado IAX2"
+Rule Name="Nome da Regra"
+From="De"
+To="Para"
+Rules="Regras"
+Any SIP="Any SIP"
+server="servidor"
+client="cliente"
+
+;Network Information
+Network Information="Informações de Rede"
+Name="Nome"
+MAC Address="MAC"
+IPV4 Address="Endereço IPV4"
+IPV6 Address="Endereço IPV6"
+Mask="Máscara de Rede"
+Gateway="Gateway"
+RX Packets="Pacotes Recebidos"
+TX Packets="Pacotes Transmitidos"
+L2TP VPN Information="L2TP VPN Information"
+PPTP Information="PPTP Information"
+IP Address="Endereço IP"
+P-t-P IP Address="Endereço P-t-P IP"
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-time.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-time]
+Time Settings="Configurações de Data e Hora"
+System Time="Data e Hora do Sistema"
+System Time help="Data e Hora do seu Gateway."
+Time Zone="Fuso horário"
+Time Zone help="Selecione o fuso horário conforme o horário da sua região."
+POSIX TZ String="POSIX FH"
+POSIX TZ String help="Fuso horário padrão Posix."
+Auto-Sync from Server="Auto-Sync from Server"
+Auto-Sync from Server help="Se ativado sincroniza automaticamente do servidor."
+Auto-Sync Type="Auto-Sync Type"
+Auto-Sync Type help="Sincronização do NTP ou da estação base.."
+NTP Server 1="Servidor NTP primário"
+NTP Server 1 help="Domínio ou endereço IP do servidor NTP. Exemplo [a.ntp.br]"
+NTP Server 2="Servidor NTP secundário"
+NTP Server 2 help="Segunda opção para servidor NTP. Exemplo [b.ntp.br]"
+NTP Server 3="Servidor NTP terciário"
+NTP Server 3 help="Terceira opção para servidor NTP. Exemplo [c.ntp.br] " 
+Auto-Sync from NTP="Sincronizar automaticamente horário NTP"
+Auto-Sync from NTP help="Ativa ou desativa sincronismo do horário com servidor NTP. On(ativado),OFF(desabilitado)."
+Station="Station"
+Sync from NTP="Sincronizar do NTP"
+Sync from Client="Sincronizar do PC"
+Time Synchronize="Sincronizar Horário"
+Synchronize Succeeded="Sincronismo NTP bem sucedido"
+Synchronize Failed="Sincronismo falhou"
+Client Synchronize Succeeded="Sincronismo com PC bem sucedido"
+Client Synchronize Failed="Sincronismo com PC falhou"
+Sychronous time from ntp help="Sychronous time from NTP server need some times, please waiting for minutes"
+request timeout help="Request timeout, failed to sychronous time from NTP server."
+Sync Time From NTP="Sync Time From NTP"
+Save Data="Save Data"
+Sync from Station="Sync from Station"
+Sync from Station Failed="Failed to synchronize time from base station!"
+Sync from Client Failed="Failed to synchronize time from Client!"
+
+Unknown="Desconhecido"
+User defined @or out of date="Definido pelo Usuário (ou desatualizado)"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-login.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-login]
+Web Login Settings="Configurações de Acesso Web"
+User Name="Nome de Usuário"
+User Name help="Atenção: Essa é a senha para acessar a web. <br/>Você pode definir um novo usuário e senha para acesso.<br/>Nome de usuário: Caracteres permitidos \"-_+.<>&0-9a-zA-Z\".Tamanho: 1-32 caracteres."
+Password="Senha"
+Password help="Os caracteres permitidos são [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 caracteres."
+Confirm Password="Confirmar Senha"
+Confirm Password help="Por favor insira a mesma senha do campo 'Senha' acima."
+Login Mode="Modo de Login"
+Login Mode help="Seleciona o modo de login."
+Port="Porta"
+Port help="Porta de acesso ao SSH."
+Confirm Password warning web="Essa senha deve corresponder à senha acima."
+js webserver port help="Faixa: 1024-65535, padrão 80."
+User name has been used="O nome do usuário foi usado"
+Password len tip="A senha não pode ser menor que 8 caracteres."
+Password Login Rule="A senha deve atender às seguintes regras: 1. Pelo menos oito caracteres.2.Pelo menos um número.3.Pelo menos uma letra minúscula.4.Pelo menos uma letra maiúscula. "."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-ssh.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-ssh]
+SSH Login Settings="Configurações de Acesso SSH"
+User Name="Nome de Usuário"
+User Name help="Nome de Usuário: Caracteres permitidos \"-_+.<>&0-9a-zA-Z\".Length: 1-32 characters.</br>O nome não pode ser 'root'."
+User Name warning ssh="O nome não pode ser 'root'"
+Password="Senha"
+Password help="Caracteres permitidos: \"0-9a-zA-Z`~!@$%^&*()_+{}\"|<>?-=[]'\,./\".tamanho: 4-32 caracteres."
+Port="Port"
+Port help="Porta de acesso ao SSH."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-general.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-general]
+Language Settings="Configurações de Idioma"
+Language="Idioma"
+Language help="Seleciona o idioma de apresentação da página web"
+Language Download="Download"
+Language Download help="Download do pacote de idioma selecionado."
+language Delete="Excluir"
+language Delete help="Deleta idioma selecionado."
+Add New Language="Adicionar Novo Idioma"
+Add New Language help="Carrega arquivo com idioma desejado"
+New language Package="Novo pacote de idioma"
+Scheduled Reboot="Reinicialização Programada"
+Reboot Type="Programação da Reinicialização"
+Reboot Type help="Por Dia: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reinicia todos os dias as hh:mm(horário). <br>Por Semana: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reinicia toda semana XXX(dia da semana) as hh:mm(horário). <br>Por Mês: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reinicia todo mês dia DD(Dia do mês) as hh:mm(horário). <br>Por Tempo de Funcionamento: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reinicia periódicamente pelo tempo em funcionamento."
+By Day="Por Dia"
+By Week="Por Semana"
+By Month="Por Mês"
+By Running Time="Por Tempo de Funcionamento"
+Running Time="Tempo em Funcionamento"
+Running Time help="Tempo que o produto está ligado"
+Sun="Dom"
+Mon="Seg"
+Tue="Ter"
+Wed="Qua"
+Thu="Qui"
+Fri="Sex"
+Sat="Sab"
+
+Language Download help="Download do pacote de idioma selecionado."
+Language Download error="Não foi possível encontrar o pacote de idioma selecionado."
+
+Language Package Upload Filesize error="O arquivo carregado é maior que 1MB!<br>O carregamento do arquivo falhou.<br>"
+Language Package Upload Move Failed="Carregamento do arquivo de idioma falhou"
+Language Package Upload Failed="Carregamento do arquivo de idioma falhou"
+Language Package Format error="Formato do arquivo de idioma incorreto"
+Add Language overwrite alert="Idioma já existente!\nO idioma não pode ser sobreescrito!"
+Add Language overwrite confirm="Idioma já existente!\nVocê deseja sobreescrevê-lo?"
+
+Delete Language alert="Você não pode excluir o idioma padrão."
+Delete Language confirm="Você tem certeza que deseja excluir o idioma selecionado?"
+Select File alert="Por favor selecione o arquivo primeiro!"
+Language Package Size alert="Tamanho máximo do arquivo é 1MB!"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-tools.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-tools]
+Reboot Tools="Ferramentas de Reinicialização"
+System Reboot="Reiniciar Gateway"
+System Reboot help="Reinicia o gateway e todas as chamadas correntes serão encerradas."
+System Reboot confirm="Você tem certeza que deseja reiniciar o gateway agora?\nVocê irá perder todos os dados na memória!"
+Asterisk Reboot="Reiniciar Asterisk"
+Asterisk Reboot help="Reinicia o Asterisk e todas as chamadas correntes serão encerradas."
+Asterisk Reboot confirm="Você tem certeza que deseja reiniciar o Asterisk agora?"
+
+Update Firmware="Atualizar Firmware"
+System Update="Atualizar Sistema"
+System Update filesize alert="Tamanho máximo do arquivo é 40M!"
+System Update IE alert="Por favor dê permissão ao ActiveX Scripting File System Object!"
+System Update confirm="Você tem certeza que deseja atualizar o sistema?\\nAtenção!Isso pode alterar a estrutura dos seus arquivos de configurações originais."
+New system file="Novo arquivo do sistema"
+System Online Update="Atualização online do sistema"
+System Online Update help="O arquivo de firmware será baixado diretamente do site oficial do fabricante. "
+System version help 1="A versão atual do sistema é:"
+System version help 2="A última versão do sistema é:"
+System version help 3="Atenção:\nNão feche a página enquanto está atualizando; Caso contrário a atualização falhará!\n"
+System Online Update confirm="Atenção, por favor:\nIsso pode causar danos na estrutura dos arquivos de configuração originais!\nVocê tem certeza que deseja atualizar o sistema?\n"
+System Online Update version error="Atualização remota falhou. Verifique sua conexão de internet!"
+System Online Update Download error="O download do arquivo do sistema falhou. Verifique sua conexão de internet!"
+System Online Update fopen error="Não foi possível salvar o arquivo!"
+Get remote version failed="Falha ao obter arquivo remoto."
+Be cautious="Atenção, por favor"
+System Online Update caution1="Isso pode alterar os arquivos de configuração originais. Placas desconectadas não podem ser atualizadas.\n\n"
+System Online Update caution2="Você tem certeza que deseja atualizar o sistema?\n"
+System Online Update caution3="Isso pode alterar os arquivos de configuração originais!\n\n"
+System Online Update caution4="Não feche a página enquanto está atualizando; Caso contrário a atualização falhará!"
+
+Upload Configuration="Atualizar configuração"
+File Upload="Arquivo para Atualização"
+File Upload confirm="Você tem certeza que deseja atualizar os arquivos de configuração?\nIsso pode alterar a estrutura dos seus arquivos de configurações originais."
+New configuration file="Novo arquivo de configuração"
+move uploaded file="move uploaded file"
+Backup Configuration="Download Arquivo Configuração"
+Download Backup="Download Arquivo de Configuração"
+Current configuration file version="Versão do arquivo de configuração atual"
+
+Restore Configuration="Restaurar Configurações"
+Factory Reset="Restaurar ao Padrão de Fábrica"
+Factory Reset help="Isso irá restaurar todas as configurações do gateway aos padrões de fábrica! Ao finalizar o gateway será reinicializado."
+Factory Reset confirm="Você tem certeza que deseja restaurar ao padrão de fábrica agora?"
+
+Result="Resultado"
+
+System Rebooting="Reiniciando Sistema"
+System Reboot wait="O sistema está reiniciando...<br>Por favor aguarde cerca de 60s, o sistema está reiniciando."
+
+Asterisk Rebooting="Reiniciando Asterisk"
+Asterisk Reboot Succeeded="Asterisk reiniciado com sucesso"
+Asterisk Reboot Failed="Falha ao reiniciar Asterisk"
+
+System Update Filesize error="Seu arquivo de atualização é maior que 40M!<br>A atualização falhou."
+System Update Move error="Falha ao mover o arquivo de atualização!<br>A atualização falhou."
+System Updating="Atualizando o Sistema"
+fork error="Erro"
+Error code="Código de erro"
+System Update Succeeded="Sistema atualizado com sucesso"
+System Update Succeeded help="É necessário reiniciar para entrar no novo sistema."
+System Update error 1="O arquivo é maior que o espaço no servidor 40M!"
+System Update error 2="O arquivo é maior que o permitido pelo navegador!"
+System Update error 3="O arquivo foi atualizado parcialmente!"
+System Update error 4="Não foi possível encontrar o arquivo de atualização!"
+System Update error 5="O servidor perdeu temporariamente a pasta!"
+System Update error 6="Falha ao escrever na pasta temporária!"
+System Update Failed="Atualização do sistema falhou"
+Get remote version failed="Falha ao obter arquivo remoto."
+Be cautious="Atenção, por favor"
+System Online Update caution1="Isso pode alterar os arquivos de configuração originais. Placas desconectadas não podem ser atualizadas.\n\n"
+System Online Update caution2="Você tem certeza que deseja atualizar o sistema?\n"
+System Online Update caution3="Isso pode alterar os arquivos de configuração originais!\n\n"
+System Online Update caution4="Não feche a página enquanto está atualizando; Caso contrário a atualização falhará!"
+
+Downloading="Baixando"
+Updating system="Sistema Atualizando"
+Update failed="Falha na atualização"
+update failed output="Falha na atualização.<br>Código de erro: "
+update succeed output="Sistema atualizado com sucesso!<br>Você deve reiniciar para acessar o novo sistema."
+Updating system was failed="Falha ao atualizar o sistema"
+Update Online Information="Update Online Information"
+
+Configuration Files Upload="Atualizar arquivos de configuração"
+Configuration Files Upload Filesize error="O arquivo é maior que 40M!<br>A atualização dos arquivos de configuração falhou."
+Configuration Files Upload Move error="Falha ao mover o arquivo!<br>A atualização dos arquivos de configuração falhou."
+Configuration Files Uploading="Atualizando arquivos de configuração"
+Configuration Files Upload Failed="Falha ao atualizar os arquivos de configuração"
+Configuration Files Upload Succeeded="Arquivos de configuração atualizados com sucesso"
+Configuration Files Update Succeeded="Configuration Files Update Succeeded"
+Configuration Files Update Failed="Configuration Files Update Failed"
+Configuration Files Upload version error 1="</br>Não foi possível encontrar os arquivos de configuração!</br>Não foi possível encontrar asterisk/cfg_version!<br>"
+Configuration Files Upload version error 2="</br>Versão de configuração desconhecida!"
+Configuration Files Upload version error 3="</br>O sistema atual não suporta essa versão de configuração!</br>"
+Configuration Files Upload check="Verificando versão da configuração....<br>"
+Configuration Files Upload update="Atualizando arquivos de configuração....<br>"
+Configuration Files Upload error 1="O arquivo é maior que o espaço no servidor '40M'!"
+Configuration Files Upload error 2="O arquivo é maior que o limite do navegador!"
+Configuration Files Upload error 3="O arquivo foi atualizado parcialmente!"
+Configuration Files Upload error 4="Não foi possível encontrar o arquivo de atualização!"
+Configuration Files Upload error 5="O servidor perdeu a pasta temporária!"
+Configuration Files Upload error 6="Falha ao escrever na pasta temporária!"
+Stop Asterisk="Parando o asterisk....<br>"
+Start Asterisk="Iniciando o asterisk....<br>"
+
+Packing was failed="O empacotamento falhou"
+Can not find="Não foi possível encontrar"
+
+Configuration Restore="Restaurar configuração"
+Configuration Restore wait="Restaurando arquivo de configuração padrão...<br>Aguarde cerca de 60s, o sistema está reiniciando."
+Configuration Restoring="Restaurando configuração"
+Configuration Restore Failed="Falha ao restaurar configuração"
+System Online Update help="O arquivo de firmware será baixado diretamente do site oficial do fabricante. "
+System version help 3="Atenção:\nNão feche a página enquanto está atualizando; Caso contrário a atualização falhará!\n"
+Change Log="Change Log"
+Detailed="Detailed"
+Update Online Now="Update Online Now"
+Voice Record="Gravação de voz"
+Voice Record help="Selecione um módulo para a gravação de voz."
+Voice Stop help="O tempo máximo de gravação de voz é 3 minutos e o sistema irá parar de gravar e realizar o download quando atingir o tempo máximo"
+Start Recording="Iniciar Gravação"
+Stop Recording="Parar Gravação"
+
+System Switch="System Switch"
+System Switching="System Switching"
+System Switch Succeeded="System Switch Succeeded"
+System Switch Failed="System Switch Failed"
+System Switch confirm="Are you sure to switch system now?After switching over, the system needs to be restarted to take effect."
+
+License="License"
+Upload License file="Upload License file"
+License Upload="License Upload"
+License Upload Filesize error="Your uploaded file was larger than 80M!<br>Upload license was failed."
+License Upload Move error="Moving your uploaded file was failed!<br/>"
+License Uploading="License Uploading"
+License Upload Failed="License Upload Failed"
+Upload License help="Are you sure you want to upload license?"
+Software service expiration time="Software service expiration time"
+Software expired help1="Your software service is about to expire."
+Software left="Left"
+Software expired help2="Use the new License please!"
+Software expired help3="Your software service has expired, please use the new License!"
+Upload License file help="Please upload the correct License file!"
+Get UUID="Get UUID"
+Get UUID error="Get UUID error"
+License Enable="License Enable"
+License Enable help="ON(ativado),OFF(desativado)"
+System Count Dowm="The system will be restarted automatically after 10 seconds countdown"
+Gateway Update Completed="O gateway precisa ser reiniciado após a conclusão da atualização do firmware"
+System Download Succeeded="The system is being upgaded, please wait."
+Board Number="Board Number"
+Firmware version help="Firmware version should not be less than 2.1.2"
+Firmware upload help="The format of the uploaded file is incorrect."
+Select File alert="Please select your file first!"
+Firmware Link="Firmware Link"
+File Link="File Link"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-user.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-user]
+Username="Nome de Usuário"
+Username help="User name must be unique"
+Password="Senha"
+Password help="Modify user information, do not fill in the password, the original password will not change.<br/>Passwords must satisfy the following rules:<br/>1. At least 8 symbols<br/>2. Contains at least one numeric symbol<br/>3. Contains at least one lowercase letter<br/>4. Include at least one capital letter"
+Number of logged-in IPS="Number of logged-in IPS"
+Number of logged-in IPS help="Number of simultaneous online IP"
+IP Number="IP Number"
+Create Time="Create Time"
+Role="Role"
+Super="Super"
+General User="General"
+User name has been used="User name has been used"
+Custom="Custom"
+Auth="Auth"
+Auth help="Page permissions assigned to the current user"
+User Lock="You entered too many errors and your account was temporarily locked. Please try again after the countdown is over."
+User Limit="The number of user logins has exceeded the limit"
+Auth Limit="You do not have permission to access this page"
+New User="New User"
+Confirm Password="Confirm Password"
+Confirm Password help="Please input the same password as 'Password' above."
+Only View="Only View"
+Password len tip="The password cannot be less than 8 characters."
+password rule tip="Does not comply with the password rules."
+Confirm Password warning web="This password must match the password above."
+No Limited="Sem limite"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-info.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-info]
+Product Name="Nome do Produto"
+Model Name="Nome do Modelo"
+GSM Modem Description="Descrição do Modem"
+Firmware Version="Firmware Version"
+Firmware Build="Firmware Build"
+Software Version="Versão de Software"
+Hardware Version="Versão de Hardware"
+Slot Number="Número do Slot"
+Storage Usage="Uso do Armazenamento"
+Memory Usage="Uso de Memória"
+Memory Clean="Limpar Memória"
+Build Time="Data de instalação"
+Contact Address="Endereço"
+Contact Address Contents="Khomp - Indústria Brasileira"
+Tel="Tel"
+Fax="Fax"
+E-Mail="E-Mail"
+Web Site="Website"
+Rebooting Counts="Contagem de Reinicializações"
+System Uptime="Tempo em Operação"
+Port Amount="Port Amount"
+Kernel Build Time="Kernel Build Time"
+No Limit="Sem Limite"
+System Time="Data e Hora do Sistema"
+Model Description="Bandas de operação"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-wizard.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-wizard]
+Setting Wizard="Configurações Wizard"
+Setup Wizard="Configurações Wizard"
+Change Password="Mudar senha"
+Select Time Zone="Selecionar Horário de Verão"
+Network Settings="Configurações de Rede"
+SIP Endpoints="Contas VoIP"
+SIP Endpoint="Contas VoIP"
+Endpoint Name="Nome da Conta"
+Order="Ordem"
+Rule Name="Nome da Regra"
+Destination="Roteamento"
+Summary="Resumo"
+Select Timezone="Selecionar horário de verão"
+Self-defined Time Zone="Fuso horário auto-definido"
+IP Method="Método IP"
+Gateway IP="Gateway IP"
+DNS Server 1="Servidor DNS 1"
+DNS Server 2="Servidor DNS 2"
+DNS Server 3="Servidor DNS 3"
+Host Name or IP Address="Nome do host ou endereço IP"
+Routing Rules="Regra de roteamento"
+Create Inbound Routes="Criar rotas de entrada"
+The password must meet the following rules="A senha deve atender às seguintes regras"
+At least eight characters.="Pelo menos oito caracteres."
+At least one number.="Pelo menos um número."
+At least one lowercase letter.="Pelo menos uma letra minúscula."
+At least one uppercase letter.="Pelo menos uma letra maiúscula."
+js checking new_password="A senha deve ter letra minúscula, letra maiúscula e números, tamanho: 8-32 caracteres."
+Previous="Anterior"
+Next="Próximo"
+Quit="Sair"
+Registration mode="Modo de Registro"
+Credentails="PABX"
+None mode="None: Not Sending/Receiving SIP Regisration."
+Server mode="Server: Acts as a SIP server, the gateway accepts registration from SIP Clients."
+Client mode="Client: Acts as a SIP Client, the gateway sends registration to SIP servers."
+quit setting wizard help="Você tem certeza que quer sair da configuração wizard?"
+skip change password help="Note: For security reasons, you should change the default password. Are you sure you want to go to the next step?"
+Time Zone="Time Zone"
+New Username="Novo Usuário"
+New Password="Nova Senha"
+Confirm Password="Confirma Senha"
+Click here to remove this pattern="Click here to remove this pattern"
+Any SIP="Any SIP"
+Custom="Custom"
+GROUP="GRUPO"
+Conference="Conference"
+Routing Groups="Grupos de Roteamento"
+Group Name="Nome do Grupo"
+Policy="Policy"
+Ascending="Ascending"
+Descending="Descending"
+Roundrobin="Roundrobin"
+Reverse Roundrobin="Reverse Roundrobin"
+Fewest Calls="Fewest Calls"
+experiment="experiment"
+Members="Membros (canais)"
+Routing Name="Nome da Rota"
+Call Comes in From="Call Comes in From"
+Send Call Through="Send Call Through"
+Dial Patterns that will use this Route="Padrões de discagem que usarão esta rota:"
+Add More Dial Pattern Fields="Adicionar mais campos de padrão de discagem"
+Create Inbound Routes="Criar rotas de entrada"
+Forward Number="Encaminhar Número"
+IP Method="Método IP"
+Factory="Padrão"
+Static="Estático"
+IP Address="Endereço IP"
+Subnet Mask="Máscara de Sub-rede"
+WAN="WAN"
+Disable="Desativado"
+Self-defined Time Zone="Fuso horário auto-definido"
+Language="Idioma"
+Name="Nome"
+User Name="Nome de Usuário"
+Password="Senha"
+Registration="Registro"
+Server="Servidor"
+Client="Cliente"
+Host Name or IP Address="Nome do host ou endereço IP"
+Transport="Transport"
+NAT Traversal="NAT Traversal"
+Force report on="Force report on"
+Report if requested and comedia="Report if requested and comedia"
+Registration mode="Registration mode"
+None mode="None mode"
+Server mode="Server mode"
+Client mode="Modo Cliente"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-settings]
+Registration Status="Estado do Registro"
+Module Status="Estado do Módulo"
+Name="Nome"
+Name help="Alias da porta GSM.<br/> Caracteres permitidos \"-_+.&lt;&gt;&amp;0-9a-zA-Z\".Tamanho: 1-32 caracteres."
+Speaker Volume="Volume de Recepção"
+Speaker Volume help="Nível do volume de recepção, a faixa é 0-100.<br/>Isso vai ajustar o volume de recepção via comando AT."
+Microphone Volume="Volume de Transmissão"
+Microphone Volume help="Nível do volume de transmissão, a faixa é 0-15.<br/>Isso vai ajustar o volume de transmissão via comando AT."
+Txgain="Ganho Tx"
+Txgain help="Indica o ganho no codec uplink e a faixa é -1-65535.O valor padrão é 11172."
+Txdgain="Ganho Txd"
+Txdgain help="Indica o ganho digital no codec uplink e a faixa é -1-65535.O valor padrão é 11172."
+Rxgain="Ganho Rx"
+Rxgain help="Indica o ganho no codec downlink e a faixa é -1-65535.O valor padrão é 60000."
+Dial Prefix="Prefixo de Discagem"
+Dial Prefix help="Número prefixo para chamadas de saída do canal GSM."
+Pin Code="Código Pin"
+Pin Code help="Número de identificação PIN do SIM card. <br/> PIN code pode ser modificado para evitar que o SIM card seja roubado."
+Custom AT commands when start="Comandos AT customizados ao iniciar"
+Custom AT commands when start help="Comandos AT customizados pelo usuário ao iniciar sistema, use '|' para dividir comando AT."
+STK flag="STK flag"
+STK flag help="STK flag"
+STK AT commands when atd="Permite comandos AT STK quando ativo"
+STK AT commands when atd help="Permite comandos AT STK quando ativo"
+CLIR="Chamada Anônima"
+CLIR help="A identificação de chamadas não é enviada ao realizar uma ligação.<br/>O gateway adiciona '#31' na frente do número discado. <br/>Essa função deve ser suportada pela operadora."
+SMS Center Number="Número central SMS"
+SMS Center Number help="O número da central SMS da operadora."
+Band Mode="Bandas"
+Band Mode help="Seleciona quais bandas funcionará nesse slot"
+Band="Banda"
+Band help="Banda"
+SIM IMSI="SIM IMSI"
+SIM IMSI help="SIM IMSI"
+Module IMEI="IMEI do módulo"
+Module IMEI help="Número de identificação IMEI do módulo"
+Module Revision="Revisão do Módulo"
+Module Revision help="Revisão do Módulo"
+Carrier="Operadora"
+Carrier help="Operadora"
+Bind Carrier="Blind Carrier"
+Bind Carrier help="Blind Carrier"
+Signal="Sinal"
+Signal help="Sinal"
+BER="BER"
+BER help="BER"
+Status="Estado"
+Status help="Estado"
+GSM Voice Codec="Codec de voz GSM"
+GSM Voice Codec help="Codec de voz GSM"
+CLCC="CLCC"
+CLCC help="Retorna a lista de chamadas ativas do ME. se o comando for bem sucedido mas não houver chamadas, nenhuma informação é enviada ao TE."
+CSQ flag="CSQ flag"
+CSQ flag help="Habilitar ou Desabilitar a função CSQ. Valor padrão é Habilitado."
+CSQ Timeout="CSQ Timeout"
+CSQ Timeout help=" Tempo de resposta para enviar instruções CSQ; Range de valores: 1 ~ 300s; unidade de tempo em: segundos"
+AT Timeout="AT Timeout"
+AT Timeout help="AT Timeout"
+CallerID Type="CallerID Type"
+CallerID Type help="CallerID Type"
+AUTO="AUTO"
+GSM only="GSM only"
+WCDMA only="WCDMA only"
+LTE only="LTE only"
+TD-SCDMA only="TD-SCDMA only"
+UMTS only="UMTS only"
+CDMA only="CDMA only"
+HDR only="HDR only"
+CDMA and HDR only="CDMA and HDR only"
+
+Save To Other Ports help="Salvar Configuração Para as Outras Portas"
+Sync All Settings help="Sincronizar todas as configurações"
+js check csq timeout="the range of csq timeout is 1 ~ 300s"
+js check gain="Range: -1-65535."
+Modify SMSC prompt="Insira um novo número central SMS"
+Modify SMSC confirm="Confirmar alteração do Número Central SMS do SIM? Atenção ao realizar a alteração!"
+
+Step="Tempo Base"
+Call Duration Limit Step help="O intervalo do valor do Tempo Base é 1-999.<br>O Tempo Base multiplicado pelo Tempo de Duração de uma Única Chamada apenas diz o tempo de duração permitido para uma chamada."
+Enable Single Call Duration Limit="Limite de Duração de uma Única Chamada"
+Enable Single Call Duration Limit help="Define a duração máxima de uma única chamada. <br>Exemplo: Se o tempo de uma única chamada é configurada em 10, <br>a chamada será desligada após o tempo de 10 x Tempo Base em segundos."
+Single Call Duration Limitation="Limite de Duração de uma Única Chamada"
+Single Call Duration Limitation help="O intervalo do valor de Limite de Duração de uma Única Chamada é 1-999999. <br>O Tempo Base multiplicado pelo tempo Limite de Duração de uma Única Chamada apenas diz o tempo de duração permitido para uma chamada."
+Enable Call Duration Limitation="Limite de Duração das Chamadas no Canal"
+Enable Call Duration Limitation help="Essa função define o limite das chamadas totais do canal GSM. <br>A duração máxima é entre 1 e 999999 valores de Tempo Base."
+Call Duration Limitation="Limite de Duração das Chamadas (LDC)"
+Call Duration Limitation help="O intervalor do valor de Limite de Duração das Chamadas é 1-999999. <br>O Tempo Base multiplicado pelo tempo de uma única chamada define a duração máxima das chamadas."
+Remain Time="Tempo Restante"
+Remain Time help="Esse valor é multiplicado pelo Tempo Base mostra o período de tempo restante para realizar chamadas."
+Minimum Charging Time="Tempo mínimo para cobrança"
+Minimum Charging Time help="Período de tempo da chamada em que a partir dele a operadora cobra encargos.<br>O valor deve ser menor que o Tempo Base."
+Alarm Threshold="Tempo para Alarme"
+Alarm Threshold help="Define um tempo para envio de alarme para aviso de limite de tempo para chamadas. <br>Enquanto o tempo base da chamada for maior que esse valor,<br>o gateway vai enviar alarmes via SMS para o telefone configurado.<br>O valor deve ser menor que o limite de duração de chamadas."
+Alarm Phone Number="Número de Telefone para Alarme"
+Alarm Phone Number help="Número de telefone para recebimento de alarmes, o usuário irá receber mensagens de alarme do gateway."
+Alarm Description="Descrição do Alarme"
+Alarm Description help="Descrição do Alarme de informações, <br>que será enviado para o celular do usuário."
+Enable Auto Reset="Restaurar Tempo Auto"
+Enable Auto Reset help="Restaura automaticamente o tempo limite de chamadas, <br>ou seja, restabelece os limites totais de chamadas do canal GSM conforme configurado."
+Auto Reset Type="Tipo de Restuarar Tempo Auto"
+Auto Reset Type help="Restaura o tempo limite de chamadas por dia, semana ou mês."
+Next Reset Time="Próxima Restauração"
+Next Reset Time help="Define quando o limite será restaurado. <br>O sistema iniciará a contagem a partir do período configurado."
+Second="Segundos"
+Reset="Restaurar"
+
+js check dl_step integer="A entrada deve ser menor que a duração do Tempo Base"
+js check warining time="A entrada deve ser menor que o limite de duração da chamada."
+js check datetime="Por favor preencha no formato correto de data e hora. Ex: 2013-09-03 19:44:31"
+js check datetime2="The date must be greater than the current."
+js check warning time integer="The input should be less than call duration limitation."
+Dial Limit Reset confirm="Você deseja restaurar o Tempo Restante?"
+
+Save To Other Ports="Salvar Configuração Para as Outras Portas"
+Sync All Settings="Sincronizar todas as configurações"
+Sync All Settings help="Sincronizar todas as configurações"
+Select all settings="Selecionar Todas as Configurações"
+
+GSM Settings Save Report="Relatório ao Salvar Configurações GSM"
+gsm settings save failed="Falha ao Salvar!"
+
+List Carrier="Listar Operadora"
+Bind Carrier="Ocultar Operadora"
+Call Waiting Function="Call Waiting Function"
+Default Band Tip="You have selected some bands, default clears the selected bands."
+Dial Timeout="Dial Timeout"
+Dial Timeout help="Dial Timeout"
+No Limit="Sem Limite"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-callforwarding.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-callforwarding]
+Select="Selecionar"
+Call Type="Tipo de Chamada"
+Call Number="Número para Encaminhamento"
+Query="Requisitar Config."
+Setting="Configurar"
+Query Warning="Aviso: Essa função requisita as informações a rede GSM, por isso pode haver algum atraso na resposta."
+Setting Warning="Aviso: Essa função envia as informações para a rede GSM, por isso pode haver algum atraso na resposta."
+check correct number="Por favor insira o número correto!"
+QUERYING="Requisitando"
+Select least warning="Selecione ao menos uma porta!"
+TIMEOUT="Tempo Esgotado"
+SETTING="Configurando"
+UNKNOWN="Desconhecido"
+NOT READY="NÃO PRONTO"
+FAILED="FALHOU"
+SUCCESS="SUCESSO"
+Please set the content="Por favor defina o valor!"
+Please choose port="Selecione a porta que deseja configurar!"
+Call Forwarding Unconditional="Encaminhar Sempre"
+Call Forwarding No Reply="Encaminhar Não Atendidas"
+Call Forwarding Busy="Encaminhar Quando Ocupado"
+Call Forward on Not Reachable="Encaminhar Caso Fora da Rede"
+Cancel All="Cancelar Todos"
+js check call forward integer="Por favor, entre com um número!"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-callwaiting.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-callwaiting]
+Call Waiting Function="Função chamada em espera"
+Status="Estado"
+Query="Requisitar Config."
+Setting="Configurar"
+Select least warning="Selecione ao menos uma porta!"
+Query Warning="Aviso: Essa função requisita as informações a rede GSM, por isso pode haver algum atraso na resposta."
+QUERYING="Requisitando"
+TIMEOUT="Tempo Esgotado"
+SETTING="Configurando"
+UNKNOWN="Desconhecido"
+NOT READY="NÃO PRONTO"
+FAILED="FALHOU"
+SUCCESS="SUCESSO"
+Please choose port="Selecione a porta que deseja configurar!"
+Please set the content="Por favor defina o valor!"
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-dtmf.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-dtmf]
+DTMF Detection Settings="Configurações de Detecção DTMF"
+DTMF Detect Flag="DTMF Detect Flag"
+DTMF Detect Flag help="DTMF Detect Flag"
+Reference Value="Valores de Referência"
+Reference Value help="Valores de referência para os parâmetros DTMF"
+Relax DTMF Normal Twist="Normal Twist DTMF"
+Relax DTMF Reverse Twist="Reverse Twist DTMF"
+Relax DTMF Reverse Twist="Relax DTMF Reverse Twist"
+Relax DTMF Reverse Twist help="Relax DTMF Reverse Twist"
+DTMF Relative Peak Row="Relative Peak Row DTMF"
+DTMF Relative Peak Row help="Relative Peak Row DTMF"
+DTMF Relative Peak Col="Relative Peak Col DTMF"
+DTMF Relative Peak Col help="Relative Peak Col DTMF"
+DTMF Hits Begin="DTMF Hits Begin"
+DTMF Hits Begin help="DTMF Hits Begin"
+DTMF Misses End="DTMF Misses End"
+DTMF Misses End help="DTMF Misses End"
+Custom="Customizado"
+Default="Padrão"
+Suggest="Sugerido"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-bcch.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-bcch]
+Mode="Mode"
+LAC="LAC"
+BCCH="BCCH"
+dbm="dbm"
+Status="Status"
+Detail="Detail"
+Get Current State="Get Current State"
+Search Cell="Search Cell"
+BCCH Mode=""
+BCCH Mode help="BCCH Mode"
+Minimum Signal Strength allow=""
+Minimum Signal Strength allow help="Minimum Signal Strength allow"
+Auto Period=""
+Auto Period help="Auto Period"
+Switch BCCH in Calling=""
+Switch BCCH in Calling help="Switch BCCH in Calling"
+Call times=""
+Call times help="Call times"
+Minimun ASR="Minimun ASR"
+Minimun call ASR="Minimun call ASR"
+Call failed times="Call failed times"
+Call failed times="Call failed times"
+Apply To All Ports="Apply To All Ports"
+Apply To All Ports help="Apply To All Ports"
+Index="Index"
+MCC="MCC"
+MNC="MNC"
+LAC="LAC"
+CID="CID"
+Receive Level="Receive Level"
+Lock="Lock"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-toolkit.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-toolkit]
+Function="Função"
+Function help="Requisitar USSD:<br/>Insira um número USSD específico<br/>(Por exemplo,*222# para verificar o saldo do SIM card. O código USSD pode ser diferente conforme operadora) <br/>para obter a informação USSD.<br/>O gateway tentará obter usando comandos AT.<br/></br/>Enviar Comandos AT:<br/>Para realizar algum comando AT específico.<br/>Isso é útil quando é necessário realizar debug do modem GSM. Ex: realizar comando [AT+CSQ] para verificar a qualidade do sinal.<br/><br/>Verificar Número:<br/>Entre com um número conhecido (como exemplo o seu celular) para verificar qual o número do SIM card.<br/>Clique em \"Executar\", então o gateway irá discar para o número que você inseriu.<br/>Irá ringar apenas uma vez e a chamada será desligada. <br/>Isso não terá nenhum custo, pois a chamada não será atendida."
+Copy to Selected="Copiar ao Módulo Selecionado"
+Clear All="Limpar Tudo"
+Execute="Executar"
+Get USSD="Requisitar USSD"
+Send AT Command="Enviar Comandos AT"
+Check Number="Verificar Número"
+Input="Entrada"
+Output="Saída"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-autoimei.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-autoimei]
+Automatic Modify GSM IMEI="Automatic Modify GSM IMEI"
+Automatic Change IMEI="Automatic Change IMEI"
+Automatic Change IMEI help="Allowing endpoints to send some specified KEY WORDS and corresponding PASSWORD to operate the gateway. <br/>Message is case-sensitive."
+Port="Port"
+Port help="To select on which GSM channel(s) to send SMS and enter what message you want to send."
+Interval="Interval"
+Immediately="Immediately"
+Immediately help 1="To decide the modification take effect immediately or not."
+Immediately help 2="modify IMEI immediately"
+Force="Force"
+Force help="Modify IMEI no matter whether the channel state is ready or not. "
+Auto-IMEI Advanced="Auto-IMEI Advanced"
+Auto-IMEI Advanced help="Advanced Settings for Automatic Modify IMEI."
+IMEI Number Setting="IMEI Number Setting"
+digit="digit"
+Current IMEI="Current IMEI"
+Set to All="Definir para todos"
+Manual="Manual"
+js imei tac help="The input TAC should be 6 bits 0~9 or x or X"
+js imei fac help="The input FAC should be 2 bits 0~9 or x or X"
+js imei snr help="The input SNR should be 6 bits 0~9 or x or X"
+js select at least one port="You must select at least one port."
+Back Home="Back Home"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	module-update.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module-update]
+Module Update file="Arquivo de Atualização do Módulo"
+Module Update file help="Arquivo que precisa ser carregado para atualização do módulo."
+Module Updating="Atualizando Módulo"
+Port="Porta"
+Port help="Selecione a porta do módulo que será atualizado."
+Module Update alert="Por favor verifique os seguintes pontos, caso não sejam seguidos, isso pode causar problemas na atualização!"
+Module Update note1="1、A atualização do módulo demora alguns minutos."
+Module Update note2="2、O sistema não pode ser desligado durante a atualização do módulo."
+Module Update note3="3、Não reinicie o sistema ou o asterisk durante a atualização do módulo."
+Module Update note4="4、Não atualize essa página durante a atualização do módulo."
+Module Update note5="5、Não realize outras operações no sistema enquando o módulo está sendo atualizado."
+Select port alert="Primeiramente selecione a porta"
+exit="Sair"
+module update close tip="O módulo está sendo atualizado, e sair irá fazer com que a atualização falhe. Você tem certeza que deseja sair?"
+Confirm="Confirmar"
+Updating="Atualizando"
+Update success="Atualização bem Sucedida"
+Restart update="Reiniciar atualização"
+Update error="Falha ao atualizar, erro desconhecido."
+Update waiting="Aguardando atualização"
+Show All="Mostrar todos"
+System Update filesize alert="Tamanho máximo do arquivo é 80M!"
+Select File alert="Por favor selecione o arquivo primeiro!"
+
+MCU Update="MCU Update"
+MCU Update file="MCU Update file"
+MCU Update file help="Upload the required upgraded MCU files"
+Update="Update"
+MCU Update alert="Please note the following points,if it is violated,it may cause the MCU upgrade to fail!"
+MCU Update note1="1.MCU upgrade will take a long time."
+MCU Update note2="2.System cannot be powered off during MCU update."
+MCU Update note3="3.Do not reboot system or asterisk during MCU update."
+MCU Update note4="4.Do not refresh this page during MCU update."
+MCU Update note5="5.Do not perform other operations on this system during MCU update."
+MCU Updating="MCU Updating"
+
+EMU Update="EMU Update"
+Select a EMU to Update="Select a EMU to Update"
+Select a EMU to Update help="Select a EMU to Update"
+Baud Rate="Baud Rate"
+Baud Rate help="Baud Rate"
+EMU Update file="EMU Update file"
+EMU Update file help="EMU Update file"
+EMU Update alert="Do not cut off the power supply during upgrading.Are you sure Update Emu?"
+
+bin File help="Wrong file type. Please upload .bin file."
+zip File help="Wrong file type. Please upload .zip file."
+MLD File help="Wrong file type. Please upload .MLD file."
+error File help="The file format is not correct. Please re select the file!"
+Firmware mismatch="Firmware mismatch"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-calllimit.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-calllimit]
+Type="Tipo"
+Call Limit="Limite de Chamadas"
+Call Limit Time="Limitar duração de chamadas"
+Call Time Limit Switch="Limitar chamada"
+Call Time Limit Switch help="Habilita limite de chamadas"
+Call And SMS Limit="Limite de chamadas e SMS"
+Call Limit Switch="Limitar chamadas"
+Call Limit Switch help="Habilita para limitar chamadas"
+Limit Call Time="Limitar duração de chamadas"
+Limit Call TIme help="Limita a duração de uma única chamada. O valor padrão é 0, o que significa ilimitado."
+Limit Daily Call Times="Limitar o número de chamadas por dia(LNCD)"
+Limit Daily Call Times help="Limite o número de chamadas por dia (independentemente de a pessoa estar conectada), o valor padrão é 0, indicando ilimitado."
+Limit Daily Answer Times="Limitar o número de chamadas respondidas por dia"
+Limit Daily Answer Times help="Limite o número de chamadas respondidas por dia. O valor padrão é 0, indicando ilimitado"
+Limit Hour Call Times="Limitar o número de chamadas por hora"
+Limit Hour Call Times help="Limite o número de chamadas por hora (independentemente de a pessoa estar conectada), o valor padrão é 0, indicando ilimitado."
+Call Status="Estado Chamadas"
+
+Step="Tempo Base"
+Step help="O intervalo do valor do Tempo Base é 1-999.<br>O Tempo Base multiplicado pelo Tempo de Duração de uma Única Chamada apenas diz o tempo de duração permitido para uma chamada."
+Enable Single Call Duration Limit="Limite de Duração de uma Única Chamada"
+Enable Single Call Duration Limit help="Define a duração máxima de uma única chamada. <br>Exemplo: Se o tempo de uma única chamada é configurada em 10, <br>a chamada será desligada após o tempo de 10 x Tempo Base em segundos."
+Single Call Duration Limitation="Limite de Duração de uma Única Chamada"
+Single Call Duration Limitation help="O intervalo do valor de Limite de Duração de uma Única Chamada é 1-999999. <br>O Tempo Base multiplicado pelo tempo Limite de Duração de uma Única Chamada apenas diz o tempo de duração permitido para uma chamada."
+Enable Call Duration Limitation="Limite de Duração das Chamadas no Canal"
+Enable Call Duration Limitation help="Essa função define o limite das chamadas totais do canal GSM. <br>A duração máxima é entre 1 e 999999 valores de Tempo Base."
+Call Duration Limitation="Limite de Duração das Chamadas"
+Call Duration Limitation help="O intervalor do valor de Limite de Duração das Chamadas é 1-999999. <br>O Tempo Base multiplicado pelo tempo de uma única chamada define a duração máxima das chamadas."
+Minimum Charging Time="Tempo mínimo para cobrança"
+Minimum Charging Time help="Período de tempo da chamada em que a partir dele a operadora cobra encargos.<br>O valor deve ser menor que o Tempo Base."
+Alarm Threshold="Tempo para Alarme"
+Alarm Threshold help="Define um tempo para envio de alarme para aviso de limite de tempo para chamadas. <br>Enquanto o tempo base da chamada for maior que esse valor,<br>o gateway vai enviar alarmes via SMS para o telefone configurado.<br>O valor deve ser menor que o limite de duração de chamadas."
+Alarm Phone Number="Número de Telefone para Alarme"
+Alarm Phone Number help="Número de telefone para recebimento de alarmes, o usuário irá receber mensagens de alarme do gateway."
+Alarm Description="Descrição do Alarme"
+Alarm Description help="Descrição do Alarme de informações, <br>que será enviado para o celular do usuário."
+Remain Time="Tempo Restante"
+Remain Time help="Esse valor é multiplicado pelo Tempo Base mostra o período de tempo restante para realizar chamadas."
+Enable Auto Reset="Restaurar Tempo Auto"
+Enable Auto Reset help="Restaura automaticamente o tempo limite de chamadas, <br>ou seja, restabelece os limites totais de chamadas do canal GSM conforme configurado."
+Auto Reset Type="Tipo de Restuarar Tempo Auto"
+Auto Reset Type help="Restaura o tempo limite de chamadas por dia, semana ou mês."
+Next Reset Time="Próxima Restauração"
+Next Reset Time help="Define quando o limite será restaurado. <br>O sistema iniciará a contagem a partir do período configurado."
+Second="Segundos"
+Reset="Restaurar"
+
+Lock Detect Switch="Lock Detect Switch"
+Lock Detect Switch help="Lock Detect Switch"
+Mark Switch="Mark Switch"
+Mark Switch help="Mark Switch"
+Call Failed Mark Count="Call Failed Mark Count"
+Call Failed Mark Count help="The number of consecutive calls failed to reach the number of settings, marking the port."
+Call Failed Lock Switch="Call Failed Lock Switch"
+Call Failed Lock Switch help="Call Failed Lock Switch"
+Call Failed Lock Count="Call Failed Lock Count"
+Call Failed Lock Count help="Lock the port after the number of successive call failures reaches the set number, restrict the port expiration, and no longer select the port expiration in the group policy."
+SMS Send Detection Switch="SMS Send Detection Switch"
+SMS Send Detection Switch help="After opening, when the number of successive call failures reaches the set value, send short message to check whether the port is available; if the short message is sent successfully, clear the number of successive call failures; if the short message fails, limit the port\'s outgoing."
+SMS Send Detection Count="SMS Send Detection Count"
+SMS Send Detection Count help="SMS Send Detection Count"
+Send Sms Number="Send Sms Number"
+Send Sms Number help="Send Sms Number"
+Sms Message="Sms Message"
+Sms Message help="Sms Message"
+Testing SMS report="Testing SMS report"
+Testing SMS report help="When closed, the successful sending of short message indicates that the port is available; when opened, the successful sending of short message and the receipt of short message report indicate that the port is available."
+
+Lock Sim="Bloqueio do SIM card"
+Mark Count and Lock Count="Call Failed Mark Count must be less than Call Failed Lock Count."
+Call Status="Call Status"
+Lock Status="Lock Status"
+Mark Status="Mark Status"
+Sim Status Unlock="Sim Status:Desbloqueado."
+Unlock Tip="Are you sure you want to unlock it?"
+Unlimit Tip="This operation will unlimited the call times limit. Are you sure you want to do this?"
+Unlimit Tip@both_time="This operation will unlimited the call times limit, and the call duration limit needs to be removed by using the reset button within the settings. Are you sure you want to do this?"
+Unlimit Tip@only_time="The call duration limit needs to be removed by using the reset button within the settings."
+Sim Status Unlimit="Sim Status:Ilimitado."
+
+SMS Limit="Limitar SMS"
+SMS Limit Switch="Limitar SMS"
+SMS Limit Switch help="Habilita a opção de limitar SMS"
+SMS Limit Success Flag="Limitar SMS contabilizando as mensagens enviadas com sucesso"
+SMS Limit Success Flag help="Quando desabilitado, independentemente de a mensagem ser enviada com sucesso ou não, o número de mensagens é contabilizado."
+Day Limit SMS Count="Limite de SMS por dia"
+Day Limit SMS Count help="Limita o número de SMS enviados por dia, o valor padrão é 0, indicando ilimitado."
+Month Limit SMS Count="Limite de SMS por mês"
+Month Limit SMS Count help="Limita o número de SMS enviados por mês, o valor padrão é 0, indicando ilimitado."
+SMS Clean Date="Dia que zera contador de mensagem mensal"
+SMS Clean Date help="O número de mensagens enviadas mensalmente é zerada automaticamente para 0, 0 minutos e 0 segundos na data definida."
+Unlimited="Ilimitado"
+Limited="Limitado"
+Unlocked="Desbloqueado"
+Locked="Bloqueado"
+Unmarked="Não marcado"
+Marked="Marcado"
+SMS Sending Statistics="Estatísticas de envio de SMS"
+Clear zero="Limpar"
+SMS count of the day="Contador de SMS do dia"
+SMS count of the month="Contador de SMS do mês"
+Daily limit="Limite diário"
+Monthly limit="Limite mensal"
+Monthly recovery date="Dia que zera contador de mensagem mensal"
+SMS Status="Estado SMS"
+Call Statistics="Estatísticas das Chamadas"
+Hour Call Count="Contador de chamadas por hora"
+Daily Call Count="Contador diário de chamadas"
+Daily Answer Count="Contador diário de chamadas respondidas"
+Call Failed Count="Contador de chamadas com falhas"
+Switch="Switch"
+Switch help="Save all the current restricted states, and the system will automatically save the state at zero after switching on the switch, <br/>and will restore to the saved state after power failure and restart.<br/> Turning off this switch will turn off automatic state saving, and all States will be cleared after power failure and restart."
+Locking="Locking"
+Call Duration="Duração das chamadas"
+Single Limit Time Less Tip="A limitação da duração da chamada única deve ser menor ou igual à limitação da duração da chamada."
+SMS Time Interval Switch="Enviar SMS em intervalo de hora"
+SMS Time Interval Switch help="Quando essa opção está ativada, o SMS pode ser enviado apenas dentro do horário de início e término."
+SMS Time Start="Horário que inicia"
+SMS Time Start help="Hora de inicio de envio de SMS."
+SMS Time End="Horário de término"
+SMS Time End help="Hora de término do envio de SMS."
+No Limit="Sem Limite"
+Dial Limit Reset confirm="Esta operação cancelará o limite de duração da chamada. Você tem certeza de que quer fazer isso?"
+
+Save To Other Ports="Salvar Configuração Para as Outras Portas"
+Save To Other Ports help="Salvar Configuração Para as Outras Portas"
+Sync All Settings="Sincronizar todas as configurações"
+Sync All Settings help="Sincronizar todas as configurações"
+All="Todos"
+Select all settings="Selecionar Todas as Configurações"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	voip-endpoints.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[voip-endpoints]
+;SIP
+SIP Endpoint="Contas VoIP"
+Endpoint Name="Nome da Conta"
+Credentials="Usuário"
+IAX2 Endpoint="IAX2 Endpoint"
+Anonymous="Anonymous"
+
+Main Endpoint Settings="Configurações Principais"
+Name="Nome"
+Name help="Nome utilizado para identificação do usuário."
+User Name="Nome de Usuário"
+User Name help="Nome de Usuário que o dispositivo irá usar para se registrar com o gateway."
+Password="Senha"
+Password help="Senha que o dispositivo irá usar para se registrar com o gateway"
+Registration="Registro"
+Registration help="Define se o dispositivo irá se registrar no gateway ou se o gateway irá se registrar no dispositivo."
+Hostname or IP Address="Endereço IP ou Hostname"
+Hostname or IP Address help="Endereço de IP ou Hostname, ou então 'dynamic' se o dispositivo tiver endereço IP dinâmico.<br/>Isso exigirá registro.<br>Aviso: Se essa configuração for um Hostname e o seu DNS tiver mudado, você terá que <span style=\"color:rgb(255,0,0)\">reiniciar o asterisk</span>."
+Transport="Transporte SIP"
+Transport help="Protocolo de transporte SIP."
+NAT Traversal="NAT Traversal"
+NAT Traversal help="Endereço NAT transversal."
+
+;Advanced:Registration Options"
+Advanced:Registration Options="Avançado: Opções de Registro"
+Authentication User="Usuário de Autenticação"
+Authentication User help="Nome de usuário utilizado apenas para autenticação."
+Register Extension="Registro de Extensão"
+Register Extension help="Quando o gateway se registra como usuário SIP em um servidor SIP, <br/>as chamadas deste servidor se conectam com essa extensão local."
+Register User="Register User"
+Register User help="Register user name , <br/>it is the user of register => user[:secret[:authuser]]@host[:port][/extension] ."
+Contact User="Contact User"
+Contact User help="eg: When the Contact User is 402<br/>Contact: &lt;sip:402@172.16.6.123:5060;transport=UDP&gt;"
+From User="Usuário"
+From User help="Um nome de usuário para identificar o gateway para este dispositivo."
+From Domain="Domínio"
+From Domain help="Um domínio para identificar o gateway para este dispositivo."
+Remote Secret help="Uma senha que pode ser usada se o gateway se registra de forma remota."
+Remote Secret="Senha Registro Remoto"
+Port="Porta"
+Port help="O número da porta que o gateway vai conectar ao dispositivo."
+Qualify="Verificar Conexão"
+Qualify help="Define se deve verificado ou não o estado da conexão com o dispositivo."
+Qualify Frequency="Frequência de Verificação "
+Qualify Frequency help="Qual a frequência, em segundos, que será verificado o estado da conexão."
+Outbound Proxy="Outbound Proxy"
+Outbound Proxy help="Um proxy que o gateway usa para enviar todas as sinalizações outbound, enviando a sinalização diretamente aos dispositivos."
+Custom Registery="Custom Registery"
+Custom Registery help="Custom Registery On / Off."
+Registery String="Registery String"
+Registery String help="Context of registery. user[:secret[:authuser]]@host[:port][/extension] </br>eg: 1001@sip.com:pbx122@172.16.6.122/1001 </br>"
+Enable Outboundproxy to Host="Enable Outboundproxy to Host"
+Enable Outboundproxy to Host help="Outboundproxy to Host On / Off."
+Tlsverify="Tlsverify"
+Tlsverify help="enable TLS verify or disable."
+Tlssetup="Tlssetup"
+Tlssetup help="Whether we are willing to accept connections, connect to the other party, or both."
+Tlsprivatekey="Tlsprivatekey"
+Tlsprivatekey help="Private key file (*.pem format only) for TLS connections. If no tlsprivatekey is specified, tlscertfile is searched for both public and private key."
+Encryption="Encriptação"
+Encryption help="Whether to offer SRTP encrypted media (and only SRTP encrypted media) on outgoing calls to a peer. Calls will fail with HANGUPCAUSE=58 if the peer does not support SRTP. Defaults to no."
+
+;Call Settings"
+Call Settings="Configurações de Chamada"
+DTMF Settings="Configurações DTMF"
+DTMF Mode="Modo DTMF"
+DTMF Mode help="Define o modo padrão de envio de DTMF. Valor padrão RFC2833."
+RFC2833="RFC2833"
+Inband="Inband"
+Info="Info"
+
+Caller ID Settings="Configurações de Caller ID"
+Trust Remote-Party-ID="Remote-Party-ID Confiável"
+Trust Remote-Party-ID help="Tenha o Remote-Party-ID ou não, o cabeçalho deve ser confiável."
+Send Remote-Party-ID="Enviar Remote-Party-ID"
+Send Remote-Party-ID help="Se deve ou não enviar o cabeçalho Remote-Party-ID."
+Remote Party ID Format="Formato do Remote Party ID"
+Remote Party ID Format help="Como configurar o cabeçalho Remote-Party-ID: do Remote-Party-ID ou do P-Asserted-Identity."
+P-Asserted-Identity Header="Cabeçalho P-Asserted-Identity"
+Remote-Party-ID Header="Cabeçaçlho Remote-Party-ID"
+Caller ID Presentation="Apresentação do Caller ID"
+Caller ID Presentation help="Se deve ou não apresentar o Caller ID."
+
+Maximum Channels="Número Máximo de Canais"
+Call Limit="Limite de Chamadas"
+Allowed,not screened="Permitido,not screened"
+Allowed,passed screen="Permitido,passed screen"
+Allowed,failed screen="Permitido,failed screen"
+Allowed="Permitido"
+Prohibited,not screened="Proibido,not screened"
+Prohibited,passed screen="Proibido,passed screen"
+Prohibited,failed screen="Proibido,failed screen"
+Prohibited="Proibido"
+Unavailable="Indisponível"
+
+;Advanced:Signaling Settings"
+Advanced:Signaling Settings="Avançado: Configurações de Sinalização"
+Progress Inband="Sinalização Inband"
+Progress Inband help="Define se será gerado ring em in-band. <br/>Padrão: nunca."
+Never="Nunca"
+Append user="Acrescentar usuário"
+phone to URI="telefone ao URI"
+phone to URI help="Define se é adicionado ou não 'usuário=telefone' à URI que contenha um número de telefone válido."
+Add Q.850 Reason Headers="Adicionar opção Q.850"
+Add Q.850 Reason Headers help="Habilita ou desabilita a opção de cabeçalho Q.850 se estiver disponível."
+Ignor SDP Version="Honor SDP Version"
+Ignor SDP Version help="By default, the gateway will honor the session version number in SDP packets and will only modify the SDP session if the version number changes. <br/>Turn this option off to force the gateway to ignore the SDP session version number and treat all SDP data as new data. <br/>This is required for devices that send non-standard SDP packets (observed with Microsoft OCS). <br/>By default this option is on."
+Directmedia="Directmedia"
+Directmedia help="the value of parameter directmedia is one of them (no , yes, nonat, update, outgoing), default value is yes. <br/>directmedia=yes  'allow RTP media direct'<br/>directmedia = no 'deny re-invites'<br/>directmedia = nonat 'allow reinvite when local, deny reinvite when NAT'<br/> directmedia = update 'use UPDATE instead of INVITE'<br/>directmedia = update,nonat 'use UPDATE when local, deny when NAT'"
+Allow Transfers="Permitir Transferências"
+Allow Transfers help="Define se transferências de chamadas são permitidas ou não.<br/>Default is enabled."
+Allow Promiscuous Redirects="Permitir Promiscuous Redirects"
+Allow Promiscuous Redirects help="Define se permite ou não o 302 ou REDIR para endereço SIP não local."
+Max Forwards="Encaminhamentos Máximos"
+Max Forwards help="Configura a quantidade máxima de cabeçalho de encaminhamento SIP para prevenção de loop."
+Send TRYING on REGISTER="Enviar TRYING com REGISTER"
+Send TRYING on REGISTER help="Envia um 100 Trying quando o dispositivo registra."
+
+;Advanced:Timer Settings"
+Advanced:Timer Settings="Avançado: Configurações de Temporização"
+Default T1 Timer="Temporização T1 Padrão"
+Default T1 Timer help="Essa temporização é usada principalmente no INVITE."
+Call Setup Timer="Temporização Config. de Chamada"
+Call Setup Timer help="Resposta que deve ser enviada nesse priríodo de tempo para que a chamada não fique auto congestionada<br/>O padrão é 64 vezes a temporização T1 padrão."
+Session Timers="Temporização de Sessão"
+Session Timers help="Temporização de Sessão tem três modos: <br/>- Originado, requisita e roda a temporização de sessão sempre; <br/>- Aceita, roda temporização de sessão quando requisitado; <br/>- Recusa, não roda temporização de sessão em nenhum caso."
+Accept="Aceita"
+Originate="Originado"
+Refuse="Recusa"
+Minimum Session Refresh Interval="Intervalo Mín. de Atua. da Sessão"
+Minimum Session Refresh Interval help="Intervalo de tempo mínimo para atualizar a sessão em segundos. O padrão é 90 segundos."
+Maximum Session Refresh Interval="Intervalo Max. de Atua. da Sessão"
+Maximum Session Refresh Interval help="Intervalo de tempo máximo para atualizar a sessão em segundos. O padrão é 1800 segundos."
+Session Refresher="Atualizador de Sessão"
+Session Refresher help="Atualizador de sessão, UAC ou UAS. O padrão é o UAS."
+
+Add New SIP Endpoint="Adicionar Dispositivo SIP"
+Edit SIP Endpoint="Editar Dispositivo SIP"
+Sync All Settings="Sincronizar todas as configurações"
+Sync All Settings help = "Sincronizar todas as configurações"
+
+;IAX2
+Add New IAX2 Endpoint="Add New IAX2 Endpoint"
+Edit IAX2 Endpoint="Edit IAX2 Endpoint"
+Save To Other Sips="Salvar para outros TRUNKS"
+Save To Other Sips help="Salvando o parâmetro deste TRUNK atual para outros TRUNKS de forma síncrona"
+Select all settings="Selecionar Todas as Configurações"
+Auth="Auth"
+Auth help="Authentication method for connections"
+Transfer="Transfer"
+Transfer help="Disable or not IAX2 native transfer"
+Trunk="Trunk"
+Trunk help="Use IAX2 trunking with this host"
+Qualify Smothing="Qualify Smothing"
+Qualify Smothing help="Use an average of the last two PONG results to reduce falsely detected LAGGED hosts. The default is no."
+Qualify Freq Ok="Qualify Freq Ok"
+Qualify Freq Ok help="How frequently to ping the peer when everything seems to be OK, in milliseconds."
+Qualify Freq Not Ok="Qualify Freq Not Ok"
+Qualify Freq Not Ok help="How frequently to ping the peer when it is either, LAGGED or UNAVAILABLE, in milliseconds."
+IAX2 Encryption="Encriptação IAX2"
+IAX2 Trunk settings="Configurações Tronco IAX2"
+Server="Servidor"
+Client="Cliente"
+md5="md5"
+plaintext="plaintext"
+rsa="rsa"
+inkeys="inkeys"
+inkeys help="inkeys is a list of acceptable public keys on the local system"
+Force Encryption="Force Encryption"
+Force Encryption help="Force encryption insures no connection is established unless both sides support encryption. By turning this option on, encryption is automatically turned on as well. The default is no."
+Trunk Max Size="Trunk Max Size"
+Trunk Max Size help="defaults to 128000 bytes, which supports up to 800 calls of ulaw at 20ms a frame."
+Trunk MTU="Trunk MTU"
+Trunk MTU help="sets the maximum transmission unit for IAX2 UDP trunking."
+Trunk Frequency="Trunk Frequency"
+Trunk Frequency help="How frequently to send trunk msgs in msec. This is 20ms by default."
+Trunk Time Stamps="Trunk Time Stamps"
+Trunk Time Stamps help="ensure that frame timestamps get sent end-to-end properly."
+Min. RegExpire="Min. RegExpire"
+Min. RegExpire help="Minimum amounts of time that IAX2 peers can request as a registration expiration interval in seconds."
+Max. RegExpire="Max. RegExpire"
+Max. RegExpire help="Maximum amounts of time that IAX2 peers can request as a registration expiration interval in seconds."
+Require Call Token="Require Call Token"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-bindpoints.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-bindpoints]
+Batch SIP Endpoints="Batch SIP Endpoints"
+ID="ID"
+User Name="Nome de Usuário"
+password="Senha"
+Hostname or IP Address="Endereço IP ou Hostname"
+Port="Porta"
+Outbound Proxy="Outbound Proxy"
+Register Mode="Register Mode"
+Batch="Batch"
+AutoPassword="AutoPassword"
+js check busername="you need to set a number for username"
+Outbound Proxy="Outbound Proxy"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-adv-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-adv-settings]
+General="Geral"
+Networking="Rede"
+UDP Bind Port="Porta UDP"
+UDP Bind Port help="Define a porta de recepção do tráfego UDP."
+Enable TCP="Ativar TCP"
+Enable TCP help="Ativar servidor para conexão de entrada TCP. O padrão é 'Não'"
+TCP Bind Port="Porta TCP"
+TCP Bind Port help="Define a porta de conexão TCP."
+TCP Authentication Timeout="Timeout da autenticação TCP"
+TCP Authentication Timeout help="O tempo máximo em segundos que o cliente tem para autenticação.<br/>Se o cliente não se autentica antes do timeout,<br/>a conexão expira e o cliente é desconectado. O valor padrão é: 30 segundos."
+TCP Authentication Limit="Limite de autenticação TCP"
+TCP Authentication Limit help="O número máximo de sessões não autenticadas que serão permitidas a se conectar a qualquer momento. O padrão é: 50)"
+Enable Hostname Lookup="Hostname Lookup"
+Enable Hostname Lookup help="Ativa o DNS SRV lookups nas chamadas de saída."
+Enable Internal SIP Call="Chamadas SIP Internas"
+Enable Internal SIP Call help="Define se os usuários podem ou não fazer chamadas SIP internasyou \"Dispositivos registrados com esse gateway\"."
+Internal SIP Call Prefix="Prefixo para Chamadas Internas SIP"
+Internal SIP Call Prefix help="Define um prefixo antes de rotear uma chamada interna."
+Auto Update="Auto Update"
+
+NAT Settings="Configurações de NAT"
+Local Network="Rede Local"
+Local Network help="Formato:192.168.0.0/255.255.0.0 ou 172.16.0.0./12<br/>."
+Local Network List="Lista de Rede Local"
+Local Network List help="Endereço IP local que você adicionou."
+IP Range="Faixa de IP"
+Subscribe Network Change Event="Notificações de Alteração de Rede"
+Subscribe Network Change Event help="Define se recebe notificações de mudança do endereço de rede visto externamente."
+Match External Address Locally="Combinar Endereço Externo Localmente"
+Match External Address Locally help="Apenas substitui o endereço externo ou host externo se combinarem."
+Dynamic Exclude Static="Dynamic Exclude Static"
+Dynamic Exclude Static help="Disallow all dynamic hosts from registering as any IP address<br/> used for staticly defined hosts. This helps avoid the configuration<br/>error of allowing your users to register at the same address as a SIP provider."
+Externally Mapped TCP Port="Porta TCP Externamente Mapeada"
+Externally Mapped TCP Port help="Mapeia a porta TCP quando o gateway estiver atrás de NAT."
+External Address="Endereço Externo"
+External Address help="O endereço externo e a porta TCP (opcional) para o NAT.<br>Endereço externo= hostname[:porta] endereço IP estático[:porta] a ser usada em mensagens SIP."
+External Hostname="Hostname Externo"
+External Hostname help="O hostname externo e a porta TCP (opcional) para o NAT.<br>Hostname externo = hostname[:porta] é similar ao \"Endereço Externo\"."
+Hostname Refresh Interval="Intervalo de Atualização Hostname"
+Hostname Refresh Interval help="Com que frequência o hostname será verificado."
+
+RTP Settings="Configurações RTP"
+Start of RTP Port Range="Início da Faixa de Portas RTP"
+Start of RTP Port Range help="Início da faixa de portas a ser usada para o RTP."
+End of RTP port Range="Fim da Faixa de Portas RTP"
+End of RTP port Range help="Fim da faixa de portas a ser usada para o RTP"
+RTP Timeout="RTP Timeout"
+RTP Timeout help="Tempo de expiração do RTP"
+
+Parsing and Compatibility="Análise e Compatibilidade"
+Strict RFC Interpretation="Interpretação RFC Estrita"
+Strict RFC Interpretation help="Verifica tags de cabeçalho, conversão de caracter nas URIs e cabeçalhos multiline<br/>para compatibilidade SIP estrita. O padrão é sim"
+Send Compact Headers="Enviar Cabeçalhos Compactos"
+Send Compact Headers help="Envia cabeçalhos SIP compactos."
+SDP Owner="Proprietário SDP"
+SDP Owner help="Permite alterar o nome de usuário no SDP, (o=).<br/>Esse campo não pode conter espaço."
+Ring 183 Mode="Ring 183 Mode"
+Ring 183 Mode help="Ring 183 Mode"
+
+SIP Methods="Métodos SIP"
+Disallowed SIP Methods="Métodos SIP Não Permitidos"
+Disallowed SIP Methods help="Caso a outra ponta da comunicação SIP não permite algum desses métodos<br/> você pode definir no gateway para desabilitar a opção não suportada pela outra ponta.<br/> Note que se a outra ponta tiver SIP padrão e declarado no cabeçalho, isso não precisa ser alterado."
+Hangup Cause Code="Hangup Cause Code"
+Hangup Cause Code help="Hangup Cause Code"
+Line Unavailable Code="Line Unavailable Code"
+Line Unavailable Code help="Line Unavailable Code"
+Notify Unlimited="Notify Unlimited"
+Notify Unlimited help="on:Received notify, do not restrict, reply directly to 200ok.<br/>off:According to normal processing."
+ACK="ACK"
+BYE="BYE"
+CANCEL="CANCEL"
+INFO="INFO"
+INVITE="INVITE"
+MESSAGE="MESSAGE"
+NOTIFY="NOTIFY"
+OPTIONS="OPTIONS"
+PRACK="PRACK"
+PUBLISH="PUBLISH"
+REFER="REFER"
+REGISTER="REGISTER"
+SUBSCRIBE="SUBSCRIBE"
+UPDATE="UPDATE"
+defalut="defalut"
+404 Not Found="404 Not Found"
+420 No Route Destination="420 No Route Destination"
+486 Busy Here="486 Busy Here"
+408 Request Timeout="408 Request Timeout"
+480 Temporarily Unavailable="480 Temporarily Unavailable"
+403 Forbidden="403 Forbidden"
+410 Gone="410 Gone"
+502 Bad Gateway="502 Bad Gateway"
+484 Address Incomplete="484 Address Incomplete"
+501 Not Implemented="501 Not Implemented"
+500 Server Internal Failure="500 Server Internal Failure"
+503 Service Unavailable="503 Service Unavailable"
+488 Not Acceptable Here="488 Not Acceptable Here"
+603 Declined="603 Declined"
+EXTEN="EXTEN"
+Number="Number"
+Name="Name"
+Tel/Tel="Tel/Tel"
+Tel/User="Tel/User"
+User/Tel="User/Tel"
+User/User="User/User"
+
+Caller ID="Número de Origem"
+Caller ID help="defalut:Sip From and Number<br/>eg: When selecting SIP From, Name is Peter and Number is 402.<br/>The From mode is: \"Peter\"&lt;sip:402@172.16.6.239;transport=UDP&gt;;tag=bd481672"
+Shrink Caller ID="Shrink Caller ID"
+Shrink Caller ID help="A função Shrink CallerID remove '(', ' ', ')' , '.',<br/>e '-' não entre colchetes. Por exemplo, o valor do CallerID é 555.5555<br/>então torna-se 5555555 quando a opção é habilitada. Desabilitando essa opção, resulta em nenhuma modificação no CallerID."
+SIP To="SIP To"
+SIP To help="Callee ID transfer"
+SIP From="SIP From"
+SIP From help="Caller ID transfer"
+
+Timer Configuration="Configurações de Temporizações"
+Maximum Registration Expiry="Tempo máximo para expiração de registro"
+Maximum Registration Expiry help="Tempo máximo permitido de registro(segundos)"
+Minimum Registration Expiry="Tempo mínimo para expiração de registro"
+Minimum Registration Expiry help="Duração mínima de registros (padrão 60 segundos)"
+Default Registration Expiry="Expiração de registro padrão"
+Default Registration Expiry help="Duração do registo de entrada/saída"
+
+Outbound Registrations="Registros de saída"
+Registration Timeout="Timeout de Registro"
+Registration Timeout help="Com qual frequência, em segundos, para repetir pedidos de registro. Padrão 20 segundos."
+Number of Registration Attempts="Número de tentativas de registro"
+Number of Registration Attempts help="Número de tentativas de registro antes de desistir. 0 = continue tentando para sempre,<br/> então com essa configuração o gateway irá enviar pedidos de registro até que o servidor aceite o registro SIP."
+
+Transform Local Port="Transform Local Port"
+Client Auto Flag="Client Auto Flag"
+Client Auto Flag help="Client Auto Flag Switch"
+Client Basic Port="Client Basic Port"
+Client Basic Port help="Configuring the SIP local port can not conflict with other port numbers used by the device.(range 1-9999, default value: 5060)"
+Client Basic Port Tip="Range: 1-9999"
+Client Port Step="Client Port Step"
+Client Port Step help="1-10: Automatically select different local SIP ports based on this value."
+Client of Registration Attempts="Client of Registration Attempts"
+Client of Registration Attempts help="The default value is 3. The number of attempts to register, such as setting 3, indicates that the local port will change after 3 failures of registration."
+
+Authentication Settings="Configurações de Autenticação"
+Match Auth Username="Nome de Usuário da Autenticação de Correspondência"
+Match Auth Username help="Se disponível, combine a entrada do usuário usando o campo 'Nome de Usuário' da linha de autenticação em vez do campo 'de'. "
+Realm="Realm"
+Realm help="Realm para autenticação digest. Realms DEVEM SER  globalmente únicos de acordo com a RFC 3261.<br/> Defina isso para o seu nome de host (hostname) ou nome de domínio."
+Use Domain as Realm="Use o domínio como Realm"
+Use Domain as Realm help="Use o domínio da configuração SIP Domains como o domínio Realm.<br/>No caso, o realm será baseado na requisição 'para' ou 'de'<br/> no cabeçalho e deve corresponder a um dos domínios. Caso contrário, o valor configurado 'realm'<br/> será utilizado."
+Always Auth Reject="Sempre Rejeitar Autenticação"
+Always Auth Reject help="Quando um pedido de INVITE ou REGISTER é rejeitado, <br/>por qualquer motivo, sempre rejeitar com uma resposta idêntica<br/> para validar nome de usuário e senha/hash inválidos em vez de permitir que o solicitante<br/> saiba se  há um usuário ou peer correspondente para sua solicitação. Isto reduz a capacidade de um invasor procurar nomes de usuário SIP válidos."
+Authenticate Options Requests="Autenticar solicitações de OPTIONS"
+Authenticate Options Requests help="A ativação dessa opção autenticará as solicitações OPTIONS da mesma forma que as solicitações de INVITE. Por padrão, esta opção está desativada."
+
+Guest Calling="Chamada de Convidados"
+Allow Guest Calling="Permitir chamadas de convidados"
+Allow Guest Calling help="Permitir ou rejeitar chamadas de clientes (padrão sim, permitido). Se o seu gateway<br/> estiver conectado à Internet e permitir que os clientes liguem, você deseja verificar <br/> quais serviços estão disponíveis para todos, ativando-os no contexto padrão."
+
+Media="Mídia"
+QoS/ToS="QoS/ToS"
+TOS for SIP Packets="TOS para pacotes SIP"
+TOS for SIP Packets help="Define o tipo de serviço para pacotes SIP."
+TOS for RTP Packets="TOS para pacotes RTP"
+TOS for RTP Packets help="Define o tipo de serviço para pacotes RTP"
+
+Codec Settings="Configurações de Codec"
+Codec Settings help="Selecione o codec na lista suspensa. Codecs devem ser diferentes para cada Prioridade de Codec."
+Codec Priority="Prioridade de Codec"
+Not Used="Not Used"
+
+Timeout="Timeout"
+Get IP="Get IP"
+Getting Public IP="Getting Public IP"
+Get Public IP Success="Get Public IP Success"
+Get Public IP Error="Failed to get external address. Please check network connectivity."
+Permit Dialing Letters="Permit Dialing Letters"
+Permit Dialing Letters help="When the Permit Dialing Letters switch is turned off, the called number is only allowed to use numbers.<br/> When the Permit Dialing Letters switch is turned on, the called number can be numbers and character."
+Immediately="Immediately"
+AfterRing="AfterRing"
+Current Port="Current Port"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	iax-adv-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[iax-adv-settings]
+;General Settings
+General Settings="General Settings"
+Bind Port="Bind Port"
+Bind Port help="bindport may be specified"
+Bind Address="Bind Address"
+Bind Address help="more than once to bind to multiple addresses, but the first will be the default."
+Enable IAX Compat="Enable IAX Compat"
+Enable IAX Compat help="Set iaxcompat to yes if you plan to use layered <br>switches or some other scenario which may cause <br>some delay when doing a lookup in the dialplan. <br>It incurs a small performance hit to enable it.  <br>This option causes Asterisk to spawn a separate <br>thread when it receives an IAX2 DPREQ (Dialplan  <br>Request) instead of blocking while it waits for <br>a response."
+Enable Nochecksums="Enable Nochecksums"
+Enable Nochecksums help="Disable UDP checksums (if nochecksums is set, <br> then no checkums will be calculated/checked on <br>systems supporting this feature)."
+Enable Delay Reject="Enable Delay Reject"
+Enable Delay Reject help="You may specify a global default AMA flag for iaxtel calls. It must be one of 'default', 'omit', 'billing' or 'documentation'. These flags are used in the generation of call detail records."
+ADSI="ADSI"
+ADSI help="ADSI can be enabled if you have ADSI compatible CPE equipment."
+SRV Lookup="SRV Lookup"
+SRV Lookup help="Whether or not to perform an SRV lookup on outbound calls."
+AMA Flags="AMA Flags"
+AMA Flags help="You may specify a global default AMA flag for iaxtel calls. These flags are used in the generation of call detail records"
+Auto Kill="Auto Kill"
+Auto Kill help="If we don't get ACK to our NEW within 2000ms, and autokill is set to yes, then we cancel the whole thing. This is used to keep things from stalling for a long time for a host that is not available, but would be ill advised for bad connections."
+Language="Language"
+Language help="You may specify a global default language for users. This can be specified also on a per-user basis. If omitted, will fallback to English."
+Account Code="Account Code"
+Account Code help="You may specify a default account for Call Detail Records in addition to specifying on a per-user basis."
+Description="Description"
+Priority="Priority"
+Resyncing can be disabled by setting this parameter to -1="Resyncing can be disabled by setting this parameter to -1"
+
+;Music On Hold
+Music On Hold="Music On Hold"
+Mohsuggest="Mohsuggest"
+Mohsuggest help="The 'mohsuggest' option specifies which music on hold<br>class to suggest to the peer channel when this channel<br>places the peer on hold. It may be specified globally or<br>on a per-user or per-peer basis."
+Mohinterpret="Mohinterpret"
+Mohinterpret help="You may specify a global default language for users.<br> This can be specified also on a per-user basis.<br> If omitted, will fallback to English (en)."
+
+;Codec Settings
+Codec Settings="Configurações de Codec"
+Band Width="Band Width"
+Band Width help="Specify bandwidth of low, medium, or high to control which codecs are used in general"
+Disallow="Disallow"
+Disallow help="fine tune codecs here using 'disallow' clauses with specific codecs"
+Allow="Allow"
+Allow help="fine tune codecs here using 'allow' clauses with specific codecs"
+Codec Priority="Prioridade de Codec"
+Codec Priority help="Codecpriority controls the codec negotiation of <br>  an inbound IAX2 call. This option is inherited to <br>  all user entities. It can also be defined in each <br>  user entity separately which will override the <br>  setting in general."
+low="low"
+medium="medium"
+high="high"
+all="all"
+Not Used="Not Used"
+host="host"
+caller="caller"
+disabled="disabled"
+reqonly="reqonly"
+
+;Jitter Buffer Settings
+Jitter Buffer Settings="Jitter Buffer Settings"
+Jitter Buffer="Jitter Buffer"
+Jitter Buffer help="global default as to whether you want the jitter buffer at all"
+Force Jitter Buffer="Force Jitter Buffer"
+Force Jitter Buffer help="in the ideal world, when we bridge VoIP channels we don't want to do jitterbuffering on the switch, since the endpoints can each handle this. However, some endpoints may have poor jitterbuffers themselves, so this option will force * to always jitterbuffer, even in this case."
+Max Jitter Buffers="Max Jitter Buffers"
+Max Jitter Buffers help="a maximum size for the jitter buffer"
+Resyncthreshold="Resyncthreshold"
+Resyncthreshold help="when the jitterbuffer notices a significant change in delay that continues over a few frames, it will resync, assuming that the change in delay was caused by a timestamping mix-up. The threshold for noticing a change in delay is measured as twice the measured jitter plus this resync threshold."
+Max Jitter Interps="Max Jitter Interps"
+Max Jitter Interps help="the maximum number of interpolation frames the jitterbuffer should return in a row. Since some clients do not send CNG/DTX frames to indicate silence, the jitterbuffer will assume silence has begun after returning this many interpolations. This prevents interpolating throughout a long silence."
+Jitter Target Extra="Jitter Target Extra"
+Jitter Target Extra help="number of milliseconds by which the new jitter buffer will pad its size. the default is 40, so without modification, the new jitter buffer will set its size to the jitter value plus 40 milliseconds. increasing this value may help if your network normally has low jitter, but occasionally has spikes."
+
+;Misc Settings
+Misc Settings="Misc Settings"
+IAX2 Thread Count="IAX2 Thread Count"
+IAX2 Thread Count help="Establishes the number of iax helper threads to handle I/O."
+IAX2 Max Thread Count="IAX2 Max Thread Count"
+IAX2 Max Thread Count help="Establishes the number of extra dynamic threads that may be spawned to handle I/O."
+Max Call Number="Max Call Number"
+Max Call Number help="The 'maxcallnumbers' option limits the amount of call <br>  numbers allowed for each individual remote IP address. <br>   Once an IP address reaches it\'s call number limit, no <br>  more new connections are allowed until the previous ones <br>  close. This option can be used in a peer definition as <br>  well, but only takes effect for the IP of a dynamic peer <br>  after it completes registration."
+MaxCallNumbers_Nonvalidated="MaxCallNumbers_Nonvalidated"
+MaxCallNumbers_Nonvalidated help="The \'maxcallnumbers_nonvalidated\' is used to set the <br>  combined number of call numbers that can be allocated <br>  for connections where call token  validation has been <br>  disabled. Unlike the \'maxcallnumbers\' option, this <br>  limit is not separate for each individual IP address.  <br>  Any connection resulting in a non-call token validated <br>  call number being allocated contributes to this limit. <br>   For use cases, see the call token user guide.  This <br>  option\'s default value of 8192 should be sufficient in <br>  most cases."
+
+;Quality of Service
+Quality of Service="Quality of Service"
+tos="tos"
+tos help="Type of Service"
+cos="cos"
+cos help="Class of Service"
+Normal Service="Normal Service"
+Mincost="Mincost"
+High Reliability="High Reliability"
+High Throughput="High Throughput"
+Low Delay="Low Delay"
+
+default="default"
+omit="omit"
+billing="billing"
+documentation="documentation"
+Call Token Optional="Call Token Optional"
+passthrough="passthrough"
+Max Call Number="Max Call Number"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-security.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-security]
+TLS Setting="Configurações TLS"
+TLS Enable="Ativar TLS"
+TLS Enable help="Essa opção permite a autenticação com certificados."
+TLS Verify Server="TLS Verify Server"
+TLS Verify Server help="Enable or disable tls verify server(default is no)."
+Port="Porta"
+Port help="Porta"
+TLS Client Method="TLS Client Method"
+TLS Client Method help="Incluem valores tlsv1, sslv3, sslv2, Especifique o protocolo para conexões do cliente de saída, O padrão é sslv2."
+tlsv1="tlsv1"
+sslv2="sslv2"
+sslv3="sslv3"
+TLS keys="TLS keys"
+Type="Tipo"
+Key Name="Key Name"
+IP Address="IP Address"
+Organization="Organization"
+Password="Senha"
+Operation="Operation"
+client="Cliente"
+server="Servidor"
+Create="Criar"
+Key Files="Key Files"
+Upload the pem file="Upload the pem file"
+Upload the crt file="Upload the crt file"
+File Upload="File Upload"
+File Name="File Name"
+File Size="File Size"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-rules.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-rules]
+Move="Mover"
+Order="Ordem"
+Rule Name="Nome da Regra"
+From="De"
+To="Para"
+Rules="Regras"
+Any SIP="Any SIP"
+New Call Routing Rule="Nova regra de roteamento de chamadas"
+Save Orders="Salvar"
+Create a Call Routing Rule="Criar uma regra de roteamento de chamada"
+Modify a Call Routing Rule="Modificar uma regra de roteamento de chamada"
+Edit="Editar"
+
+;Call Routing Rule
+Call Routing Rule="Regra de roteamento de chamadas"
+Routing Name="Nome da Rota"
+Routing Name help="O nome da regra criada, Deve ser usado para descrever qual tipo de chamada esse roteamento corresponde.(Por exemplo, 'SIP2GSM' ou 'GSM2SIP')."
+Call Comes in From="Chamada vem de"
+Call Comes in From help="O ponto de partida das chamadas recebidas."
+Send Call Through="Enviar chamada através"
+Send Call Through help="O destino as chamadas recebidas."
+
+Random Delay="Random Delay"
+Random Delay help="Random Acquisition of Arbitrary Values in the Threshold Range."
+Delay MIN="Delay MIN"
+Delay MIN help="Minimum Delay Time Random Acquisition."
+Delay MAX="Delay MAX"
+Delay MAX help="Random Maximum Delay Time Length."
+
+;DISA Settings
+DISA Settings="Configurações de DISA"
+Authentication="Autenticação"
+Authentication help="Ativar ou Desativar autenticação por senha."
+Secondary Dialing="Discagem Secundária"
+Secondary Dialing help="Ativar ou desativar a discagem secundária."
+DISA Timeout="DISA Timeout"
+DISA Timeout help="Selecionar o timeout de 1 até 10 segundos."
+Max Password Digits="Número Máximo de dígitos de Senha"
+Max Password Digits help="Restringir o comprimento máximo da senha."
+Password="Senha"
+Password help="Click the button to edit the Authenticated Password."
+Dial Patterns that will use this Route="Padrões de discagem que usarão essa rota"
+
+;Advance Routing Rule
+Advance Routing Rule="Regras de Roteamento Avançado"
+Dial Patterns that will use this Route="Padrões de discagem que usarão essa rota"
+Dial Patterns that will use this Route help="Um Padrão de discagem é um conjunto exclusivo de dígitos que selecionará essa rota e enviará a chamada para os troncos designados. <br/>Se um padrão discado corresponder a essa rota, nenhuma rota subseqüente será tentada. <br/>Se os Grupos de Horários estiverem ativados, as rotas subsequentes serão verificadas quanto a correspondências fora do(s) horário(s) designado(s).<br /><br /><b>Regras:</b><br /><b>X</b>&nbsp;&nbsp;&nbsp; Corresponde qualquer dígito de 0-9<br /><b>Z</b>&nbsp;&nbsp;&nbsp; Corresponde qualquer dígito de  1-9<br /><b>N</b>&nbsp;&nbsp;&nbsp; Corresponde qualquer dígito de  2-9<br /><b>[1237-9]</b>&nbsp;   Corresponde a qualquer dígito entre parênteses (exemplo: 1,2,3,7,8,9)<br /><b>.</b>&nbsp;&nbsp;&nbsp; corresponde a um ou mais dígitos discados <br /><br/><b>prepend:</b>&nbsp;&nbsp;&nbsp; Dígitos para proceder uma correspondência sucedida. <br/>Se o número discado corresponder aos padrões especificados pelas colunas subseqüentes, isso será prefixado antes de ser enviado aos troncos.<br /><br/><b>prefixo:</b>&nbsp;&nbsp;&nbsp; Prefixo a ser removido em uma correspondência bem-sucedida. <br/>O número discado é comparado com este e as colunas subseqüentes para a correspondência. <br/>Em partida, esse prefixo é removido do número discado antes de ser enviado para os troncos..<br /><br/><b>Padrão correspondente:</b>&nbsp;&nbsp;&nbsp; O número discado será comparado com o prefixo + este padrão de correspondência. <br/>Após uma correspondência com sucesso, a parte do padrão de correspondência do número discado será enviada para os troncos<br/><br/><b>CallerID:</b>&nbsp;&nbsp;&nbsp; Se o CallerID é fornecido, o número discado corresponderá apenas ao prefixo + padrão de correspondência se o CallerID transmitido corresponder a isso. <br/>Quando as extensões fazem chamadas de saída, o CallerID será o número do ramal e NÃO o CID de saída. <br/>As seqüências de correspondência especiais acima podem ser usadas para a correspondência do CallerID, semelhante a outras correspondências de números."
+Add More Dial Pattern Fields="Adicionar mais campos de padrão de discagem"
+Click here to remove this pattern="Clique aqui para remover este padrão"
+
+warn_anysip="Aviso: Ele irá definir: allowguest = yes"
+Time Patterns that will use this Route="Padrões de tempo que usarão essa rota"
+Time Patterns that will use this Route help="Padrões de tempo que usarão essa rota"
+
+Time to start="Tempo de início"
+Time to finish="Tempo de fim"
+Week Day start="Início do dia da semana"
+Week Day finish="Fim do dia da semana"
+Month Day start="Início do dia do mês"
+Month Day finish="Fim do dia do mês"
+Month start="Início do mês"
+Month finish="Fim do mês"
+
+CalleeID/callerID Manipulation="CalleeID/callerID Manipulation"
+Callee_Dial_pattern="Callee_Dial_pattern"
+Caller_Dial_pattern="Caller_Dial_pattern"
+Prepend="Prepend"
+Prefix="Prefix"
+SDfR="SDfR"
+StA="StA"
+RdfR="RdfR"
+Match Pattern="Match Pattern"
+Caller Name="Caller Name"
+Add More Dial Pattern Fields="Adicionar mais campos de padrão de discagem"
+
+Add More Time Pattern Fields="Adicionar mais campos de padrão de tempo"
+
+;Change Rules
+Change Rules="Alterar Regras"
+Set the Caller ID Name to="Definir o nome do CallerID para"
+Set the Caller ID Name to help="Qual nome do identificador de chamadas(CallerID)  que você deseja definir antes de enviar esta chamada para o endpoint."
+Set the Caller ID Number to="Definir o número do Caller ID para"
+Set the Caller ID Number to help="Qual número de chamador você gostaria de definir antes de enviar esta chamada para o endpoint."
+Forward Number="Encaminhar número"
+Forward Number help="Esse número será enviado para o destino do PBX ou SIP Server como um número DID para as configurações de regra de entrada."
+Custom Context="Custom Context"
+Custom Context help="Custom Context help"
+
+Failover Call Through Number="Failover Call Through Number"
+Failover Call Through Number help="O gateway tentará enviar a chamada para cada um desses na ordem que você especificar."
+Add a Failover Call Through Provider="Adicionar Failover Call Through Provider"
+GROUP="GRUPO"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-group.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-group]
+Group Name="Nome do grupo"
+Type="Tipo"
+Policy="Policy"
+Members="Membros"
+New Group="Novo Grupo"
+Create a Group="Criar um Grupo"
+Modify a Group="Modificar um Grupo"
+
+Routing Groups="Grupos de roteamento"
+Group Name help="O nome desta rota. Deve ser usado para descrever que tipos de chamadas esta rota corresponde(por exemplo, 'SIP2GSM' ou 'GSM2SIP')."
+Type help="Tipo"
+Policy help="Policy"
+Members help="Membros"
+js check groupname="Caractere permitido deve ser qualquer um [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 caracteres."
+MODULE="MÓDULO"
+
+Ascending="Ascending"
+ascending="ascending"
+Descending="Descending"
+descending="descending"
+Roundrobin="Roundrobin"
+roundrobin="roundrobin"
+Reverse Roundrobin="Reverse Roundrobin"
+reverseroundrobin="reverseroundrobin"
+Fewest Calls="Fewest Calls"
+experiment="experimento"
+Ringall="Ringall"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-sim-binding.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-sim-binding]
+Port="Porta"
+Sip Trunk="Sip Trunk"
+CallerID="CallerID"
+Sim Number="Sim Number"
+Batch Creating Rules="Batch Regras de Roteamento"
+Sim Number="Sim Number"
+SIM number help="SIM Number: Esse número será enviado ao PABX de destino, como um número DID para as configurações da regra de entrada. E o CallerID será definido como o identificador de chamadas na rota de saída. Se o SIM Number for vazio, nenhum roteamento de entrada será criado."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-mnp.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-mnp]
+MNP Settings="MNP Settings"
+MNP Check Enable="Habilitar verificação do MNP"
+MNP Check Enable help="ON(ativado),OFF(desativado)"
+MNP URL="MNP URL"
+MNP URL help="Por favor, insira um endereço válido na URL."
+MNP Timeout="MNP Timeout"
+MNP timeout help="Caractere permitido deve ser maior que zero."
+Manipulation Choice="Escolha de Manipulação"
+Manipulation Choice help="Manipulation Choice"
+Route calls before manipulation="Rotear chamadas antes da manipulação"
+Route calls after manipulation="Rotear chamadas antes da manipulação"
+js check URL="Por favor, insira um endereço válido na URL."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-blacklist.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-blacklist]
+Routing Blacklist="Blacklist de Roteamento"
+Enable Blacklist="Habilitar Blacklist"
+Enable Blacklist help="Ativa a Blacklist de roteamento"
+Dial Patterns that will use this Routing Blacklist="Padrões de discagem que usarão esta Blacklist de roteamento"
+Dial Patterns that will use this Route Blacklist help="Para chamadas entrantes, quando algum número presente na Blacklist ligar para qualquer canal do KVoLTE a chamada será roteada para hangup()."
+Number="Número"
+Add a new number to Blacklist="Adicionar novo número na Blacklist"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-advanced.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-advanced]
+General="Geral"
+Dial Timeout="Dial Timeout"
+Dial Timeout help="O caractere permitido deve ser um número inteiro entre 1 e 3600."
+Second="Segundos"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-settings]
+General="Geral"
+SMS Received="Receber SMS"
+SMS Received help="ON(ativado),OFF(desativado)"
+SMS Received warning="Ative a opção Receber SMS antes de ativar o Query Balance, Query Number, Armazenamento local de SMS, SMS para E-mail ou o SMS para HTTP!"
+SMS Local Stored="Armazenamento local de SMS"
+SMS Local Stored help="ON(ativado),OFF(desativado)"
+SMS Status Report="Relatório de status do SMS:"
+SMS Status Report help="ON(ativado),OFF(desativado)"
+
+Sender Options="Opções do remetente"
+Resend Failed Message="Reenviar mensagem com falha:"
+Resend Failed Message help="Quantas vezes que você tentará reenviar sua mensagem com falha."
+Repeat Same Message="Repetir a mesma mensagem"
+Repeat Same Message help="Quantas vezes que você irá reenviar a mesma mensagem."
+Verbose="Verbose"
+Verbose help="Nível de verbose de envio de mensagem."
+always="always"
+
+SMS to Email="SMS para E-mail"
+SMS to Email help="Esta é uma ferramenta que disponibiliza para sua conta de e-mail transmitir a caixa de entrada de SMS para outras caixas de e-mail."
+Enable="Ativar"
+Enable help="ON(ativado),OFF(desativado)"
+SMTP Server="Servidor SMTP"
+SMTP Server help="Servidor SMTP"
+Email Address of Sender="Endereço de e-mail do remetente"
+Email Address of Sender help="Para definir o endereço de e-mail de uma conta de e-mail disponível.<br/> Por exemplo, support@gmail.com"
+Domain="Domínio"
+Domain help="Para definir o servidor de e-mail de saída. <br/> Exemplo: smtp.gmail.com"
+SMTP Port="Porta SMTP"
+SMTP Port help="Para definir o número da porta do servidor do e-mail de saída. (O padrão é:  25.)"
+default="Padrão"
+SMTP User Name="Nome do Usuário SMTP"
+SMTP User Name help="O usuário de login da sua conta de e-mail existente. <br/>Essa opção pode ser diferente do seu endereço de e-mail. <br/>Alguns clientes de email não precisam do postfix de e-mail."
+SMTP Password="Senha SMTP"
+SMTP Password help="A senha de login do seu e-mail existente."
+TLS Enable="Ativar TLS"
+TLS Enable help="Essa opção permite a autenticação com certificados."
+Title="Assunto"
+Title help="Variável disponível: <br/>$PHONENUMBER:Número do remetente SMS. <br/>$PORT:SMS de qual porta.<br/>$TIME:SMS recebeu o tempo.<br/>$MESSAGE: Conteúdo SMS.<br/>"
+Content="Conteúdo"
+Content help="Variável disponível: <br/>$PHONENUMBER:Número do remetente SMS. <br/>$PORT:SMS de qual porta.<br/>$TIME:SMS recebeu o tempo.<br/>$MESSAGE: Conteúdo SMS.<br/>"
+
+SMS Control="Controle de SMS"
+SMS Control help="Permitir que os endpoints enviem algumas específicas palavras chaves e a SENHA correspondente para o gateway operar. <br/>Mensagem é case-sensitive."
+Password="Senha"
+Password help="A senha para confirmar as ações recebidas por SMS, essa ações fazem o gateway Reiniciar, Desligar, <br/> restaurar arquivo de configuração e obter informações deste gateway."
+SMS Formats="Formato SMS"
+SMS Formats help="Por exemplo, Os formatos de mensagem: <br/>reboot system SENHA: Para reiniciar seu gateway. <br/>A SENHA está referindo a SENHA definida na opção \"Senha\" acima.<br/>restore configs SENHA: Para restaurar os arquivos de configuração para as configurações de fábrica. <br/>get info SENHA: Para obter o endereço IP do gateway."
+SMS Formats contents="reboot system SENHA<br><br>reboot asterisk SENHA<br><br>restore config SENHA<br><br>get info SENHA"
+SMS Inbox Auto clean="Limpar automaticamente a caixa de entrada SMS"
+SMS Inbox Auto clean help="ON : Quando a caixa de entrada de SMS chegar ao tamanho máximo configurado, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o sistema cortará metade do arquivo. Novo registro será retido.<br>OFF : O registro SMS permanecerá e o tamanho do arquivo aumentará gradualmente. <br>Padrão ON, Tamanho Máximo=20MB."
+maxsize="Tamanho Máximo"
+
+HTTP to SMS="HTTP para SMS"
+Enable CORS="Habilita CORS"
+Enable CORS help="ON(ativado),OFF(desativado)"
+Allow Access Origin Domain="Allow Access Origin Domain"
+Allow Access Origin Domain help="Allow Access Origin Domain"
+URL="URL"
+URL help="A URL para enviar SMS. <br>Nome de Usuário: O Nome de Usuário para enviar SMS.<br>Senha: A senha para mandar SMS.<br>Número do Telefone: o número de telefone de destino. <br>Mensagem: O conteúdo SMS. <br>Porta: A porta GSM para enviar mensagem. Exemplo: gsm-1.1,gsm-1.2. <br>Relatório: O formato do relatório de resultados de envio. <br>timeout: Quanto tempo irá aguardar. <br>"
+Timeout="Timeout"
+Timeout help="HTTP para SMS Timeout"
+Wait Timeout="Aguardar Timeout"
+Wait Timeout help="Aguardar Timeout"
+GSM Send Timeout="Timeout para envio GSM"
+GSM Send Timeout help="Tempo limite para envio GSM"
+Socket Timeout="Socket Timeout"
+Socket Timeout help="Socket Timeout"
+GSM Port help="Porta GSM"
+Report="Relatório"
+Report help="Relatório de envio de SMS"
+SMS to HTTP="SMS para HTTP"
+SMS to HTTP URL help="O SMS recebe o URL HTTP"
+Enable SMS Reports to HTTP="Habilitar relatório SMS para HTTP"
+Enable SMS Reports to HTTP help="ON(Habilita),OFF(Desabilita)"
+Enable AsyncSMS Result to HTTP="Habilita AsyncSMS Resultado para HTTP"
+Enable AsyncSMS Result to HTTP help="ON(Habilita),OFF(Desabilita)"
+Use web server's user and password="Use o usuário e a senha do servidor web"
+Use default user and password="Use o usuário e senha padrão"
+User Name="Nome de Usuário"
+User Name help="Nome de Usuário"
+Port="Porta"
+Port help="Porta"
+HTTP to USSD Report help="Enviar relatório de resultado USSD"
+Advanced="Avançado"
+Advanced help="Avançado"
+Debug="Debug"
+Debug help="Debug"
+HTTP to USSD Timeout help="HTTP Sends USSD Timeout"
+USSD to HTTP URL help="The USSD receive HTTP URL"
+USSD Result="Resultado USSD"
+Http Timeout help="Allowed character must be  greater than zero."
+Http Debug help="Allowed character must be  greater than zero."
+
+MMS Settings="MMS Settings"
+Download Type="Download Type"
+Download Type help="Download Type:off;immediately;on time."
+Download Time="Download Time"
+Download Time help="Timely download time."
+Immediately@mms="Immediately"
+On Time="On Time"
+JSON="JSON"
+String="String"
+No Report="No Report"
+SMS to HTTP Usage="SMS to HTTP Usage"
+Test="Test"
+Test help="Send the test email to the destination email address."
+SMS to Email--Destination Email Address help="Select the target address mailbox configured by the port. If the port is not configured, use the global configuration above."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-sender.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-sender]
+Port="Porta"
+Port help="Para selecionar em qual(is) canal(is) GSM(s) enviar SMS e digitar qual mensagem você deseja enviar."
+All="Tudo"
+Flash SMS="Flash SMS"
+Flash SMS help="SMS Flash (Mensagem Classe 0)"
+Load numbers from text file="Carregar números a partir de um arquivo de texto"
+Load numbers from text file help="Carrega números de um arquivo de texto"
+Destination Number="Número de Destino"
+Destination Number help="O número de quem irá receber a mensagem.<br/>Você será capaz de separar cada número por os seguintes símbolos: '\r', '\n', caractere de espaço, ponto e vírgula, vírgula.<br/> Se você tiver mais de um número de destino."
+Destination Number help2="\"; ponto e vírgula\" , \"| Barra vertical(pipe) \" , \" , Vírgula \" , \"   espaço \" , \" : dois pontos \" , \" . ponto \" São as formas de separar a lista de números de destino"
+Message="Mensagem"
+Message help="O conteúdo do SMS a ser enviado."
+select ports="Por favor, selecione as portas!"
+Load numbers from text file help="Carrega números de um arquivo de texto"
+Send="Enviar"
+Stop="Cancelar"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-inbox.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-inbox]
+Port="Porta"
+Phone Number="Número do Telefone"
+Time="Data"
+Message Keywords="Palavra-chave mensagem"
+Message="Mensagem"
+All="All"
+
+Total Records="Total de Registros"
+NO RECORD="SEM REGISTROS"
+DATABASE BUSY="BANCO DE DADOS OCUPADO"
+
+Filter="Filtro"
+Clean Filter="Limpar Filtros"
+Delete="Deletar"
+Clean Up="Limpar"
+Export="Exportar"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-outbox.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-outbox]
+outbox="Caixa de Saída"
+Port="Porta"
+Phone Number="Número do Telefone"
+Time="Data"
+Message="Mensagem"
+Message Keywords="Palavra-chave mensagem"
+All="Tudas"
+Filter="Filtro"
+Clean Filter="Limpar Filtro"
+Total Records="Total de Registros"
+NO RECORD="SEM REGISTROS"
+DATABASE BUSY="BANCO DE DADOS OCUPADO"
+sending="Enviando"
+failure="Falhou"
+Sent From="Enviado De"
+Sent To="Enviado Para"
+Status="Estado"
+Export="Exportar"
+Clean Up="Limpar"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-routing.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-routing]
+Routing Groups="Grupos de Roteamento"
+Routing Name="Nome da Rota"
+Routing Name help="Nome da Rota Criada"
+Type="Tipo"
+Type help="Tipo"
+Policy="Policy"
+Policy help="Policy"
+From Members="De"
+From Members help="De qual canal"
+To Members="Para"
+To Members help="Para qual canal"
+To Number="Para o número"
+To Number help="Para o número"
+Ascending="Ascending"
+Roundrobin="Roundrobin"
+New Routing="Nova Rota"
+does not exist="does not exist"
+Trigger="Trigger"
+Send Text="Send Text"
+Click here to remove this pattern="Click here to remove this pattern"
+Modify a Routing="Modify a Routing"
+Create a Routing="Criando um Roteamento"
+Advanced Settings="Configurações Avançadas"
+Trigger Clear Configure="Trigger Clear Configure"
+Trigger Clear Code="Trigger Clear Code"
+Trigger Clear Code help="Um código de mensagem específica será usada para limpar a lista pré-configurada."
+Trigger Configure List="Trigger Configure List"
+Trigger Configure List help="Configure \"Trigger\" and \"Send Text\".<br>For example: \"From Members\" receive a SMS text \"Trigger\" ,\"To Members\" will send \"Send Text\" to \"To Number\"."
+Add More Trigger Settings Fields="Add More Trigger Settings Fields"
+js check groupname="Os caracteres permitidos são [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 caracteres."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-ussd.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-ussd]
+HTTP to USSD="HTTP para USSD"
+Enable CORS="Habilita CORS"
+Enable CORS help="ON(Habilita),OFF(Desabilita)"
+Allow Access Origin Domain="Allow Access Origin Domain"
+Allow Access Origin Domain help="Allow Access Origin Domain"
+URL="URL"
+URL help="O URL para enviar ussd. <br>Nome de Usuário(username): o usuário para enviar o ussd.<br>Senha(password): A senha do usuário para enviar ussd.<br>phonenumber: o número de telefone de destino. <br>Mensagem(message): O conteúdo do USSD. <br>Porta(port): O canal gsm para enviar ussd. Exemplo: gsm-1.1,gsm-1.2,lte-1.1. <br>Resultado (report): Formato do relatório. <br>timeout: Quanto tempo irá esperar. <br>"
+User Name="Nome de Usuário"
+User Name help="Nome de Usuário"
+Password="Senha"
+Password help="Senha"
+Port="Porta"
+Port help="Porta"
+Report="Relatório"
+Report help="Formato do resultado do envio USSD"
+Use default user and password="Use o usuário e senha padrão"
+USSD to HTTP Usage="USSD para HTTP"
+Close="Fechar"
+USSD Result="Resultado USSD"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-mms.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-mms]
+MMS Settings="MMS Settings"
+Download Type="Download Type"
+Download Type help="Download Type"
+Download Time="Download Time"
+Download Time help="Download Time"
+Close="Close"
+Immediately="Immediately"
+On Time="On Time"
+ID="ID"
+APN User Name="APN User Name"
+APN Password="APN Password"
+APN="APN"
+Batch="Batch"
+Second="Second"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-email.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-email]
+Email="E-mail"
+Port="Porta"
+Enable="Habilitar"
+SMTP Server="Servidor SMTP"
+SMTP Server help="Servidor SMTP"
+Email Address of Sender="Endereço de e-mail do remetente"
+Email Address of Sender help="Para definir o endereço de e-mail de uma conta de e-mail disponível.<br/> Por exemplo, support@gmail.com"
+Domain="Domínio"
+Domain help="Para definir o servidor de e-mail de saída. <br/> Exemplo: smtp.gmail.com"
+SMTP Port="Porta SMTP"
+SMTP Port help="Para definir o número da porta do servidor do e-mail de saída. (O padrão é:  25.)"
+Default="Padrão"
+SMTP User Name="Nome do Usuário SMTP"
+SMTP User Name help="O usuário de login da sua conta de e-mail existente. <br/>Essa opção pode ser diferente do seu endereço de e-mail. <br/>Alguns clientes de email não precisam do postfix de e-mail."
+SMTP Password="Senha SMTP"
+SMTP Password help="A senha de login do seu e-mail existente."
+TLS Enable="Ativar TLS"
+TLS Enable help="Essa opção permite a autenticação com certificados."
+Destination Email Address="Endereço de e-mail de destino"
+Destination Email Address 1 help="O primeiro endereço de e-mail para receber a mensagem da caixa de entrada."
+Destination Email Address 2 help="O segundo endereço de e-mail para receber a mensagem da caixa de entrada."
+Destination Email Address 3 help="O terceiro endereço de e-mail para receber a mensagem da caixa de entrada."
+Title="Assunto"
+Title help="Variável disponível: <br/>$PHONENUMBER:Número do remetente SMS. <br/>$PORT:SMS de qual porta.<br/>$TIME:SMS recebeu o tempo.<br/>$MESSAGE: Conteúdo SMS.<br/>"
+Content="Conteúdo"
+Content help="Variável disponível: <br/>$PHONENUMBER:Número do remetente SMS. <br/>$PORT:SMS de qual porta.<br/>$TIME:SMS recebeu o tempo.<br/>$MESSAGE: Conteúdo SMS.<br/>"
+OTHER="OTHER"
+GMAIL="GMAIL"
+HOTMAIL="HOTMAIL"
+YAHOO="YAHOO"
+default="default"
+Save To Other Ports="Salvar Configuração Para as Outras Portas"
+Save To Other Ports help="Salvar Configuração Para as Outras Portas"
+Sync All Settings="Sincronizar todas as configurações"
+Sync All Settings help="Sincronizar todas as configurações"
+Select all settings="Selecionar Todas as Configurações"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-lan.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-lan]
+LAN IPv4="LAN IPv4"
+Interface="Interface"
+Interface help="O nome da interface de rede."
+Type="Tipo"
+Type help="O método para obter o IP.<br/>Padrão: Obtém o endereço IP do número de Slot(Sistema->Informações Número de slot).<br/>Estático: Define manualmente o endereço IP do  gateway GSM.<br/>DHCP: Obtém IP automaticamente sua rede LAN."
+MAC="MAC"
+MAC help="Endereço físico da sua interface de rede."
+Factory="Padrão"
+Static="Estático"
+DHCP="DHCP"
+
+IPv4 Settings="Configurações IPv4"
+IPv6 Settings="Configurações IPv6"
+Address="Endereço IP"
+Address help="O Endereço IP do seu gateway GSM."
+Netmask="Máscara de rede"
+Netmask help="Máscara de subrede do seu gateway."
+Default Gateway="Default Gateway"
+Default Gateway help="Endereço IP do Gateway."
+Prefix="Prefix"
+Prefix help="Prefix"
+DNS Servers="DNS Servers"
+DNS Servers help="A list of DNS IP address. <br/>Basically this info is from your local network service provider. "
+DNS Server="DNS Server"
+
+;; network lan settings help
+Reserved Access IP="IP de Acesso Reservado"
+Reserved Access IP help="Um endereço IP reservado para acesso, caso seu IP de gateway não esteja disponível."
+Enable="Ativar"
+Enable help="Ativa ou Desativa o Endereço IP Reservado.<br/>On(Ativado),Off(Desativado)"
+Reserved Address="Endereço IP Reservado"
+Reserved Address help="O endereço IP reservado para este gateway. "
+Reserved Netmask="Máscara de rede reservada"
+Reserved Netmask help="A máscara de sub-rede do endereço IP reservado."
+DNS Servers="Servidores DNS"
+DNS Servers help="Uma lista de endereços IP de DNS. <br/>Basicamente, esta informação é do seu provedor de serviços de rede local."
+DNS Server="Servidor DNS"
+Protocol Open="Select at least one protocol to open"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-vpn.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-vpn]
+VPN Settings="Configurações da VPN"
+pptp-vpn connection status="pptp-vpn connection status"
+VPNType="Tipo de VPN"
+VPNType help="Qual o tipo de conexão VPN.<br/>OpenVPN: openvpn.<br/>PPTP VPN: pptp vpn.<br/>None: Nenhum."
+OpenVPN="OpenVPN"
+PPTP VPN="PPTP VPN"
+N2N VPN="N2N VPN"
+L2TP VPN="L2TP VPN"
+Server="Servidor"
+Server help="Endereço do Servidor."
+server="Servidor"
+Client="Cliente"
+client="Cliente"
+Upload Configuration="Atualizar configuração"
+File Upload="Arquivo para Atualização"
+PPTP VPN Settings="Configurações VPN PPTP"
+PPTP VPN Configuration help="O IP do servidor PPTP."
+PPTP VPN MPPE help="PPTP VPN MPPE"
+Failed to connect="A conexão falhou"
+N2N VPN Settings="Configuração VPN N2N"
+
+OpenVPN Configuration Files help="Aviso:1. O formato do arquivo deve ser "xxxx.tar.gz" ou "xxxx.ovpn";2.O postfix do arquivo de configuração deve ser ".conf";3.O arquivo de upload não deve conter nenhuma (xxxx.tar.gz file only);4. Se ainda estiver confuso faça o download do Exemplo de configuração para análise;"
+Connection Status="Status da Conexão"
+OpenVPN Settings="Configuração OpenVPN"
+Sample Configuration="Exemplo de configuração"
+OpenVPN Sample Configuration help="Isso é apenas um exemplo de configuração para auxiliar no formato do arquivo a ser gerado. (Somente arquivo xxxx.tar.gz)<br/>"
+Download Samples="Download dos Exemplos de Configuração"
+VPN detection="Detecção VPN"
+VPN detection help="Detecção automática da VPN, se o tempo definido for 2 minutos, então a cada 2 minutos detecta o status da conexão do dispositivo com IP (Ex. 10.8.0.1). Tempo em 0 quer dizer: sem detecção."
+Server Address="Endereço do Servidor"
+Port="Porta"
+Port help="Porta"
+Local IP="Local IP"
+Subnet Mask="Máscara de Subrede"
+User Name="Nome de Usuário"
+Username="Nome de Usuário"
+Password="Senha"
+Password help="Senha da VPN"
+N2N connection status="N2N connection status"
+Account="Conta"
+Account help="Conta da VPN"
+Use MPPE="Use MPPE"
+Use MPPE help="Usar MPPE ou não"
+L2TP VPN Settings="Configurações da VPN L2TP"
+IPSec="IPSec"
+IPSec Password="Senha IPSec"
+connected="Conectado"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-ddns.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-ddns]
+DDNS Settings="Configurações de DDNS"
+DDNS="DDNS"
+DDNS help="Ativar/Desativar DDNS (Dynamic Domain Name Server). <br/>"
+Type="Tipo"
+Type help="Define o tipo do servidor DDNS. <br/>"
+User Name="Nome de Usuário"
+User Name help="O nome de login da sua conta DDNS.<br/>"
+Password="Senha"
+Password help="A senha da sua conta DDNS.<br/>"
+Your domain="Seu Domínio"
+Your domain help="O domínio ao qual seu servidor da Web pertencerá.<br/>"
+inadyn="inadyn"
+phddns="phddns"
+Method="Method"
+Method help="Method"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-toolkit.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-toolkit]
+Ping="Ping"
+Traceroute="Traceroute"
+GSM IP="GSM IP"
+GSM IP help="Interface"
+Interface="Interface"
+Interface help="Nome da interface de rede a ser capturada."
+Start="Iniciar"
+Source host="Host de origem"
+Source host help="IP do host de origem"
+Destination host="Host de destino"
+Destination host help="IP do host de destino."
+Port="Porta"
+Port help="Porta a ser capturada"
+Protocol="Protocolo"
+Protocol help="Protocolo a ser capturado"
+Network Data Capture="Network Data Capture"
+Source host help="IP do host de origem"
+Destination host help="IP do host de destino."
+tcpdump capture help="A máxima duração de captura de pacotes de rede é de 3 minutos, o sistema vai parar e fazer dowload da captura automaticamente quando ultrapassar esse limite."
+Stop Capture="Parar captura"
+Traceroute="Traceroute"
+Capture Network Data="Capture Network Data"
+All="Todos"
+TCP="TCP"
+UDP="UDP"
+RTP="RTP"
+RTCP="RTCP"
+ICMP="ICMP"
+ARP="ARP"
+SIP="SIP"
+Packge Capture="Captura de Pacotes de Rede"
+Stop="Parar"
+Download="Download"
+Running Time="Tempo de execução"
+Channel Recording="Capturar Canal"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-switch.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-switch]
+Firewall Settings="Configurações de Firewall"
+Firewall Enable="Ativar Firewall"
+Firewall Enable help="ON(ativado),OFF(desativado)"
+Ping Enable="Ativar Ping"
+Ping Enable help="ON(ativado),OFF(desativado)"
+White List Settings="Configurações de White List"
+White List Enable="Ativar White List"
+White List Enable help="ON(ativado),OFF(desativado)"
+List IP Settings="Lista de IP"
+List IP Settings help="ON(ativado),OFF(desativado)"
+Ping help="ON(enabled),OFF(disabled)"
+Black List Settings="Configurações de Black List"
+Black List Enable="Ativar Black List"
+Black List Enable help="ON(ativado),OFF(desativado)"
+List IP Settings="Lista de IP"
+Ping help="ON(ativado),OFF(desativado)"
+Submit="Aplicar"
+Invalid IP address help="Invalid IP address. Please check the ip input, and note that they are separated only by \",\"."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-rules.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-rules]
+Rule Name="Nome da Regra"
+Type="Tipo"
+Protocol="Protocolo"
+Protocol help="Escolha o protocolo utilizado na regra."
+Modify a Rule="Modificar uma Regra"
+Create a Rule="Criar uma Regra"
+Rule Name help="O nome desta regra."
+Port="Porta"
+Port help="Insira o intervalo de portas."
+IP="IP"
+Security Rules="Regras de Segurança"
+IP / MASK="IP / MASK"
+IP / MASK help="O formato do IP é IP/MASK.Confirme o intervalo IP e máscara."
+Actions help="Escolha a ação do firewall."
+New Rule="Nova regra"
+Submit="Aplicar"
+TCP="TCP"
+UDP="UDP"
+ICMP="ICMP"
+ACCEPT="ACCEPT"
+DROP="DROP"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-sipcapture.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-sipcapture]
+SIP Capture="Captura de pacotes SIP"
+Interface="Interface"
+Interface help="Interface de Rede."
+Method-filter="Filtro"
+Method-filter help="Filtro para métodos SIP"
+Start Capture="Iniciar Captura"
+Capture Sip="Captura de pacotes SIP"
+Stop Capture="Parar Captura"
+tcpdump capture help="O tempo máximo de gravação de voz é 3 minutos e o sistema irá parar de gravar e realizar o download quando atingir o tempo máximo"
+INVITE="INVITE"
+OPTIONS="OPTIONS"
+REGISTER="REGISTER"
+All="Todos"
+Packge Capture="Captura de pacotes SIP"
+Start="Iniciar"
+Stop="Parar"
+Download="Download"
+Running Time="Tempo em execução"
+Output="Output"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-astapi.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-astapi]
+General="Geral"
+Enable="Ativar"
+Port="Porta"
+Port help="Número da Porta de Rede"
+Manager="Gerenciador"
+Manager Name="Nome do Gerenciador"
+Manager Name help="Nome do Gerenciador Sem Espaço."
+Manager secret="Senha do Gerenciador"
+Manager secret help="Senha Para o Gerenciador.<br/>a senha padrão é composta de letras e números, <br/>Se você quiser modificar a senha, a senha inserida deve ser composta de letras, números e caracteres especiais \"0-9a-zA-Z!@#$%^&*\".Tamanho: 8-32 caracteres."
+Deny="Negar"
+Deny help="Se você quiser negar muitos hosts ou redes, use caractere & como separador.<br/>Exemplo: 0.0.0.0/0.0.0.0 ou 192.168.1.0/255.255.255.0&10.0.0.0/255.0.0.0"
+Permit="Permitir"
+Permit help="Se você quiser permitir muitos hosts ou redes, use o caractere & como separador.<br/>Exemplo: 0.0.0.0/0.0.0.0 ou 192.168.1.0/255.255.255.0&10.0.0.0/255.0.0.0"
+Rights="Atribuições"
+System="Sistema"
+System help="Informações gerais sobre o sistema e capacidade de executar comandos de gerenciamento do sistema, <br/>tal como Desligar, Reiniciar, e Recarregar."
+Log="Log"
+Log help="Informações de registro de Logs. Somente leitura. (Definido mas ainda não usado.)"
+Call="Chamada"
+Call help="Informações sobre canais e capacidade de definir informações em um canal em execução."
+Verbose="Verbose"
+Verbose help="Informação de Verbose.  Somente leitura. (Definido mas ainda não usado.)"
+Command="Comando"
+Command help="Permissão para executar comandos da CLI. Apenas escrita."
+Agent="Agente"
+Agent help="Informações sobre filas e agentes e capacidade de adicionar membros da fila a uma fila."
+User="Usuário"
+User help="Permissão para enviar e receber eventos de usuário."
+Config="Config"
+Config help="Capacidade de ler e escrever arquivos de configuração."
+DTMF="DTMF"
+DTMF help="Receber eventos DTMF. Somente leitura."
+Reporting="Relatório"
+Reporting help="Capacidade de obter informações sobre o sistema."
+CDR="CDR"
+CDR help="Saída do cdr_manager, se carregado. Somente leitura."
+Dialplan="Dialplan"
+Dialplan help="Receber eventos NewExten e VarSet. Somente leitura."
+Originate="Originar"
+Originate help="Permissão para originar novas chamadas. Somente escrita."
+All="Tudo"
+All help="Seleciona todas opções."
+read="Ler"
+write="Escrever"
+Report="Relatório"
+Asterisk Reboot="Reiniciar Asterisk"
+Asterisk Reboot help="Reinicia o Asterisk e todas as chamadas correntes serão encerradas."
+Asterisk Reboot confirm="Você tem certeza que deseja reiniciar o Asterisk agora?"
+Asterisk Rebooting="Reiniciando Asterisk"
+Result="Resultado"
+Asterisk Reboot Succeeded="Asterisk reiniciado com sucesso"
+Asterisk Reboot Failed="Falha ao reiniciar Asterisk"
+General="Geral"
+Warning="Warning"
+Warning help="*Asterisk API is closed.Please note that this operation may lead to serious consequences on calling and sending sms."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-astcli.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-astcli]
+Asterisk CLI="Asterisk CLI"
+Command="Comando"
+Command help="Permissão para executar comandos da CLI. Apenas escrita."
+Execute="Executar"
+Output="Saída"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-astfileeditor.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-astfileeditor]
+Configuration Files="Configuration Files"
+File Name="Nome do Arquivo"
+File Size="Tamanho do Arquivo"
+New Configuration File="Novo arquivo de configuração"
+Reload Asterisk="Reload Asterisk"
+Reload Asterisk confirm="Você tem certeza que quer recarregar o Asterisk agora?"
+Prime Config. Files="Prime Config. Files"
+Config. Files List="Config. Files List"
+Edit="Editar"
+Save file name="Por favor, insira o nome do arquivo!"
+Save file exist="Arquivo já existe!"
+Cancel="Cancelar"
+Delete File="Excluir Arquivo"
+Delete File confirm="Você tem certeza que quer excluir esse arquivo?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-internet.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-internet]
+Internet="Internet"
+Timing internet="Timing internet"
+Timing internet help="Timing internet"
+Timing time="Timing time"
+Timing time help="Timing time"
+Open="Open"
+Close="Close"
+By Month="Por Mês"
+By Day="Por Dia"
+Try Times="Try Times"
+MAX="MAX"
+USED="USED"
+No Timing="No Timing"
+APN User Name="APN User Name"
+APN Password="APN Password"
+APN="APN"
+URL="URL"
+MAX="MAX"
+USED="USED"
+Time="Time"
+Batch="Batch"
+Cancel="Cancelar"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-cloud.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-cloud]
+Cloud="Cloud"
+Enable Cloud Service="Enable Cloud Service"
+Account="Account"
+Account help="the account which is registered in OpenVox cloud center."
+Password="Senha"
+Password help="The password of cloud account."
+Connection Status="Status da Conexão"
+Connection Status help="Cloud management connection status."
+Choose Service="Choose Service"
+Choose Service help="choosing a remote server the current device will connect"
+China="China."
+America="América"
+Europe="Europa"
+Customize="Personalizar"
+cloud sign help="Se inscreva."
+cloud signmessage help="Don't have an account?"
+connected="connected"
+no connected="no connected"
+Cloud Service Disconnected="Cloud Service Disconnected"
+Connection timed out="Connection timed out"
+Password error="Password error"
+User does not exist="User does not exist"
+You have been blacklisted="You have been blacklisted"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-balance.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-balance]
+Port="Porta"
+Query Type="Tipo de Consulta"
+Query Type help="Se o canal estiver no estado de chamada, a consulta falhará."
+Query Swith="Habilita Consulta"
+Query Swith help="O KVoLTE fornece uma função de consulta de saldo para usuários que usam o cartão SIM. Ele pode enviar automaticamente uma mensagem curta ao operador para consultar o saldo atual no cartão SIM."
+Destination Number="Número de Destino"
+Destination Number help="Número usado pelo operador para receber a informação da consulta."
+Receive Number="Número Origem "
+Receive Number help="Número usado pelo operador para enviar o conteúdo consultado."
+Send Message="Enviar Mensagem"
+Send Message help="Conteúdo de uma curta mensagem enviada aos operadores para consultas."
+Matching Key="Chave Correspondente"
+Matching Key help="As 10 primeiras palavras no conteúdo retornado pelo operador não têm mais que 30 palavras."
+Registered Query="Consulta registrada"
+Registered Query help="SIM Card Registration Successful Automatic Query Once."
+Inactive="Inativo"
+Inactive help="Range de intervado:0-30000. Quando o valor é 0, isso é desabilitado.<br/>Unidade: Minutos."
+Call Count Query="Contador de chamadas de consulta"
+Call Count Query help="Range de intervalo:0-100. Quando o valor é 0, isso é desabilitado."
+Decimal mark="Decimal mark"
+Decimal mark help="Operadores respondem aos símbolos de ponto decimal do conteúdo numérico."
+Kilo mark="Kilo mark"
+Kilo mark help="O operador responde ao símbolo de microbit do conteúdo numérico"
+Balance="Consulta Saldo"
+Interval="Intervalo"
+Interval help="Range de intervalo:0-30000. Quando o valor é 0, isso é desabilitado."
+SMS="SMS"
+Tel="Tel"
+USSD="USSD"
+The matching test="Teste de correspondência"
+Message content="Conteúdo da Mensagem"
+Message content help="Conteúdo da mensagem usada para consulta de saldo"
+Matching results="Resultados correspondentes"
+Matching results help="Resultados correspondentes"
+Test="Teste"
+Save To Other Ports="Salvar Configuração Para as Outras Portas"
+Save To Other Ports help="Salvar Configuração Para as Outras Portas"
+Sync All Settings="Sincronizar todas as configurações"
+Sync All Settings help="Sincronizar todas as configurações"
+All="All"
+Select all settings="Selecionar Todas as Configurações"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-phonenumber.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-phonenumber]
+General="Geral"
+Balance="Consulta Telefone"
+Port="Porta"
+Query Swith="Habilita Consulta de Número"
+Query Swith help="O fornece uma função de consulta de número, que pode enviar automaticamente uma mensagem ao operador para consultar o número do cartão SIM que você usa atualmente."
+Query Type="Tipo da Consulta"
+Query Type help="Se o canal estiver no estado de chamada, a consulta falhará."
+Destination Number="Número de Destino"
+Destination Number help="Número usado pelo operador para receber a informação da consulta."
+Receive Number="Número Origem"
+Receive Number help="NNúmero usado pelo operador para enviar o conteúdo consultado."
+Send Message="Enviar Mensagem"
+Send Message help="Conteúdo de uma curta mensagem enviada aos operadores para consultas"
+Matching Key="Chave Correspondente"
+Matching Key help="As 10 primeiras palavras no conteúdo retornado pelo operador não têm mais que 10 palavras."
+Decimal mark="Decimal mark"
+Decimal mark help="Operadores respondem aos símbolos de ponto decimal do conteúdo numérico."
+Kilo mark="Kilo mark"
+Kilo mark help="O operador responde ao símbolo de microbit do conteúdo numérico"
+Registered Query="Consulta registrada"
+Registered Query help="SIM Card Registration Successful Automatic Query Once."
+Call Count Query="Contador de chamadas de consulta"
+Call Count Query help="Range de intervalo:0-100. Quando o valor é 0, isso é desabilitado."
+Interval="Intervalo"
+Interval help="Range de Intervalo :0-30000. Quando for 0, é desabilitado."
+SMS="SMS"
+Tel="Tel"
+USSD="USSD"
+Balance="Consulta Saldo"
+Inactive="Inativo"
+Save To Other Ports="Salvar Configuração Para as Outras Portas"
+Save To Other Ports help="Salvar Configuração Para as Outras Portas"
+Sync All Settings="Sincronizar todas as configurações"
+Select all settings="Selecionar Todas as Configurações"
+
+The matching test="Teste de correspondência"
+Matching key="Chave Correspondente	"
+Matching key help="Chave Correspondente	"
+Message content="Conteúdo da Mensagem"
+Message content help="Conteúdo da mensagem usada para consulta do número do SIM Card"
+Matching results="Resultados correspondentes"
+Matching results help="Resultados correspondentes"
+Test="Teste"
+PhoneNumber="Número de Telefone"
+Setting=" "
+Mobile Number Switch="Mobile Number Switch"
+Mobile Number Switch help="Quando esta opção é ativada, o número do celular será exibido nas páginas."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-arp.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-arp]
+ARP="ARP"
+IP="IP"
+IP help="IP"
+MAC="MAC"
+MAC help="MAC"
+Cancel="Cancelar"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-settings]
+System Logs="Logs do Sistema"
+System Logs help="Habilita ou Desabilita Logs do sistema."
+Auto clean="Limpar Automaticamente"
+Auto clean help="switch on : Quando o tamanho do arquivo de log atingir o tamanho máximo , <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; o sistema cortará metade do arquivo. Novos registros serão mantidos. <br>switch off : Os logs permanecerão e o tamanho do arquivo aumentará gradualmente. <br>"
+Auto clean default@System Logs="default on, default size=1MB."
+maxsize="Tamanho máximo"
+
+Asterisk Logs="Logs Asterisk"
+Verbose="Verbose"
+Verbose help="Verbose message switch."
+Notice="Notice"
+Notice help="Notice message  switch."
+Warning="Warning"
+Warning help="Warning message  switch."
+Debug="Debug"
+Debug help="Debug message switch."
+Error="Error"
+Error help="Error message  switch."
+DTMF="DTMF"
+DTMF help="DTMF info switch."
+Auto clean default@Asterisk Logs="Padrão on, Tamanho padrão=100KB."
+
+SIP Logs="Logs SIP"
+SIP Logs help="Ativa ou Desativa o log SIP."
+IAX Logs="Logs IAX2"
+IAX Logs help="Ativa ou Desativa log IAX."
+AT Commands Logs="AT Commands Logs"
+AT Commands Logs help="Displaying GSM module AT messages."
+Auto clean default@SIP Logs="Padrão on, Tamanho padrão=100KB."
+Auto clean default@IAX Logs="Padrão on, Tamanho padrão=100KB."
+Auto clean default@AT Commands Logs="Padrão on, Tamanho padrão=100KB."
+
+BSP Logs="Logs BSP"
+Track="Track"
+Info="Informação"
+RRI Logs="Logs RRI"
+RRI Pipe Logs="Logs RRI Pipe"
+RRI Pipe Logs help="Ativa ou Desativa o RRI Pipe log."
+Voice Record="Gravação de voz"
+Auto clean default@BSP Logs="Padrão on, Tamanho padrão=100KB."
+Auto clean default@RRI Logs="Padrão on, Tamanho padrão=100KB."
+
+Call Detail Record="Gravação dos Detalhes de Chamada"
+Call Detail Record help="Exibe a Gravação dos Detalhes de Chamada por canal."
+Append IMEI="Acrescentar IMEI"
+Append IMEI help="ON : IMEI será acrescentado ao canal GSM do CDR em 'De' ou 'Para'. <br> OFF: Não acrescentar o IMEI. <br> padrão off."
+Auto clean default@Call Detail Record="default on, Tamanho padrão=20MB."
+
+Syslog="Syslog"
+Local Syslog="Local Syslog"
+Local Syslog help="Essa ação define o nível de log do Asterisk, em seguida, ativa o Syslog local."
+Server Address="Endereço do Servidor"
+Server Address help="Endereço do Servidor"
+Server Port="Porta do Servidor"
+Server Port help="Porta do Servidor"
+Syslog Level="Nível de Syslog"
+CDR Level="CDR Level"
+EMERG="EMERG"
+ALERT="ALERT"
+CRIT="CRIT"
+ERROR="ERROR"
+WARNING="WARNING"
+NOTICE="NOTICE"
+INFO="INFO"
+DEBUG="DEBUG"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-sys.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-sys]
+System Logs="Logs do Sistema"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-ast.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-ast]
+Asterisk Logs="Asterisk Logs"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-sip.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-sip]
+SIP Logs="SIP Logs"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-iax.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-iax]
+IAX2 Logs="IAX2 Logs"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-bsp.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-bsp]
+BSP Logs="BSP Logs"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-rri.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-rri]
+RRI Logs="RRI Logs"
+RRI Pipe Logs="RRI Pipe Logs"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-debugat.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-debugat]
+Send AT Commands="Send AT Commands"
+Packing was failed="Packing was failed"
+Send="Send"
+AT Commands Logs="AT Commands Logs"
+Refresh Rate="Tempo de Atualização"
+Refresh="Atualizar"
+Clean Up="Limpar Log"
+Clean All="Clean All"
+Download="Download"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-cdr.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-cdr]
+NO RECORD="NO RECORD"
+Caller ID="Número de Origem"
+Callee ID="Número de Destino"
+From="De"
+To="Para"
+Start Time="Hora de início"
+Duration="Duração"
+Result="Resultado"
+All="All"
+Filter="Filter"
+Clean Filter="Clean Filter"
+Callee ID help="defalut: EXTEN<br/>eg: When selecting SIP To, Name is Jason and Number is 401.<br/>To mode is: \"Jason\"&lt;sip:401@172.16.6.239;transport=UDP&gt;"
+Start Time="Start Time"
+Total Records="Total Records"
+DATABASE BUSY="DATABASE BUSY"
+ANSWERED="ATENDIDA"
+BUSY="OCUPADO"
+FAILED="FALHOU"
+NO ANSWER="NÃO ATENDIDA"
+Sim Number="Sim Number"
+Bank="Bank"
+Slot="Slot"
+Delete="Deletar"
+Clean Up="Limpar Log"
+Clean Up confirm="Are you sure to clean up this logs?"
+Export="Export"
+GSM Outbound="GSM Outbound"
+GSM Inbound="GSM Inbound"
+All Calls="All Calls"
+All Durations="All Durations"
+Answered="Answered"
+No Answer="No Answer"
+Busy="Busy"
+Failed="Failed"
+Other="Other"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-statistics.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-statistics]
+GSM Outbound="GSM Outbound"
+GSM Inbound="GSM Inbound"
+SMS="SMS"
+Port="Porta"
+All Calls="Todas chamadas"
+All Durations="Todas as durações"
+Answered="Atendidas"
+Canceled="Canceladas"
+Busy="Ocupadas"
+No Answer="Não Atendidas"
+No Dialtone="Sem Tom de Discagem"
+No Carrier="Sem Operadora"
+Other="Outras"
+ALL SMS="ALL SMS"
+Deliverd="Deliverd"
+Sent="Sent"
+Failed="Failed"
+Total="Total"
+Export="Export"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	set-info.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[set-info]
+Set Information="Set Information"
+Switch="Switch"
+Switch help="If this switch is enabled, the following parameter information will be used."
+Product Name="Nome do Produto"
+Product Name help="Nome do Produto"
+Contact Address="Contact Address"
+Contact Address help="Contact Address"
+Tel="Tel"
+Tel help="Tel"
+Fax="Fax"
+Fax help="Fax"
+E-Mail="E-Mail"
+E-Mail help="E-Mail"
+Web Site="Web Site"
+Web Site help="Web Site"
+Copyright="Copyright"
+Copyright help="Copyright"
+Download Sample Images="Download Sample Images"
+Download Sample Images help="Download the case picture and modify it according to the size of the picture."
+Header Image="Header Image"
+Header Image help="Header background picture, the size of the picture is 1280x417, can be seen in the following case picture."
+Footer Image="Footer Image"
+Footer Image help="Footer background picture, the size of the picture is 1280x105, can be seen in the following case picture."
+Image Upload error="Your Image file was larger than 2M!<br>Uploading failed."

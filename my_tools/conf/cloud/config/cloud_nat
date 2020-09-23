@@ -1,0 +1,12 @@
+
+config stun 'stun'
+	option server_port '3478'
+	option loglevel '4'
+	option nat_detected '1'
+	option username 'cloud_stun'
+	option password 'cloud_stun'
+	option max_keepalive '3'
+	option min_keepalive '30'
+	option server_address 'cloud.openvox.com.cn'
+	option crudp_address '120.236.234.142:52648'
+

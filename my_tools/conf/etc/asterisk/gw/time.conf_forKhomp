@@ -1,0 +1,6 @@
+[general]
+auto_sync=on
+timezone=America/Sao_Paulo@BRT3BRST,M11.1.0/0,M2.5.0/0
+ntp1=pool.ntp.org
+ntp2=64.236.96.53
+ntp3=ntp1.aliyun.com

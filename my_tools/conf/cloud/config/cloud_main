@@ -1,0 +1,25 @@
+
+config local
+	option interface 'eth0'
+	option port '7547'
+	option ubus_socket '/var/run/cloud.sock'
+	option date_format '%FT%T%z'
+	option password '111111'
+	option username 'cloudclient'
+
+config acs
+	option parameter_key 'da81e8a9c31abe8124cd0487f3023fe7 '
+	option url 'http://cloud.openvox.com.cn/cloud'
+	option username 'admin'
+	option periodic_enable 'true'
+	option password 'Xaps123.'
+	option periodic_interval '1600'
+
+config device
+	option product_class 'Wireless Gateway'
+	option hardware_version '0'
+	option software_version '1.4.2'
+	option model_name 'SWG-1016'
+	option serial_number '00E04C36000F'
+	option oui '00E04C'
+

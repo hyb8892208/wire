@@ -1,0 +1,33 @@
+#!/bin/sh
+
+dns_setting()
+{
+	#DNS Settings
+	touch /tmp/resolv.conf
+	cat /dev/null > /etc/resolv.conf
+	for i in 1 2 3 4; do
+		DNS=`/my_tools/set_config /etc/asterisk/gw/network/dns.conf get option_value general dns$i 2> /dev/null`
+		if [ "$DNS" != "" ];then
+			( echo "$DNS" | egrep "^((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)$" > /dev/null 2>&1 ) && echo "nameserver $DNS" >> /etc/resolv.conf
+		fi
+	done
+}
+
+case "$1" in
+	start)
+		dns_setting
+		;;
+	stop)
+		cat /dev/null > /etc/resolv.conf
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|reload}"
+		exit 2
+		;;
+esac
+
+exit 0

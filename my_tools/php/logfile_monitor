@@ -1,0 +1,352 @@
+#!/bin/php
+
+<?php
+
+//default setting;
+/************************************************/
+$conf_path = '/etc/asterisk/gw';
+$conf_file = 'logfile_monitor.conf';
+$conf_path_file = $conf_path."/".$conf_file;
+$default_maxsize = 20*1024;
+$interval = 120;
+$debug = false;
+/************************************************/
+
+include_once("/www/cgi-bin/inc/aql.php");
+include_once("/www/cgi-bin/inc/cdrdb.php");
+include_once("/www/cgi-bin/inc/smsinboxdb.php");
+include_once("/www/cgi-bin/inc/function.inc");
+
+function generate_default_conf()
+{
+	global $conf_path_file;
+
+	$buf = <<<EOF
+[sys_log]
+autoclean_sw=on
+maxsize=1MB
+
+[ast_log]
+autoclean_sw=on
+maxsize=100KB
+
+[sip_log]
+autoclean_sw=on
+maxsize=100KB
+
+[iax_log]
+autoclean_sw=on
+maxsize=100KB
+
+[bsp_log]
+autoclean_sw=on
+maxsize=100KB
+
+[rri_log]
+autoclean_sw=on
+maxsize=100KB
+
+[at_log]
+autoclean_sw=on
+maxsize=100KB
+
+[cdr_log]
+autoclean_sw=on
+maxsize=10MB
+
+[sms_inbox]
+autoclean_sw=on
+maxsize=20MB
+EOF;
+//EOF
+	$flock = lock_file($conf_path_file);
+	if(($fh = fopen($conf_path_file, "w")) <= 0) {
+		unlock_file($flock);
+		echo "open $conf_path_file error\n";
+		exit(1);
+	}
+	if(fwrite($fh, $buf)===false) {
+		unlock_file($flock);
+		echo "write $conf_path_file error\n";
+		exit(2);
+	}
+	fclose($fh);
+	unlock_file($flock);
+}
+
+function check_cut_cdrdb($file, $maxsize)
+{
+	global $debug;
+	clearstatcache();
+	if($debug){echo "in check_cut_cdrdb()  file=$file maxsize=$maxsize filesize=".filesize($file)."\n";}
+	while(file_exists($file) && (filesize($file) > $maxsize)){
+		if($debug)echo "=========$file need to be cut\n";
+		$flock = lock_file($file);
+		$db = new CDRDB();
+		$results = $db->try_query("select count(*) from cdr");
+		$res = $results->fetchArray();
+		$count = ceil($res[0]/2);
+		$results->finalize();
+		if($debug)echo "count=$count\n";
+		$db->try_query("delete from cdr where id in(select id from cdr order by id asc limit 0,$count)");
+		$db->try_exec("vacuum");
+		$db->close();
+		unlock_file($flock);
+		clearstatcache();
+	}
+}
+
+function check_cut_smsinboxdb($file, $maxsize)
+{
+	global $debug;
+	clearstatcache();
+	if($debug){echo "in check_cut_smsinboxdb() file=$file maxsize=$maxsize filesize=".filesize($file)."\n";}
+	while(file_exists($file) && (filesize($file) > $maxsize)){
+		if($debug)echo "=========$file need to be cut\n";
+		$flock = lock_file($file);
+		$db = new SMSINBOXDB();
+		$results = $db->try_query("select count(*) from sms");
+		$res = $results->fetchArray();
+		$count = ceil($res[0]/2);
+		$results->finalize();
+		if($debug)echo "count=$count\n";
+		$db->try_query("delete from sms where id in(select id from sms order by id asc limit 0,$count)");
+		$db->try_exec("vacuum");
+		$db->close();
+		unlock_file($flock);
+		clearstatcache();
+	}
+}
+
+function check_cut_txt($file, $maxsize)
+{
+	global $debug;
+	clearstatcache();
+	if($debug){echo "in check_cut_txt(), file=$file maxsize=$maxsize filesize=".filesize($file)."\n";}
+	if(is_dir($file)){
+		$dir = $file;
+		$dir_handle = opendir($dir);
+		while(($file = readdir($dir_handle))!= false){
+			if($file == '.' || $file == '..') {
+				continue;
+			}   
+			$file = $dir."/".$file;
+			check_cut_txt($file, $maxsize);
+		}  
+	}else{
+		while(file_exists($file) && filesize($file) > $maxsize){
+			if($debug)echo "========$file need to be cut\n";
+			$size = $maxsize/2;
+			$flock = lock_file($file);
+			$fh = fopen($file, "r+");
+			fseek($fh, -$size, SEEK_END);/* read the last $size content; */
+			$buf = fread($fh, $size);
+			echo "get buf: ".strlen($buf)."\n";
+			ftruncate($fh, 0);/* clear up file */
+			rewind($fh);
+			fwrite($fh, $buf);/* write the read content; */
+			fclose($fh);
+			unlock_file($flock);
+			clearstatcache();
+		}
+	}
+}
+
+function monitor_file_func($monitor_flie, $interval)
+{
+	global $debug;
+
+	if($debug)echo "start monitor ...\n";
+	while(true){
+		if($debug)echo "\ncheck...\n";
+		foreach($monitor_flie as $key => $value){
+			if($debug)echo "key=$key\n";
+			$file = $monitor_flie[$key]['file'];
+			$maxsize = $monitor_flie[$key]['maxsize'];
+			if($key == 'cdr_log'){
+				check_cut_cdrdb($file, $maxsize);
+			}else if($key == 'sms_inbox'){
+				check_cut_smsinboxdb($file, $maxsize);
+			}else{
+				check_cut_txt($file, $maxsize);
+			}
+		}
+		sleep($interval);
+	}
+}
+
+function read_pipe_file(){
+    $files=array();
+    $queue=array('/tmp/module_pipe');
+    while($data=each($queue)){
+        $path=$data['value'];
+        if(is_dir($path) && $handle=opendir($path)){
+            while($file=readdir($handle)){
+                if($file=='.'||$file=='..') continue;
+				if(strstr($file, '.log')){
+					$files[] = $path.'/'.$file;
+				}
+                $real_path = $path.'/'.$file;
+                if (is_dir($real_path)) $queue[] = $real_path;
+            }
+        }
+        closedir($handle);
+    }
+    return $files;
+}
+
+function read_simemu_file(){
+    $files=array();
+    $queue=array('/tmp/log/SimEmuSvr/');
+    while($data=each($queue)){
+        $path=$data['value'];
+        if(is_dir($path) && $handle=opendir($path)){
+            while($file=readdir($handle)){
+                if($file=='.'||$file=='..') continue;
+				$files[] = $path.'/'.$file;
+                $real_path = $path.'/'.$file;
+                if (is_dir($real_path)) $queue[] = $real_path;
+            }
+        }
+        closedir($handle);
+    }
+    return $files;
+}
+
+################################################################
+#
+#
+#	file monitor
+#
+#
+################################################################
+
+if(!file_exists($conf_path_file) || filesize($conf_path_file) == 0) {
+	generate_default_conf();
+}
+
+/* read conf */
+$aql = new aql();
+$setok = $aql->set('basedir',$conf_path);
+if (!$setok) {
+	echo $aql->get_error();
+	exit(2);
+}
+
+$hlock=lock_file($conf_path_file);
+if(!$aql->open_config_file($conf_path_file)){
+        echo $aql->get_error();
+        unlock_file($hlock);
+	exit(3);
+}else{
+        $res = $aql->query("select * from $conf_file");
+        unlock_file($hlock);
+	if($debug)print_r($res);
+}    
+
+/* get monitor file */
+$monitor_file = array();
+if(!is_array($res))
+	exit(4);
+foreach($res as $key => $value){
+	if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+		switch($key){
+		case "sys_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/data/log/sys-log";
+			}
+			break;
+		case "ast_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/tmp/log/asterisk/log4gw";
+			}
+			break;
+		case "sip_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/var/log/asterisk/sip-log";
+			}
+			break;
+		case "iax_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/var/log/asterisk/iax2-log";
+			}
+			break;
+		case "bsp_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/tmp/log/bsp_server.log";
+			}
+			break;
+		case "rri_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/tmp/log/rri_server.log";
+				
+				$temp_arr = read_pipe_file();
+				for($i=0;$i<count($temp_arr);$i++){
+					$monitor_file[$temp_arr[$i]]['file'] = $temp_arr[$i];
+					if(isset($res["$key"]['maxsize']) && $res["$key"]['maxsize'] != ''){
+						preg_match("/^[0-9]+/", $res["$key"]['maxsize'], $maxsize_a);
+						$monitor_file[$temp_arr[$i]]['maxsize'] = trim($maxsize_a[0])*1024;
+					}else{
+						$monitor_file[$temp_arr[$i]]['maxsize'] = $default_maxsize;
+					}
+				}
+			}
+			break;
+		case "at_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/var/log/asterisk/at";
+			}
+			break;
+		case "cdr_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/data/log/cdr.db";
+			}
+			break;
+		case "sms_inbox":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/data/log/smsinbox.db";
+			}
+			break;
+		case "simemu_logs":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$temp_arr = read_simemu_file();
+				for($i=0;$i<count($temp_arr);$i++){
+					$monitor_file[$temp_arr[$i]]['file'] = $temp_arr[$i];
+					if(isset($res["$key"]['maxsize']) && $res["$key"]['maxsize'] != ''){
+						preg_match("/^[0-9]+/", $res["$key"]['maxsize'], $maxsize_a);
+						$monitor_file[$temp_arr[$i]]['maxsize'] = trim($maxsize_a[0])*1024;
+					}else{
+						$monitor_file[$temp_arr[$i]]['maxsize'] = $default_maxsize;
+					}
+				}
+			}
+			break;
+		case "simemu_log":
+			if(isset($res["$key"]['autoclean_sw']) && $res["$key"]['autoclean_sw'] == 'on'){
+				$monitor_file["$key"]['file'] = "/tmp/log/SimEmuSvr/SimEmuSvr.log";
+			}
+			break;
+		}
+		if(isset($res["$key"]['maxsize']) && $res["$key"]['maxsize'] != ''){
+			preg_match("/^[0-9]+/", $res["$key"]['maxsize'], $maxsize_a);
+			preg_match("/[KMB]+$/", $res["$key"]['maxsize'], $unit_a);
+			if(isset($maxsize_a[0]) && isset($unit_a[0])){
+				if($debug)echo "size=$maxsize_a[0] unit=$unit_a[0]\n";
+				if(trim($unit_a[0]) == "KB")
+					$monitor_file["$key"]['maxsize'] = trim($maxsize_a[0])*1024;
+				elseif(trim($unit_a[0]) == "MB")
+					$monitor_file["$key"]['maxsize'] = trim($maxsize_a[0])*1024*1024;
+			}
+		}
+		if(!isset($monitor_file["$key"]['maxsize'])){
+			$monitor_file["$key"]['maxsize'] = $default_maxsize;
+		}
+	}
+}
+
+/* start monitor */
+if($debug)print_r($monitor_file);
+monitor_file_func($monitor_file, $interval);
+
+?>
+

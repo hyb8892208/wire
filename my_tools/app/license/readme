@@ -1,0 +1,16 @@
+﻿genkey
+    用于生成加解密、签名与验证所需的秘钥
+genlicense
+    用于生成license
+anlslicense
+    用于解析license
+
+www
+    license管理的web界面代码
+
+getMac
+   用于PBX生产测试流程中，从数据库中获取空闲MAC地址。
+   
+
+key
+  秘钥(注意保密)

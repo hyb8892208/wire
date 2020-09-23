@@ -1,0 +1,120 @@
+tommy@ubuntu:/mnt/hgfs/linux_test$ sudo ./QFlash -f EC20CEFAGR06A05M4G -P ttyUSB0
+QFlash Version: LTE_QFlash_Linux&Android_V1.4.0
+
+The CPU is little endian
+
+firmware path: /mnt/hgfs/linux_test/EC20CEFAGR06A05M4G
+./QFlash: invalid option -- 'P'
+Module upgrade tool, Mon Apr  2 00:13:13 2018
+
+/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update/partition_nand.xml
+Auto detect quectel diagnose port = ttyUSB0
+Start to open com port: /dev/ttyUSB0
+Use normal diag port
+Get sahara hello packet!
+Get sahara hello packet failed.
+Detect module status!
+Module status detect
+The module in normal mode
+
+Software Revision = EC20CEFAGR06A05M4G
+Switch to PRG status
+Diagnose port disconnect
+Diagnose port connected.
+Start to open com port: /dev/ttyUSB0
+Try get sahara hello packet!
+Get sahara hello packet successfully!
+Send sahara hello response packet(2)!
+Start Read Data!
+Sahara send /mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//NPRG9x07.mbn
+progress : 100% finished 
+Send sahara do packet!
+Module Status Detection
+Upgrade in normal mode
+Diagnose port connected.
+Start to open com port: /dev/ttyUSB0
+Module status detect
+The module in go mode
+Start to download firmware
+handle_parti_tbl command = 1a, status = 00
+flash 0:SBL /mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//sbl1.mbn
+sending '0:SBL' (209KB)
+progress : 100% finished 
+OKAY
+flash 0:TZ /mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//tz.mbn
+sending '0:TZ' (538KB)
+progress : 100% finished 
+OKAY
+flash 0:RPM /mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//rpm.mbn
+sending '0:RPM' (154KB)
+progress : 100% finished 
+OKAY
+flash 0:aboot /mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//appsboot.mbn
+sending '0:aboot' (463KB)
+progress : 100% finished 
+OKAY
+Change to fastboot mode...
+flash 0:boot invalid-boot
+
+sending '0:boot' (4KB)
+progress : 100% finished 
+OKAY
+test /dev/bus/usb/001/004 Read/WRITE OK
+Detect Adb port
+/mnt/hgfs/linux_test/QFlash fastboot flash boot "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//mdm9607-perf-boot.img"
+sending 'boot' (5746 KB)...
+OKAY [  0.735s]
+writing 'boot'...
+OKAY [  1.218s]
+finished. total time: 1.953s
+/mnt/hgfs/linux_test/QFlash fastboot flash recovery "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//mdm9607-perf-boot.img"
+sending 'recovery' (5746 KB)...
+OKAY [  0.765s]
+writing 'recovery'...
+OKAY [  1.253s]
+finished. total time: 2.018s
+/mnt/hgfs/linux_test/QFlash fastboot flash recoveryfs_b "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//mdm-perf-recovery-image-mdm9607-perf.ubi"
+sending 'recoveryfs_b' (10752 KB)...
+OKAY [  1.377s]
+writing 'recoveryfs_b'...
+OKAY [  2.298s]
+finished. total time: 3.675s
+/mnt/hgfs/linux_test/QFlash fastboot flash modem "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//NON-HLOS.ubi"
+sending 'modem' (40448 KB)...
+OKAY [  5.165s]
+writing 'modem'...
+OKAY [  8.985s]
+finished. total time: 14.150s
+/mnt/hgfs/linux_test/QFlash fastboot flash recoveryfs "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//mdm-perf-recovery-image-mdm9607-perf.ubi"
+sending 'recoveryfs' (10752 KB)...
+OKAY [  1.373s]
+writing 'recoveryfs'...
+OKAY [  2.345s]
+finished. total time: 3.719s
+/mnt/hgfs/linux_test/QFlash fastboot flash qdsp6sw_b "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//NON-HLOS.ubi"
+sending 'qdsp6sw_b' (40448 KB)...
+OKAY [  5.144s]
+writing 'qdsp6sw_b'...
+OKAY [  8.603s]
+finished. total time: 13.748s
+/mnt/hgfs/linux_test/QFlash fastboot flash sys_back "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//mdm9607-perf-sysfs.ubi"
+sending 'sys_back' (50176 KB)...
+OKAY [  6.416s]
+writing 'sys_back'...
+OKAY [ 10.594s]
+finished. total time: 17.010s
+/mnt/hgfs/linux_test/QFlash fastboot flash system "/mnt/hgfs/linux_test/EC20CEFAGR06A05M4G/update//mdm9607-perf-sysfs.ubi"
+sending 'system' (50176 KB)...
+OKAY [  6.544s]
+writing 'system'...
+OKAY [ 13.451s]
+finished. total time: 19.996s
+/mnt/hgfs/linux_test/QFlash fastboot reboot
+rebooting...
+
+finished. total time: 0.018s
+The device restart...
+Welcome to use the Quectel module!!!
+Upgrade module successfully, Mon Apr  2 00:15:06 2018
+
+THE TOTAL DOWNLOAD TIME IS 113.365 s

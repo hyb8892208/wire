@@ -1,0 +1,1401 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+                              common/bsp_tools.o (__moddi3)
+/usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+                              /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o (__libc_csu_init)
+
+Allocating common symbols
+Common symbol       size              file
+
+g_soap_server_tid   0x4               bsp_server.o
+g_soap_server_attr  0x24              bsp_server.o
+queue               0xfa0             bsp_server.o
+hdl_params          0x1e0             bsp_server.o
+g_queue_tid         0x28              bsp_server.o
+g_bsp_timers        0x180             common/bsp_tools.o
+g_bs_timer_attr     0x24              common/bsp_tools.o
+soap_thr            0x28              bsp_server.o
+g_input_buf         0x100             bsp_server.o
+queue_lock          0x18              bsp_server.o
+queue_cond          0x30              bsp_server.o
+g_bs_timer_tid      0x4               common/bsp_tools.o
+g_soap_server_run_flag
+                    0x4               bsp_server.o
+
+Discarded input sections
+
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ .gnu_debuglink
+                0x0000000000000000        0xc /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+ .gnu_debuglink
+                0x0000000000000000        0xc /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+ .group         0x0000000000000000        0x8 gsoap/stdsoap2.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 gsoap/stdsoap2.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 gsoap/stdsoap2.o
+ .group         0x0000000000000000        0x8 gsoap/soapC.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 gsoap/soapC.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 gsoap/soapC.o
+ .group         0x0000000000000000        0x8 gsoap/soapServer.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 gsoap/soapServer.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 gsoap/soapServer.o
+ .group         0x0000000000000000        0x8 gsoap_api.o
+ .group         0x0000000000000000        0x8 gsoap_api.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 gsoap_api.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 gsoap_api.o
+ .group         0x0000000000000000        0x8 bsp_server.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 bsp_server.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 bsp_server.o
+ .group         0x0000000000000000        0x8 common/bsp_tools.o
+ .group         0x0000000000000000        0x8 common/bsp_tools.o
+ .text.__x86.get_pc_thunk.cx
+                0x0000000000000000        0x4 common/bsp_tools.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 common/bsp_tools.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 common/bsp_tools.o
+ .group         0x0000000000000000        0x8 hw/mod_brd_hw_intf.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 hw/mod_brd_hw_intf.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/mod_brd_hw_intf.o
+ .group         0x0000000000000000        0x8 hw/m35_operation.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 hw/m35_operation.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/m35_operation.o
+ .group         0x0000000000000000        0x8 hw/sim6320c_operation.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 hw/sim6320c_operation.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/sim6320c_operation.o
+ .group         0x0000000000000000        0x8 hw/chan_brd_hw_intf.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 hw/chan_brd_hw_intf.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/chan_brd_hw_intf.o
+ .group         0x0000000000000000        0x8 hw/mod_brd.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 hw/mod_brd.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/mod_brd.o
+ .group         0x0000000000000000        0x8 hw/swg_device.o
+ .group         0x0000000000000000        0x8 hw/swg_device.o
+ .text.__x86.get_pc_thunk.cx
+                0x0000000000000000        0x4 hw/swg_device.o
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 hw/swg_device.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/swg_device.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 hw/swg_device_test.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+ .group         0x0000000000000000        0x8 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .text.__x86.get_pc_thunk.bx
+                0x0000000000000000        0x4 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+ .gnu_debuglink
+                0x0000000000000000        0xc /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+LOAD gsoap/stdsoap2.o
+LOAD gsoap/soapC.o
+LOAD gsoap/soapServer.o
+LOAD gsoap_api.o
+LOAD bsp_server.o
+LOAD common/bsp_tools.o
+LOAD hw/mod_brd_hw_intf.o
+LOAD hw/m35_operation.o
+LOAD hw/sim6320c_operation.o
+LOAD hw/chan_brd_hw_intf.o
+LOAD hw/mod_brd.o
+LOAD hw/swg_device.o
+LOAD hw/swg_device_test.o
+LOAD ./czmq/lib/libczmq.so
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/libpthread.so
+START GROUP
+LOAD /lib/i386-linux-gnu/libpthread.so.0
+LOAD /usr/lib/i386-linux-gnu/libpthread_nonshared.a
+END GROUP
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/libgcc_s.so
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/libc.so
+START GROUP
+LOAD /lib/i386-linux-gnu/libc.so.6
+LOAD /usr/lib/i386-linux-gnu/libc_nonshared.a
+LOAD /lib/i386-linux-gnu/ld-linux.so.2
+END GROUP
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/libgcc_s.so
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+LOAD /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+                0x0000000008048000                PROVIDE (__executable_start, 0x8048000)
+                0x0000000008048134                . = (0x8048000 + SIZEOF_HEADERS)
+
+.interp         0x0000000008048134       0x13
+ *(.interp)
+ .interp        0x0000000008048134       0x13 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.note.ABI-tag   0x0000000008048148       0x20
+ .note.ABI-tag  0x0000000008048148       0x20 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.note.gnu.build-id
+                0x0000000008048168       0x24
+ *(.note.gnu.build-id)
+ .note.gnu.build-id
+                0x0000000008048168       0x24 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.hash
+ *(.hash)
+
+.gnu.hash       0x000000000804818c       0x3c
+ *(.gnu.hash)
+ .gnu.hash      0x000000000804818c       0x3c /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.dynsym         0x00000000080481c8      0x760
+ *(.dynsym)
+ .dynsym        0x00000000080481c8      0x760 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.dynstr         0x0000000008048928      0x518
+ *(.dynstr)
+ .dynstr        0x0000000008048928      0x518 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.gnu.version    0x0000000008048e40       0xec
+ *(.gnu.version)
+ .gnu.version   0x0000000008048e40       0xec /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.gnu.version_d  0x0000000008048f2c        0x0
+ *(.gnu.version_d)
+ .gnu.version_d
+                0x0000000008048f2c        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.gnu.version_r  0x0000000008048f2c       0xa0
+ *(.gnu.version_r)
+ .gnu.version_r
+                0x0000000008048f2c       0xa0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.rel.dyn        0x0000000008048fcc       0x20
+ *(.rel.init)
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ .rel.text      0x0000000008048fcc        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ *(.rel.fini)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+ *(.rel.data.rel.ro .rel.data.rel.ro.* .rel.gnu.linkonce.d.rel.ro.*)
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+ *(.rel.ctors)
+ *(.rel.dtors)
+ *(.rel.got)
+ .rel.got       0x0000000008048fcc       0x20 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+ .rel.bss       0x0000000008048fec        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ *(.rel.ifunc)
+
+.rel.plt        0x0000000008048fec      0x348
+ *(.rel.plt)
+ .rel.plt       0x0000000008048fec      0x348 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x0000000008049334                PROVIDE (__rel_iplt_start, .)
+ *(.rel.iplt)
+ .rel.iplt      0x0000000008049334        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x0000000008049334                PROVIDE (__rel_iplt_end, .)
+
+.init           0x0000000008049334       0x23
+ *(SORT(.init))
+ .init          0x0000000008049334       0x1e /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+                0x0000000008049334                _init
+ .init          0x0000000008049352        0x5 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+
+.plt            0x0000000008049360      0x6a0
+ *(.plt)
+ .plt           0x0000000008049360      0x6a0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x0000000008049370                fputs@@GLIBC_2.0
+                0x0000000008049380                __errno_location@@GLIBC_2.0
+                0x0000000008049390                sprintf@@GLIBC_2.0
+                0x00000000080493a0                open@@GLIBC_2.0
+                0x00000000080493b0                pthread_cond_destroy@@GLIBC_2.3.2
+                0x00000000080493c0                connect@@GLIBC_2.0
+                0x00000000080493d0                zconfig_destroy
+                0x00000000080493e0                pthread_join@@GLIBC_2.0
+                0x00000000080493f0                strerror@@GLIBC_2.0
+                0x0000000008049400                zsys_set_logident
+                0x0000000008049410                shutdown@@GLIBC_2.0
+                0x0000000008049430                pthread_cond_signal@@GLIBC_2.3.2
+                0x0000000008049440                __isoc99_sscanf@@GLIBC_2.7
+                0x0000000008049450                strtod@@GLIBC_2.0
+                0x0000000008049460                strchr@@GLIBC_2.0
+                0x0000000008049470                recv@@GLIBC_2.0
+                0x0000000008049480                inet_addr@@GLIBC_2.0
+                0x0000000008049490                system@@GLIBC_2.0
+                0x00000000080494a0                strncpy@@GLIBC_2.0
+                0x00000000080494b0                putchar@@GLIBC_2.0
+                0x00000000080494c0                write@@GLIBC_2.0
+                0x00000000080494d0                sendto@@GLIBC_2.0
+                0x00000000080494e0                listen@@GLIBC_2.0
+                0x00000000080494f0                memset@@GLIBC_2.0
+                0x0000000008049500                __libc_start_main@@GLIBC_2.0
+                0x0000000008049510                strrchr@@GLIBC_2.0
+                0x0000000008049520                ntohl@@GLIBC_2.0
+                0x0000000008049530                tcgetattr@@GLIBC_2.0
+                0x0000000008049540                htons@@GLIBC_2.0
+                0x0000000008049550                pthread_attr_setstacksize@@GLIBC_2.1
+                0x0000000008049560                zconfig_load
+                0x0000000008049570                read@@GLIBC_2.0
+                0x0000000008049580                gmtime_r@@GLIBC_2.0
+                0x0000000008049590                usleep@@GLIBC_2.0
+                0x00000000080495a0                gettimeofday@@GLIBC_2.0
+                0x00000000080495b0                strtol@@GLIBC_2.0
+                0x00000000080495c0                free@@GLIBC_2.0
+                0x00000000080495d0                access@@GLIBC_2.0
+                0x00000000080495e0                zpoller_remove
+                0x00000000080495f0                fflush@@GLIBC_2.0
+                0x0000000008049600                pthread_cond_init@@GLIBC_2.3.2
+                0x0000000008049610                getopt_long@@GLIBC_2.0
+                0x0000000008049620                accept@@GLIBC_2.0
+                0x0000000008049630                socket@@GLIBC_2.0
+                0x0000000008049640                pthread_mutex_unlock@@GLIBC_2.0
+                0x0000000008049650                pthread_attr_init@@GLIBC_2.1
+                0x0000000008049660                fclose@@GLIBC_2.1
+                0x0000000008049670                zconfig_get
+                0x0000000008049680                mktime@@GLIBC_2.0
+                0x0000000008049690                ntohs@@GLIBC_2.0
+                0x00000000080496a0                memcpy@@GLIBC_2.0
+                0x00000000080496b0                strtoul@@GLIBC_2.0
+                0x00000000080496c0                strlen@@GLIBC_2.0
+                0x00000000080496d0                pthread_attr_setinheritsched@@GLIBC_2.0
+                0x00000000080496e0                fopen@@GLIBC_2.1
+                0x00000000080496f0                zsys_set_logstream
+                0x0000000008049700                pthread_mutex_destroy@@GLIBC_2.0
+                0x0000000008049710                strcpy@@GLIBC_2.0
+                0x0000000008049720                printf@@GLIBC_2.0
+                0x0000000008049730                bind@@GLIBC_2.0
+                0x0000000008049740                zpoller_destroy
+                0x0000000008049750                zpoller_add
+                0x0000000008049760                zpoller_new
+                0x0000000008049770                atoi@@GLIBC_2.0
+                0x0000000008049780                pthread_mutex_init@@GLIBC_2.0
+                0x0000000008049790                select@@GLIBC_2.0
+                0x00000000080497a0                close@@GLIBC_2.0
+                0x00000000080497b0                fwrite@@GLIBC_2.0
+                0x00000000080497c0                fprintf@@GLIBC_2.0
+                0x00000000080497d0                strstr@@GLIBC_2.0
+                0x00000000080497e0                strncat@@GLIBC_2.0
+                0x00000000080497f0                malloc@@GLIBC_2.0
+                0x0000000008049800                pthread_mutex_lock@@GLIBC_2.0
+                0x0000000008049810                zpoller_wait
+                0x0000000008049820                fputc@@GLIBC_2.0
+                0x0000000008049830                __isnan@@GLIBC_2.0
+                0x0000000008049840                pthread_create@@GLIBC_2.1
+                0x0000000008049850                sleep@@GLIBC_2.0
+                0x0000000008049860                __isnanf@@GLIBC_2.0
+                0x0000000008049870                pthread_cond_wait@@GLIBC_2.3.2
+                0x0000000008049880                memmove@@GLIBC_2.0
+                0x0000000008049890                strcat@@GLIBC_2.0
+                0x00000000080498a0                send@@GLIBC_2.0
+                0x00000000080498b0                __xpg_strerror_r@@GLIBC_2.3.4
+                0x00000000080498c0                gethostbyname_r@@GLIBC_2.1.2
+                0x00000000080498d0                puts@@GLIBC_2.0
+                0x00000000080498e0                zsys_info
+                0x00000000080498f0                setsockopt@@GLIBC_2.0
+                0x0000000008049900                tcsetattr@@GLIBC_2.0
+                0x0000000008049910                fcntl@@GLIBC_2.0
+                0x0000000008049920                rand@@GLIBC_2.0
+                0x0000000008049930                bzero@@GLIBC_2.0
+                0x0000000008049940                htonl@@GLIBC_2.0
+                0x0000000008049950                strncmp@@GLIBC_2.0
+                0x0000000008049960                zsys_set_logsystem
+                0x0000000008049970                getsockopt@@GLIBC_2.0
+                0x0000000008049980                strftime@@GLIBC_2.0
+                0x0000000008049990                snprintf@@GLIBC_2.0
+                0x00000000080499a0                zsys_error
+                0x00000000080499b0                recvfrom@@GLIBC_2.0
+                0x00000000080499c0                strcmp@@GLIBC_2.0
+                0x00000000080499d0                exit@@GLIBC_2.0
+                0x00000000080499e0                pthread_setcancelstate@@GLIBC_2.0
+                0x00000000080499f0                pthread_cancel@@GLIBC_2.0
+ *(.iplt)
+ .iplt          0x0000000008049a00        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.text           0x0000000008049a00    0x346c2
+ *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+ .text.unlikely
+                0x0000000008049a00        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+ .text.unlikely
+                0x0000000008049a00        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+ *(.text.exit .text.exit.*)
+ *(.text.startup .text.startup.*)
+ *(.text.hot .text.hot.*)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x0000000008049a00       0x22 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x0000000008049a00                _start
+ .text          0x0000000008049a22        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+ *fill*         0x0000000008049a22        0xe 
+ .gnu.linkonce.t.__x86.get_pc_thunk.bx
+                0x0000000008049a30        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+                0x0000000008049a30                __x86.get_pc_thunk.bx
+ *fill*         0x0000000008049a34        0xc 
+ .text          0x0000000008049a40       0xbb /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+ .text          0x0000000008049afb    0x1d0b2 gsoap/stdsoap2.o
+                0x0000000008049e38                soap_send_raw
+                0x000000000804a036                soap_flush
+                0x000000000804a0df                soap_flush_raw
+                0x000000000804a22c                soap_send
+                0x000000000804a270                soap_send2
+                0x000000000804a2b8                soap_send3
+                0x000000000804a642                soap_recv_raw
+                0x000000000804aa23                soap_recv
+                0x000000000804ae8d                soap_getchar
+                0x000000000804af1a                soap_code
+                0x000000000804af70                soap_code_int
+                0x000000000804afc0                soap_code_str
+                0x000000000804aff2                soap_code_bits
+                0x000000000804b0d1                soap_code_list
+                0x000000000804b304                soap_get
+                0x000000000804badb                soap_move
+                0x000000000804bb1d                soap_tell
+                0x000000000804bb56                soap_pututf8
+                0x000000000804bca7                soap_getutf8
+                0x000000000804bfa7                soap_puthex
+                0x000000000804c044                soap_gethex
+                0x000000000804c20c                soap_putbase64
+                0x000000000804c36d                soap_getbase64
+                0x000000000804c5ec                soap_xop_forward
+                0x000000000804c6a4                soap_dime_forward
+                0x000000000804c79a                soap_strdup
+                0x000000000804c7fb                soap_wstrdup
+                0x000000000804c880                soap_new_block
+                0x000000000804c8ec                soap_push_block
+                0x000000000804c977                soap_pop_block
+                0x000000000804c9e1                soap_update_pointers
+                0x000000000804cbe4                soap_resolve
+                0x000000000804ce6b                soap_size_block
+                0x000000000804cebd                soap_first_block
+                0x000000000804cf22                soap_next_block
+                0x000000000804cf8a                soap_block_size
+                0x000000000804cfa7                soap_end_block
+                0x000000000804d059                soap_save_block
+                0x000000000804d14c                soap_putsize
+                0x000000000804d177                soap_putsizes
+                0x000000000804d1a7                soap_putsizesoffsets
+                0x000000000804d3f2                soap_putoffset
+                0x000000000804d41d                soap_putoffsets
+                0x000000000804d4ec                soap_size
+                0x000000000804d51e                soap_getoffsets
+                0x000000000804d61d                soap_getsize
+                0x000000000804d740                soap_getsizes
+                0x000000000804d81c                soap_getposition
+                0x000000000804d8ed                soap_push_namespace
+                0x000000000804da8f                soap_pop_namespace
+                0x000000000804dadd                soap_match_namespace
+                0x000000000804dc3f                soap_current_namespace
+                0x000000000804dd45                soap_tag_cmp
+                0x000000000804de6d                soap_match_tag
+                0x000000000804e036                soap_match_array
+                0x000000000804f309                soap_bind
+                0x000000000804f8ee                soap_poll
+                0x000000000804fa33                soap_accept
+                0x0000000008050185                soap_closesock
+                0x0000000008050299                soap_force_closesock
+                0x00000000080502e6                soap_cleanup
+                0x000000000805030b                soap_done
+                0x0000000008051673                soap_get_header_attribute
+                0x0000000008051704                soap_decode_key
+                0x0000000008051733                soap_decode_val
+                0x0000000008052405                soap_response
+                0x0000000008052553                soap_url
+                0x00000000080525e6                soap_encode_url
+                0x00000000080526c6                soap_encode_url_string
+                0x0000000008052738                soap_hash
+                0x00000000080527c5                soap_new_LIBRARY_VERSION_REQUIRED_20818
+                0x000000000805280c                soap_free
+                0x000000000805283f                soap_del
+                0x00000000080528db                soap_embed
+                0x0000000008052998                soap_pointer_lookup
+                0x00000000080529ef                soap_pointer_enter
+                0x0000000008052b2d                soap_array_pointer_lookup
+                0x0000000008052be0                soap_begin_count
+                0x0000000008052e63                soap_end_count
+                0x0000000008052ec1                soap_begin_send
+                0x00000000080531ac                soap_embedded
+                0x00000000080531ea                soap_reference
+                0x000000000805329b                soap_array_reference
+                0x0000000008053360                soap_embedded_id
+                0x0000000008053491                soap_is_embedded
+                0x0000000008053538                soap_is_single
+                0x000000000805358e                soap_set_embedded
+                0x00000000080535b8                soap_attachment
+                0x00000000080539e1                soap_lookup
+                0x0000000008053a3e                soap_enter
+                0x0000000008053ab7                soap_malloc
+                0x0000000008053b9e                soap_dealloc
+                0x0000000008053d02                soap_delete
+                0x0000000008053dc5                soap_delegate_deletion
+                0x0000000008053e4b                soap_link
+                0x0000000008053e9d                soap_unlink
+                0x0000000008053f30                soap_lookup_type
+                0x0000000008053f78                soap_id_lookup
+                0x000000000805421b                soap_id_forward
+                0x00000000080543c8                soap_id_enter
+                0x00000000080545b1                soap_fcopy
+                0x00000000080545dc                soap_end_send
+                0x00000000080546d8                soap_end_send_flush
+                0x00000000080549b0                soap_end_recv
+                0x0000000008054c38                soap_free_temp
+                0x0000000008054e35                soap_open_logfile
+                0x0000000008054ea2                soap_set_recv_logfile
+                0x0000000008054ea7                soap_set_sent_logfile
+                0x0000000008054eac                soap_set_test_logfile
+                0x0000000008054eb1                soap_copy
+                0x0000000008054ee7                soap_copy_context
+                0x000000000805511f                soap_copy_stream
+                0x00000000080556b0                soap_free_stream
+                0x00000000080556dc                soap_initialize
+                0x0000000008055705                soap_init_LIBRARY_VERSION_REQUIRED_20818
+                0x0000000008055f3b                soap_begin
+                0x0000000008056097                soap_end
+                0x0000000008056126                soap_set_version
+                0x00000000080561bc                soap_set_namespaces
+                0x0000000008056321                soap_set_local_namespaces
+                0x0000000008056402                soap_tagsearch
+                0x00000000080564b7                soap_lookup_ns
+                0x0000000008056786                soap_element
+                0x000000000805701f                soap_element_begin_out
+                0x000000000805707a                soap_array_begin_out
+                0x0000000008057299                soap_element_start_end_out
+                0x00000000080575d9                soap_element_end_out
+                0x000000000805772c                soap_element_ref
+                0x00000000080577c7                soap_element_href
+                0x0000000008057832                soap_element_null
+                0x0000000008057935                soap_element_nil
+                0x00000000080579ad                soap_element_id
+                0x0000000008057ad8                soap_element_result
+                0x0000000008057b9c                soap_check_result
+                0x0000000008057be8                soap_attribute
+                0x0000000008057d40                soap_element_begin_in
+                0x0000000008057ee3                soap_element_end_in
+                0x000000000805811c                soap_attr_value
+                0x00000000080581e0                soap_set_attr
+                0x0000000008058666                soap_clr_attr
+                0x0000000008058a88                soap_store_lab
+                0x0000000008058ac0                soap_append_lab
+                0x0000000008058c18                soap_peek_element
+                0x0000000008059f08                soap_retry
+                0x0000000008059f3a                soap_revert
+                0x0000000008059f7e                soap_string_out
+                0x000000000805a2d3                soap_string_in
+                0x000000000805b007                soap_wstring_out
+                0x000000000805b183                soap_wstring_in
+                0x000000000805b62c                soap_int2s
+                0x000000000805b654                soap_outint
+                0x000000000805b6da                soap_s2int
+                0x000000000805b755                soap_inint
+                0x000000000805b911                soap_long2s
+                0x000000000805b951                soap_outlong
+                0x000000000805b9d7                soap_s2long
+                0x000000000805ba4e                soap_inlong
+                0x000000000805bc0a                soap_LONG642s
+                0x000000000805bc5c                soap_outLONG64
+                0x000000000805bce6                soap_s2LONG64
+                0x000000000805bd36                soap_inLONG64
+                0x000000000805bfdc                soap_byte2s
+                0x000000000805c00c                soap_outbyte
+                0x000000000805c096                soap_s2byte
+                0x000000000805c108                soap_inbyte
+                0x000000000805c276                soap_short2s
+                0x000000000805c2a7                soap_outshort
+                0x000000000805c32f                soap_s2short
+                0x000000000805c3a8                soap_inshort
+                0x000000000805c53d                soap_float2s
+                0x000000000805c65b                soap_outfloat
+                0x000000000805c6e1                soap_s2float
+                0x000000000805cae3                soap_infloat
+                0x000000000805cc0a                soap_double2s
+                0x000000000805cd32                soap_outdouble
+                0x000000000805cdbe                soap_s2double
+                0x000000000805cef8                soap_indouble
+                0x000000000805d01f                soap_unsignedByte2s
+                0x000000000805d04f                soap_outunsignedByte
+                0x000000000805d0d9                soap_s2unsignedByte
+                0x000000000805d148                soap_inunsignedByte
+                0x000000000805d2b6                soap_unsignedShort2s
+                0x000000000805d2e7                soap_outunsignedShort
+                0x000000000805d371                soap_s2unsignedShort
+                0x000000000805d3e1                soap_inunsignedShort
+                0x000000000805d576                soap_unsignedInt2s
+                0x000000000805d59e                soap_outunsignedInt
+                0x000000000805d624                soap_s2unsignedInt
+                0x000000000805d6aa                soap_inunsignedInt
+                0x000000000805d866                soap_unsignedLong2s
+                0x000000000805d8a6                soap_outunsignedLong
+                0x000000000805d92c                soap_s2unsignedLong
+                0x000000000805d9b2                soap_inunsignedLong
+                0x000000000805db6e                soap_ULONG642s
+                0x000000000805dbc0                soap_outULONG64
+                0x000000000805dc4a                soap_s2ULONG64
+                0x000000000805dc9a                soap_inULONG64
+                0x000000000805decb                soap_s2string
+                0x000000000805df69                soap_s2QName
+                0x000000000805e33f                soap_QName2s
+                0x000000000805e6f9                soap_s2wchar
+                0x000000000805e991                soap_wchar2s
+                0x000000000805eb14                soap_outstring
+                0x000000000805ebeb                soap_instring
+                0x000000000805ee0d                soap_outwstring
+                0x000000000805eee3                soap_inwstring
+                0x000000000805f0d0                soap_timegm
+                0x000000000805f153                soap_dateTime2s
+                0x000000000805f1df                soap_outdateTime
+                0x000000000805f265                soap_s2dateTime
+                0x000000000805f58e                soap_indateTime
+                0x000000000805f6fc                soap_outliteral
+                0x000000000805f8ee                soap_inliteral
+                0x000000000805fa70                soap_outwliteral
+                0x000000000805fc78                soap_inwliteral
+                0x000000000805fe12                soap_value
+                0x000000000805ff2b                soap_getline
+                0x00000000080602cc                soap_dime_option
+                0x0000000008060372                soap_putdimehdr
+                0x0000000008060554                soap_putdime
+                0x0000000008060a86                soap_getdimehdr
+                0x0000000008060d86                soap_getdime
+                0x0000000008061400                soap_getmimehdr
+                0x0000000008061766                soap_getmime
+                0x000000000806179b                soap_post_check_mime_attachments
+                0x00000000080617b3                soap_check_mime_attachments
+                0x00000000080617f8                soap_get_mime_attachment
+                0x0000000008061d88                soap_match_cid
+                0x0000000008061f42                soap_putmimehdr
+                0x00000000080620df                soap_putmime
+                0x000000000806236c                soap_set_dime
+                0x000000000806239b                soap_set_mime
+                0x0000000008062415                soap_clr_dime
+                0x0000000008062444                soap_clr_mime
+                0x0000000008062548                soap_set_dime_attachment
+                0x00000000080625f2                soap_set_mime_attachment
+                0x00000000080626b2                soap_next_multipart
+                0x0000000008062877                soap_begin_serve
+                0x0000000008062919                soap_begin_recv
+                0x0000000008063460                soap_envelope_begin_out
+                0x0000000008063675                soap_envelope_end_out
+                0x00000000080638a2                soap_get_http_body
+                0x0000000008063a44                soap_envelope_begin_in
+                0x0000000008063cbb                soap_envelope_end_in
+                0x0000000008063d06                soap_body_begin_out
+                0x0000000008063d9f                soap_body_end_out
+                0x0000000008063dfe                soap_body_begin_in
+                0x0000000008063e79                soap_body_end_in
+                0x0000000008063eec                soap_recv_header
+                0x0000000008063f72                soap_set_endpoint
+                0x0000000008064104                soap_connect
+                0x0000000008064131                soap_connect_command
+                0x000000000806464e                soap_s2base64
+                0x00000000080647d1                soap_base642s
+                0x0000000008064a1a                soap_s2hex
+                0x0000000008064ae9                soap_hex2s
+                0x0000000008064c25                soap_puthttphdr
+                0x0000000008065245                soap_set_fault
+                0x0000000008065b36                soap_send_fault
+                0x0000000008065ddf                soap_recv_fault
+                0x0000000008066011                soap_send_empty_response
+                0x000000000806609e                soap_recv_empty_response
+                0x00000000080663ef                soap_set_sender_error
+                0x000000000806643b                soap_set_receiver_error
+                0x000000000806651d                soap_sender_fault
+                0x0000000008066547                soap_sender_fault_subcode
+                0x0000000008066591                soap_receiver_fault
+                0x00000000080665bb                soap_receiver_fault_subcode
+                0x0000000008066605                soap_print_fault
+                0x000000000806676c                soap_sprint_fault
+                0x00000000080668ee                soap_print_fault_location
+                0x0000000008066a93                soap_register_plugin_arg
+                0x0000000008066b8e                soap_lookup_plugin
+ .text          0x0000000008066bad     0x93ce gsoap/soapC.o
+                0x0000000008066bad                soap_getheader
+                0x0000000008066c16                soap_putheader
+                0x0000000008066c95                soap_serializeheader
+                0x0000000008066cdd                soap_header
+                0x0000000008066d41                soap_fault
+                0x0000000008066e52                soap_serializefault
+                0x0000000008066e8e                soap_putfault
+                0x0000000008066ed7                soap_getfault
+                0x0000000008066f20                soap_faultcode
+                0x0000000008066f79                soap_faultsubcode
+                0x0000000008067015                soap_check_faultsubcode
+                0x00000000080670a2                soap_faultstring
+                0x00000000080670ee                soap_faultdetail
+                0x00000000080671c8                soap_check_faultdetail
+                0x000000000806723f                soap_getindependent
+                0x00000000080672cc                soap_getelement
+                0x0000000008067dd8                soap_ignore_element
+                0x0000000008067f8a                soap_putindependent
+                0x0000000008068060                soap_putelement
+                0x00000000080684c3                soap_markelement
+                0x0000000008068737                soap_default_byte
+                0x0000000008068742                soap_out_byte
+                0x0000000008068775                soap_in_byte
+                0x00000000080687ab                soap_put_byte
+                0x0000000008068822                soap_get_byte
+                0x0000000008068872                soap_default_int
+                0x0000000008068880                soap_out_int
+                0x00000000080688b3                soap_in_int
+                0x00000000080688e9                soap_put_int
+                0x0000000008068960                soap_get_int
+                0x00000000080689b0                soap_default_unsignedByte
+                0x00000000080689bb                soap_out_unsignedByte
+                0x00000000080689ee                soap_in_unsignedByte
+                0x0000000008068a24                soap_put_unsignedByte
+                0x0000000008068a9b                soap_get_unsignedByte
+                0x0000000008068aeb                soap_default_unsignedInt
+                0x0000000008068af9                soap_out_unsignedInt
+                0x0000000008068b2c                soap_in_unsignedInt
+                0x0000000008068b62                soap_put_unsignedInt
+                0x0000000008068bd9                soap_get_unsignedInt
+                0x0000000008068c29                soap_default_SOAP_ENV__Fault
+                0x0000000008068cce                soap_serialize_SOAP_ENV__Fault
+                0x0000000008068d9f                soap_out_SOAP_ENV__Fault
+                0x0000000008068ff8                soap_in_SOAP_ENV__Fault
+                0x000000000806943a                soap_put_SOAP_ENV__Fault
+                0x00000000080694b1                soap_get_SOAP_ENV__Fault
+                0x0000000008069501                soap_default_SOAP_ENV__Reason
+                0x000000000806952a                soap_serialize_SOAP_ENV__Reason
+                0x0000000008069553                soap_out_SOAP_ENV__Reason
+                0x0000000008069605                soap_in_SOAP_ENV__Reason
+                0x00000000080697cf                soap_put_SOAP_ENV__Reason
+                0x0000000008069846                soap_get_SOAP_ENV__Reason
+                0x0000000008069896                soap_default_SOAP_ENV__Detail
+                0x00000000080698b8                soap_serialize_SOAP_ENV__Detail
+                0x00000000080698eb                soap_out_SOAP_ENV__Detail
+                0x0000000008069993                soap_in_SOAP_ENV__Detail
+                0x0000000008069ba7                soap_put_SOAP_ENV__Detail
+                0x0000000008069c1e                soap_get_SOAP_ENV__Detail
+                0x0000000008069c6e                soap_default_SOAP_ENV__Code
+                0x0000000008069ca1                soap_serialize_SOAP_ENV__Code
+                0x0000000008069cdf                soap_out_SOAP_ENV__Code
+                0x0000000008069db7                soap_in_SOAP_ENV__Code
+                0x0000000008069fc9                soap_put_SOAP_ENV__Code
+                0x000000000806a040                soap_get_SOAP_ENV__Code
+                0x000000000806a090                soap_default_SOAP_ENV__Header
+                0x000000000806a095                soap_serialize_SOAP_ENV__Header
+                0x000000000806a09a                soap_out_SOAP_ENV__Header
+                0x000000000806a0f6                soap_in_SOAP_ENV__Header
+                0x000000000806a269                soap_put_SOAP_ENV__Header
+                0x000000000806a2e0                soap_get_SOAP_ENV__Header
+                0x000000000806a330                soap_default_ns__brdinfo_chn_num_get
+                0x000000000806a335                soap_serialize_ns__brdinfo_chn_num_get
+                0x000000000806a33a                soap_out_ns__brdinfo_chn_num_get
+                0x000000000806a396                soap_in_ns__brdinfo_chn_num_get
+                0x000000000806a509                soap_put_ns__brdinfo_chn_num_get
+                0x000000000806a580                soap_get_ns__brdinfo_chn_num_get
+                0x000000000806a5d0                soap_default_ns__brdmcu_reg_write
+                0x000000000806a623                soap_serialize_ns__brdmcu_reg_write
+                0x000000000806a628                soap_out_ns__brdmcu_reg_write
+                0x000000000806a720                soap_in_ns__brdmcu_reg_write
+                0x000000000806a9a7                soap_put_ns__brdmcu_reg_write
+                0x000000000806aa1e                soap_get_ns__brdmcu_reg_write
+                0x000000000806aa6e                soap_default_ns__brdmcu_reg_read
+                0x000000000806aac1                soap_serialize_ns__brdmcu_reg_read
+                0x000000000806aac6                soap_out_ns__brdmcu_reg_read
+                0x000000000806abbe                soap_in_ns__brdmcu_reg_read
+                0x000000000806ae45                soap_put_ns__brdmcu_reg_read
+                0x000000000806aebc                soap_get_ns__brdmcu_reg_read
+                0x000000000806af0c                soap_default_ns__brdmcu_int_version
+                0x000000000806af35                soap_serialize_ns__brdmcu_int_version
+                0x000000000806af3a                soap_out_ns__brdmcu_int_version
+                0x000000000806afc7                soap_in_ns__brdmcu_int_version
+                0x000000000806b1b2                soap_put_ns__brdmcu_int_version
+                0x000000000806b229                soap_get_ns__brdmcu_int_version
+                0x000000000806b279                soap_default_ns__brdmcu_version
+                0x000000000806b27e                soap_serialize_ns__brdmcu_version
+                0x000000000806b283                soap_out_ns__brdmcu_version
+                0x000000000806b2df                soap_in_ns__brdmcu_version
+                0x000000000806b452                soap_put_ns__brdmcu_version
+                0x000000000806b4c9                soap_get_ns__brdmcu_version
+                0x000000000806b519                soap_default_ns__brdinfo_version
+                0x000000000806b51e                soap_serialize_ns__brdinfo_version
+                0x000000000806b523                soap_out_ns__brdinfo_version
+                0x000000000806b57f                soap_in_ns__brdinfo_version
+                0x000000000806b6f2                soap_put_ns__brdinfo_version
+                0x000000000806b769                soap_get_ns__brdinfo_version
+                0x000000000806b7b9                soap_default_ns__upgrade_chan_status
+                0x000000000806b7e2                soap_serialize_ns__upgrade_chan_status
+                0x000000000806b7e7                soap_out_ns__upgrade_chan_status
+                0x000000000806b874                soap_in_ns__upgrade_chan_status
+                0x000000000806ba5f                soap_put_ns__upgrade_chan_status
+                0x000000000806bad6                soap_get_ns__upgrade_chan_status
+                0x000000000806bb26                soap_default_ns__upgrade_chan_select
+                0x000000000806bb4f                soap_serialize_ns__upgrade_chan_select
+                0x000000000806bb54                soap_out_ns__upgrade_chan_select
+                0x000000000806bbe1                soap_in_ns__upgrade_chan_select
+                0x000000000806bdcc                soap_put_ns__upgrade_chan_select
+                0x000000000806be43                soap_get_ns__upgrade_chan_select
+                0x000000000806be93                soap_default_ns__module_reset_status_get
+                0x000000000806bebc                soap_serialize_ns__module_reset_status_get
+                0x000000000806bec1                soap_out_ns__module_reset_status_get
+                0x000000000806bf4e                soap_in_ns__module_reset_status_get
+                0x000000000806c139                soap_put_ns__module_reset_status_get
+                0x000000000806c1b0                soap_get_ns__module_reset_status_get
+                0x000000000806c200                soap_default_ns__module_uid_get
+                0x000000000806c229                soap_serialize_ns__module_uid_get
+                0x000000000806c22e                soap_out_ns__module_uid_get
+                0x000000000806c2bb                soap_in_ns__module_uid_get
+                0x000000000806c4a6                soap_put_ns__module_uid_get
+                0x000000000806c51d                soap_get_ns__module_uid_get
+                0x000000000806c56d                soap_default_ns__module_num_get
+                0x000000000806c572                soap_serialize_ns__module_num_get
+                0x000000000806c577                soap_out_ns__module_num_get
+                0x000000000806c5d3                soap_in_ns__module_num_get
+                0x000000000806c746                soap_put_ns__module_num_get
+                0x000000000806c7bd                soap_get_ns__module_num_get
+                0x000000000806c80d                soap_default_ns__module_power_state_get
+                0x000000000806c836                soap_serialize_ns__module_power_state_get
+                0x000000000806c83b                soap_out_ns__module_power_state_get
+                0x000000000806c8c8                soap_in_ns__module_power_state_get
+                0x000000000806cab3                soap_put_ns__module_power_state_get
+                0x000000000806cb2a                soap_get_ns__module_power_state_get
+                0x000000000806cb7a                soap_default_ns__module_power_off
+                0x000000000806cba3                soap_serialize_ns__module_power_off
+                0x000000000806cba8                soap_out_ns__module_power_off
+                0x000000000806cc35                soap_in_ns__module_power_off
+                0x000000000806ce20                soap_put_ns__module_power_off
+                0x000000000806ce97                soap_get_ns__module_power_off
+                0x000000000806cee7                soap_default_ns__module_power_on
+                0x000000000806cf10                soap_serialize_ns__module_power_on
+                0x000000000806cf15                soap_out_ns__module_power_on
+                0x000000000806cfa2                soap_in_ns__module_power_on
+                0x000000000806d18d                soap_put_ns__module_power_on
+                0x000000000806d204                soap_get_ns__module_power_on
+                0x000000000806d254                soap_default_ns__module_turn_on_state_get
+                0x000000000806d27d                soap_serialize_ns__module_turn_on_state_get
+                0x000000000806d282                soap_out_ns__module_turn_on_state_get
+                0x000000000806d30f                soap_in_ns__module_turn_on_state_get
+                0x000000000806d4fa                soap_put_ns__module_turn_on_state_get
+                0x000000000806d571                soap_get_ns__module_turn_on_state_get
+                0x000000000806d5c1                soap_default_ns__module_turn_off
+                0x000000000806d5ea                soap_serialize_ns__module_turn_off
+                0x000000000806d5ef                soap_out_ns__module_turn_off
+                0x000000000806d67c                soap_in_ns__module_turn_off
+                0x000000000806d867                soap_put_ns__module_turn_off
+                0x000000000806d8de                soap_get_ns__module_turn_off
+                0x000000000806d92e                soap_default_ns__module_turn_on
+                0x000000000806d957                soap_serialize_ns__module_turn_on
+                0x000000000806d95c                soap_out_ns__module_turn_on
+                0x000000000806d9e9                soap_in_ns__module_turn_on
+                0x000000000806dbd4                soap_put_ns__module_turn_on
+                0x000000000806dc4b                soap_get_ns__module_turn_on
+                0x000000000806dc9b                soap_default_ns__simcard_insert_event_get
+                0x000000000806dcc4                soap_serialize_ns__simcard_insert_event_get
+                0x000000000806dcc9                soap_out_ns__simcard_insert_event_get
+                0x000000000806dd56                soap_in_ns__simcard_insert_event_get
+                0x000000000806df41                soap_put_ns__simcard_insert_event_get
+                0x000000000806dfb8                soap_get_ns__simcard_insert_event_get
+                0x000000000806e008                soap_default_ns__simcard_insert_state_get
+                0x000000000806e031                soap_serialize_ns__simcard_insert_state_get
+                0x000000000806e036                soap_out_ns__simcard_insert_state_get
+                0x000000000806e0c3                soap_in_ns__simcard_insert_state_get
+                0x000000000806e2ae                soap_put_ns__simcard_insert_state_get
+                0x000000000806e325                soap_get_ns__simcard_insert_state_get
+                0x000000000806e375                soap_default_ns__simcard_enable_state_get
+                0x000000000806e39e                soap_serialize_ns__simcard_enable_state_get
+                0x000000000806e3a3                soap_out_ns__simcard_enable_state_get
+                0x000000000806e430                soap_in_ns__simcard_enable_state_get
+                0x000000000806e61b                soap_put_ns__simcard_enable_state_get
+                0x000000000806e692                soap_get_ns__simcard_enable_state_get
+                0x000000000806e6e2                soap_default_ns__simcard_disable
+                0x000000000806e70b                soap_serialize_ns__simcard_disable
+                0x000000000806e710                soap_out_ns__simcard_disable
+                0x000000000806e79d                soap_in_ns__simcard_disable
+                0x000000000806e988                soap_put_ns__simcard_disable
+                0x000000000806e9ff                soap_get_ns__simcard_disable
+                0x000000000806ea4f                soap_default_ns__simcard_enable
+                0x000000000806ea78                soap_serialize_ns__simcard_enable
+                0x000000000806ea7d                soap_out_ns__simcard_enable
+                0x000000000806eb0a                soap_in_ns__simcard_enable
+                0x000000000806ecf5                soap_put_ns__simcard_enable
+                0x000000000806ed6c                soap_get_ns__simcard_enable
+                0x000000000806edbc                soap_default_ns__gsoap_api_rsp_t
+                0x000000000806ee0f                soap_serialize_ns__gsoap_api_rsp_t
+                0x000000000806ee3b                soap_out_ns__gsoap_api_rsp_t
+                0x000000000806ef33                soap_in_ns__gsoap_api_rsp_t
+                0x000000000806f1c2                soap_put_ns__gsoap_api_rsp_t
+                0x000000000806f239                soap_get_ns__gsoap_api_rsp_t
+                0x000000000806f289                soap_serialize_PointerToSOAP_ENV__Reason
+                0x000000000806f2ce                soap_out_PointerToSOAP_ENV__Reason
+                0x000000000806f336                soap_in_PointerToSOAP_ENV__Reason
+                0x000000000806f44b                soap_put_PointerToSOAP_ENV__Reason
+                0x000000000806f4c2                soap_get_PointerToSOAP_ENV__Reason
+                0x000000000806f512                soap_serialize_PointerToSOAP_ENV__Detail
+                0x000000000806f557                soap_out_PointerToSOAP_ENV__Detail
+                0x000000000806f5bf                soap_in_PointerToSOAP_ENV__Detail
+                0x000000000806f6d4                soap_put_PointerToSOAP_ENV__Detail
+                0x000000000806f74b                soap_get_PointerToSOAP_ENV__Detail
+                0x000000000806f79b                soap_serialize_PointerToSOAP_ENV__Code
+                0x000000000806f7e0                soap_out_PointerToSOAP_ENV__Code
+                0x000000000806f848                soap_in_PointerToSOAP_ENV__Code
+                0x000000000806f95d                soap_put_PointerToSOAP_ENV__Code
+                0x000000000806f9d4                soap_get_PointerToSOAP_ENV__Code
+                0x000000000806fa24                soap_serialize_PointerTons__gsoap_api_rsp_t
+                0x000000000806fa69                soap_out_PointerTons__gsoap_api_rsp_t
+                0x000000000806fad1                soap_in_PointerTons__gsoap_api_rsp_t
+                0x000000000806fbe6                soap_put_PointerTons__gsoap_api_rsp_t
+                0x000000000806fc5d                soap_get_PointerTons__gsoap_api_rsp_t
+                0x000000000806fcad                soap_serialize__QName
+                0x000000000806fcda                soap_out__QName
+                0x000000000806fd0d                soap_in__QName
+                0x000000000806fd46                soap_put__QName
+                0x000000000806fdbd                soap_get__QName
+                0x000000000806fe0d                soap_default_string
+                0x000000000806fe1b                soap_serialize_string
+                0x000000000806fe48                soap_out_string
+                0x000000000806fe7b                soap_in_string
+                0x000000000806feb4                soap_put_string
+                0x000000000806ff2b                soap_get_string
+ .text          0x000000000806ff7b     0x3e56 gsoap/soapServer.o
+                0x000000000806ff7b                soap_serve
+                0x000000000807004f                soap_serve_request
+                0x0000000008070525                soap_serve_ns__simcard_enable
+                0x00000000080707b8                soap_serve_ns__simcard_disable
+                0x0000000008070a4b                soap_serve_ns__simcard_enable_state_get
+                0x0000000008070cde                soap_serve_ns__simcard_insert_state_get
+                0x0000000008070f71                soap_serve_ns__simcard_insert_event_get
+                0x0000000008071204                soap_serve_ns__module_turn_on
+                0x0000000008071497                soap_serve_ns__module_turn_off
+                0x000000000807172a                soap_serve_ns__module_turn_on_state_get
+                0x00000000080719bd                soap_serve_ns__module_power_on
+                0x0000000008071c50                soap_serve_ns__module_power_off
+                0x0000000008071ee3                soap_serve_ns__module_power_state_get
+                0x0000000008072176                soap_serve_ns__module_num_get
+                0x0000000008072405                soap_serve_ns__module_uid_get
+                0x0000000008072698                soap_serve_ns__module_reset_status_get
+                0x000000000807292b                soap_serve_ns__upgrade_chan_select
+                0x0000000008072bbe                soap_serve_ns__upgrade_chan_status
+                0x0000000008072e51                soap_serve_ns__brdinfo_version
+                0x00000000080730e0                soap_serve_ns__brdmcu_version
+                0x000000000807336f                soap_serve_ns__brdmcu_int_version
+                0x0000000008073602                soap_serve_ns__brdmcu_reg_read
+                0x00000000080738a0                soap_serve_ns__brdmcu_reg_write
+                0x0000000008073b42                soap_serve_ns__brdinfo_chn_num_get
+ .text          0x0000000008073dd1     0x11c0 gsoap_api.o
+                0x0000000008073e46                ns__simcard_enable
+                0x0000000008073ea9                ns__simcard_disable
+                0x0000000008073f0f                ns__simcard_enable_state_get
+                0x0000000008074030                ns__simcard_insert_state_get
+                0x000000000807415e                ns__simcard_insert_event_get
+                0x00000000080742a0                ns__module_turn_on
+                0x0000000008074306                ns__module_turn_off
+                0x000000000807436c                ns__module_turn_on_state_get
+                0x000000000807448d                ns__module_power_on
+                0x00000000080744f3                ns__module_power_off
+                0x0000000008074559                ns__module_power_state_get
+                0x000000000807469b                ns__module_num_get
+                0x000000000807479a                ns__module_uid_get
+                0x000000000807487d                ns__module_reset_status_get
+                0x000000000807494d                ns__brdmcu_version
+                0x00000000080749f3                ns__brdmcu_int_version
+                0x0000000008074af8                ns__brdmcu_reg_read
+                0x0000000008074c49                ns__brdmcu_reg_write
+                0x0000000008074cb2                ns__brdinfo_chn_num_get
+                0x0000000008074da8                ns__brdinfo_version
+                0x0000000008074ed3                ns__upgrade_chan_select
+                0x0000000008074f32                ns__upgrade_chan_status
+ .text.__x86.get_pc_thunk.cx
+                0x0000000008074f91        0x4 gsoap_api.o
+                0x0000000008074f91                __x86.get_pc_thunk.cx
+ .text          0x0000000008074f95     0x104d bsp_server.o
+                0x0000000008074fc6                process_options
+                0x0000000008075161                soap_enqueue
+                0x0000000008075212                soap_dequeue
+                0x00000000080752b9                soap_queue_handle
+                0x00000000080753a2                soap_server_run
+                0x00000000080754a7                soap_server_start
+                0x0000000008075888                soap_server_stop
+                0x00000000080759f4                soap_get_port
+                0x0000000008075a06                czmq_init_log
+                0x0000000008075bce                cmd_usage
+                0x0000000008075c09                cmd_proc
+                0x0000000008075d4f                cmd_parse
+                0x0000000008075e6e                main
+ .text          0x0000000008075fe2      0xa2f common/bsp_tools.o
+                0x0000000008075fe2                char_to_val
+                0x0000000008076034                str_to_int
+                0x0000000008076195                open_serial
+                0x00000000080762af                close_serial
+                0x00000000080762d5                get_termios
+                0x000000000807631a                set_termios
+                0x0000000008076361                set_serial_attr
+                0x0000000008076496                bs_timer_init
+                0x000000000807653a                bs_timer_destroy
+                0x0000000008076556                bs_timer_add
+                0x000000000807678f                bs_timer_del
+                0x00000000080767f5                bs_timer_run
+ .text          0x0000000008076a11      0x9e4 hw/mod_brd_hw_intf.o
+                0x0000000008076e44                hwif_reg_read_mul
+                0x0000000008076fb9                hwif_reg_write
+                0x00000000080770a0                hwif_reg_write_bit
+                0x0000000008077249                hwif_get_help_info
+                0x000000000807727e                hwif_get_verison_info
+                0x00000000080772b3                hwif_get_uid_info
+                0x00000000080772e8                hwif_get_key_status
+                0x000000000807735c                hwif_set_key_status_hold_time
+ .text          0x00000000080773f5      0xaf5 hw/m35_operation.o
+ .text          0x0000000008077eea      0xa98 hw/sim6320c_operation.o
+ .text          0x0000000008078982      0x239 hw/chan_brd_hw_intf.o
+                0x0000000008078982                chan_brd_rx_cmd_ret
+                0x0000000008078aed                chan_brd_tx_cmd
+ .text          0x0000000008078bbb      0x240 hw/mod_brd.o
+                0x0000000008078bbb                mod_brd_select_upgrade_chan
+                0x0000000008078d0a                mod_brd_upgrade_chan_is_selected
+ .text          0x0000000008078dfb     0x5034 hw/swg_device.o
+                0x000000000807b57b                swg_device_init
+                0x000000000807b848                swg_device_deinit
+                0x000000000807b8db                swg_gchan_2_mb_idx_chan
+                0x000000000807b98a                swg_read_mod_brd_reg
+                0x000000000807bb53                swg_write_mod_brd_reg
+                0x000000000807bd06                swg_get_mod_brd_uid
+                0x000000000807beb0                swg_get_mod_brd_reset_key_status
+                0x000000000807c051                swg_sim_card_enable
+                0x000000000807c2df                swg_get_sim_card_enable_status
+                0x000000000807c5af                swg_get_sim_card_insert_status
+                0x000000000807c87f                swg_get_sim_card_insert_event
+                0x000000000807cd4d                swg_chan_mod_power_on_off
+                0x000000000807d05e                swg_get_chan_mod_power_status
+                0x000000000807d32e                swg_chan_mod_vbat_supply
+                0x000000000807d5d5                swg_get_chan_mod_vbat_status
+                0x000000000807d8a5                swg_get_total_chan_num
+                0x000000000807d8be                swg_get_total_mod_brd_num
+                0x000000000807d8d7                swg_get_mod_brd_ver_info
+                0x000000000807d9e7                swg_get_dev_ver_info
+                0x000000000807da2b                swg_select_upgrade_chan
+                0x000000000807dca7                swg_upgrade_chan_is_selected
+ .text          0x000000000807de2f        0x0 hw/swg_device_test.o
+ *fill*         0x000000000807de2f        0x1 
+ .text          0x000000000807de30      0x212 /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+                0x000000000807de30                __moddi3
+ *fill*         0x000000000807e042        0xe 
+ .text          0x000000000807e050       0x72 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+                0x000000000807e050                __libc_csu_init
+                0x000000000807e0c0                __libc_csu_fini
+ .text          0x000000000807e0c2        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+ .text          0x000000000807e0c2        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+ *(.gnu.warning)
+
+.fini           0x000000000807e0c4       0x14
+ *(SORT(.fini))
+ .fini          0x000000000807e0c4        0xf /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+                0x000000000807e0c4                _fini
+ .fini          0x000000000807e0d3        0x5 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+                0x000000000807e0d8                PROVIDE (__etext, .)
+                0x000000000807e0d8                PROVIDE (_etext, .)
+                0x000000000807e0d8                PROVIDE (etext, .)
+
+.rodata         0x000000000807e100     0x5ce4
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata        0x000000000807e100        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x000000000807e100                _fp_hw
+ .rodata.cst4   0x000000000807e104        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x000000000807e104                _IO_stdin_used
+ *fill*         0x000000000807e108       0x38 
+ .rodata        0x000000000807e140     0x2538 gsoap/stdsoap2.o
+                0x000000000807e264                soap_double_nan
+                0x000000000807e280                soap_base64o
+                0x000000000807e300                soap_base64i
+ .rodata        0x0000000008080678      0x5f2 gsoap/soapC.o
+ .rodata        0x0000000008080c6a      0x1e5 gsoap/soapServer.o
+ *fill*         0x0000000008080e4f        0x1 
+ .rodata        0x0000000008080e50      0x4dd gsoap_api.o
+ *fill*         0x000000000808132d        0x3 
+ .rodata        0x0000000008081330      0x4d0 bsp_server.o
+ .rodata        0x0000000008081800       0x16 common/bsp_tools.o
+ *fill*         0x0000000008081816        0x2 
+ .rodata        0x0000000008081818      0x208 hw/mod_brd_hw_intf.o
+ .rodata        0x0000000008081a20      0x12e hw/m35_operation.o
+ *fill*         0x0000000008081b4e        0x2 
+ .rodata        0x0000000008081b50       0xf0 hw/sim6320c_operation.o
+ .rodata        0x0000000008081c40     0x21a4 hw/swg_device.o
+
+.rodata1
+ *(.rodata1)
+
+.eh_frame_hdr   0x0000000008083de4     0x16e4
+ *(.eh_frame_hdr)
+ .eh_frame_hdr  0x0000000008083de4     0x16e4 gsoap/stdsoap2.o
+
+.eh_frame       0x00000000080854c8     0x6c78
+ *(.eh_frame)
+ .eh_frame      0x00000000080854c8       0x3c /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                                         0x40 (size before relaxing)
+ .eh_frame      0x0000000008085504     0x31b4 gsoap/stdsoap2.o
+                                       0x31e0 (size before relaxing)
+ .eh_frame      0x00000000080886b8     0x21bc gsoap/soapC.o
+                                       0x21e8 (size before relaxing)
+ .eh_frame      0x000000000808a874      0x370 gsoap/soapServer.o
+                                        0x39c (size before relaxing)
+ .eh_frame      0x000000000808abe4      0x390 gsoap_api.o
+                                        0x3bc (size before relaxing)
+ .eh_frame      0x000000000808af74      0x25c bsp_server.o
+                                        0x288 (size before relaxing)
+ .eh_frame      0x000000000808b1d0      0x1ec common/bsp_tools.o
+                                        0x22c (size before relaxing)
+ .eh_frame      0x000000000808b3bc      0x1d4 hw/mod_brd_hw_intf.o
+                                        0x200 (size before relaxing)
+ .eh_frame      0x000000000808b590      0x1a0 hw/m35_operation.o
+                                        0x1cc (size before relaxing)
+ .eh_frame      0x000000000808b730      0x1a0 hw/sim6320c_operation.o
+                                        0x1cc (size before relaxing)
+ .eh_frame      0x000000000808b8d0       0x50 hw/chan_brd_hw_intf.o
+                                         0x7c (size before relaxing)
+ .eh_frame      0x000000000808b920       0x4c hw/mod_brd.o
+                                         0x78 (size before relaxing)
+ .eh_frame      0x000000000808b96c      0x748 hw/swg_device.o
+                                        0x788 (size before relaxing)
+ .eh_frame      0x000000000808c0b4       0x38 /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+                                         0x50 (size before relaxing)
+ .eh_frame      0x000000000808c0ec       0x50 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+                                         0x7c (size before relaxing)
+ .eh_frame      0x000000000808c13c        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges .exception_ranges*)
+                0x000000000808c140                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
+                0x000000000808d140                . = DATA_SEGMENT_ALIGN (0x1000, 0x1000)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges .exception_ranges*)
+
+.tdata
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x000000000808d140        0x0
+                0x000000000808d140                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x000000000808d140                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x000000000808d140        0x4
+                0x000000000808d140                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*) SORT(.ctors.*))
+ *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
+ .init_array    0x000000000808d140        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+                0x000000000808d144                PROVIDE (__init_array_end, .)
+
+.fini_array     0x000000000808d144        0x4
+                0x000000000808d144                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*) SORT(.dtors.*))
+ *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
+ .fini_array    0x000000000808d144        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+                0x000000000808d148                PROVIDE (__fini_array_end, .)
+
+.ctors
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+
+.dtors
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+
+.jcr            0x000000000808d148        0x4
+ *(.jcr)
+ .jcr           0x000000000808d148        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+ .jcr           0x000000000808d148        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+
+.data.rel.ro    0x000000000808d180      0x540
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ .data.rel.ro.local
+                0x000000000808d180      0x500 gsoap/stdsoap2.o
+ .data.rel.ro.local
+                0x000000000808d680       0x40 bsp_server.o
+ *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*)
+
+.dynamic        0x000000000808d6c0       0xf8
+ *(.dynamic)
+ .dynamic       0x000000000808d6c0       0xf8 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x000000000808d6c0                _DYNAMIC
+
+.got            0x000000000808d7b8       0x10
+ *(.got)
+ .got           0x000000000808d7b8       0x10 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ *(.igot)
+                0x000000000808d7c8                . = DATA_SEGMENT_RELRO_END (., (SIZEOF (.got.plt) >= 0xc)?0xc:0x0)
+
+.got.plt        0x000000000808d7c8      0x1b0
+ *(.got.plt)
+ .got.plt       0x000000000808d7c8      0x1b0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x000000000808d7c8                _GLOBAL_OFFSET_TABLE_
+ *(.igot.plt)
+ .igot.plt      0x000000000808d978        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+
+.data           0x000000000808d980      0x244
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x000000000808d980        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+                0x000000000808d980                data_start
+                0x000000000808d980                __data_start
+ .data          0x000000000808d984        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+ .data          0x000000000808d984        0x4 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+                0x000000000808d984                __dso_handle
+ .data          0x000000000808d988        0x0 gsoap/stdsoap2.o
+ .data          0x000000000808d988        0x0 gsoap/soapC.o
+ .data          0x000000000808d988        0x0 gsoap/soapServer.o
+ .data          0x000000000808d988        0x0 gsoap_api.o
+ .data          0x000000000808d988        0x4 bsp_server.o
+                0x000000000808d988                bsp_prt_unmask
+ *fill*         0x000000000808d98c       0x34 
+ .data.rel.local
+                0x000000000808d9c0       0x64 bsp_server.o
+                0x000000000808d9c0                namespaces
+ *fill*         0x000000000808da24       0x1c 
+ .data          0x000000000808da40       0x58 common/bsp_tools.o
+                0x000000000808da40                baud_table
+ .data          0x000000000808da98        0x0 hw/mod_brd_hw_intf.o
+ .data          0x000000000808da98        0x0 hw/m35_operation.o
+ *fill*         0x000000000808da98        0x8 
+ .data.rel.local
+                0x000000000808daa0       0x64 hw/m35_operation.o
+                0x000000000808daa0                sim_m35_ops_v010000
+                0x000000000808dae0                sim_m35_ops_v020000
+ .data          0x000000000808db04        0x0 hw/sim6320c_operation.o
+ *fill*         0x000000000808db04       0x1c 
+ .data.rel.local
+                0x000000000808db20       0x64 hw/sim6320c_operation.o
+                0x000000000808db20                sim_6320c_ops_v010000
+                0x000000000808db60                sim_6320c_ops_v020000
+ .data          0x000000000808db84        0x0 hw/chan_brd_hw_intf.o
+ .data          0x000000000808db84        0x0 hw/mod_brd.o
+ .data          0x000000000808db84        0x0 hw/swg_device.o
+ *fill*         0x000000000808db84       0x1c 
+ .data.rel.local
+                0x000000000808dba0       0x24 hw/swg_device.o
+                0x000000000808dba0                sim_ops_constructor
+ .data          0x000000000808dbc4        0x0 hw/swg_device_test.o
+ .data          0x000000000808dbc4        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+ .data          0x000000000808dbc4        0x0 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .data          0x000000000808dbc4        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+ .data          0x000000000808dbc4        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+
+.tm_clone_table
+                0x000000000808dbc4        0x0
+ .tm_clone_table
+                0x000000000808dbc4        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+ .tm_clone_table
+                0x000000000808dbc4        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+
+.data1
+ *(.data1)
+                0x000000000808dbc4                _edata = .
+                0x000000000808dbc4                PROVIDE (edata, .)
+                0x000000000808dbc4                . = .
+                0x000000000808dbc4                __bss_start = .
+
+.bss            0x000000000808dc00     0xf0a8
+ *(.dynbss)
+ .dynbss        0x000000000808dc00        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x000000000808dc00        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crt1.o
+ .bss           0x000000000808dc00        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crti.o
+ .bss           0x000000000808dc00        0x1 /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+ .bss           0x000000000808dc01        0x0 gsoap/stdsoap2.o
+ .bss           0x000000000808dc01        0x0 gsoap/soapC.o
+ .bss           0x000000000808dc01        0x0 gsoap/soapServer.o
+ .bss           0x000000000808dc01        0x0 gsoap_api.o
+ *fill*         0x000000000808dc01       0x3f 
+ .bss           0x000000000808dc40     0x1040 bsp_server.o
+                0x000000000808dc40                g_queue_head
+                0x000000000808dc44                g_queue_tail
+                0x000000000808dc48                server_soap
+                0x000000000808dc4c                poller
+                0x000000000808dc50                bsp_log_fd
+                0x000000000808dc54                fd_log
+                0x000000000808dc58                g_input_idx
+ .bss           0x000000000808ec80        0x4 common/bsp_tools.o
+                0x000000000808ec80                g_bs_timer_run_flag
+ .bss           0x000000000808ec84        0x0 hw/mod_brd_hw_intf.o
+ .bss           0x000000000808ec84        0x0 hw/m35_operation.o
+ .bss           0x000000000808ec84        0x0 hw/sim6320c_operation.o
+ .bss           0x000000000808ec84        0x0 hw/chan_brd_hw_intf.o
+ .bss           0x000000000808ec84        0x0 hw/mod_brd.o
+ *fill*         0x000000000808ec84       0x3c 
+ .bss           0x000000000808ecc0     0xca00 hw/swg_device.o
+ .bss           0x000000000809b6c0        0x0 hw/swg_device_test.o
+ .bss           0x000000000809b6c0        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+ .bss           0x000000000809b6c0        0x0 /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .bss           0x000000000809b6c0        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+ .bss           0x000000000809b6c0        0x0 /usr/lib/gcc/i586-linux-gnu/4.9/../../../i386-linux-gnu/crtn.o
+ *(COMMON)
+ COMMON         0x000000000809b6c0     0x1414 bsp_server.o
+                0x000000000809b6c0                g_soap_server_tid
+                0x000000000809b6e0                g_soap_server_attr
+                0x000000000809b740                queue
+                0x000000000809c700                hdl_params
+                0x000000000809c8e0                g_queue_tid
+                0x000000000809c920                soap_thr
+                0x000000000809c980                g_input_buf
+                0x000000000809ca80                queue_lock
+                0x000000000809caa0                queue_cond
+                0x000000000809cad0                g_soap_server_run_flag
+ *fill*         0x000000000809cad4       0x2c 
+ COMMON         0x000000000809cb00      0x1a8 common/bsp_tools.o
+                0x000000000809cb00                g_bsp_timers
+                0x000000000809cc80                g_bs_timer_attr
+                0x000000000809cca4                g_bs_timer_tid
+                0x000000000809cca8                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x000000000809cca8                . = ALIGN (0x4)
+                0x000000000809cca8                . = SEGMENT_START ("ldata-segment", .)
+                0x000000000809cca8                . = ALIGN (0x4)
+                0x000000000809cca8                _end = .
+                0x000000000809cca8                PROVIDE (end, .)
+                0x000000000809cca8                . = DATA_SEGMENT_END (.)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x39
+ *(.comment)
+ .comment       0x0000000000000000       0x1d /usr/lib/gcc/i586-linux-gnu/4.9/crtbegin.o
+                                         0x1e (size before relaxing)
+ .comment       0x000000000000001d       0x1e gsoap/stdsoap2.o
+ .comment       0x000000000000001d       0x1e gsoap/soapC.o
+ .comment       0x000000000000001d       0x1e gsoap/soapServer.o
+ .comment       0x000000000000001d       0x1e gsoap_api.o
+ .comment       0x000000000000001d       0x1e bsp_server.o
+ .comment       0x000000000000001d       0x1e common/bsp_tools.o
+ .comment       0x000000000000001d       0x1e hw/mod_brd_hw_intf.o
+ .comment       0x000000000000001d       0x1e hw/m35_operation.o
+ .comment       0x000000000000001d       0x1e hw/sim6320c_operation.o
+ .comment       0x000000000000001d       0x1e hw/chan_brd_hw_intf.o
+ .comment       0x000000000000001d       0x1e hw/mod_brd.o
+ .comment       0x000000000000001d       0x1e hw/swg_device.o
+ .comment       0x000000000000001d       0x1e hw/swg_device_test.o
+ .comment       0x000000000000001d       0x1e /usr/lib/gcc/i586-linux-gnu/4.9/libgcc.a(_moddi3.o)
+ .comment       0x000000000000001d       0x1c /usr/lib/i386-linux-gnu/libc_nonshared.a(elf-init.oS)
+                                         0x1d (size before relaxing)
+ .comment       0x0000000000000039       0x1e /usr/lib/gcc/i586-linux-gnu/4.9/crtend.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info .gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line .debug_line.* .debug_line_end)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_macro
+ *(.debug_macro)
+
+.gnu.attributes
+ *(.gnu.attributes)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(./release/bsp_server elf32-i386)

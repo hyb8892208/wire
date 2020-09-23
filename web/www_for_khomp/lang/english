@@ -1,0 +1,3236 @@
+language#english#English
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     Language Package Description
+;
+;     Format:
+;		   [page name]
+;          key1="value1"
+;		   key2="value2"
+;		   ...
+;
+;     Notice:
+;          1.Package head line format: language#xxx#XXXX
+;            xxx is the Internal identification.
+;            XXX is the web view.
+;          2.Package must save format: UTF-8(No BOM)
+;          3.If there is ["] in value, please use [\"]. For example: 
+;            language help="This is \"Portuguese\""
+;		   4.[page name] must be set.Same as URL address.
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    general
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[general]
+Name="Name"
+User Name="User Name"
+Password="Password"
+Port="Port"
+From="From"
+Type="Type"
+To="To"
+Enable="Enable"
+Enable help="ON(enabled),OFF(disabled)"
+All="All"
+All help="Select all or deselect all."
+Report="Report"
+Total="Total"
+does not exist="does not exist"
+_On="On"
+_None="None"
+_No="No"
+_Yes="Yes"
+SUCCESS="SUCCESS"
+success="success"
+Mobile Number="Mobile Number"
+English="English"
+Chinese="Chinese"
+Save Successful="Save Successful!"
+Username="Username"
+
+js check domain="Invalid domain or IP address."
+js check diyname="Allowed character must be any of [-_+.<>&0-9a-zA-Z],1 - 32 characters."
+js check diypwd="Allowed character must be any of [0-9a-zA-Z`~!@$%^&*()_+{}|<>?-=[],./],4 - 32 characters."
+js limit aminame="limit the input string to \"send\", \"event\", \"general\". "
+js check the password complexity="The password you enter must consist of letters, numbers, and special characters, \"0-9a-zA-Z!@#$%^&*\".Length: 8-32 characters."
+js check gsmgain="Range：-1-65535"
+js check gsmvol="Volume range: 0-100."
+js check gsmmic="Volume range: 0-15."
+js check adcchipgain="Gain range:  -42 - 20."
+js check dialprefix="Must be 0-9 or +,*,#"
+js check gsmpin="Must be 4 - 12 digits"
+js check email="Please input a valid email address"
+js check sipendp="Allowed character must be any of [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 characters."
+js check sipname="Allowed character must be any of [0-9a-zA-Z$*()-=_.], 1-32 characters."
+js check sippwd="Allowed character must be any of [0-9a-zA-Z`~!#$%^&*()_+{}|<>-=,.], 0-32 characters."
+js check routingname="Allowed character must be any of [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 characters."
+js check networkport="Please input valid port number (1-65535)"
+js check smtpuser="Please input a valid STMP user name"
+js check smtppwd="Allowed character must be any of [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-64 characters."
+js check phonenum="Please input a valid phone number!"
+js check ussd="Please input a valid USSD number!"
+js check ip="Please input a valid IP address"
+js check mac="Please input a valid MAC address"
+js check pppoeuser="Please input valid username"
+js check pppoepwd="Please input valid password"
+js check float="Please input floating number"
+js check integer="Please input integer number"
+js check smail="You must set a email address."
+
+js check dtmf float 1="Please input floating number"
+js check dtmf float 2="The input should be less than 100.0"
+js check dtmf integer 1="Please input integer data"
+js check dtmf integer 2="The input should be less than 100"
+js check null="Can not be null."
+js check send_msg="Allowed character must be 1-128 characters."
+js check match_key="Allowed character must be 1-32 characters."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    week
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[week]
+Monday="Monday"
+Tuesday="Tuesday"
+Wednesday="Wednesday"
+Thursday="Thursday"
+Friday="Friday"
+Saturday="Saturday"
+Sunday="Sunday"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    month
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[month]
+January="January"
+February="February"
+March="March"
+April="April"
+May="May"
+June="June"
+July="July"
+August="August"
+September="September"
+October="October"
+November="November"
+December="December"
+
+Month="Month"
+Week="Week"
+Day="Day"
+Hour="Hour"
+Minute="Minute"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    menu
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[menu]
+system="system"
+module="module"
+voip="voip"
+routing="routing"
+sms="sms"
+network="network"
+advanced="advanced"
+logs="logs"
+
+;system
+Status="Status"
+Time="Time"
+Login Settings="Login Settings"
+SSH="SSH"
+General="General"
+Tools="Tools"
+User="User"
+Information="Information"
+Setting Wizard="Setting Wizard"
+
+;module
+Module Settings="Module Settings"
+Call Forwarding="Call Forwarding"
+Call Waiting="Call Waiting"
+DTMF="DTMF"
+BCCH="BCCH"
+Toolkit="Toolkit"
+Module Update="Module Update"
+Call And SMS Limit="Call And SMS Limit"
+
+;voip
+VoIP Endpoints="VoIP Endpoints"
+Batch SIP Endpoints="Batch SIP Endpoints"
+Advanced SIP Settings="Advanced SIP Settings"
+Advanced IAX2 Settings="Advanced IAX2 Settings"
+SIP Account Security="SIP Account Security"
+
+;routing
+Call Routing Rules="Call Routing Rules"
+Groups="Groups"
+Batch Creating Rules="Batch Creating Rules"
+MNP Settings="MNP Settings"
+Routing Blacklist="Routing Blacklist"
+Advanced="Advanced"
+
+;sms
+SMS Settings="SMS Settings"
+SMS Sender="SMS Sender"
+SMS Inbox="SMS Inbox"
+SMS Outbox="SMS Outbox"
+SMS Forwarding="SMS Forwarding"
+USSD="USSD"
+MMS Settings="MMS Settings"
+Email="Email"
+
+;network
+LAN Settings="LAN Settings"
+WAN Settings="WAN Settings"
+VPN Settings="VPN Settings"
+DDNS Settings="DDNS Settings"
+Security Settings="Security Settings"
+Security Rules="Security Rules"
+SIP Capture="SIP Capture"
+
+;advanced
+Asterisk API="Asterisk API"
+Asterisk CLI="Asterisk CLI"
+Asterisk File Editor="Asterisk File Editor"
+Cloud="Cloud"
+Balance="Balance"
+PhoneNumber="PhoneNumber"
+ARP="ARP"
+
+;logs
+Log Settings="Log Settings"
+System="System"
+Asterisk="Asterisk"
+SIP="SIP"
+CDR="CDR"
+IAX2="IAX2"
+BSP="BSP"
+RRI="RRI"
+AT Commands="AT Commands"
+Statistics="Statistics"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    Time Zone
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Time Zone]
+Australia="Australia"
+Melbourne,Canberra,Sydney="Melbourne,Canberra,Sydney"
+Perth="Perth"
+Brisbane="Brisbane"
+Adelaide="Adelaide"
+Darwin="Darwin"
+Hobart="Hobart"
+
+Europe="Europe"
+Amsterdam,Netherlands="Amsterdam,Netherlands"
+Athens,Greece="Athens,Greece"
+Berlin,Germany="Berlin,Germany"
+Brussels,Belgium="Brussels,Belgium"
+Bratislava,Slovakia="Bratislava,Slovakia"
+Budapest,Hungary="Budapest,Hungary"
+Copenhagen,Denmark="Copenhagen,Denmark"
+Dublin,Ireland="Dublin,Ireland"
+Helsinki,Finland="Helsinki,Finland"
+Kyiv,Ukraine="Kyiv,Ukraine"
+Lisbon,Portugal="Lisbon,Portugal"
+London,GreatBritain="London,GreatBritain"
+Madrid,Spain="Madrid,Spain"
+Oslo,Norway="Oslo,Norway"
+Paris,France="Paris,France"
+Prague,CzechRepublic="Prague,CzechRepublic"
+Roma,Italy="Roma,Italy"
+Moscow,Russia="Moscow,Russia"
+Stockholm,Sweden="Stockholm,Sweden"
+Zurich,Switzerland="Zurich,Switzerland"
+
+New Zealand="New Zealand"
+Auckland, Wellington="Auckland, Wellington"
+
+USA and Canada="USA and Canada"
+Hawaii Time="Hawaii Time"
+Alaska Time="Alaska Time"
+Pacific Time="Pacific Time"
+Mountain Time="Mountain Time"
+Mountain Time @Arizona, no DST="Mountain Time (Arizona, no DST)"
+Central Time="Central Time"
+Eastern Time="Eastern Time"
+
+Atlantic="Atlantic"
+Bermuda="Bermuda"
+
+Asia="Asia"
+;Asia (UTC+1)
+Anadyr="Anadyr"
+
+Central and South America="Central and South America"
+Sao Paulo,Brazil="Sao Paulo,Brazil"
+Fernando de Noronha,Brazil="Fernando de Noronha,Brazil"
+Manaus,Brazil="Manaus,Brazil"
+Rio Branco,Brazil="Rio Branco,Brazil"
+Buenos_Aires,Argentina="Buenos_Aires,Argentina"
+Central America @no DST="Central America (no DST)"
+Caracas,Venezuela="Caracas,Venezuela"
+
+Italy="Italy"
+Japan="Japan"
+Sweden="Sweden"
+Thailand="Thailand"
+Norway="Norway"
+Mexico="Mexico"
+Philippines="Philippines"
+Poland="Poland"
+Portugal="Portugal"
+United Kingdom="United Kingdom"
+United States="United States"
+South Africa="South Africa"
+Malaysia="Malaysia"
+Netherlands="Netherlands"
+Hungrary="Hungrary"
+Israel="Israel"
+Brazil="Brazil"
+Austria="Austria"
+Belgium="Belgium"
+Switzerland="Switzerland"
+Chile="Chile"
+China="China"
+Spain="Spain"
+Finland="Finland"
+Germany="Germany"
+Denmark="Denmark"
+Czech Republic="Czech Republic"
+Czech_republic="Czech_republic"
+Estonia="Estonia"
+France="France"
+Greece="Greece"
+Hungary="Hungary"
+Bulgaria="Bulgaria"
+Lithuania="Lithuania"
+Venezuela="Venezuela"
+;Russian Federation / ex Soviet Union="Russian Federation / ex Soviet Union"
+Russian Federation="Russian Federation"
+Colombia="Colombia"
+Ecuador="Ecuador"
+Indonesia="Indonesia"
+ITU="ITU"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    button
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[button]
+Save="Save"
+Cancel="Cancel"
+
+Action="Action"
+Actions="Actions"
+Manual="Manual"
+Send="Send"
+Stop="Stop"
+Add="Add"
+
+Download="Download"
+Modify="Modify"
+
+Filter="Filter"
+Clean Filter="Clean Filter"
+
+Delete="Delete"
+Delete confirm="Are you sure to delete you selected ?"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+Clean All="Clean All"
+Clean All confirm="Are you sure to clean up all logs?"
+Export="Export"
+Refresh="Refresh"
+
+Apply="Apply"
+Apply Bar help="Settings have been changed. Calls may be terminated when you apply these changes. Do you want to apply now ? "
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;    pages
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[pages]
+Previous page="Previous page"
+Next page="Next page"
+input page help="Please input your page number, and press [Enter] to skip to."
+total pages="total pages"
+goto input page="goto input page"
+go="go"
+Cancel Apply help="Configuration settings can be cancelled before Apply."
+Apply Back help="Are you sure you want to cancel the configuration settings?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-status.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-status]
+;Module-Information
+Module Information="Module Information"
+Type="Type"
+Signal="Signal"
+Band="Band"
+BER="BER"
+Carrier="Carrier"
+Registration Status="Registration Status"
+PDD="PDD"
+ACD="ACD"
+ASR="ASR"
+Module Status="Module Status"
+Remain Time="Remain Time"
+Times="Times"
+
+Model IMEI="Model IMEI"
+Network Name="Network Name"
+Network Status="Network Status"
+Signal Quality="Signal Quality"
+BER value="BER value"
+SIM IMSI="SIM IMSI"
+SIM SMS Center Number="SIM SMS Center Number"
+Own Number="Own Number"
+Phone Number="Phone Number"
+State="State"
+Call Limit="Call Limit"
+Lock Status="Lock Status"
+Mark Status="Mark Status"
+SMS Status="SMS Status"
+Limited="Limited"
+Unlimited="Unlimited"
+Locked="Locked"
+Locking="Locking"
+Unlocked="Unlocked"
+Marked="Marked"
+Unmarked="Unmarked"
+
+Undetected SIM Card="Undetected SIM Card"
+Not registered="Not registered"
+READY="READY"
+INIT="INIT"
+DOWN="DOWN"
+UP="UP"
+Ready="Ready"
+READY="READY"
+CALL PROGRESS="CALL PROGRESS"
+CALL ACTIVE="CALL ACTIVE"
+RINGING="RINGING"
+HANGUP="HANGUP"
+UNKNOW="UNKNOW"
+Undetected SIM Card="Undetected SIM Card"
+Not registered="Not registered"
+Searching="Searching"
+Registration denied="Registration denied"
+Unknown="Unknown"
+Registered="Registered"
+Unknown Network Status="Unknown Network Status"
+
+;SIP/IAX/Routing Information
+SIP Information="SIP Information"
+IAX2 Information="IAX2 Information"
+Routing Information="Routing Information"
+Endpoint Name="Endpoint Name"
+User Name="User Name"
+Host="Host"
+Registration="Registration"
+SIP Status="SIP Status"
+IAX2 Status="IAX2 Status"
+Rule Name="Rule Name"
+From="From"
+To="To"
+Rules="Rules"
+Any SIP="Any SIP"
+
+;Network Information
+Network Information="Network Information"
+Name="Name"
+MAC Address="MAC Address"
+IPV4 Address="IPV4 Address"
+IPV6 Address="IPV6 Address"
+Mask="Mask"
+Gateway="Gateway"
+RX Packets="RX Packets"
+TX Packets="TX Packets"
+L2TP VPN Information="L2TP VPN Information"
+PPTP Information="PPTP Information"
+IP Address="IP Address"
+P-t-P IP Address="P-t-P IP Address"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-time.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-time]
+Time Settings="Time Settings"
+System Time="System Time"
+System Time help="Your gateway system time."
+Time Zone="Time Zone"
+Time Zone help="The world time zone. Please select the one which is the same as or the closest to your city."
+POSIX TZ String="POSIX TZ String"
+POSIX TZ String help="Posix timezone strings."
+Auto-Sync from Server="Auto-Sync from Server"
+Auto-Sync from Server help="Whether enable automatically synchronize from server or not. On(enabled),OFF(disabled)."
+Auto-Sync Type="Auto-Sync Type"
+Auto-Sync Type help="Synchronization from NTP or from base station."
+NTP Server 1="NTP Server 1"
+NTP Server 1 help="Time server domain or hostname.For example, [time.asia.apple.com] "
+NTP Server 2="NTP Server 2"
+NTP Server 2 help="The first reserved NTP server.For example, [time.windows.com] "
+NTP Server 3="NTP Server 3"
+NTP Server 3 help="The second reserved NTP server.For example, [time.nist.gov] "
+Auto-Sync from NTP="Auto-Sync from NTP"
+Auto-Sync from NTP help="Whether enable automatically synchronize from NTP server or not. On(enabled),OFF(disabled)."
+Station="Station"
+Sync from NTP="Sync from NTP"
+Sync from Client="Sync from Client"
+Time Synchronize="Time Synchronize"
+Synchronize Succeeded="Synchronize Succeeded"
+Synchronize Failed="Synchronize Failed"
+Client Synchronize Succeeded="Client Synchronize Succeeded"
+Client Synchronize Failed="Client Synchronize Failed"
+Sychronous time from ntp help="Sychronous time from NTP server need some times, please waiting for minutes"
+request timeout help="Request timeout, failed to sychronous time from NTP server."
+Sync Time From NTP="Sync Time From NTP"
+Save Data="Save Data"
+Sync from Station="Sync from Station"
+Sync from Station Failed="Failed to synchronize time from base station!"
+Sync from Client Failed="Failed to synchronize time from Client!"
+
+Unknown="Unknown"
+User defined @or out of date="User defined (or out of date)"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-login.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-login]
+Web Login Settings="Web Login Settings"
+User Name="User Name"
+User Name help="NOTES: Your gateway doesn't have administration role. <br/>All you can do here is defining the username and password to manage your gateway.<br/>And it has all privileges to operate your gateway.<br/>User Name: Allowed characters \"-_+.<>&0-9a-zA-Z\".Length: 1-32 characters."
+Password="Password"
+Password help="Allowed character must be any of [0-9a-zA-Z`~!@$%^&*()_+{}|<>?-=[],./],4 - 32 characters."
+Confirm Password="Confirm Password"
+Confirm Password help="Please input the same password as 'Password' above."
+Login Mode="Login Mode"
+Login Mode help="Select the mode of login."
+Port="Port"
+Port help="Specify the web server port number."
+Confirm Password warning web="This password must match the password above."
+js webserver port help="Range: 1024-65535, Default 80. Some ports are forbidding."
+User name has been used="User name has been used"
+Password len tip="The password cannot be less than 8 characters."
+Password Login Rule="The password must meet the following rules:1.At least eight characters.2.At least one number.3.At least one lowercase letter.4.At least one uppercase letter."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-ssh.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-ssh]
+SSH Login Settings="SSH Login Settings"
+User Name="Username"
+User Name help="User Name: Allowed characters \"-_+.<>&0-9a-zA-Z\".Length: 1-32 characters.</br>Can't use 'root'."
+User Name warning ssh="Can't use 'root'"
+Password="Password"
+Password help="Allowed characters: \"0-9a-zA-Z`~!@$%^&*()_+{}\"|<>?-=[]'\,./\".Length: 4-32 characters."
+Port="Port"
+Port help="SSH login port number."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-general.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-general]
+Language Settings="Language Settings"
+Language="Language"
+Language help="Language Setting"
+Language Download="Download"
+Language Download help="Download selected language package."
+language Delete="Delete"
+language Delete help="Delete selected language."
+Add New Language="Add New Language"
+Add New Language help="Add New Language"
+New language Package="New language Package"
+Scheduled Reboot="Scheduled Reboot"
+Reboot Type="Reboot Type"
+Reboot Type help="By Day: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reboot everyday at xx:xx(time). <br>By Week: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reboot everyweek on XXX(week day) at xx:xx(time). <br>By Month: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reboot everymonth on XXX(Month day) at xx:xx(time). <br>By Running Time: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reboot periodically by the run time."
+By Day="By Day"
+By Week="By Week"
+By Month="By Month"
+By Running Time="By Running Time"
+Running Time="Running Time"
+Running Time help="Running Time"
+Sun="Sun"
+Mon="Mon"
+Tue="Tue"
+Wed="Wed"
+Thu="Thu"
+Fri="Fri"
+Sat="Sat"
+
+Language Download help="Download selected language package."
+Language Download error="Can not find Your select language package."
+
+Language Package Upload Filesize error="Your uploaded file was larger than 1MB!<br>Uploading language package was failed.<br>"
+Language Package Upload Move Failed="Language Package Upload Move Failed"
+Language Package Upload Failed="Language Package Upload Failed"
+Language Package Format error="Language Package Format error"
+Add Language overwrite alert="Language already exists!\nReadyonly Language cannot be overwrite!"
+Add Language overwrite confirm="Language already exists!\nDo you want to overwrite it?"
+
+Delete Language alert="Sorry, you can not delete the default language."
+Delete Language confirm="Are you sure to delete the selected language package?"
+Select File alert="Please select your file first!"
+Language Package Size alert="Uploaded max file is 1MB!"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-tools.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-tools]
+Reboot Tools="Reboot Tools"
+System Reboot="System Reboot"
+System Reboot help="Reboot the gateway and all the current calls will be dropped."
+System Reboot confirm="Are you sure to reboot your gateway now?\nYou will lose all data in memory!"
+Asterisk Reboot="Asterisk Reboot"
+Asterisk Reboot help="Reboot the asterisk and all the current calls will be dropped."
+Asterisk Reboot confirm="Are you sure to reboot Asterisk now?"
+
+Update Firmware="Update Firmware"
+System Update="System Update"
+System Update filesize alert="Uploaded max file is 40M!"
+System Update IE alert="Please allow ActiveX Scripting File System Object!"
+System Update confirm="Are you sure to update your system?\\nUse caution, please!This might damage the structure of your original configuration files."
+New system file="New system file"
+System Online Update="System Online Update"
+System Online Update help="New system file is downloaded from official website and update system. "
+System version help 1="Your current system version is :"
+System version help 2="The latest system version is :"
+System version help 3="Warning:\nDO NOT leave this page in the process of updating; OTHERWISE system updating will fail!\n"
+System Online Update confirm="Be cautious, please :\nThis might damage the structure of your original configuration files!\nAre you sure to update your system?\n"
+System Online Update version error="Get remote version failed. Please check the network connection is correct!"
+System Online Update Download error="Download system file failed. Please check the network connection is correct!"
+System Online Update fopen error="Save system file failed!"
+Get remote version failed="Get remote version failed。"
+Be cautious="Be cautious"
+System Online Update caution1="This might damage your configuration files and disconnected boards could not be updated."
+System Online Update caution2="Are you sure to update your system?"
+System Online Update caution3="This might damage the structure of your original configuration files!"
+System Online Update caution4="DO NOT leave this page in the process of updating; OTHERWISE system updating will fail!"
+
+Upload Configuration="Upload Configuration"
+File Upload="File Upload"
+File Upload confirm="Are you sure to upload configuration files?\nThis will damage the structure of your original configuration files."
+New configuration file="New configuration file"
+move uploaded file="move uploaded file"
+Backup Configuration="Backup Configuration"
+Download Backup="Download Backup"
+Current configuration file version="Current configuration file version"
+
+Restore Configuration="Restore Configuration"
+Factory Reset="Factory Reset"
+Factory Reset help="This will cause all the configuration files to back to default factory values! And reboot your gateway once it finishes."
+Factory Reset confirm="Are you sure to restore configuration file now?"
+
+Result="Result"
+
+System Rebooting="System Rebooting"
+System Reboot wait="System Rebooting...<br>Please wait for about 60s, system will be rebooting."
+
+Asterisk Rebooting="Asterisk Rebooting"
+Asterisk Reboot Succeeded="Asterisk Reboot Succeeded"
+Asterisk Reboot Failed="Asterisk Reboot Failed"
+
+System Update Filesize error="Your updated file was larger than 40M!<br>Updating system was failed."
+System Update Move error="Moving your updated file was failed!<br>Updating system was failed."
+System Updating="System Updating"
+fork error="fork error"
+Error code="Error code"
+System Update Succeeded="System Update Succeeded"
+System Update Succeeded help="You must reboot system to entry the newer system."
+System Update error 1="The file was larger than the server space 40M!"
+System Update error 2="The file was larger than the browser's limit!"
+System Update error 3="The file was only partially uploaded!"
+System Update error 4="Can not find uploaded file!"
+System Update error 5="The server temporarily lost folder!"
+System Update error 6="Failed to write to the temporary folder!"
+System Update Failed="System Update Failed"
+Get remote version failed="Get remote version failed."
+Be cautious="Be cautious, please"
+System Online Update caution1="This might damage your configuration files and disconnected boards could not be updated.\n\n"
+System Online Update caution2="Are you sure to update your system?\n"
+System Online Update caution3="This might damage the structure of your original configuration files!\n\n"
+System Online Update caution4="DO NOT leave this page in the process of updating; OTHERWISE system updating will fail!"
+
+Downloading="Downloading"
+Updating system="Updating system"
+Update failed="Update failed"
+update failed output="Updating system was failed.<br>Error code: "
+update succeed output="Successfully update your system!<br>You must reboot system to entry the newer system."
+Updating system was failed="Updating system was failed"
+Update Online Information="Update Online Information"
+
+Configuration Files Upload="Configuration Files Upload"
+Configuration Files Upload Filesize error="Your uploaded file was larger than 40M!<br>Uploading configuration files was failed."
+Configuration Files Upload Move error="Moving your updated file was failed!<br>Uploading configuration files was failed."
+Configuration Files Uploading="Configuration Files Uploading"
+Configuration Files Upload Failed="Configuration Files Upload Failed"
+Configuration Files Upload Succeeded="Configuration Files Upload Succeeded"
+Configuration Files Update Succeeded="Configuration Files Update Succeeded"
+Configuration Files Update Failed="Configuration Files Update Failed"
+Configuration Files Upload version error 1="</br>Can not find configration file!</br>Can not find asterisk/cfg_version!<br>"
+Configuration Files Upload version error 2="</br>Unknown configuration version!"
+Configuration Files Upload version error 3="</br>Your current system does not support this configuration version!</br>"
+Configuration Files Upload check="Checking configuration version....<br>"
+Configuration Files Upload update="Updating configuration files....<br>"
+Configuration Files Upload error 1="The file was larger than the server space 40M!"
+Configuration Files Upload error 2="The file was larger than the browser's limit!"
+Configuration Files Upload error 3="The file was only partially uploaded!"
+Configuration Files Upload error 4="Can not find uploaded file!"
+Configuration Files Upload error 5="The server temporarily lost folder!"
+Configuration Files Upload error 6="Failed to write to the temporary folder!"
+Stop Asterisk="stopping asterisk....<br>"
+Start Asterisk="Starting asterisk....<br>"
+
+Packing was failed="Packing was failed"
+Can not find="Can not find"
+
+Configuration Restore="Configuration Restore"
+Configuration Restore wait="Default Configuration Files Restoring...<br>Please wait for about 60s, system will be rebooting."
+Configuration Restoring="Configuration Restoring"
+Configuration Restore Failed="Configuration Restore Failed"
+System Online Update help="New system file is downloaded from official website and update system."
+System version help 3="Warning:\\nDO NOT leave this page in the process of updating; OTHERWISE system updating will fail!\\n"
+Change Log="Change Log"
+Detailed="Detailed"
+Update Online Now="Update Online Now"
+Voice Record help="Select a module to recode voice."
+Voice Stop help="The maximum duration of voice recording is 3 minutes,and the system will stop and download the voice recording file automatically when time is up"
+Start Recording="Start Recording"
+Stop Recording="Stop Recording"
+
+System Switch="System Switch"
+System Switching="System Switching"
+System Switch Succeeded="System Switch Succeeded"
+System Switch Failed="System Switch Failed"
+System Switch confirm="Are you sure to switch system now?After switching over, the system needs to be restarted to take effect."
+
+License="License"
+Upload License file="Upload License file"
+License Upload="License Upload"
+License Upload Filesize error="Your uploaded file was larger than 80M!<br>Upload license was failed."
+License Upload Move error="Moving your uploaded file was failed!<br/>"
+License Uploading="License Uploading"
+License Upload Failed="License Upload Failed"
+Upload License help="Are you sure you want to upload license?"
+Software service expiration time="Software service expiration time"
+Software expired help1="Your software service is about to expire."
+Software left="Left"
+Software expired help2="Use the new License please!"
+Software expired help3="Your software service has expired, please use the new License!"
+Upload License file help="Please upload the correct License file!"
+Get UUID="Get UUID"
+Get UUID error="Get UUID error"
+License Enable="License Enable"
+License Enable help="ON(enabled), OFF(disabled)"
+System Count Dowm="The system will be restarted automatically after 10 seconds countdown"
+Gateway Update Completed="Gateway needs to be restarted after firmware upgrade is completed."
+System Download Succeeded="The system is being upgaded, please wait."
+Board Number="Board Number"
+Firmware version help="Firmware version should not be less than 2.1.2"
+Firmware upload help="The format of the uploaded file is incorrect."
+Select File alert="Please select your file first!"
+Firmware Link="Firmware Link"
+File Link="File Link"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-user.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-user]
+Username="Username"
+Username help="User name must be unique"
+Password="Password"
+Password help="Modify user information, do not fill in the password, the original password will not change.<br/>Passwords must satisfy the following rules:<br/>1. At least 8 symbols<br/>2. Contains at least one numeric symbol<br/>3. Contains at least one lowercase letter<br/>4. Include at least one capital letter"
+Number of logged-in IPS="Number of logged-in IPS"
+Number of logged-in IPS help="Number of simultaneous online IP"
+IP Number="IP Number"
+Create Time="Create Time"
+Role="Role"
+Super="Super"
+General User="General"
+User name has been used="User name has been used"
+Custom="Custom"
+Auth="Auth"
+Auth help="Page permissions assigned to the current user"
+User Lock="You entered too many errors and your account was temporarily locked. Please try again after the countdown is over."
+User Limit="The number of user logins has exceeded the limit"
+Auth Limit="You do not have permission to access this page"
+New User="New User"
+Confirm Password="Confirm Password"
+Confirm Password help="Please input the same password as 'Password' above."
+Only View="Only View"
+Password len tip="The password cannot be less than 8 characters."
+password rule tip="Does not comply with the password rules."
+Confirm Password warning web="This password must match the password above."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-info.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-info]
+Product Name="Product Name"
+Model Name="Model Name"
+GSM Modem Description="GSM Modem Description"
+Firmware Version="Firmware Version"
+Firmware Build="Firmware Build"
+Software Version="Software Version"
+Hardware Version="Hardware Version"
+Slot Number="Slot Number"
+Storage Usage="Storage Usage"
+Memory Usage="Memory Usage"
+Memory Clean="Memory Clean"
+Build Time="Build Time"
+Contact Address="Contact Address"
+Contact Address Contents="Khomp -Brazilian Industry"
+Tel="Tel"
+Fax="Fax"
+E-Mail="E-Mail"
+Web Site="Web Site"
+Rebooting Counts="Rebooting Counts"
+System Uptime="System Uptime"
+Port Amount="Port Amount"
+Kernel Build Time="Kernel Build Time"
+No Limit="No Limit"
+System Time="System Time"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	system-wizard.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[system-wizard]
+Setting Wizard="Setting Wizard"
+Setup Wizard="Setup Wizard"
+Change Password="Change Password"
+Select Time Zone="Select Time Zone"
+Network Settings="Network Settings"
+SIP Endpoints="SIP Endpoints"
+Destination="Destination"
+Summary="Summary"
+Select Timezone="Select Timezone"
+Self-defined Time Zone="Self-defined Time Zone"
+IP Method="IP Method"
+Gateway IP="Gateway IP"
+DNS Server 1="DNS Server 1"
+DNS Server 2="DNS Server 2"
+DNS Server 3="DNS Server 3"
+Host Name or IP Address="Host Name or IP Address"
+Routing Rules="Routing Rules"
+Create Inbound Routes="Create Inbound Routes"
+The password must meet the following rules="The password must meet the following rules"
+At least eight characters.="At least eight characters."
+At least one number.="At least one number."
+At least one lowercase letter.="At least one lowercase letter."
+At least one uppercase letter.="At least one uppercase letter."
+js checking new_password="The password you enter must consist of lowercase letter, uppercase letter, and numbers, Length: 8-32 characters."
+Previous="Previous"
+Next="Next"
+Quit="Quit"
+Registration mode="Registration mode"
+Credentails="Credentails"
+None mode="None: Not Sending/Receiving SIP Regisration."
+Server mode="Server: Acts as a SIP server, the gateway accepts registration from SIP Clients."
+Client mode="Client: Acts as a SIP Client, the gateway sends registration to SIP servers."
+quit setting wizard help="Are you sure you want to quit the setting wizard?"
+skip change password help="Note: For security reasons, you should change the default password. Are you sure you want to go to the next step?"
+
+New Username="New Username"
+New Password="New Password"
+Confirm Password="Confirm Password"
+Click here to remove this pattern="Click here to remove this pattern"
+Any SIP="Any SIP"
+Custom="Custom"
+GROUP="GROUP"
+Conference="Conference"
+Routing Groups="Routing Groups"
+Group Name="Group Name"
+Policy="Policy"
+Ascending="Ascending"
+Descending="Descending"
+Roundrobin="Roundrobin"
+Reverse Roundrobin="Reverse Roundrobin"
+Fewest Calls="Fewest Calls"
+experiment="experiment"
+Members="Members"
+Routing Name="Routing Name"
+Call Comes in From="Call Comes in From"
+Send Call Through="Send Call Through"
+Dial Patterns that will use this Route="Dial Patterns that will use this Route"
+Add More Dial Pattern Fields="Add More Dial Pattern Fields"
+Create Inbound Routes="Create Inbound Routes"
+Forward Number="Forward Number"
+IP Method="IP Method"
+Factory="Factory"
+Static="Static"
+IP Address="IP Address"
+Subnet Mask="Subnet Mask"
+Gateway IP="Gateway IP"
+DNS Server 1="DNS Server 1"
+DNS Server 2="DNS Server 2"
+DNS Server 3="DNS Server 3"
+WAN="WAN"
+Disable="Disable"
+Self-defined Time Zone="Self-defined Time Zone"
+Language="Language"
+portuguese="portuguese"
+Name="Name"
+User Name="User Name"
+Password="Password"
+Registration="Registration"
+Server="Server"
+Client="Client"
+Host Name or IP Address="Host Name or IP Address"
+Transport="Transport"
+NAT Traversal="NAT Traversal"
+Force report on="Force report on"
+Report if requested and comedia="Report if requested and comedia"
+Registration mode="Registration mode"
+None mode="None mode"
+Server mode="Server mode"
+Client mode="Client mode"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-settings]
+Registration Status="Registration Status"
+Module Status="Module Status"
+Name="Name"
+Name help="The alias of the GSM port.<br/> Allowed characters \"-_+.&lt;&gt;&amp;0-9a-zA-Z\".Length: 1-32 characters."
+Speaker Volume="Speaker Volume"
+Speaker Volume help="The speaker volume level, the range is 0-100.<br/>This will adjust the loud speaker volume level by an AT command."
+Microphone Volume="Microphone Volume"
+Microphone Volume help="The microphone volume, range is: 0-15. <br/> This will change the microphone gain level by an AT command."
+Txgain="Txgain"
+Txgain help="Numeric type.Indicates uplink codec gain and the range is -1-65535.The default value is 11172."
+Txdgain="Txdgain"
+Txdgain help="Numeric type.Indicates uplink digital gain and the range is -1-65535.The default value is 11172."
+Rxgain="Rxgain"
+Rxgain help="Numeric type.Indicates downlink digital gains.The range is -1-65535.The default value is 60000."
+Dial Prefix="Dial Prefix"
+Dial Prefix help="The Prefix number of outgoing calls from this GSM channel."
+Pin Code="Pin Code"
+Pin Code help="Personal indentification numbers of SIM card. <br/> PIN code can be modified to prevent SIM card from being stolen."
+Custom AT commands when start="Custom AT commands when start"
+Custom AT commands when start help="User custom AT commands when start system, use '|' to split AT command."
+STK flag="STK flag"
+STK flag help="STK flag"
+STK AT commands when atd="STK AT commands when atd"
+STK AT commands when atd help="STK AT commands when atd"
+CLIR="CLIR"
+CLIR help="Caller ID restriction,this function is used to hidden caller ID of SIM card number.<br/>The gateway will add '#31#' in front of mobile number. <br/>This function must support by Operator."
+SMS Center Number="SMS Center Number"
+SMS Center Number help="Your SMS center number of your local carrier."
+Band Mode="Band Mode"
+Band Mode help="Band Mode"
+Band="Band"
+Band help="Band"
+SIM IMSI="SIM IMSI"
+SIM IMSI help="SIM IMSI"
+Module IMEI="Module IMEI"
+Module IMEI help="Module IMEI"
+Module Revision="Module Revision"
+Module Revision help="Module Revision"
+Carrier="Carrier"
+Carrier help="Carrier"
+Bind Carrier="Bind Carrier"
+Bind Carrier help="Bind Carrier"
+Signal="Signal"
+Signal help="Signal"
+BER="BER"
+BER help="BER"
+Status="Status"
+Status help="Status"
+GSM Voice Codec="GSM Voice Codec"
+GSM Voice Codec help="GSM Voice Codec"
+CLCC="CLCC"
+CLCC help="return list of current calls of ME.if command succeeds but no calls are available,no information response is sent to TE."
+CSQ flag="CSQ flag"
+CSQ flag help="Open or close the CSQ flag function. The default value is ON."
+CSQ Timeout="CSQ Timeout"
+CSQ Timeout help="Response timeout time for sending CSQ instructions; Range of values: 1 ~ 300s; Time unit: seconds"
+AT Timeout="AT Timeout"
+AT Timeout help="AT Timeout"
+CallerID Type="CallerID Type"
+CallerID Type help="CallerID Type"
+AUTO="AUTO"
+GSM only="GSM only"
+WCDMA only="WCDMA only"
+LTE only="LTE only"
+TD-SCDMA only="TD-SCDMA only"
+UMTS only="UMTS only"
+CDMA only="CDMA only"
+HDR only="HDR only"
+CDMA and HDR only="CDMA and HDR only"
+
+Save To Other Ports help="Save to Other Ports"
+Sync All Settings help="Synchronize all configurations"
+js check csq timeout="the range of csq timeout is 1 ~ 300s"
+js check gain="Range: -1-65535."
+Modify SMSC prompt="Please input a new SMS Center Number"
+Modify SMSC confirm="Do you confirm to change SIM SMS Center Number ? It's dangerous!"
+
+Step="Step"
+Call Duration Limit Step help="Step length value range is 1-999.<br>Step length multiplied by time of single call just said a single call duration time allowed."
+Enable Single Call Duration Limit="Enable Single Call Duration Limit"
+Enable Single Call Duration Limit help="Definite maximum call duration for single call. <br>Example: if Time of single call set to 10, the call will be disconnected after <br>talking 10*step seconds."
+Single Call Duration Limitation="Single Call Duration Limitation"
+Single Call Duration Limitation help="The value of limitation single call, this value range is 1-999999. <br>Step length multiplied by time of single call just said a single call duration time allowed."
+Enable Call Duration Limitation="Enable Call Duration Limitation"
+Enable Call Duration Limitation help="This function is to limit the total call duration of GSM channel. <br>The max call duration is between 1 to 999999 steps."
+Call Duration Limitation="Call Duration Limitation"
+Call Duration Limitation help="The value of total call limitation, this value range is 1-999999. <br>Step length multiplied by time of single call just said a single call duration time allowed."
+Remain Time="Remain Time"
+Remain Time help="This value is multiplied by to step length is a rest call time."
+Minimum Charging Time="Minimum Charging Time"
+Minimum Charging Time help="A single call over this time, <br>GSM side of the operators began to collect fees, unit for seconds.<br>The value must be less than Step length."
+Alarm Threshold="Alarm Threshold"
+Alarm Threshold help="Define a threshold value of call duration. <br>While the call steps larger than this value, <br>the gateway will send alarm information to designated phone number via SMS.<br>The value must be less than call duration limitation."
+Alarm Phone Number="Alarm Phone Number"
+Alarm Phone Number help="Receiving alarm phone number, user will received alarm message from gateway."
+Alarm Description="Alarm Description"
+Alarm Description help="Alarm port information description, <br>which will be sent to user mobile phone with alarm information."
+Enable Auto Reset="Enable Auto Reset"
+Enable Auto Reset help="Automatic restore remaining talk time, <br>that is, get total call minutes of GSM channel."
+Auto Reset Type="Auto Reset Type"
+Auto Reset Type help="Reset call minutes by date, by week, by month."
+Next Reset Time="Next Reset Time"
+Next Reset Time help="Defined next reset date. <br>System will count start from that date and work as Reset Period setting."
+Second="Second"
+Reset="Reset"
+
+js check dl_step integer="The input should be less than duration step"
+js check warining time="The input should be less than call duration limitation."
+js check datetime="Please input right format date and time. eg: 01/01/2019 19:44:31"
+js check datetime2="The date must be greater than the current."
+js check warning time integer="The input should be less than call duration limitation."
+Dial Limit Reset confirm="Do you confirm to reset Remaining Time?"
+
+Save To Other Ports="Save To Other Ports"
+Sync All Settings="Sync All Settings"
+Sync All Settings help="Sync All Settings"
+Select all settings="Select all settings"
+
+GSM Settings Save Report="GSM Settings Save Report"
+gsm settings save failed="save failed!"
+
+List Carrier="List Carrier"
+Bind Carrier="Bind Carrier"
+Call Waiting Function="Call Waiting Function"
+Default Band Tip="You have selected some bands, default clears the selected bands."
+Dial Timeout="Dial Timeout"
+Dial Timeout help="Dial Timeout"
+No Limit="No Limit"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-callforwarding.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-callforwarding]
+Select="Select"
+Call Type="Call Type"
+Call Number="Call Number"
+Query="Query"
+Setting="Setting"
+Query Warning="Notice: This function need to request the data from GSM network,there will be some delay."
+Setting Warning="Notice: This function need to send the data to GSM network,there will be some delay."
+check correct number="Please input the correct number!"
+QUERYING="QUERYING"
+Select least warning="Please select at least one port!"
+TIMEOUT="TIMEOUT"
+SETTING="SETTING"
+Please set the content="Please set the content!"
+Please choose port="Please choose the port you want to set!"
+Call Forwarding Unconditional="Call Forwarding Unconditional"
+Call Forwarding No Reply="Call Forwarding No Reply"
+Call Forwarding Busy="Call Forwarding Busy"
+Call Forward on Not Reachable="Call Forward on Not Reachable"
+Cancel All="Cancel All"
+js check call forward integer="Please input the correct number!"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-callwaiting.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-callwaiting]
+Call Waiting Function="Call Waiting Function"
+Status="Status"
+Query="Query"
+Setting="Setting"
+Select least warning="Please select at least one port!"
+Query Warning="Notice: This function need to request the data from GSM network,there will be some delay."
+QUERYING="QUERYING"
+TIMEOUT="TIMEOUT"
+UNKNOWN="UNKNOWN"
+NOT READY="NOT READY"
+FAILED="FAILED"
+SETTING="SETTING"
+Please choose port="Please choose the port you want to set!"
+Please set the content="Please set the content!"
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-dtmf.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-dtmf]
+DTMF Detection Settings="DTMF Detection Settings"
+DTMF Detect Flag="DTMF Detect Flag"
+DTMF Detect Flag help="DTMF Detect Flag"
+Reference Value="Reference Value"
+Reference Value help="Reference Value"
+Relax DTMF Normal Twist="Relax DTMF Normal Twist"
+Relax DTMF Normal Twist help="Relax DTMF Normal Twist"
+Relax DTMF Reverse Twist="Relax DTMF Reverse Twist"
+Relax DTMF Reverse Twist help="Relax DTMF Reverse Twist"
+DTMF Relative Peak Row="DTMF Relative Peak Row"
+DTMF Relative Peak Row help="DTMF Relative Peak Row"
+DTMF Relative Peak Col="DTMF Relative Peak Col"
+DTMF Relative Peak Col help="DTMF Relative Peak Col"
+DTMF Hits Begin="DTMF Hits Begin"
+DTMF Hits Begin help="DTMF Hits Begin"
+DTMF Misses End="DTMF Misses End"
+DTMF Misses End help="DTMF Misses End"
+Custom="Custom"
+Default="Default"
+Suggest="Suggest"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-bcch.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-bcch]
+Mode="Mode"
+LAC="LAC"
+BCCH="BCCH"
+dbm="dbm"
+Status="Status"
+Detail="Detail"
+Get Current State="Get Current State"
+Search Cell="Search Cell"
+BCCH Mode=""
+BCCH Mode help="BCCH Mode"
+Minimum Signal Strength allow=""
+Minimum Signal Strength allow help="Minimum Signal Strength allow"
+Auto Period=""
+Auto Period help="Auto Period"
+Switch BCCH in Calling=""
+Switch BCCH in Calling help="Switch BCCH in Calling"
+Call times=""
+Call times help="Call times"
+Minimun ASR="Minimun ASR"
+Minimun call ASR="Minimun call ASR"
+Call failed times="Call failed times"
+Call failed times="Call failed times"
+Apply To All Ports="Apply To All Ports"
+Apply To All Ports help="Apply To All Ports"
+Index="Index"
+MCC="MCC"
+MNC="MNC"
+LAC="LAC"
+CID="CID"
+Receive Level="Receive Level"
+Lock="Lock"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-toolkit.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-toolkit]
+Function="Function"
+Function help="Get USSD:<br/>Enter a specific USSD number<br/>(For example,*142# to check your SIM card's balance. This USSD number is might be different from different carriers) <br/>to get the USSD information.<br/>The gateway will try to get by AT commands.<br/></br/>Send AT Command:<br/>To perform some specific AT commands.<br/>This is useful when you have a debug of the GSM modem. e.g: perform [AT+CSQ] to check what signal quality it is.<br/><br/>Check Number:<br/>Enter a known number(like your mobile phone) to check what number it is of the SIM card.<br/>Click \"Execute\", then the gateway will dial to the number you already input.<br/>It only rings for one time and hangs up at once. <br/>Not generating telephone charge during this procedure."
+Copy to Selected="Copy to Selected"
+Clear All="Clear All"
+Execute="Execute"
+Get USSD="Get USSD"
+Send AT Command="Send AT Command"
+Check Number="Check Number"
+Input="Input"
+Output="Output"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-autoimei.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-autoimei]
+Automatic Modify GSM IMEI="Automatic Modify GSM IMEI"
+Automatic Change IMEI="Automatic Change IMEI"
+Automatic Change IMEI help="Allowing endpoints to send some specified KEY WORDS and corresponding PASSWORD to operate the gateway. <br/>Message is case-sensitive."
+Port="Port"
+Port help="To select on which GSM channel(s) to send SMS and enter what message you want to send."
+Interval="Interval"
+Immediately="Immediately"
+Immediately help 1="To decide the modification take effect immediately or not."
+Immediately help 2="modify IMEI immediately"
+Force="Force"
+Force help="Modify IMEI no matter whether the channel state is ready or not. "
+Auto-IMEI Advanced="Auto-IMEI Advanced"
+Auto-IMEI Advanced help="Advanced Settings for Automatic Modify IMEI."
+IMEI Number Setting="IMEI Number Setting"
+digit="digit"
+Current IMEI="Current IMEI"
+Set to All="Set to All"
+Manual="Manual"
+js imei tac help="The input TAC should be 6 bits 0~9 or x or X"
+js imei fac help="The input FAC should be 2 bits 0~9 or x or X"
+js imei snr help="The input SNR should be 6 bits 0~9 or x or X"
+js select at least one port="You must select at least one port."
+Back Home="Back Home"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	module-update.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module-update]
+Module Update file="Module Update file"
+Module Update file help="Upload module files that need to be updated."
+Module Updating="Module Updating"
+Port="Port"
+Port help="Select the module port that needs to be updated."
+Module Update alert="Please note the following points,if it is violated,it may cause the module upgrade to fail!"
+Module Update note1="1、Module upgrade will take a long time."
+Module Update note2="2、System cannot be powered off during module update."
+Module Update note3="3、Do not reboot system or asterisk during module update."
+Module Update note4="4、Do not refresh this page during module update."
+Module Update note5="5、Do not perform other operations on this system during module update."
+Select port alert="Please select the port first"
+exit="exit"
+module update close tip="The module is being updating, and the exit will cause the module update to fail. Are you sure you want to do this?"
+Confirm="Confirm"
+Updating="Updating"
+Update success="Update success"
+Restart update="Restart update"
+Update error="Failure to upgrade, an unknown error."
+Update waiting="Update waiting"
+Show All="Show All"
+System Update filesize alert="Uploaded max file is 80M!"
+Select File alert="Please select your file first!"
+
+MCU Update="MCU Update"
+MCU Update file="MCU Update file"
+MCU Update file help="Upload the required upgraded MCU files"
+Update="Update"
+MCU Update alert="Please note the following points,if it is violated,it may cause the MCU upgrade to fail!"
+MCU Update note1="1.MCU upgrade will take a long time."
+MCU Update note2="2.System cannot be powered off during MCU update."
+MCU Update note3="3.Do not reboot system or asterisk during MCU update."
+MCU Update note4="4.Do not refresh this page during MCU update."
+MCU Update note5="5.Do not perform other operations on this system during MCU update."
+MCU Updating="MCU Updating"
+
+EMU Update="EMU Update"
+Select a EMU to Update="Select a EMU to Update"
+Select a EMU to Update help="Select a EMU to Update"
+Baud Rate="Baud Rate"
+Baud Rate help="Baud Rate"
+EMU Update file="EMU Update file"
+EMU Update file help="EMU Update file"
+EMU Update alert="Do not cut off the power supply during upgrading.Are you sure Update Emu?"
+
+bin File help="Wrong file type. Please upload .bin file."
+zip File help="Wrong file type. Please upload .zip file."
+MLD File help="Wrong file type. Please upload .MLD file."
+error File help="The file format is not correct. Please re select the file!"
+Firmware mismatch="Firmware mismatch"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	gsm-calllimit.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[gsm-calllimit]
+Type="Type"
+Call Limit="Call Limit"
+Call Limit Time="Call Limit Time"
+Call Time Limit Switch="Call Time Limit Switch"
+Call Time Limit Switch help="Call Time Limit Switch"
+Call And SMS Limit="Call And SMS Limit"
+Call Limit Switch="Call Limit Switch"
+Call Limit Switch help="Call Limit Switch"
+Limit Call Time="Limit Call Time"
+Limit Call TIme help="Limit the length of a single call. The default value is 0, which means unlimited."
+Limit Daily Call Times="Limit Daily Call Times"
+Limit Daily Call Times help="Limit the number of calls per day (regardless of whether the person is connected), the default value is 0, indicating unlimited."
+Limit Daily Answer Times="Limit Daily Answer Times"
+Limit Daily Answer Times help="Limit the number of calls per day and the number of answers. The default value is 0, indicating no limit."
+Limit Hour Call Times="Limit Hour Call Times"
+Limit Hour Call Times help="Limit the number of calls per hour (regardless of whether the person is connected), the default value is 0, indicating unlimited."
+
+Lock Detect Switch="Lock Detect Switch"
+Lock Detect Switch help="Lock Detect Switch"
+Mark Switch="Mark Switch"
+Mark Switch help="Mark Switch"
+Call Failed Mark Count="Call Failed Mark Count"
+Call Failed Mark Count help="The number of consecutive calls failed to reach the number of settings, marking the port."
+Call Failed Lock Switch="Call Failed Lock Switch"
+Call Failed Lock Switch help="Call Failed Lock Switch"
+Call Failed Lock Count="Call Failed Lock Count"
+Call Failed Lock Count help="Lock the port after the number of successive call failures reaches the set number, restrict the port expiration, and no longer select the port expiration in the group policy."
+SMS Send Detection Switch="SMS Send Detection Switch"
+SMS Send Detection Switch help="After opening, when the number of successive call failures reaches the set value, send short message to check whether the port is available; if the short message is sent successfully, clear the number of successive call failures; if the short message fails, limit the port\'s outgoing."
+SMS Send Detection Count="SMS Send Detection Count"
+SMS Send Detection Count help="SMS Send Detection Count"
+Send Sms Number="Send Sms Number"
+Send Sms Number help="Send Sms Number"
+Sms Message="Sms Message"
+Sms Message help="Sms Message"
+Testing SMS report="Testing SMS report"
+Testing SMS report help="When closed, the successful sending of short message indicates that the port is available; when opened, the successful sending of short message and the receipt of short message report indicate that the port is available."
+
+Lock Sim="Lock Sim"
+Mark Count and Lock Count="Call Failed Mark Count must be less than Call Failed Lock Count."
+Call Status="Call Status"
+Lock Status="Lock Status"
+Mark Status="Mark Status"
+Sim Status Unlock="Sim Status:Unlock."
+Unlock Tip="Are you sure you want to unlock it?"
+Unlimit Tip="This operation will unlimited the call times limit. Are you sure you want to do this?"
+Unlimit Tip@both_time="This operation will unlimited the call times limit, and the call duration limit needs to be removed by using the reset button within the settings. Are you sure you want to do this?"
+Unlimit Tip@only_time="The call duration limit needs to be removed by using the reset button within the settings."
+Sim Status Unlimit="Sim Status:Unlimit."
+
+SMS Limit="SMS Limit"
+SMS Limit Switch="SMS Limit Switch"
+SMS Limit Switch help="SMS Limit Switch"
+SMS Limit Success Flag="SMS Limit Success Flag"
+SMS Limit Success Flag help="When close, no matter whether the message is sent successfully or not, the number of messages is counted."
+Day Limit SMS Count="Day Limit SMS Count"
+Day Limit SMS Count help="Limit the number of SMS sent daily, the default value is 0, indicating unlimited."
+Month Limit SMS Count="Month Limit SMS Count"
+Month Limit SMS Count help="Limit the number of SMS sent per month, the default value is 0, indicating unlimited."
+SMS Clean Date="SMS Clean Date"
+SMS Clean Date help="The number of messages sent monthly is automatically cleared at 0 points, 0 minutes and 0 seconds on the set date."
+Unlimited="Unlimited"
+Limited="Limited"
+Unlocked="Unlocked"
+Locked="Locked"
+Unmarked="Unmarked"
+Marked="Marked"
+SMS Sending Statistics="SMS Sending Statistics"
+Clear zero="Clear zero"
+SMS count of the day="SMS count of the day"
+SMS count of the month="SMS count of the month"
+Daily limit="Daily limit"
+Monthly limit="Monthly limit"
+Monthly recovery date="Monthly recovery date"
+SMS Status="SMS Status"
+Call Statistics="Call Statistics"
+Hour Call Count="Hour Call Count"
+Daily Call Count="Daily Call Count"
+Daily Answer Count="Daily Answer Count"
+Call Failed Count="Call Failed Count"
+Switch="Switch"
+Switch help="Save all the current restricted states, and the system will automatically save the state at zero after switching on the switch, <br/>and will restore to the saved state after power failure and restart.<br/> Turning off this switch will turn off automatic state saving, and all States will be cleared after power failure and restart."
+Locking="Locking"
+Call Duration="Call Duration"
+Single Limit Time Less Tip="Single Call Duration Limitation must be less than or equal to Call Duration Limitation."
+SMS Time Interval Switch="SMS Time Interval Switch"
+SMS Time Interval Switch help="When this switch is enabled, SMS can only be sent within the start-stop time."
+SMS Time Start="SMS Time Start"
+SMS Time Start help="Starting time of sending SMS."
+SMS Time End="SMS Time End"
+SMS Time End help="End time of sending SMS."
+No Limit="No Limit"
+Dial Limit Reset confirm="This operation will unlimite the call duration limit. Are you sure you want to do this?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	voip-endpoints.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[voip-endpoints]
+;SIP
+SIP Endpoint="SIP Endpoint"
+Endpoint Name="Endpoint Name"
+Credentials="Credentials"
+IAX2 Endpoint="IAX2 Endpoint"
+
+Main Endpoint Settings="Main Endpoint Settings"
+Name="Name"
+Name help="A name which is able to read by human. <br/>And it's only used for user's referance."
+User Name="User Name"
+User Name help="User Name the endpoint will use to authenticate with the gateway."
+Password="Password"
+Password help="Password the endpoint will use to authenticate with the gateway.<br/>Allowed characters"
+Registration="Registration"
+Registration help="Whether this endpoint will register to this gateway or this gateway to the endpoint."
+Hostname or IP Address="Hostname or IP Address"
+Hostname or IP Address help="IP address or hostname of the endpoint or 'dynamic' if the endpoint has a dynamic IP address.<br/>This will require registration.<br>Notice: If the input here is hostname and your DNS has changed, you must <span style=\"color:rgb(255,0,0)\">reboot asterisk</span>."
+Transport="Transport"
+Transport help="This sets the possible transport types for outgoing. Order of usage, <br/>when the respective transport protocols are inabled, is UDP, TCP, TLS.<br/>The first enabled transport type is only used for outbound messages until a<br/>Registration takes place. During the peer Registration the transport type <br/>may change to another supported type if the peer requests so."
+NAT Traversal="NAT Traversal"
+NAT Traversal help="Addresses NAT-related issues in incoming SIP or media sessions."
+
+;Advanced:Registration Options"
+Advanced:Registration Options="Advanced:Registration Options"
+Authentication User="Authentication User"
+Authentication User help="A username to use only for registration."
+Register Extension="Register Extension"
+Register Extension help="When Gateway registers as a SIP user agent to a SIP proxy(provider), <br/>calls from this provider connect to this local extension."
+Register User="Register User"
+Register User help="Register user name , <br/>it is the user of register => user[:secret[:authuser]]@host[:port][/extension] ."
+Contact User="Contact User"
+Contact User help="eg: When the Contact User is 402<br/>Contact: &lt;sip:402@172.16.6.123:5060;transport=UDP&gt;"
+From User="From User"
+From User help="A username to identify the gateway to this endpoint."
+From Domain="From Domain"
+From Domain help="A domain to identify the gateway to this endpoint."
+Remote Secret help="A password which is only used if the gateway registers to the remote side."
+Remote Secret="Remote Secret"
+Port="Port"
+Port help="The port number the gateway will connect to at this endpoint."
+Qualify="Qualify"
+Qualify help="Whether or not to check the endpoint's connection status."
+Qualify Frequency="Qualify Frequency"
+Qualify Frequency help="How often, in seconds, to check the endpoint's connection status."
+Outbound Proxy="Outbound Proxy"
+Outbound Proxy help="A proxy to which the gateway will send all outbound signaling instead of sending signaling directly to endpoints."
+Custom Registery="Custom Registery"
+Custom Registery help="Custom Registery On / Off."
+Registery String="Registery String"
+Registery String help="Context of registery. user[:secret[:authuser]]@host[:port][/extension] </br>eg: 1001@sip.com:pbx122@172.16.6.122/1001 </br>"
+Enable Outboundproxy to Host="Enable Outboundproxy to Host"
+Enable Outboundproxy to Host help="Outboundproxy to Host On / Off."
+Tlsverify="Tlsverify"
+Tlsverify help="enable TLS verify or disable."
+Tlssetup="Tlssetup"
+Tlssetup help="Whether we are willing to accept connections, connect to the other party, or both."
+Tlsprivatekey="Tlsprivatekey"
+Tlsprivatekey help="Private key file (*.pem format only) for TLS connections. If no tlsprivatekey is specified, tlscertfile is searched for both public and private key."
+Encryption="Encryption"
+Encryption help="Whether to offer SRTP encrypted media (and only SRTP encrypted media) on outgoing calls to a peer. Calls will fail with HANGUPCAUSE=58 if the peer does not support SRTP. Defaults to no."
+
+;Call Settings"
+Call Settings="Call Settings"
+DTMF Settings="DTMF Settings"
+DTMF Mode="DTMF Mode"
+DTMF Mode help="Set default dtmfmode for sending DTMF. Default:rfc2833. <br/>Other options: 'info', SIP INFO message(application/dtmf-relay);<br/>'inband',Inband audio(require 64kbit codec -alaw,ulaw)."
+RFC2833="RFC2833"
+Inband="Inband"
+Info="Info"
+
+Caller ID Settings="Caller ID Settings"
+Trust Remote-Party-ID="Trust Remote-Party-ID"
+Trust Remote-Party-ID help="Whether or not the Remote-Party-ID header should be trusted."
+Send Remote-Party-ID="Send Remote-Party-ID"
+Send Remote-Party-ID help="Whether or not to send the Remote-Party-ID header."
+Remote Party ID Format="Remote Party ID Format"
+Remote Party ID Format help="How to set the Remote-Party-ID header: from Remote-Party-ID or from P-Asserted-Identity."
+P-Asserted-Identity Header="P-Asserted-Identity Header"
+Remote-Party-ID Header="Remote-Party-ID Header"
+Caller ID Presentation="Caller ID Presentation"
+Caller ID Presentation help="Whether or not to display Caller ID."
+
+Maximum Channels="Maximum Channels"
+Call Limit="Call Limit"
+Allowed,not screened="Allowed,not screened"
+Allowed,passed screen="Allowed,passed screen"
+Allowed,failed screen="Allowed,failed screen"
+Allowed="Allowed"
+Prohibited,not screened="Prohibited,not screened"
+Prohibited,passed screen="Prohibited,passed screen"
+Prohibited,failed screen="Prohibited,failed screen"
+Prohibited="Prohibited"
+Unavailable="Unavailable"
+
+;Advanced:Signaling Settings"
+Advanced:Signaling Settings="Advanced:Signaling Settings"
+Progress Inband="Progress Inband"
+Progress Inband help="If we should generate in-band ringing. <br/>Always use 'never' to never use in-band signalling, even in cases where some buggy devices might not render it.<br/>Valid values: yes, no, never. <br/>Default: never."
+Never="Never"
+Append user="Append user"
+phone to URI="phone to URI"
+phone to URI help="Whether or not to add ';user=phone' to URIs that contain a valid phone number."
+Add Q.850 Reason Headers="Add Q.850 Reason Headers"
+Add Q.850 Reason Headers help="Whether or not to add Reason header and to use it if it is available."
+Ignor SDP Version="Honor SDP Version"
+Ignor SDP Version help="By default, the gateway will honor the session version number in SDP packets and will only modify the SDP session if the version number changes. <br/>Turn this option off to force the gateway to ignore the SDP session version number and treat all SDP data as new data. <br/>This is required for devices that send non-standard SDP packets (observed with Microsoft OCS). <br/>By default this option is on."
+Directmedia="Directmedia"
+Directmedia help="the value of parameter directmedia is one of them (no , yes, nonat, update, outgoing), default value is yes. <br/>directmedia=yes  'allow RTP media direct'<br/>directmedia = no 'deny re-invites'<br/>directmedia = nonat 'allow reinvite when local, deny reinvite when NAT'<br/> directmedia = update 'use UPDATE instead of INVITE'<br/>directmedia = update,nonat 'use UPDATE when local, deny when NAT'"
+Allow Transfers="Allow Transfers"
+Allow Transfers help="Whether or not to globally enable transfers. <br/>Choosing 'no' will disable all transfers (unless enabled in peers or users). <br/>Default is enabled."
+Allow Promiscuous Redirects="Allow Promiscuous Redirects"
+Allow Promiscuous Redirects help="Whether or not to allow 302 or REDIR to non-local SIP address. <br/>Note that promiscredir when redirects are made to the local system will cause loops since this gateway is incapable of performing a "hairpin" call."
+Max Forwards="Max Forwards"
+Max Forwards help="Setting for the SIP Max-Forwards header (loop prevention)."
+Send TRYING on REGISTER="Send TRYING on REGISTER"
+Send TRYING on REGISTER help="Send a 100 Trying when the endpoint registers."
+
+;Advanced:Timer Settings"
+Advanced:Timer Settings="Advanced:Timer Settings"
+Default T1 Timer="Default T1 Timer"
+Default T1 Timer help="This timer is used primarily in INVITE transactions. <br/>The default for Timer T1 is 500 ms or the measured run-trip time between the gateway and the device if you have qualify=yes for the device."
+Call Setup Timer="Call Setup Timer"
+Call Setup Timer help="If a provisional response is not received in this amount of time, the call will autocongest. <br/>Defaults to 64 times the default T1 timer."
+Session Timers="Session Timers"
+Session Timers help="Session-Timers feature operates in the following three modes: originate, Request and run session-timers always;<br/>accept, Run session-timers only when requested by other UA; refuse, <br/>Do not run session timers in any case."
+Accept="Accept"
+Originate="Originate"
+Refuse="Refuse"
+Minimum Session Refresh Interval="Minimum Session Refresh Interval"
+Minimum Session Refresh Interval help="Minimum session refresh interval in seconds. Defualts to 90 secs."
+Maximum Session Refresh Interval="Maximum Session Refresh Interval"
+Maximum Session Refresh Interval help="Maximum session refresh interval in seconds. Defaults to 1800s."
+Session Refresher="Session Refresher"
+Session Refresher help="The session refresher, uac or uas. Defaults to uas."
+
+Add New SIP Endpoint="Add New SIP Endpoint"
+Edit SIP Endpoint="Edit SIP Endpoint"
+Sync All Settings="Sync All Settings"
+Sync All Settings help = "Sync All Settings help"
+
+;IAX2
+Add New IAX2 Endpoint="Add New IAX2 Endpoint"
+Edit IAX2 Endpoint="Edit IAX2 Endpoint"
+Save To Other Sips="Save To Other Sips"
+Save To Other Sips help="Saving current sip param to other sips synchronously"
+Auth="Auth"
+Auth help="Authentication method for connections"
+Transfer="Transfer"
+Transfer help="Disable or not IAX2 native transfer"
+Trunk="Trunk"
+Trunk help="Use IAX2 trunking with this host"
+Qualify Smothing="Qualify Smothing"
+Qualify Smothing help="Use an average of the last two PONG results to reduce falsely detected LAGGED hosts. The default is no."
+Qualify Freq Ok="Qualify Freq Ok"
+Qualify Freq Ok help="How frequently to ping the peer when everything seems to be OK, in milliseconds."
+Qualify Freq Not Ok="Qualify Freq Not Ok"
+Qualify Freq Not Ok help="How frequently to ping the peer when it is either, LAGGED or UNAVAILABLE, in milliseconds."
+Server="Server"
+Client="Client"
+md5="md5"
+plaintext="plaintext"
+rsa="rsa"
+inkeys="inkeys"
+inkeys help="inkeys is a list of acceptable public keys on the local system"
+Force Encryption="Force Encryption"
+Force Encryption help="Force encryption insures no connection is established unless both sides support encryption. By turning this option on, encryption is automatically turned on as well. The default is no."
+Trunk Max Size="Trunk Max Size"
+Trunk Max Size help="defaults to 128000 bytes, which supports up to 800 calls of ulaw at 20ms a frame."
+Trunk MTU="Trunk MTU"
+Trunk MTU help="sets the maximum transmission unit for IAX2 UDP trunking."
+Trunk Frequency="Trunk Frequency"
+Trunk Frequency help="How frequently to send trunk msgs in msec. This is 20ms by default."
+Trunk Time Stamps="Trunk Time Stamps"
+Trunk Time Stamps help="ensure that frame timestamps get sent end-to-end properly."
+Min. RegExpire="Min. RegExpire"
+Min. RegExpire help="Minimum amounts of time that IAX2 peers can request as a registration expiration interval in seconds."
+Max. RegExpire="Max. RegExpire"
+Max. RegExpire help="Maximum amounts of time that IAX2 peers can request as a registration expiration interval in seconds."
+Require Call Token="Require Call Token"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-bindpoints.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-bindpoints]
+Batch SIP Endpoints="Batch SIP Endpoints"
+ID="ID"
+User Name="User Name"
+password="password"
+Hostname or IP Address="Hostname or IP Address"
+Port="Port"
+Outbound Proxy="Outbound Proxy"
+Register Mode="Register Mode"
+Batch="Batch"
+AutoPassword="AutoPassword"
+js check busername="you need to set a number for username"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-adv-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-adv-settings]
+;General="General"
+Networking="Networking"
+UDP Bind Port="UDP Bind Port"
+UDP Bind Port help="Choose a port on which to listen for UDP traffic."
+Enable TCP="Enable TCP"
+Enable TCP help="Enable server for incoming TCP connection(default is no)."
+TCP Bind Port="TCP Bind Port"
+TCP Bind Port help="Choose a port on which to listen for TCP traffic."
+TCP Authentication Timeout="TCP Authentication Timeout"
+TCP Authentication Timeout help="The maximum number of seconds a client has to authenticate.<br/>If the client does not authenticate before this timeout expires,<br/>the client will be disconnected.(default value is: 30 seconds)"
+TCP Authentication Limit="TCP Authentication Limit"
+TCP Authentication Limit help="The maiximum number of unauthenticated sessions that will be<br/>allowed to connect at any given time.(default is:50)"
+Enable Hostname Lookup="Enable Hostname Lookup"
+Enable Hostname Lookup help="Enable DNS SRV lookups on outbound calls Note: the gateway only<br/> uses the first host in SRV records Disabling DNS SRV lookups disables<br/>the ability to place SIP calls based on domain names to some other SIP<br/>users on the Internet Sepcifying a port in a SIP peer definition or when<br/>dialing outbound calls with supress SRV lookups for that peer or call."
+Enable Internal SIP Call="Enable Internal SIP Call"
+Enable Internal SIP Call help="Whether enable the internal SIP calls or not when you select the registration option \"Endpoint registers with this gateway\"."
+Internal SIP Call Prefix="Internal SIP Call Prefix"
+Internal SIP Call Prefix help="Specify a prefix before routing the internal calls."
+
+NAT Settings="NAT Settings"
+Local Network="Local Network"
+Local Network help="Format:192.168.0.0/255.255.0.0 or 172.16.0.0./12<br/>A list of IP address or IP ranges which are located inside a NATed network.<br/> This gateway will replace the internal IP address in SIP and SDP messages with<br/> the extenal IP address when a NAT exists between the gateway and other endpoings."
+Local Network List="Local Network List"
+Local Network List help="Local IP address list that you added."
+IP Range="IP Range"
+Subscribe Network Change Event="Subscribe Network Change Event"
+Subscribe Network Change Event help="Through the use of the test_stun_monitor module, the gateway has the ability to detect when<br/>the perceived external network address has changed. When the stun_monitor is installed and <br/>configured, chan_sip will renew all outbound registrations when the monitor detects any sort<br/>of network change has occurred. By default this option is enabled, but only takes effect once<br/>res_stun_monitor is configured. If res_stun_monitor is enabled and you wish to not generate all<br/>outbound registrations on a network change,use the option below to disable this feature."
+Match External Address Locally="Match External Address Locally"
+Match External Address Locally help="Only substitute the externaddr or externhost setting if it matches."
+Dynamic Exclude Static="Dynamic Exclude Static"
+Dynamic Exclude Static help="Disallow all dynamic hosts from registering as any IP address<br/> used for staticly defined hosts. This helps avoid the configuration<br/>error of allowing your users to register at the same address as a SIP provider."
+Externally Mapped TCP Port="Externally Mapped TCP Port"
+Externally Mapped TCP Port help="The externally mapped TCP port, when the gateway is behind a static NAT or PAT."
+External Address="External Address"
+External Address help="The external address (and optional TCP port) of the NAT.<br>External Address = hostname[:port] specifies a static address[:port] to be used in SIP and SDP messages.Examples: <br>External Address = 12.34.56.78<br>External Address = 12.34.56.78:9900 <br>"
+External Hostname="External Hostname"
+External Hostname help="The external hostname (and optional TCP port) of the NAT.<br>External Hostname = hostname[:port] is similar to \"External Address\". Examples: <br>External Hostname = foo.dyndns.net<br>"
+Hostname Refresh Interval="Hostname Refresh Interval"
+Hostname Refresh Interval help="How often to perform a hostname lookup. This can be useful when your NAT device<br/>lets you choose the port mapping, but the IP address is dynamic. Beware, you might<br/>suffer from service disruption when the name server resolution fails."
+
+RTP Settings="RTP Settings"
+Start of RTP Port Range="Start of RTP Port Range"
+Start of RTP Port Range help="Start of range of port numbers to be used for RTP."
+End of RTP port Range="End of RTP port Range"
+End of RTP port Range help="End of range of port numbers to be used for RTP"
+RTP Timeout="RTP Timeout"
+RTP Timeout help="RTP Timeout"
+
+Parsing and Compatibility="Parsing and Compatibility"
+Strict RFC Interpretation="Strict RFC Interpretation"
+Strict RFC Interpretation help="Check header tags, character conversion in URIs, and multiline headers<br/>for strict SIP compatibility(default is yes)"
+Send Compact Headers="Send Compact Headers"
+Send Compact Headers help="Send compact SIP headers."
+SDP Owner="SDP Owner"
+SDP Owner help="Allows you to change the username filed in the SDP owner string,(o=).<br/>This filed MUST NOT contain spaces."
+Ring 183 Mode="Ring 183 Mode"
+Ring 183 Mode help="Ring 183 Mode"
+
+SIP Methods="SIP Methods"
+Disallowed SIP Methods="Disallowed SIP Methods"
+Disallowed SIP Methods help="When a dialog is started with another SIP endpoint, the other endpoint<br/> should include an Allow header telling us what SIP methods the endpoint<br/> implements. However, some endpoints either do not include an Allow header<br/>or lie about what methods they implement.In the former case, the gateway<br/>makes the assumption that the endpoint supports all known SIP methods. If<br/>you know that your SIP endpoint does not provide support for a specific method,<br/> then you may provide a list of methods that your endpoint does not implement in the<br/>disallowed_methods option. Note that if your endpoint is truthful with its Allow header,<br/> then there is no need to set this option."
+Hangup Cause Code="Hangup Cause Code"
+Hangup Cause Code help="Hangup Cause Code"
+Line Unavailable Code="Line Unavailable Code"
+Line Unavailable Code help="Line Unavailable Code"
+Notify Unlimited="Notify Unlimited"
+Notify Unlimited help="on:Received notify, do not restrict, reply directly to 200ok.<br/>off:According to normal processing."
+ACK="ACK"
+BYE="BYE"
+CANCEL="CANCEL"
+INFO="INFO"
+INVITE="INVITE"
+MESSAGE="MESSAGE"
+NOTIFY="NOTIFY"
+OPTIONS="OPTIONS"
+PRACK="PRACK"
+PUBLISH="PUBLISH"
+REFER="REFER"
+REGISTER="REGISTER"
+SUBSCRIBE="SUBSCRIBE"
+UPDATE="UPDATE"
+defalut="defalut"
+404 Not Found="404 Not Found"
+420 No Route Destination="420 No Route Destination"
+486 Busy Here="486 Busy Here"
+408 Request Timeout="408 Request Timeout"
+480 Temporarily Unavailable="480 Temporarily Unavailable"
+403 Forbidden="403 Forbidden"
+410 Gone="410 Gone"
+502 Bad Gateway="502 Bad Gateway"
+484 Address Incomplete="484 Address Incomplete"
+501 Not Implemented="501 Not Implemented"
+500 Server Internal Failure="500 Server Internal Failure"
+503 Service Unavailable="503 Service Unavailable"
+488 Not Acceptable Here="488 Not Acceptable Here"
+603 Declined="603 Declined"
+EXTEN="EXTEN"
+Number="Number"
+Name="Name"
+Tel/Tel="Tel/Tel"
+Tel/User="Tel/User"
+User/Tel="User/Tel"
+User/User="User/User"
+
+Caller ID="Caller ID"
+Caller ID help="defalut:Sip From and Number<br/>eg: When selecting SIP From, Name is Peter and Number is 402.<br/>The From mode is: \"Peter\"&lt;sip:402@172.16.6.239;transport=UDP&gt;;tag=bd481672"
+Shrink Caller ID="Shrink Caller ID"
+Shrink Caller ID help="The shrinkcallerid function removes '(', ' ', ')', non-trailing '.',<br/>and '-' not in square brackets. For example,the caller id value 555.5555<br/>becomes 5555555 when this option is enabled. Disabling this option results<br/>in no modification of the caller id value,which is necessary when the caller<br/> id represents something that must be preserved. By default this option is on."
+SIP To="SIP To"
+SIP To help="Callee ID transfer"
+SIP From="SIP From"
+SIP From help="Caller ID transfer"
+
+Timer Configuration="Timer Configuration"
+Maximum Registration Expiry="Maximum Registration Expiry"
+Maximum Registration Expiry help="Maximum allowed time of incoming registrations and subscriptions (seconds)"
+Minimum Registration Expiry="Minimum Registration Expiry"
+Minimum Registration Expiry help="Minimum length of registrations/subscriptions (default 60)"
+Default Registration Expiry="Default Registration Expiry"
+Default Registration Expiry help="Default length of incoming/outgoing registration"
+
+Outbound Registrations="Outbound Registrations"
+Registration Timeout="Registration Timeout"
+Registration Timeout help="How often, in seconds, to retry registration calls. Default 20 seconds."
+Number of Registration Attempts="Number of Registration Attempts"
+Number of Registration Attempts help="Number of registration attempts before we give up. 0 = continue forever,<br/> hammering the other server until it accepts the registration. Default is 0 tries,<br/> continue forever"
+
+Transform Local Port="Transform Local Port"
+Client Auto Flag="Client Auto Flag"
+Client Auto Flag help="Client Auto Flag Switch"
+Client Basic Port="Client Basic Port"
+Client Basic Port help="Configuring the SIP local port can not conflict with other port numbers used by the device.(range 1-9999, default value: 5060)"
+Client Basic Port Tip="Range: 1-9999"
+Client Port Step="Client Port Step"
+Client Port Step help="1-10: Automatically select different local SIP ports based on this value."
+Client of Registration Attempts="Client of Registration Attempts"
+Client of Registration Attempts help="The default value is 3. The number of attempts to register, such as setting 3, indicates that the local port will change after 3 failures of registration."
+
+Security="Security"
+Authentication Settings="Authentication Settings"
+Match Auth Username="Match Auth Username"
+Match Auth Username help="If available, match user entry using the 'username' field from the<br/> authentication line instead of the 'from' field."
+Realm="Realm"
+Realm help="Realm for digest authentication. Realms MUST be globally unique according<br/>to RFC 3261. Set this to your host name or domain name."
+Use Domain as Realm="Use Domain as Realm"
+Use Domain as Realm help="Use the domain from the SIP Domains setting as the realm.<br/>In this case, the realm will be based on the request 'to' or 'from'<br/> header and should match one of the domain. Otherwise, the configured 'realm'<br/> value will be used."
+Always Auth Reject="Always Auth Reject"
+Always Auth Reject help="When an incoming INVITE or REGISTER is to be rejected, <br/>for any reason, always reject with an identical response equivalent<br/> to valid username and invalid password/hash instead of letting the requester<br/> know whether there was a matching user or peer for their request. This reduces<br/>the ability of an attacker to scan for valid SIP usernames. This option is set<br/>to 'yes' by default."
+Authenticate Options Requests="Authenticate Options Requests"
+Authenticate Options Requests help="Enabling this option will authenticate OPTIONS requests just<br/>like INVITE requests are. By default this option is disabled."
+
+Guest Calling="Guest Calling"
+Allow Guest Calling="Allow Guest Calling"
+Allow Guest Calling help="Allow or reject guest calls (default is yes, to allow). If your gateway<br/> is connected to the Internet and you allow guest calls, you want to check<br/>which services you offer everyone out there, by enabling them in the default context."
+
+Media="Media"
+QoS/ToS="QoS/ToS"
+TOS for SIP Packets="TOS for SIP Packets"
+TOS for SIP Packets help="Sets type of service for SIP packets."
+TOS for RTP Packets="TOS for RTP Packets"
+TOS for RTP Packets help="Sets type of service for RTP packets"
+
+Codec Settings="Codec Settings"
+Codec Settings help="Select codec from the drop down list. Codecs should be different for each Codec Priority."
+Codec Priority="Codec Priority"
+Not Used="Not Used"
+
+Timeout="Timeout"
+Get IP="Get IP"
+Getting Public IP="Getting Public IP"
+Get Public IP Success="Get Public IP Success"
+Get Public IP Error="Failed to get external address. Please check network connectivity."
+Permit Dialing Letters="Permit Dialing Letters"
+Permit Dialing Letters help="When the Permit Dialing Letters switch is turned off, the called number is only allowed to use numbers.<br/> When the Permit Dialing Letters switch is turned on, the called number can be numbers and character."
+Immediately="Immediately"
+AfterRing="AfterRing"
+Current Port="Current Port"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	iax-adv-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[iax-adv-settings]
+;General Settings
+General Settings="General Settings"
+Bind Port="Bind Port"
+Bind Port help="bindport may be specified"
+Bind Address="Bind Address"
+Bind Address help="more than once to bind to multiple addresses, but the first will be the default."
+Enable IAX Compat="Enable IAX Compat"
+Enable IAX Compat help="Set iaxcompat to yes if you plan to use layered <br>switches or some other scenario which may cause <br>some delay when doing a lookup in the dialplan. <br>It incurs a small performance hit to enable it.  <br>This option causes Asterisk to spawn a separate <br>thread when it receives an IAX2 DPREQ (Dialplan  <br>Request) instead of blocking while it waits for <br>a response."
+Enable Nochecksums="Enable Nochecksums"
+Enable Nochecksums help="Disable UDP checksums (if nochecksums is set, <br> then no checkums will be calculated/checked on <br>systems supporting this feature)."
+Enable Delay Reject="Enable Delay Reject"
+Enable Delay Reject help="You may specify a global default AMA flag for iaxtel calls. It must be one of 'default', 'omit', 'billing' or 'documentation'. These flags are used in the generation of call detail records."
+ADSI="ADSI"
+ADSI help="ADSI can be enabled if you have ADSI compatible CPE equipment."
+SRV Lookup="SRV Lookup"
+SRV Loopup help="Whether or not to perform an SRV lookup on outbound calls."
+AMA Flags="AMA Flags"
+AMA Flags help="You may specify a global default AMA flag for iaxtel calls. These flags are used in the generation of call detail records"
+Auto Kill="Auto Kill"
+Auto Kill help="If we don't get ACK to our NEW within 2000ms, and autokill is set to yes, then we cancel the whole thing. This is used to keep things from stalling for a long time for a host that is not available, but would be ill advised for bad connections."
+Language="Language"
+Language help="You may specify a global default language for users. This can be specified also on a per-user basis. If omitted, will fallback to English."
+Account Code="Account Code"
+Account Code help="You may specify a default account for Call Detail Records in addition to specifying on a per-user basis."
+
+;Music On Hold
+Music On Hold="Music On Hold"
+Mohsuggest="Mohsuggest"
+Mohsuggest help="The 'mohsuggest' option specifies which music on hold<br>class to suggest to the peer channel when this channel<br>places the peer on hold. It may be specified globally or<br>on a per-user or per-peer basis."
+Mohinterpret="Mohinterpret"
+Mohinterpret help="You may specify a global default language for users.<br> This can be specified also on a per-user basis.<br> If omitted, will fallback to English (en)."
+
+;Codec Settings
+Codec Settings="Codec Settings"
+Band Width="Band Width"
+Band Width help="Specify bandwidth of low, medium, or high to control which codecs are used in general"
+Disallow="Disallow"
+Disallow help="fine tune codecs here using 'disallow' clauses with specific codecs"
+Allow="Allow"
+Allow help="fine tune codecs here using 'allow' clauses with specific codecs"
+Codec Priority="Codec Priority"
+Codec Priority help="Codecpriority controls the codec negotiation of <br>  an inbound IAX2 call. This option is inherited to <br>  all user entities. It can also be defined in each <br>  user entity separately which will override the <br>  setting in general."
+low="low"
+medium="medium"
+high="high"
+all="all"
+Not Used="Not Used"
+host="host"
+caller="caller"
+disabled="disabled"
+reqonly="reqonly"
+
+;Jitter Buffer Settings
+Jitter Buffer Settings="Jitter Buffer Settings"
+Jitter Buffer="Jitter Buffer"
+Jitter Buffer help="global default as to whether you want the jitter buffer at all"
+Force Jitter Buffer="Force Jitter Buffer"
+Force Jitter Buffer help="in the ideal world, when we bridge VoIP channels we don't want to do jitterbuffering on the switch, since the endpoints can each handle this. However, some endpoints may have poor jitterbuffers themselves, so this option will force * to always jitterbuffer, even in this case."
+Max Jitter Buffers="Max Jitter Buffers"
+Max Jitter Buffers help="a maximum size for the jitter buffer"
+Resyncthreshold="Resyncthreshold"
+Resyncthreshold help="when the jitterbuffer notices a significant change in delay that continues over a few frames, it will resync, assuming that the change in delay was caused by a timestamping mix-up. The threshold for noticing a change in delay is measured as twice the measured jitter plus this resync threshold."
+Max Jitter Interps="Max Jitter Interps"
+Max Jitter Interps help="the maximum number of interpolation frames the jitterbuffer should return in a row. Since some clients do not send CNG/DTX frames to indicate silence, the jitterbuffer will assume silence has begun after returning this many interpolations. This prevents interpolating throughout a long silence."
+Jitter Target Extra="Jitter Target Extra"
+Jitter Target Extra help="number of milliseconds by which the new jitter buffer will pad its size. the default is 40, so without modification, the new jitter buffer will set its size to the jitter value plus 40 milliseconds. increasing this value may help if your network normally has low jitter, but occasionally has spikes."
+
+;Misc Settings
+Misc Settings="Misc Settings"
+IAX2 Thread Count="IAX2 Thread Count"
+IAX2 Thread Count help="Establishes the number of iax helper threads to handle I/O."
+IAX2 Max Thread Count="IAX2 Max Thread Count"
+IAX2 Max Thread Count help="Establishes the number of extra dynamic threads that may be spawned to handle I/O."
+Max Call Number="Max Call Number"
+Max Call Number help="The 'maxcallnumbers' option limits the amount of call <br>  numbers allowed for each individual remote IP address. <br>   Once an IP address reaches it\'s call number limit, no <br>  more new connections are allowed until the previous ones <br>  close. This option can be used in a peer definition as <br>  well, but only takes effect for the IP of a dynamic peer <br>  after it completes registration."
+MaxCallNumbers_Nonvalidated="MaxCallNumbers_Nonvalidated"
+MaxCallNumbers_Nonvalidated help="The \'maxcallnumbers_nonvalidated\' is used to set the <br>  combined number of call numbers that can be allocated <br>  for connections where call token  validation has been <br>  disabled. Unlike the \'maxcallnumbers\' option, this <br>  limit is not separate for each individual IP address.  <br>  Any connection resulting in a non-call token validated <br>  call number being allocated contributes to this limit. <br>   For use cases, see the call token user guide.  This <br>  option\'s default value of 8192 should be sufficient in <br>  most cases."
+
+;Quality of Service
+Quality of Service="Quality of Service"
+tos="tos"
+tos help="Type of Service"
+cos="cos"
+cos help="Class of Service"
+Normal Service="Normal Service"
+Mincost="Mincost"
+High Reliability="High Reliability"
+High Throughput="High Throughput"
+Low Delay="Low Delay"
+
+default="default"
+omit="omit"
+billing="billing"
+documentation="documentation"
+Call Token Optional="Call Token Optional"
+passthrough="passthrough"
+Max Call Number="Max Call Number"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-security.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-security]
+TLS Setting="TLS Setting"
+TLS Enable="TLS Enable"
+TLS Enable help="Enable or disable DTLS-SRTP support."
+TLS Verify Server="TLS Verify Server"
+TLS Verify Server help="Enable or disable tls verify server(default is no)."
+Port="Port"
+Port help="Port"
+TLS Client Method="TLS Client Method"
+TLS Client Method help="values include tlsv1, sslv3, sslv2, Specify protocol for outbound client connections, default is sslv2."
+tlsv1="tlsv1"
+sslv2="sslv2"
+sslv3="sslv3"
+Type="Type"
+Key Name="Key Name"
+IP Address="IP Address"
+Organization="Organization"
+Password="Password"
+Operation="Operation"
+client="client"
+server="server"
+Create="Create"
+Key Files="Key Files"
+Upload the pem file="Upload the pem file"
+Upload the crt file="Upload the crt file"
+File Upload="File Upload"
+File Name="File Name"
+File Size="File Size"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-rules.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-rules]
+Move="Move"
+Order="Order"
+Rule Name="Rule Name"
+From="From"
+To="To"
+Rules="Rules"
+Any SIP="Any SIP"
+New Call Routing Rule="New Call Routing Rule"
+Save Orders="Save Orders"
+Create a Call Routing Rule="Create a Call Routing Rule"
+Modify a Call Routing Rule="Modify a Call Routing Rule"
+
+;Call Routing Rule
+Call Routing Rule="Call Routing Rule"
+Routing Name="Routing Name"
+Routing Name help="The name of this route. Should be used to describe what types of calls this route matches(for example, 'SIP2GSM' or 'GSM2SIP')."
+Call Comes in From="Call Comes in From"
+Call Comes in From help="The launching point of incoming calls."
+Send Call Through="Send Call Through"
+Send Call Through help="The destination to receive the incoming calls."
+
+Random Delay="Random Delay"
+Random Delay help="Random Acquisition of Arbitrary Values in the Threshold Range."
+Delay MIN="Delay MIN"
+Delay MIN help="Minimum Delay Time Random Acquisition."
+Delay MAX="Delay MAX"
+Delay MAX help="Random Maximum Delay Time Length."
+
+;DISA Settings
+DISA Settings="DISA Settings"
+Authentication="Authentication"
+Authentication help="Enable or disable password authentication."
+Secondary Dialing="Secondary Dialing"
+Secondary Dialing help="Enable or disable secondary dialing."
+DISA Timeout="DISA Timeout"
+DISA Timeout help=Select the timemout range of 1 to 10 seconds.""
+Max Password Digits="Max Password Digits"
+Max Password Digits help="Restrict the max length of password."
+Password="Password"
+Password help="Click the button to edit the Authenticated Password."
+Dial Patterns that will use this Route="Dial Patterns that will use this Route"
+
+;Advance Routing Rule
+Advance Routing Rule="Advance Routing Rule"
+Dial Patterns that will use this Route="Dial Patterns that will use this Route"
+Dial Patterns that will use this Route help="A Dial Pattern is a unique set of digits that will select this route and send the call to the designated trunks. <br/>If a dialed pattern matches this route, no subsequent routes will be tried. <br/>If Time Groups are enabled, subsequent routes will be checked for matches outside of the designated time(s).<br /><br /><b>Rules:</b><br /><b>X</b>&nbsp;&nbsp;&nbsp; matches any digit from 0-9<br /><b>Z</b>&nbsp;&nbsp;&nbsp; matches any digit from 1-9<br /><b>N</b>&nbsp;&nbsp;&nbsp; matches any digit from 2-9<br /><b>[1237-9]</b>&nbsp;   matches any digit in the brackets (example: 1,2,3,7,8,9)<br /><b>.</b>&nbsp;&nbsp;&nbsp; wildcard, matches one or more dialed digits <br /><br/><b>prepend:</b>&nbsp;&nbsp;&nbsp; Digits to prepend to a successful match. Fill in Rules:[*#+0-9XZN.]+<br/>If the dialed number matches the patterns specified by the subsequent columns, then this will be prepended before sending to the trunks.<br /><br/><b>prefix:</b>&nbsp;&nbsp;&nbsp; Prefix to remove on a successful match. Fill in Rules:[*#+0-9XZN.\-\[\]]+<br/>The dialed number is compared to this and the subsequent columns for a match. <br/>Upon a match, this prefix is removed from the dialed number before sending it to the trunks.<br /><br/><b>match pattern:</b>&nbsp;&nbsp;&nbsp; The dialed number will be compared against the  prefix + this match pattern. Fill in Rules:[*#+0-9XZN.\-\[\]]+<br/>Upon a match, the match pattern portion of the dialed number will be sent to the trunks<br /><br/><b>CallerID:</b>&nbsp;&nbsp;&nbsp; If CallerID is supplied, the dialed number will only match the prefix + match pattern if the CallerID being transmitted matches this. Fill in Rules:[*#+0-9XZN.]+<br/>When extensions make outbound calls, the CallerID will be their extension number and NOT their Outbound CID. <br/>The above special matching sequences can be used for CallerID matching similar to other number matches."
+Add More Dial Pattern Fields="Add More Dial Pattern Fields"
+Click here to remove this pattern="Click here to remove this pattern"
+
+warn_anysip="Warning: It will set: allowguest=yes"
+Time Patterns that will use this Route="Time Patterns that will use this Route"
+Time Patterns that will use this Route help="Time Patterns that will use this Route"
+
+Time to start="Time to start"
+Time to finish="Time to finish"
+Week Day start="Week Day start"
+Week Day finish="Week Day finish"
+Month Day start="Month Day start"
+Month Day finish="Month Day finish"
+Month start="Month start"
+Month finish="Month finish"
+
+CalleeID/callerID Manipulation="CalleeID/callerID Manipulation"
+Callee_Dial_pattern="Callee_Dial_pattern"
+Caller_Dial_pattern="Caller_Dial_pattern"
+Prepend="Prepend"
+Prefix="Prefix"
+SDfR="SDfR"
+StA="StA"
+RdfR="RdfR"
+Match Pattern="Match Pattern"
+Caller Name="Caller Name"
+Add More Dial Pattern Fields="Add More Dial Pattern Fields"
+
+Add More Time Pattern Fields="Add More Time Pattern Fields"
+
+;Change Rules
+Change Rules="Change Rules"
+Set the Caller ID Name to="Set the Caller ID Name to"
+Set the Caller ID Name to help="What caller ID name would you like to set before sending this call to the endpoint."
+Set the Caller ID Number to="Set the Caller ID Number to"
+Set the Caller ID Number to help="What caller number would you like to set before sending this call to the endpoint."
+Forward Number="Forward Number"
+Forward Number help="This number will be sent to target PBX or SIP Server as a DID number for inbound rule settings."
+Custom Context="Custom Context"
+Custom Context help="Custom Context help"
+
+Failover Call Through Number="Failover Call Through Number"
+Failover Call Through Number help="The gateway will attempt to send the call out each of these in the order you specify"
+Add a Failover Call Through Provider="Add a Failover Call Through Provider"
+GROUP="GROUP"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-group.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-group]
+Group Name="Group Name"
+Type="Type"
+Policy="Policy"
+Members="Members"
+New Group="New Group"
+Create a Group="Create a Group"
+Modify a Group="Modify a Group"
+
+Routing Groups="Routing Groups"
+Group Name help="The name of this route. Should be used to describe what types of calls this route matches(for example, 'SIP2GSM' or 'GSM2SIP')."
+Type help="Type"
+Policy help="Policy"
+Members help="Members"
+js check groupname="Allowed character must be any of [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 characters."
+MODULE="MODULE"
+
+Ascending="Ascending"
+ascending="ascending"
+Descending="Descending"
+descending="descending"
+Roundrobin="Roundrobin"
+roundrobin="roundrobin"
+Reverse Roundrobin="Reverse Roundrobin"
+reverseroundrobin="reverseroundrobin"
+Fewest Calls="Fewest Calls"
+experiment="experiment"
+Ringall="Ringall"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sip-sim-binding.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sip-sim-binding]
+Port="Port"
+Sip Trunk="Sip Trunk"
+CallerID="CallerID"
+Sim Number="Sim Number"
+Batch Creating Rules="Batch Creating Rules"
+Sim Number="Sim Number"
+SIM number help="SIM Number: This number will be sent to target PBX or SIP Server as a DID number for inbound rule settings.If the SIM number is empty, no incoming routing is created."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-mnp.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-mnp]
+MNP Settings="MNP Settings"
+MNP Check Enable="MNP Check Enable"
+MNP Check Enable help="ON(enabled),OFF(disabled)"
+MNP URL="MNP URL"
+MNP URL help="Please check to enter the correct URL address."
+MNP Timeout="MNP Timeout"
+MNP timeout help="Allowed character must be  greater than zero."
+Manipulation Choice="Manipulation Choice"
+Manipulation Choice help="Manipulation Choice"
+Route calls before manipulation="Route calls before manipulation"
+Route calls after manipulation="Route calls after manipulation"
+js check URL="Please check to enter the correct URL address."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-blacklist.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-blacklist]
+Routing Blacklist="Routing Blacklist"
+Enable Blacklist="Enable Blacklist"
+Enable Blacklist help="Enable Blacklist"
+Dial Patterns that will use this Routing Blacklist="Dial Patterns that will use this Routing Blacklist"
+Dial Patterns that will use this Route Blacklist help="AT the inbound mode, the rules will be routed to hangup(), if the CallerNumber is exist in the blacklist."
+Number="Number"
+Add a new number to Blacklist="Add a new number to Blacklist"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	routing-advanced.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[routing-advanced]
+General="General"
+Dial Timeout="Dial Timeout"
+Dial Timeout help="Allowed character must be an integer between 1 and 3600."
+Second="Second"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-settings]
+General="General"
+SMS Received="SMS Received"
+SMS Received help="ON(enabled),OFF(disabled)"
+SMS Received warning="Turn on SMS Received switch before you enable Query Balance, Query Number, SMS Local Stored, SMS to Email or SMS to HTTP!"
+SMS Local Stored="SMS Local Stored"
+SMS Local Stored help="ON(enabled),OFF(disabled)"
+SMS Status Report="SMS Status Report"
+SMS Status Report help="ON(enabled),OFF(disabled)"
+
+Sender Options="Sender Options"
+Resend Failed Message="Resend Failed Message"
+Resend Failed Message help="The times that you will attempt to resend your failed message."
+Repeat Same Message="Repeat Same Message"
+Repeat Same Message help="The times that you will resend the same message."
+Verbose="Verbose"
+Verbose help="Verbose level of sending message."
+always="always"
+
+SMS to Email="SMS to Email"
+SMS to Email help="This is a tool that makes it available for your email account to transmit the inbox SMS to other email boxes."
+Enable="Enable"
+Enable help="ON(enabled),OFF(disabled)"
+SMTP Server="SMTP Server"
+SMTP Server help="SMTP Server"
+Email Address of Sender="Email Address of Sender"
+Email Address of Sender help="To set the email address of an available email account.<br/> For example, support@gmail.com"
+Domain="Domain"
+Domain help="To set outgoing mail server. <br/> e.g. smtp.gmail.com"
+SMTP Port="SMTP Port"
+SMTP Port help="To set port number of outgoing mail server. (Default is 25.)"
+default="default"
+SMTP User Name="SMTP User Name"
+SMTP User Name help="The login name of your existing email account. <br/>This option might be different from your email address. <br/>Some email client doesn't need the email postfix."
+SMTP Password="SMTP Password"
+SMTP Password help="The password to login your existing email."
+TLS Enable="TLS Enable"
+TLS Enable help="This option allows the authentication with certificates."
+Title="Title"
+Title help="Available variable: <br/>$PHONENUMBER:SMS sender number. <br/>$PORT:SMS from which port.<br/>$TIME:SMS received time.<br/>$MESSAGE:SMS content.<br/>"
+Content="Content"
+Content help="Available variable: <br/>$PHONENUMBER:SMS sender number. <br/>$PORT:SMS from which port.<br/>$TIME:SMS received time.<br/>$MESSAGE:SMS content.<br/>"
+
+SMS Control="SMS Control"
+SMS Control help="Allowing endpoints to send some specified KEY WORDS and corresponding PASSWORD to operate the gateway. <br/>Message is case-sensitive."
+Password="Password"
+Password help="The password to confirm that SMS makes the gateway rebooted, shut down, <br/>restored configuration files and get info on this gateway."
+SMS Formats="SMS Formats"
+SMS Formats help="For example, the message formats: <br/>reboot system PASSWORD: To reboot your whole gateway. <br/>The PASSWORD is referring to the PASSWORD you set up from option \"Password\" above.<br/>reboot asterisk PASSWORD: To restart your gateway core.<br/>restore configs PASSWORD: To reset the configuration files back to the default factory settings. <br/>get info PASSWORD: To get your gateway IP address.get info PASSWORD: To get your gateway IP address."
+SMS Formats contents="reboot system PASSWORD<br><br>reboot asterisk PASSWORD<br><br>restore config PASSWORD<br><br>get info PASSWORD"
+SMS Formats contents for Custom="reboot system PASSWORD<br><br>restore config PASSWORD<br><br>get info PASSWORD"
+SMS Inbox Auto clean="SMS Inbox Auto clean"
+SMS Inbox Auto clean help="switch on : when the size of the sms inbox record file reaches the max size, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the system will cut a half of the file. New record will be retained.<br>switch off : SMS record will remain, and the file size will increase gradually. <br>default on, maxsize=20MB."
+maxsize="maxsize"
+
+HTTP to SMS="HTTP to SMS"
+Enable CORS="Enable CORS"
+Enable CORS help="ON(enabled),OFF(disabled)"
+Allow Access Origin Domain="Allow Access Origin Domain"
+Allow Access Origin Domain help="Allow Access Origin Domain"
+URL="URL"
+URL help="The URL for send sms. <br>username: the login username for send sms.<br>password: the login password for send sms.<br>phonenumber: the destination telephone number. <br>message: the SMS contents. <br>port: the gsm port for send sms. eg gsm-1.1,gsm-1.2. <br>report: the sending result report format. <br>timeout: how long to wait. <br>"
+Timeout="Timeout"
+Timeout help="HTTP to SMS Timeout"
+Wait Timeout="Wait Timeout"
+Wait Timeout help="Wait Timeout"
+GSM Send Timeout="GSM Send Timeout"
+GSM Send Timeout help="GSM Send Timeout"
+Socket Timeout="Socket Timeout"
+Socket Timeout help="Socket Timeout"
+GSM Port help="GSM Port"
+Report="Report"
+Report help="SMS send result Report"
+SMS to HTTP="SMS to HTTP"
+SMS to HTTP URL help="The SMS receive HTTP URL"
+Enable SMS Reports to HTTP="Enable SMS Reports to HTTP"
+Enable SMS Reports to HTTP help="ON(enabled),OFF(disabled)"
+Enable AsyncSMS Result to HTTP="Enable AsyncSMS Result to HTTP"
+Enable AsyncSMS Result to HTTP help="ON(enabled),OFF(disabled)"
+Use web server's user and password="Use web server's user and password"
+Use default user and password="Use default user and password"
+User Name="User Name"
+User Name help="User Name"
+Port="Port"
+Port help="Port"
+HTTP to USSD Report help="USSD send result Report"
+Advanced="Advanced"
+Advanced help="Advanced"
+Debug="Debug"
+Debug help="Debug"
+HTTP to USSD Timeout help="HTTP Sends USSD Timeout"
+USSD to HTTP URL help="The USSD receive HTTP URL"
+USSD Result="USSD Result"
+Http Timeout help="Allowed character must be  greater than zero."
+Http Debug help="Allowed character must be  greater than zero."
+
+MMS Settings="MMS Settings"
+Download Type="Download Type"
+Download Type help="Download Type:off;immediately;on time."
+Download Time="Download Time"
+Download Time help="Timely download time."
+Immediately@mms="Immediately"
+On Time="On Time"
+JSON="JSON"
+String="String"
+No Report="No Report"
+SMS to HTTP Usage="SMS to HTTP Usage"
+Test="Test"
+Test help="Send the test email to the destination email address."
+SMS to Email--Destination Email Address help="Select the target address mailbox configured by the port. If the port is not configured, use the global configuration above."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-sender.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-sender]
+Port="Port"
+Port help="To select on which GSM channel(s) to send SMS and enter what message you want to send."
+All="All"
+Flash SMS="Flash SMS"
+Flash SMS help="Flash SMS"
+Load numbers from text file="Load numbers from text file"
+Load numbers from text file help="Load numbers from text file"
+Destination Number="Destination Number"
+Destination Number help="The number will receive the message.<br/>You will be able to separate each number by these symbols: '\r', '\n', space character, semicolon, comma.<br/>If you have more than one destination numbers."
+Destination Number help2="\"; semicolon\" , \"| vertical Bar\" , \" , comma \" , \"   blank \" , \" : colon \" , \" . dot \" were treated as separators in Destination Number List"
+Message="Message"
+Message help="The SMS content to be sent out."
+select ports="Please select ports!"
+Load numbers from text file help="Import phone numbers from files"
+Send="Send"
+Stop="Stop"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-inbox.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-inbox]
+Port="Port"
+Phone Number="Phone Number"
+Time="Time"
+Message Keywords="Message Keywords"
+Message="Message"
+All="All"
+
+Total Records="Total Records"
+NO RECORD="NO RECORD"
+DATABASE BUSY="DATABASE BUSY"
+
+Filter="Filter"
+Clean Filter="Clean Filter"
+Delete="Delete"
+Clean Up="Clean Up"
+Export="Export"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-outbox.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-outbox]
+outbox="outbox"
+Port="Port"
+Phone Number="Phone Number"
+Time="Time"
+Message="Message"
+Message Keywords="Message Keywords"
+All="All"
+Filter="Filter"
+Clean Filter="Clean Filter"
+Total Records="Total Records"
+NO RECORD="NO RECORD"
+DATABASE BUSY="DATABASE BUSY"
+sending="sending"
+failure="failure"
+Sent From="Sent From"
+Sent To="Sent To"
+Status="Status"
+Export="Export"
+Clean Up="Clean Up"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-routing.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-routing]
+Routing Groups="Routing Groups"
+Routing Name="Routing Name"
+Routing Name help="Routing Name"
+Type="Type"
+Type help="Type"
+Policy="Policy"
+Policy help="Policy"
+From Members="From Members"
+From Members help="From Members"
+To Members="To Members"
+To Members help="To Members"
+To Number="To Number"
+To Number help="To Number"
+Ascending="Ascending"
+Roundrobin="Roundrobin"
+New Routing="New Routing"
+does not exist="does not exist"
+Trigger="Trigger"
+Send Text="Send Text"
+Click here to remove this pattern="Click here to remove this pattern"
+Modify a Routing="Modify a Routing"
+Create a Routing="Create a Routing"
+Advanced Settings="Advanced Settings"
+Trigger Clear Configure="Trigger Clear Configure"
+Trigger Clear Code="Trigger Clear Code"
+Trigger Clear Code help="A specific trigger message code will be used for clearing the preconfigured list."
+Trigger Configure List="Trigger Configure List"
+Trigger Configure List help="Configure \"Trigger\" and \"Send Text\".<br>For example: \"From Members\" receive a SMS text \"Trigger\" ,\"To Members\" will send \"Send Text\" to \"To Number\"."
+Add More Trigger Settings Fields="Add More Trigger Settings Fields"
+js check groupname="Allowed character must be any of [0-9a-zA-Z`~!@#$%^*()_{}:|?-=.], 1-32 characters."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-ussd.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-ussd]
+HTTP to USSD="HTTP to USSD"
+Enable CORS="Enable CORS"
+Enable CORS help="ON(enabled),OFF(disabled)"
+Allow Access Origin Domain="Allow Access Origin Domain"
+Allow Access Origin Domain help="Allow Access Origin Domain"
+URL="URL"
+URL help="The URL for send ussd. <br>username: the login username for send ussd.<br>password: the login password for send ussd.<br>phonenumber: the destination telephone number. <br>message: the USSD contents. <br>port: the gsm port for send ussd. eg gsm-1.1,gsm-1.2. <br>report: the sending result report format. <br>timeout: how long to wait. <br>"
+User Name="User Name"
+User Name help="User Name"
+Password="Password"
+Password help="Password"
+Port="Port"
+Port help="Port"
+Report="Report"
+Report help="USSD send result Report"
+Use default user and password="Use default user and password"
+USSD to HTTP Usage="USSD to HTTP Usage"
+Close="Close"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-mms.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-mms]
+MMS Settings="MMS Settings"
+Download Type="Download Type"
+Download Type help="Download Type"
+Download Time="Download Time"
+Download Time help="Download Time"
+Close="Close"
+Immediately="Immediately"
+On Time="On Time"
+ID="ID"
+APN User Name="APN User Name"
+APN Password="APN Password"
+APN="APN"
+Batch="Batch"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	sms-email.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[sms-email]
+Email="Email"
+Port="Port"
+Enable="Enable"
+SMTP Server="SMTP Server"
+SMTP Server help="SMTP Server"
+Email Address of Sender="Email Address of Sender"
+Email Address of Sender help="To set the email address of an available email account.<br/> For example, support@openvox.cn"
+Domain="Domain"
+Domain help="To set outgoing mail server. <br/> e.g. mail.openvox.cn"
+SMTP Port="SMTP Port"
+SMTP Port help="To set port number of outgoing mail server. (Default is 25.)"
+SMTP User Name="SMTP User Name"
+SMTP User Name help="The login name of your existing email account. <br/>This option might be different from your email address. <br/>Some email client doesn't need the email postfix."
+SMTP Password="SMTP Password"
+SMTP Password help="The password to login your existing email."
+TLS Enable="TLS Enable"
+TLS Enable help="TLS Enable"
+Destination Email Address="Destination Email Address"
+Destination Email Address 1 help="The first email address to receive the inbox message."
+Destination Email Address 2 help="The second email address to receive the inbox message."
+Destination Email Address 3 help="The third email address to receive the inbox message."
+Title="Title"
+Title help="Available variable: <br/>$PHONENUMBER:SMS sender number. <br/>$PORT:SMS from which port.<br/>$TIME:SMS received time.<br/>$MESSAGE:SMS content.<br/>"
+Content="Content"
+Content help="Available variable: <br/>$PHONENUMBER:SMS sender number. <br/>$PORT:SMS from which port.<br/>$TIME:SMS received time.<br/>$MESSAGE:SMS content.<br/>"
+OTHER="OTHER"
+GMAIL="GMAIL"
+HOTMAIL="HOTMAIL"
+YAHOO="YAHOO"
+default="default"
+Save To Other Ports="Save To Other Ports"
+Save To Other Ports help="Save To Other Ports"
+Sync All Settings="Sync All Settings"
+Sync All Settings help="Sync All Settings"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-lan.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-lan]
+LAN IPv4="LAN IPv4"
+Interface="Interface"
+Interface help="The name of network interface."
+Type="Type"
+Type help="The method to get IP.<br/>Factory: Getting IP address by Slot Number(System-->Information to check slot number).<br/>Static: manually set up your gateway IP.<br/>DHCP: automatically get IP from your local LAN."
+MAC="MAC"
+MAC help="Physical address of your network interface."
+Factory="Factory"
+Static="Static"
+DHCP="DHCP"
+
+IPv4 Settings="IPv4 Settings"
+Address="Address"
+Address help="The IP address of your GSM gateway."
+Netmask="Netmask"
+Netmask help="The subnet mask of your gateway."
+Default Gateway="Default Gateway"
+Default Gateway help="Default gateway IP addrress."
+Prefix="Prefix"
+Prefix help="Prefix"
+DNS Servers="DNS Servers"
+DNS Servers help="A list of DNS IP address. <br/>Basically this info is from your local network service provider. "
+DNS Server="DNS Server"
+
+;; network lan settings help
+Reserved Access IP="Reserved Access IP"
+Reserved Access IP help="A reserved IP address to access in case your gateway IP is not available.<br/>Remember to set a similar network segment with the following address of your local PC."
+Enable="Enable"
+Enable help="A switch to enable the reserved IP address or not.<br/>On(enabled),Off(disabled)"
+Reserved Address="Reserved Address"
+Reserved Address help="The reserved IP address for this gateway."
+Reserved Netmask="Reserved Netmask"
+Reserved Netmask help="The subnet mask of the reserved IP address."
+DNS Servers="DNS Servers"
+DNS Servers help="A list of DNS IP address. <br/>Basically this info is from your local network service provider."
+DNS Server="DNS Server"
+Protocol Open="Select at least one protocol to open"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-vpn.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-vpn]
+VPN Settings="VPN Settings"
+pptp-vpn connection status="pptp-vpn connection status"
+VPNType="VPNType"
+VPNType help="The type of VPN.<br/>OpenVPN: openvpn.<br/>PPTP VPN: pptp vpn.<br/>None: None."
+OpenVPN="OpenVPN"
+PPTP VPN="PPTP VPN"
+N2N VPN="N2N VPN"
+L2TP VPN="L2TP VPN"
+Server="Server"
+Server help="Server ip address."
+server="server"
+Client="Client"
+client="client"
+Upload Configuration="Upload Configuration"
+File Upload="File Upload"
+PPTP VPN Settings="PPTP VPN Settings"
+PPTP VPN Configuration help="The pptp's server ip address."
+PPTP VPN MPPE help="PPTP VPN MPPE"
+Failed to connect="Failed to connect"
+N2N VPN Settings="N2N VPN Settings"
+
+OpenVPN Configuration Files help="Notice:1.The format of the upload file should be like this "xxxx.tar.gz" or "xxxx.ovpn";2.The postfix of configuration files should be ".conf";3.The upload file can not include any directory(xxxx.tar.gz file only);4.If still confused please download the sample configuration and refer to it(xxxx.tar.gz file only);"
+Connection Status="Connection Status"
+OpenVPN Settings="OpenVPN Settings"
+Sample Configuration="Sample Configuration"
+OpenVPN Sample Configuration help="It's just a sample configuration which help you to refer to the format. (xxxx.tar.gz file only)<br/>"
+Download Samples="Download Samples"
+VPN detection="VPN detection"
+VPN detection help="Automatic detection of VPN, if the set time is 2 minutes, then every 2 minutes to detect the connection status with IP (e.g. 10.8.0.1) devices, if not, automatically restart VPN.Time setting 0 means no detection."
+Server Address="Server Address"
+Port="Port"
+Port help="Port"
+Local IP="Local IP"
+Subnet Mask="Subnet Mask"
+User Name="User Name"
+Password="Password"
+Password help="VPN Password"
+N2N connection status="N2N connection status"
+Account="Account"
+Account help="VPN Account"
+Use MPPE="Use MPPE"
+Use MPPE help="Use MPPE or not"
+L2TP VPN Settings="L2TP VPN Settings"
+IPSec="IPSec"
+connected="connected"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-ddns.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-ddns]
+DDNS Settings="DDNS Settings"
+DDNS="DDNS"
+DDNS help="Enable/Disable DDNS (dynamic domain name server). <br/>"
+Type="Type"
+Type help="Set the type of DDNS server. <br/>"
+User Name="User Name"
+User Name help="Your DDNS account's login name.<br/>"
+Password="Password"
+Password help="Your DDNS account's password.<br/>"
+Your domain="Your domain"
+Your domain help="The domain to which your web server will belong.<br/>"
+inadyn="inadyn"
+phddns="phddns"
+Method="Method"
+Method help="Method"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-toolkit.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-toolkit]
+Ping="Ping"
+Traceroute="Traceroute"
+GSM IP="GSM IP"
+GSM IP help="GSM IP help"
+Interface="Interface"
+Interface help="The name of network interface."
+Start="Start"
+Source host="Source host"
+Source host help="Source host"
+Destination host="Destination host"
+Destination host help="The name of network interface."
+Port="Port"
+Port help="The name of network interface."
+Protocol="Protocol"
+Protocol help="The name of network interface."
+Network Data Capture="Network Data Capture"
+Source host help="IP address of source device"
+Destination host help="The name of network interface."
+tcpdump capture help="The maximum duration of this recording is 3 minutes,and the system will stop and download the recording file automatically when time is up"
+Stop Capture="Stop Capture"
+Traceroute="Traceroute"
+Capture Network Data="Capture Network Data"
+All="All"
+TCP="TCP"
+UDP="UDP"
+RTP="RTP"
+RTCP="RTCP"
+ICMP="ICMP"
+ARP="ARP"
+SIP="SIP"
+Packge Capture="Packge Capture"
+Stop="Stop"
+Download="Download"
+Running Time="Running Time"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-switch.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-switch]
+Firewall Settings="Firewall Settings"
+Firewall Enable="Firewall Enable"
+Firewall Enable help="ON(enabled),OFF(disabled)"
+Ping Enable="Ping Enable"
+Ping Enable help="ON(enabled),OFF(disabled)"
+White List Settings="White List Settings"
+White List Enable="White List Enable"
+White List Enable help="ON(enabled),OFF(disabled)"
+List IP Settings="List IP Settings"
+List IP Settings help="ON(enabled),OFF(disabled)"
+Ping help="ON(enabled),OFF(disabled)"
+Black List Settings="Black List Settings"
+Black List Enable="Black List Enable"
+Black List Enable help="ON(enabled),OFF(disabled)"
+List IP Settings="List IP Settings"
+Ping help="ON(enabled),OFF(disabled)"
+Submit="Submit"
+Invalid IP address help="Invalid IP address. Please check the ip input, and note that they are separated only by \",\"."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-rules.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-rules]
+Rule Name="Rule Name"
+Type="Type"
+Protocol="Protocol"
+Protocol help="Choose the protocol."
+Modify a Rule="Modify a Rule"
+Create a Rule="Create a Rule"
+Rule Name help="The name of this rule."
+Port="Port"
+Port help="Input the range of port."
+IP="IP"
+Security Rules="Security Rules"
+IP / MASK="IP / MASK"
+IP / MASK help="The format of IP is IP/MASK.Confirm the range by IP and mask."
+Actions help="Choose the firewall action."
+New Rule="New Rule"
+Submit="Submit"
+TCP="TCP"
+UDP="UDP"
+ICMP="ICMP"
+ACCEPT="ACCEPT"
+DROP="DROP"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	network-sipcapture.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[network-sipcapture]
+SIP Capture="SIP Capture"
+Interface="Interface"
+Interface help="The name of network interface."
+Method-filter="Method-filter"
+Method-filter help="The name of network interface."
+Start Capture="Start Capture"
+Capture Sip="Capture Sip"
+Stop Capture="Stop Capture"
+tcpdump capture help="The maximum duration of this recording is 3 minutes,and the system will stop and download the recording file automatically when time is up"
+INVITE="INVITE"
+OPTIONS="OPTIONS"
+REGISTER="REGISTER"
+All="All"
+Packge Capture="Packge Capture"
+Start="Start"
+Stop="Stop"
+Download="Download"
+Running Time="Running Time"
+Output="Output"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-astapi.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-astapi]
+General="General"
+Enable="Enable"
+Port="Port"
+Port help="Network port number."
+Manager="Manager"
+Manager Name="Manager Name"
+Manager Name help="Name of the manager without space."
+Manager secret="Manager secret"
+Manager secret help="Password for the manager.<br/>the default password is consist of letters and number, <br/>if you want to modify the password,  the password you enter must be consist of letters, numbers, and special characters \"0-9a-zA-Z!@#$%^&*\".Length: 8-32 characters."
+Deny="Deny"
+Deny help="If you want to deny many hosts or networks, use char & as separator.<br/>Example: 0.0.0.0/0.0.0.0 or 192.168.1.0/255.255.255.0&10.0.0.0/255.0.0.0"
+Permit="Permit"
+Permit help="If you want to permit many hosts or networks, use char & as separator.<br/>Example: 0.0.0.0/0.0.0.0 or 192.168.1.0/255.255.255.0&10.0.0.0/255.0.0.0"
+Rights="Rights"
+System="System"
+System help="General information about the system and ability to run system management commands, <br/>such as Shutdown, Restart, and Reload."
+Log="Log"
+Log help="Logging information.  Read-only. (Defined but not yet used.)"
+Call="Call"
+Call help="Information about channels and ability to set information in a running channel."
+Verbose="Verbose"
+Verbose help="Verbose information.  Read-only. (Defined but not yet used.)"
+Command="Command"
+Command help="Permission to run CLI commands.  Write-only."
+Agent="Agent"
+Agent help="Information about queues and agents and ability to add queue members to a queue."
+User="User"
+User help="Permission to send and receive UserEvent."
+Config="Config"
+Config help="Ability to read and write configuration files."
+DTMF="DTMF"
+DTMF help="Receive DTMF events.  Read-only."
+Reporting="Reporting"
+Reporting help="Ability to get information about the system."
+CDR="CDR"
+CDR help="Output of cdr_manager, if loaded.  Read-only."
+Dialplan="Dialplan"
+Dialplan help="Receive NewExten and VarSet events.  Read-only."
+Originate="Originate"
+Originate help="Permission to originate new calls.  Write-only."
+All="All"
+All help="Select all or deselect all."
+read="read"
+write="write"
+Report="Report"
+Asterisk Reboot="Asterisk Reboot"
+Asterisk Reboot help="Reboot the asterisk and all the current calls will be dropped."
+Asterisk Reboot confirm="Are you sure to reboot Asterisk now?"
+Asterisk Rebooting="Asterisk Rebooting"
+Result="Result"
+Asterisk Reboot Succeeded="Asterisk Reboot Succeeded"
+Asterisk Reboot Failed="Asterisk Reboot Failed"
+General="General"
+Warning="Warning"
+Warning help="*Asterisk API is closed.Please note that this operation may lead to serious consequences on calling and sending sms."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-astcli.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-astcli]
+Asterisk CLI="Asterisk CLI"
+Command="Command"
+Command help="Type your Asterisk CLI commands here to check or debug your gateway.<br/>e.g, type \"help\" or \"?\" you will get all help information."
+Execute="Execute"
+Output="Output"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-astfileeditor.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-astfileeditor]
+Configuration Files="Configuration Files"
+File Name="File Name"
+File Size="File Size"
+New Configuration File="New Configuration File"
+Reload Asterisk="Reload Asterisk"
+Reload Asterisk confirm="Are you sure to reload asterisk now?"
+Prime Config. Files="Prime Config. Files"
+Config. Files List="Config. Files List"
+Edit="Edit"
+Save file name="Please in put file name!"
+Save file exist="File already exist!"
+Cancel="Cancel"
+Delete File="Delete File"
+Delete File confirm="Are you sure to delete this file?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-internet.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-internet]
+Internet="Internet"
+Timing internet="Timing internet"
+Timing internet help="Timing internet"
+Timing time="Timing time"
+Timing time help="Timing time"
+Open="Open"
+Close="Close"
+By Month="By Month"
+By Day="By Day"
+Try Times="Try Times"
+MAX="MAX"
+USED="USED"
+No Timing="No Timing"
+APN User Name="APN User Name"
+APN Password="APN Password"
+APN="APN"
+URL="URL"
+MAX="MAX"
+USED="USED"
+Time="Time"
+Batch="Batch"
+Cancel="Cancel"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-cloud.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-cloud]
+Cloud="Cloud"
+Enable Cloud Service="Enable Cloud Service"
+Account="Account"
+Account help="the account which is registered in OpenVox cloud center."
+Password="Password"
+Password help="The password of cloud account."
+Connection Status="Connection Status"
+Connection Status help="Cloud management connection status."
+Choose Service="Choose Service"
+Choose Service help="choosing a remote server the current device will connect"
+China="China"
+America="America"
+Europe="Europe"
+Customize="Customize"
+cloud sign help="Sign up"
+cloud signmessage help="Don't have an account?"
+connected="connected"
+no connected="no connected"
+Cloud Service Disconnected="Cloud Service Disconnected"
+Connection timed out="Connection timed out"
+Password error="Password error"
+User does not exist="User does not exist"
+You have been blacklisted="You have been blacklisted"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-balance.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-balance]
+Port="Port"
+Query Type="Query Type"
+Query Type help="If the channel is in call state, the query will fail."
+Query Swith="Query Swith"
+Query Swith help="After opening, the balance can be queried."
+Destination Number="Destination Number"
+Destination Number help="Number used by operator to receive inquiry information."
+Receive Number="Receive Number"
+Receive Number help="Number used by the operator to send the queried content."
+Send Message="Send Message"
+Send Message help="Short message content sent to operators for queries."
+Matching Key="Matching Key"
+Matching Key help="The first 10 words in the contents of the content returned by the operator are not more than 30 words."
+Registered Query="Registered Query"
+Registered Query help="SIM Card Registration Successful Automatic Query Once."
+Inactive="Inactive"
+Inactive help="Interval range:0-30000.When the value is 0, it is closed.<br/>Unit: Minute."
+Call Count Query="Call Count Query"
+Call Count Query help="Call Count Query range:0-100.When the value is 0, it is closed."
+Decimal mark="Decimal mark"
+Decimal mark help="Operators reply to decimal point symbols of numerical content"
+Kilo mark="Kilo mark"
+Kilo mark help="Operator responds to the microbit symbol of numeric content"
+Balance="Balance"
+SMS="SMS"
+Tel="Tel"
+USSD="USSD"
+The matching test="The matching test"
+Message content="Message content"
+Message content help="Message content"
+Matching results="Matching results"
+Matching results help="Matching results"
+Test="Test"
+Save To Other Ports="Save To Other Ports"
+Save To Other Ports help="Save To Other Ports"
+Sync All Settings="Sync All Settings"
+Sync All Settings help="Sync All Settings"
+All="All"
+Select all settings="Select all settings"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-phonenumber.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-phonenumber]
+General="General"
+Balance="Balance"
+Port="Port"
+Query Swith="Query Swith"
+Query Swith help="Enquiry Number after Opening."
+Query Type="Query Type"
+Query Type help="If the channel is in call state, the query will fail."
+Destination Number="Destination Number"
+Destination Number help="Number used by operator to receive inquiry information."
+Receive Number="Receive Number"
+Receive Number help="Number used by the operator to send the queried content."
+Send Message="Send Message"
+Send Message help="Short message content sent to operators for queries."
+Matching Key="Matching Key"
+Matching Key help="Operators reply to the contents of the query before the number of the first 10 words, not more than 10 words."
+Decimal mark="Decimal mark"
+Decimal mark help="Operators reply to decimal point symbols of numerical content"
+Kilo mark="Kilo mark"
+Kilo mark help="Operator responds to the microbit symbol of numeric content"
+Registered Query="Registered Query"
+Registered Query help="SIM Card Registration Successful Automatic Query Once."
+Call Count Query="Call Count Query"
+Call Count Query help="Call Count Query range:0-100.When the value is 0, it is closed."
+Interval="Interval"
+Interval help="Interval range:0-30000.When the value is 0, it is closed."
+SMS="SMS"
+Tel="Tel"
+USSD="USSD"
+Balance="Balance"
+Inactive="Inactive"
+Save To Other Ports="Save To Other Ports"
+Save To Other Ports help="Save To Other Ports"
+Sync All Settings="Sync All Settings"
+
+The matching test="The matching test"
+Matching key="Matching key"
+Matching key help="Matching key"
+Message content="Message content"
+Message content help="Message content"
+Matching results="Matching results"
+Matching results help="Matching results"
+Test="Test"
+PhoneNumber="PhoneNumber"
+Setting="Setting"
+Mobile Number Switch="Mobile Number Switch"
+Mobile Number Switch help="When this switch is turned on, the mobile number will be displayed on the pages."
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	adv-arp.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[adv-arp]
+ARP="ARP"
+IP="IP"
+IP help="IP"
+MAC="MAC"
+MAC help="MAC"
+Cancel="Cancel"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-settings.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-settings]
+System Logs="System Logs"
+System Logs help="Whether enable or disable system log."
+Auto clean="Auto clean"
+Auto clean help="switch on : when the size of log file reaches the max size, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the system will cut a half of the file. New logs will be retained.<br>switch off : logs will remain, and the file size will increase gradually. <br>"
+Auto clean default@System Logs="default on, default size=1MB."
+maxsize="maxsize"
+
+Asterisk Logs="Asterisk Logs"
+Verbose="Verbose"
+Verbose help="Verbose message switch."
+Notice="Notice"
+Notice help="Notice message  switch."
+Warning="Warning"
+Warning help="Warning message  switch."
+Debug="Debug"
+Debug help="Debug message switch."
+Error="Error"
+Error help="Error message  switch."
+DTMF="DTMF"
+DTMF help="DTMF info switch."
+Auto clean default@Asterisk Logs="default on, default size=100KB."
+
+SIP Logs="SIP Logs"
+SIP Logs help="Whether enable or disable SIP log."
+IAX Logs="IAX2 Logs"
+IAX Logs help="Whether enable or disable IAX log."
+AT Commands Logs="AT Commands Logs"
+AT Commands Logs help="Displaying GSM module AT messages."
+Auto clean default@SIP Logs="default on, default size=100KB."
+Auto clean default@IAX Logs="default on, default size=100KB."
+Auto clean default@AT Commands Logs="default on, default size=100KB."
+
+BSP Logs="BSP Logs"
+Track="Track"
+Info="Info"
+RRI Logs="RRI Logs"
+RRI Pipe Logs="RRI Pipe Logs"
+RRI Pipe Logs help="Whether enable or disable RRI Pipe log."
+Voice Record="Voice Record"
+Auto clean default@BSP Logs="default on, default size=100KB."
+Auto clean default@RRI Logs="default on, default size=100KB."
+
+Call Detail Record="Call Detail Record"
+Call Detail Record help="Displaying Call Detail Records for each channel."
+Append IMEI="Append IMEI"
+Append IMEI help="switch on : IMEI will be appended to the CDR gsm channel in 'From' or 'To'. <br> switch off : No appended IMEI. <br>  default off."
+Auto clean default@Call Detail Record="default on, default size=20MB."
+
+Syslog="Syslog"
+Local Syslog="Local Syslog"
+Local Syslog help="This action needs to set the Asterisk log level in the log, and then turn on the local Syslog to take effect."
+Server Address="Server Address"
+Server Address help="Server Address"
+Server Port="Server Port"
+Server Port help="Server Port"
+Syslog Level="Syslog Level"
+CDR Level="CDR Level"
+EMERG="EMERG"
+ALERT="ALERT"
+CRIT="CRIT"
+ERROR="ERROR"
+WARNING="WARNING"
+NOTICE="NOTICE"
+INFO="INFO"
+DEBUG="DEBUG"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-sys.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-sys]
+System Logs="System Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-ast.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-ast]
+Asterisk Logs="Asterisk Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-sip.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-sip]
+SIP Logs="SIP Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-iax.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-iax]
+IAX2 Logs="IAX2 Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-bsp.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-bsp]
+BSP Logs="BSP Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-rri.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-rri]
+RRI Logs="RRI Logs"
+RRI Pipe Logs="RRI Pipe Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-debugat.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-debugat]
+Send AT Commands="Send AT Commands"
+Packing was failed="Packing was failed"
+Send="Send"
+AT Commands Logs="AT Commands Logs"
+Refresh Rate="Refresh Rate"
+Refresh="Refresh"
+Clean Up="Clean Up"
+Clean All="Clean All"
+Download="Download"
+Clean Up confirm="Are you sure to clean up this logs?"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-cdr.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-cdr]
+NO RECORD="NO RECORD"
+Caller ID="Caller ID"
+Callee ID="Callee ID"
+From="From"
+To="To"
+Start Time="Start Time"
+Duration="Duration"
+Result="Result"
+All="All"
+Filter="Filter"
+Clean Filter="Clean Filter"
+Callee ID help="defalut: EXTEN<br/>eg: When selecting SIP To, Name is Jason and Number is 401.<br/>To mode is: \"Jason\"&lt;sip:401@172.16.6.239;transport=UDP&gt;"
+Start Time="Start Time"
+Total Records="Total Records"
+DATABASE BUSY="DATABASE BUSY"
+ANSWERED="ANSWERED"
+BUSY="BUSY"
+FAILED="FAILED"
+NO ANSWER="NO ANSWER"
+Sim Number="Sim Number"
+Bank="Bank"
+Slot="Slot"
+Delete="Delete"
+Clean Up="Clean Up"
+Clean Up confirm="Are you sure to clean up this logs?"
+Export="Export"
+GSM Outbound="GSM Outbound"
+GSM Inbound="GSM Inbound"
+All Calls="All Calls"
+All Durations="All Durations"
+Answered="Answered"
+No Answer="No Answer"
+Busy="Busy"
+Failed="Failed"
+Other="Other"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	log-statistics.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[log-statistics]
+GSM Outbound="GSM Outbound"
+GSM Inbound="GSM Inbound"
+SMS="SMS"
+Port="Port"
+All Calls="All Calls"
+All Durations="All Durations"
+Answered="Answered"
+Canceled="Canceled"
+Busy="Busy"
+No Answer="No Answer"
+No Dialtone="No Dialtone"
+No Carrier="No Carrier"
+Other="Other"
+ALL SMS="ALL SMS"
+Deliverd="Deliverd"
+Sent="Sent"
+Failed="Failed"
+Total="Total"
+Export="Export"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	set-info.php
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[set-info]
+Set Information="Set Information"
+Switch="Switch"
+Switch help="If this switch is enabled, the following parameter information will be used."
+Product Name="Product Name"
+Product Name help="Product Name"
+Contact Address="Contact Address"
+Contact Address help="Contact Address"
+Tel="Tel"
+Tel help="Tel"
+Fax="Fax"
+Fax help="Fax"
+E-Mail="E-Mail"
+E-Mail help="E-Mail"
+Web Site="Web Site"
+Web Site help="Web Site"
+Copyright="Copyright"
+Copyright help="Copyright"
+Download Sample Images="Download Sample Images"
+Download Sample Images help="Download the case picture and modify it according to the size of the picture."
+Header Image="Header Image"
+Header Image help="Header background picture, the size of the picture is 1280x417, can be seen in the following case picture."
+Footer Image="Footer Image"
+Footer Image help="Footer background picture, the size of the picture is 1280x105, can be seen in the following case picture."
+Image Upload error="Your Image file was larger than 2M!<br>Uploading failed."
+Image Upload Filesize error="Your Image file was larger than 2M!<br>Uploading failed."

@@ -1,0 +1,22 @@
+#!/bin/php
+
+<?php
+/********************************************************************
+ *
+ *	path_file : /my_tools/web_language_init
+ *	
+ *	function : According to /etc/asterisk/gw/web_language.conf,
+ *		   cache /etc/asterisk/gw/web_language/xxx to 
+ *		   /tmp/language.cache.
+ *
+ ********************************************************************/
+
+include_once("/www/cgi-bin/inc/language.inc");
+
+if(!is_dir('/etc/asterisk/gw/web_language')){
+	mkdir('/etc/asterisk/gw/web_language'); 
+}
+
+web_language_init();
+
+?>

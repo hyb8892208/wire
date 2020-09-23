@@ -1,0 +1,141 @@
+#!/bin/php
+<?php 
+
+if (!isset($argv[4])) exit(1);
+
+if(file_exists("/etc/asterisk/gw/custom_sms")) {
+	@system("/etc/asterisk/gw/custom_sms \"$argv[1]\" \"$argv[2]\" \"$argv[3]\" \"$argv[4]\" > /dev/null 2>&1 &");
+}
+
+$PORT="$argv[1]";
+$PHONENUMBER="$argv[2]";
+$TIME="$argv[3]";
+$MESSAGE="$argv[4]";
+
+/* Save to database */
+include_once("/www/cgi-bin/inc/smsinboxdb.php"); 
+$db = new SMSINBOXDB(); 
+$db->insert_sms("$PORT","$PHONENUMBER","$TIME","$MESSAGE");
+
+$sms_cfg="/etc/asterisk/gw/sms.conf";
+
+/* SMS to Email */
+$sw=trim(`/my_tools/set_config "$sms_cfg" get option_value mail sw`);
+if($sw == 'on') {
+	$smail1=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smail1`);
+	$smail2=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smail2`);
+	$smail3=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smail3`);
+	$sender=trim(`/my_tools/set_config "$sms_cfg" get option_value mail sender`);
+	$smtp_server=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtpserver`);
+	$smtp_port=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtpport`);
+	if($smtp_port == "") $smtp_port=25;
+	$smtp_user=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtpuser`);
+	$smtp_pwd=trim(`/my_tools/set_config "$sms_cfg" get option_value mail smtppwd`);
+	$tls_enable=trim(`/my_tools/set_config "$sms_cfg" get option_value mail tls_enable`);
+
+	$title=trim(`/my_tools/set_config "$sms_cfg" get option_value mail mail_title`);
+	$content=trim(`/my_tools/set_config "$sms_cfg" get option_value mail mail_content`);
+
+	if($title == '') {
+		$title="$PHONENUMBER send sms to port $PORT in $TIME";
+	} else {
+		$title = str_replace("\$PHONENUMBER","$PHONENUMBER",$title);
+		$title = str_replace("\$PORT","$PORT",$title);
+		$title = str_replace("\$TIME","$TIME",$title);
+		$title = str_replace("\$MESSAGE","$MESSAGE",$title);
+	}
+
+	if($content == '') {
+		$content = "$MESSAGE";
+	} else {
+		$content = str_replace("\$PHONENUMBER","$PHONENUMBER",$content);
+		$content = str_replace("\$PORT","$PORT",$content);
+		$content = str_replace("\$TIME","$TIME",$content);
+		$content = str_replace("\$MESSAGE","$MESSAGE",$content);
+	}
+
+	if( ($smail1 != "" || $smail2 != "" || $smail3 != "") && 
+		$sender != "" && 
+		$smtp_server != "" &&
+		$smtp_user != "" &&
+		$smtp_pwd != ""
+	) {
+		require_once('/my_tools/PHPMailer_5.2.2/class.phpmailer.php');
+		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
+		try {
+			$mail->IsSMTP(); // telling the class to use SMTP
+			$mail->SMTPAuth   = true;                  // enable SMTP authentication
+
+			if($tls_enable == 'yes') {
+				#If you want to use TLS, try adding:
+				$mail->SMTPSecure = 'tls';
+			}
+
+			#If you want to use SSL, try adding:
+			#$mail->SMTPSecure = 'ssl';
+
+			$mail->CharSet	  = 'utf-8';
+			$mail->Host       = $smtp_server; // SMTP server
+			$mail->SetFrom($sender);
+
+			//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+			$mail->Port       = $smtp_port;                    // set the SMTP port for the GMAIL server
+
+			$mail->Username   = $smtp_user; // SMTP account username
+			$mail->Password   = $smtp_pwd;        // SMTP account password
+
+			if($smail1 != "")
+				$mail->AddAddress($smail1);
+
+			if($smail2 != "")
+				$mail->AddAddress($smail2);
+
+			if($smail3 != "")
+				$mail->AddAddress($smail3);
+
+			$mail->Subject = $title;
+			$mail->Body = $content; 
+			$mail->Send();
+		//  echo "Message Sent OK</p>\n";
+		} catch (phpmailerException $e) {
+			echo $e->errorMessage(); //Pretty error messages from PHPMailer
+		} catch (Exception $e) {
+			echo $e->getMessage(); //Boring error messages from anything else!
+		}
+	}
+}
+
+
+/* SMS Commands */
+$sw=trim(`/my_tools/set_config "$sms_cfg" get option_value control sw`);
+if($sw == 'on') {
+	$password=trim(`/my_tools/set_config "$sms_cfg" get option_value control password`);
+	if( $MESSAGE == "reboot system $password") {
+		exec("/my_tools/add_syslog \"Reboot system from SMS\" > /dev/null 2>&1");
+		sleep(1);
+		exec("reboot > /dev/null 2>&1");
+	} else if( $MESSAGE == "reboot asterisk $password") {
+		exec("/my_tools/add_syslog \"Reboot asterisk from SMS\" > /dev/null 2>&1");
+		sleep(1);
+		exec("/etc/init.d/asterisk restart > /dev/null 2>&1");
+	} else if( $MESSAGE == "restore config $password") {
+		exec("/my_tools/add_syslog \"Restore config from SMS\" > /dev/null 2>&1");
+		sleep(1);
+		fclose(fopen("/etc/asterisk/cfg_version","w"));
+		fclose(fopen("/etc/cfg/cfg_version","w"));
+		exec("reboot > /dev/null 2>&1");
+	} else if( $MESSAGE == "get info $password") {
+		$SPAN=$PORT;
+		$SMSSRC=$PHONENUMBER;
+		exec("/my_tools/add_syslog \"Send SMS to $SMSSRC by $SPAN (get ip)\" 2>&1");
+		$lan_ip=`/my_tools/net_tool eth0 2> /dev/null | sed -n '4p'`;
+		$wan_ip=`/my_tools/net_tool eth2 2> /dev/null | sed -n '4p'`;
+		$str="LAN IP:$lan_ip \nWAN_IP:$wan_ip";
+		$STR=$str;
+		exec("asterisk -rx \"gsm send sms $SPAN $SMSSRC \\\"$STR\\\"\" > /dev/null 2>&1");
+	}
+}
+
+
+?>
+

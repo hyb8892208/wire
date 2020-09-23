@@ -1,0 +1,461 @@
+#!/bin/sh
+# Copyright (C) 2015 PIVA Software <www.pivasoftware.com>
+# 	Author: MOHAMED Kallel <mohamed.kallel@pivasoftware.com>
+
+#############################
+#   Entry point functuons   #
+#############################
+prefix_list="$prefix_list $DMROOT.Services.VoiceService"
+entry_execute_method_list="$entry_execute_method_list entry_execute_method_root_Services"
+entry_execute_method_list_forcedinform="$entry_execute_method_list_forcedinform  entry_execute_method_root_Services"
+entry_execute_method_root_Services() {
+	case "$1" in ""|"$DMROOT."|"$DMROOT.Services."|"$DMROOT.Services.VoiceService"*)
+		common_execute_method_obj "$DMROOT.Services." "0"
+		common_execute_method_obj "$DMROOT.Services.VoiceService." "0"
+		common_execute_method_obj "$DMROOT.Services.VoiceService.1." "0"
+                
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.RemoteWeb" "1" "voice_get_remoteweb" "voice_set_remoteweb" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.RemoteSSH" "1" "voice_get_remotessh" "voice_set_remotessh" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.Web" "0" "voice_get_web" "" "" "1" 
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.WebHttpPort" "0" "voice_get_webhttpport" "" "" "1" 
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.WebHttpsPort" "0" "voice_get_webhttpsport" "" "" "1" 				                
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.SSH" "0" "voice_get_ssh" "" "" "1"
+
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.KernelBuildTime" "0" "voice_get_kernel_buildtime" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.CPUUsage" "0" "voice_get_cpu_usage" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.MemoryUsage" "0" "voice_get_memory_usage" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.StorageUsage" "0" "voice_get_storage_useage" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.ExternalStorageUsage" "0" "voice_get_externalstorage_usage" "" "" "1"
+		
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.SIPNum" "0" "voice_get_sips_num" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.IAXNum" "0" "voice_get_iax2_num" "" "" "1"
+
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.CDMANum" "0" "voice_get_cdma_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.CDMAActive" "0" "voice_get_active_cdma_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.GSMNum" "0" "voice_get_gsm_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.GSMActive" "0" "voice_get_active_gsm_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.ThreeGNum" "0" "voice_get_3g_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.ThreeGActive" "0" "voice_get_active_3g_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.FourGNum" "0" "voice_get_4g_channels" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.FourGActive" "0" "voice_get_active_4g_channels" "" "" "1" 
+		
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.CloudStatus" "0" "voice_get_cloudstatus" "" "" "1"	
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.ModelName" "0" "voice_get_model_name" "" "" "1"                
+
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.SoftwareURL" "0" "voice_get_software_url" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.UpgradeVersionURL" "0" "voice_get_upgrade_version_url" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.UpgradeInfoURL" "0" "voice_get_upgrade_info_url" "" "" "1"
+		common_execute_method_param "$DMROOT.Services.VoiceService.1.UpgradeProgressRate" "0" "voice_get_upgrade_progress_rate" "" "" "1"
+		return 0
+		;;
+	esac
+	return $E_INVALID_PARAMETER_NAME;
+}
+
+
+voice_get_remoteweb() {
+	local status=`/my_tools/set_config /etc/config/remote_web get option_value remote_web status`
+	local val=`echo ${status}` 
+	[ "X$val" = "Xstop" ] && echo "stop" && return 
+	local p1=`/my_tools/set_config /etc/config/remote_web get option_value remote_web  port` 
+	local port=`echo $p1`
+	local p2=`/my_tools/set_config /etc/config/remote_web get option_value remote_web  mport`
+	local mport=`echo $p2`
+	echo "start/${port}/${mport}"
+}
+voice_set_remoteweb() {
+	local val=`echo $1`
+	if [ "X$val" = "Xstop" ]; then
+		/my_tools/set_config /etc/config/remote_web set option_value remote_web  status stop
+		/etc/init.d/remoteweb stop
+	else
+		/my_tools/set_config /etc/config/remote_web set option_value remote_web  status stop
+		/etc/init.d/remoteweb stop
+		local mport=`echo ${val##*/}`
+		local sp=`echo ${val%/*}`
+		local port=`echo ${sp:6}`
+		/my_tools/set_config /etc/config/remote_web set option_value remote_web status start
+		/my_tools/set_config /etc/config/remote_web set option_value remote_web port $port
+		/my_tools/set_config /etc/config/remote_web set option_value remote_web mport $mport
+		/etc/init.d/remoteweb start
+		sleep 2
+		
+	fi
+	return 0;
+}
+voice_get_remotessh() {
+	local status=`/my_tools/set_config /etc/config/remote_ssh get option_value remote_ssh status`
+	local val=`echo ${status}` 
+	[ "X$val" = "Xstop" ] && echo "stop" && return 
+	local p1=`/my_tools/set_config /etc/config/remote_ssh get option_value remote_ssh  port ` 
+	local port=`echo $p1`
+	local p2=`/my_tools/set_config /etc/config/remote_ssh get option_value remote_ssh  mport `
+	local mport=`echo $p2`
+	echo "start/${port}/${mport}"
+}
+voice_set_remotessh() {
+	local val=`echo $1`
+	if [ "X$val" = "Xstop" ]; then
+		/my_tools/set_config /etc/config/remote_ssh set option_value remote_ssh  status stop   		
+		/etc/init.d/remotessh stop
+	else
+		/my_tools/set_config /etc/config/remote_ssh set option_value remote_ssh  status stop
+		/etc/init.d/remotessh stop
+		local mport=`echo ${val##*/}`
+		local sp=`echo ${val%/*}`
+		local port=`echo ${sp:6}`
+		/my_tools/set_config /etc/config/remote_ssh set option_value remote_ssh  status start
+		/my_tools/set_config /etc/config/remote_ssh set option_value remote_ssh  port $port   
+		/my_tools/set_config /etc/config/remote_ssh set option_value remote_ssh  mport $mport
+		/etc/init.d/remotessh start
+		
+	fi
+	return 0;
+}
+voice_get_web()
+{
+	mode=`/my_tools/set_config  /etc/asterisk/gw/web_server.conf get option_value general login_mode`
+	if [ "x$mode" = "xhttp_https" ]; then
+		echo "http"
+	else
+		echo $mode
+	fi
+}
+voice_get_webhttpport()
+{
+	httpport=` /my_tools/set_config  /etc/asterisk/gw/web_server.conf get option_value general  port` 
+	echo $httpport
+}
+voice_get_webhttpsport()
+{                                                           
+	echo "443"   
+
+}
+voice_get_ssh(){
+	echo "12345"
+}
+
+voice_get_cloudstatus() {
+	cloudstatus=`/my_tools/set_config  /etc/config/cloud.conf get option_value cloud enable`
+	echo $cloudstatus	
+
+}
+voice_get_model_name() {
+	mode_type=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys sys_type`
+	chan_count=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys total_chan_count`
+
+	if [ x"$mode_type" = x"1" ]; then
+		if [ x"$chan_count" = x"16" ]; then
+			ver_type=`/my_tools/set_config /tmp/hw_info.cfg get option_value sys hw_ver`
+			if [ x"$ver_type" = x"1.0" ]; then
+				model_name="SWG-1016"
+			else
+				model_name="SWG-2016"
+			fi
+			echo $model_name
+		elif [ x"$chan_count" = x"32" ]; then
+			model_name="SWG-2032"
+			echo $model_name
+		fi
+	
+	elif [ x"$mode_type" = x"3" ]; then
+		if [ x"$chan_count" = x"20" ]; then
+			model_name="VS_USB-1020"
+			echo $model_name
+		elif [ x"$chan_count" = x"44" ]; then
+			model_name="VS_USB-1044"
+			echo $model_name
+		elif [ x"$chan_count" = x"8" ]; then
+			model_name="SWG-2008"
+			echo $model_name
+		fi
+	elif [ x"$mode_type" = x"2" ];then
+		if [ x"$chan_count" = x"16" ];then
+			model_name="SWG-2016-4S"
+			echo $model_name
+		elif [ x"$chan_count" = x"16" ];then
+			model_name="SWG-2032-4S"
+			echo $model_name
+		fi
+	fi
+}
+
+voice_get_kernel_buildtime(){
+	local kernelbuildtime=`/my_tools/redis-cli get local.system.kernel.build.time | awk 'NR==1{printf("%s-%s-%s %s",$6,$2,$3,$4)}' 2> /dev/null`
+	echo $kernelbuildtime
+}
+
+voice_get_cpu_usage(){
+	CPU_1=$(cat /proc/stat | grep 'cpu ' | awk '{print $2" "$3" "$4" "$5" "$6" "$7" "$8}')
+	SYS_IDLE_1=$(echo $CPU_1 | awk '{print $4}')
+	Total01=$(echo $CPU_1 | awk '{printf "%.f",$1+$2+$3+$4+$5+$6+$7}')
+	sleep 2
+	CPU_2=$(cat /proc/stat | grep 'cpu ' | awk '{print $2" "$3" "$4" "$5" "$6" "$7" "$8}')
+	SYS_IDLE_2=$(echo $CPU_2 | awk '{print $4}')
+	Total_2=$(echo $CPU_2 | awk '{printf "%.f",$1+$2+$3+$4+$5+$6+$7}')
+	SYS_IDLE=`expr $SYS_IDLE_2 - $SYS_IDLE_1`
+	Total=`expr $Total_2 - $Total01`
+	TT=`expr $SYS_IDLE \* 100`
+	SYS_USAGE=`expr $TT / $Total`
+	SYS_Rate=`expr 100 - $SYS_USAGE`
+	SYS_Rate=${SYS_Rate}%
+	echo $SYS_Rate
+}
+
+
+voice_get_memory_usage(){
+	MEM_USAGE=`cat /proc/meminfo 2>/dev/null  | awk '{if(NR==1){A=$2}if(NR==2){B=$2}}END{print (A-B)/A*100}' 2>/dev/null`
+	MEM_USAGE=${MEM_USAGE}%
+	echo $MEM_USAGE	
+}
+
+voice_get_storage_useage(){
+	STORGE_USAGE=`df -m |grep data |awk '{print $5}'`
+	echo ${STORGE_USAGE}
+}
+
+voice_get_externalstorage_usage(){
+	SD_EXIST=`cat /proc/partitions |grep sd[a-z]1 |head -n1`
+	if [ "X${SD_EXIST}" = "X" ];then
+		SD_USAGE="--"
+	else
+		SD_USAGE=`df -m |grep /dev/sd[a-z]1 |head -n1|awk '{print $5}'`
+	fi
+		
+	echo ${SD_USAGE}
+
+}
+
+voice_get_sips_num(){
+	/usr/bin/asterisk -rx "sip show peers" > /dev/null 2>&1 
+	RESULT=`echo $?`
+	if [ ${RESULT} = 0 ];then
+		RES=`/usr/bin/asterisk -rx "sip show peers"|grep "sip peers"|awk '{print $1,$5}'`
+		SIP_TOTAL=`echo ${RES} |awk '{print $1}'`
+		SIP_ACTIVE=`echo ${RES} |awk '{print $2}'`
+		SIP_USAGE=${SIP_ACTIVE}/${SIP_TOTAL}
+		echo ${SIP_USAGE}
+	else
+		SIP_USAGE="--"
+		echo ${SIP_USAGE}
+	fi
+}
+
+voice_get_iax2_num(){
+	/usr/bin/asterisk -rx "iax2 show peers" > /dev/null 2>&1 
+	RESULT=`echo $?`
+	if [ ${RESULT} = 0 ];then
+		RES=`/usr/bin/asterisk -rx "iax2 show peers"|grep "iax2 peers"|awk '{print $1,$6}'`
+		SIP_TOTAL=`echo ${RES} |awk '{print $1}'`
+		SIP_ACTIVE=`echo ${RES} |awk '{print $2}'`
+		SIP_USAGE=${SIP_ACTIVE}/${SIP_TOTAL}
+		echo ${SIP_USAGE}
+	else
+		SIP_USAGE="--"
+		echo ${SIP_USAGE}
+	fi
+}
+
+#MODULE_TYPE_FILE=/tmp/.module_type
+#MODULE_TYPE_STR=`cat $MODULE_TYPE_FILE`
+#MODULE_TYPE_ARR=(${MODULE_TYPE_STR//,/ })
+HW_INFO_CFG=/tmp/hw_info.cfg
+
+## According to the configure file of /tmp/hw_info.cfg to generate the Array of $module_type_arr,
+## the $module_type_arr is used to save the channel's index and type
+eval $(grep -r "^chan_.*_type" $HW_INFO_CFG | awk -F "=" '{split($1, tmp_arr, "_"); print "module_type_arr["tmp_arr[2]"]="$2}')
+
+GET_CHAN_STATE=/my_tools/redis-cli  
+CALL_COUNT_KEY="app.asterisk.gsmstatus.channel"
+
+check_span_available()
+{
+    span=$1
+    ## Getting the value of channel's Singnal Quality
+    span_signal_quality=`cat /tmp/gsm/${span} | grep "Signal Quality" | awk -F ":" '{print $2}'`
+    ## Removing the space character in $span_signal_quality
+    span_signal_quality=`echo $span_signal_quality | sed s/[[:space:]]//g`
+    UP_FLAG=0
+    span_status=`cat /tmp/gsm/${span} | grep "^Status" | awk -F ":" '{print $2}'`
+    echo $span_status | grep "Power on, Provisioned, Up" > /dev/null 2>&1
+    while [[ x"$UP_FLAG" != x1 ]]
+    do
+        echo $span_status | grep "Power on, Provisioned, Up" > /dev/null 2>&1
+        if [ "$?" = 0 ]; then
+            UP_FLAG=1
+            break
+        fi
+        echo $span_status | grep "Power on, Provisioned, Block" > /dev/null 2>&1
+        if [ "$?" = 0 ]; then
+            UP_FLAG=1
+            break
+        fi 
+        echo $span_status | grep "Power on, Provisioned, In Alarm, Up" > /dev/null 2>&1
+        if [ "$?" = 0 ]; then
+             UP_FLAG=1
+             break
+        fi
+        break
+    done
+    if [ x"$UP_FLAG" = x1 ]; then
+        ## the channel is considered to active when the $span_signale_quality is greater than 1
+        if [ "${span_signal_quality}" -gt 1 ]; then
+            #let cdma_active_chan_sum=gsm_active_chan_sum+1
+            echo "available"
+        else
+            echo "disavaiable"
+        fi
+    else
+        echo "disavaiable"
+    fi
+}
+
+voice_get_cdma_channels()
+{
+	cdma_chan_sum=0
+	for((index=1; index<=${#module_type_arr[@]}; index++))
+    do
+        if [ x"${module_type_arr[$index]}" = xSIMCOM_SIM6320C ]; then
+            let cdma_chan_sum=cdma_chan_sum+1 
+        fi
+    done 
+
+	echo $cdma_chan_sum
+}
+
+voice_get_active_cdma_channels()
+{
+	cdma_active_chan_sum=0
+    for((index=1; index<=${#module_type_arr[@]}; index++))
+    do
+        if [ x"${module_type_arr[$index]}" = xSIMCOM_SIM6320C ]; then
+        	span_available_flag=`check_span_available $index`
+            if [ "$span_available_flag" = "available" ]; then
+	            let cdma_active_chan_sum=cdma_active_chan_sum+1
+        	fi                                                 
+        fi
+    done      
+            
+    echo $cdma_active_chan_sum
+
+}
+
+voice_get_gsm_channels()
+{
+	gsm_chan_sum=0
+	for ((index=1; index<=${#module_type_arr[@]}; index++))
+	do
+		if [ x"${module_type_arr[$index]}" = xQuectel_M35 ]; then
+			let gsm_chan_sum=gsm_chan_sum+1
+		fi
+	done
+
+	echo $gsm_chan_sum
+}
+
+voice_get_active_gsm_channels()
+{
+	index=0
+	gsm_active_chan_sum=0
+	for((index=1; index<=${#module_type_arr[@]}; index++))
+	do
+		if [ x"${module_type_arr[$index]}" = xQuectel_M35 ]; then
+			span_available_flag=`check_span_available $index`
+            if [ "$span_available_flag" = "available" ]; then
+	            let gsm_active_chan_sum=gsm_active_chan_sum+1
+			fi
+		fi
+	done
+
+	echo $gsm_active_chan_sum
+}
+
+voice_get_3g_channels()
+{
+	chan_sum_3g=0
+	for ((index=1; index<=${#module_type_arr[@]}; index++))
+	do
+		## 3G module type is UC15A or UC15E
+		if [ x"${module_type_arr[$index]::4}" = xUC15 ]; then 
+			let chan_sum_3g=chan_sum_3g+1
+		fi
+	done
+
+	echo $chan_sum_3g
+}
+
+voice_get_active_3g_channels()
+{
+	index=0
+	active_chan_sum_3g=0
+	for ((index=1; index<=${#module_type_arr[@]}; index++))
+	do
+		## 3G module type is UC15A or UC15E
+		if [ x"${module_type_arr[$index]::4}" = xUC15 ]; then 
+			span_available_flag=`check_span_available $index`
+            if [ "$span_available_flag" = "available" ]; then
+	            let active_chan_sum_3g=active_chan_sum_3g+1
+			fi
+		fi
+	done
+
+	echo $active_chan_sum_3g
+}
+
+voice_get_4g_channels()
+{
+	chan_sum_4g=0
+	for ((index=1; index<=${#module_type_arr[@]}; index++))
+	do
+		if [ x"${module_type_arr[$index]}" = xEC20CE ]; then
+			let chan_sum_4g=chan_sum_4g+1
+		fi
+	done
+
+	echo ${chan_sum_4g}	
+}
+
+voice_get_active_4g_channels()
+{
+	active_chan_sum_4g=0
+	for ((index=1; index<=${#module_type_arr[@]}; index++))
+	do
+		if [ x"${module_type_arr[$index]}" = xEC20CE ]; then
+			span_available_flag=`check_span_available $index`
+            if [ "$span_available_flag" = "available" ]; then
+	            let active_chan_sum_4g=active_chan_sum_4g+1
+        	fi
+		fi
+	done
+
+	echo ${active_chan_sum_4g}
+}
+
+voice_get_software_url()
+{
+	echo "http://downloads.openvox.cn/pub/firmwares/Wireless_Gateway/SWG-gen2/swg-current.bin"
+}
+
+voice_get_upgrade_version_url()
+{
+	echo "http://downloads.openvox.cn/pub/firmwares/Wireless_Gateway/SWG-gen2/current-version"
+}
+
+voice_get_upgrade_info_url()
+{
+	echo "http://downloads.openvox.cn/pub/firmwares/Wireless_Gateway/SWG-gen2/current-changelog"
+}
+
+voice_get_upgrade_progress_rate()
+{
+	#FIRMWARE_BIN=/tmp/swg-current.bin
+	FIRMWARE_BIN=/tmp/download_file
+	if [ -f $FIRMWARE_BIN ]; then
+		TOTAL_SIZE=43764
+		CURRENT_SIZE=`du -s $FIRMWARE_BIN | awk '{print $1}'`
+ 
+		echo | awk "{print ($CURRENT_SIZE/$TOTAL_SIZE)*100*0.8}"
+	else
+		echo "0"
+	fi
+}

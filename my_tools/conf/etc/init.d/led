@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /etc/functions.sh
+
+case "$1" in
+	start)
+		killps led_server $$
+		/my_tools/led_server start >/dev/null 2>&1 &
+#		/my_tools/keeper "start:led:/etc/init.d/led start"
+		;;
+	stop)
+#		/my_tools/keeper "stop:led"
+		killps led_server $$
+		/my_tools/led_server stop >/dev/null 2>&1
+		;;
+	reboot)
+		killps led_server $$
+		/my_tools/led_server reboot >/dev/null 2>&1
+		;;
+	*)
+		echo "Usage: $0 {start|stop|reboot}"
+		exit 2
+		;;
+esac
+
+exit 0

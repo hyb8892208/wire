@@ -1,0 +1,11 @@
+lock
+noauth
+#refuse-pap
+#refuse-eap
+#refuse-chap
+#refuse-mschap
+nobsdcomp
+nodeflate
+idle 0
+defaultroute
+maxfail 0

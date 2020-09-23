@@ -1,0 +1,17 @@
+﻿anlslicense 
+   
+   1.作用
+     将密文license文件解密成明文license文件
+   2.工作流程
+			和生成密文license文件的过程相反
+	3.编译
+     make -C  liblicense
+     make install -C  liblicense
+     make 
+     make install
+   4.说明
+     主要功能放在liblicense目录下,该目录会生成一个静态库。
+     静态库除了提供anlslicense接口外，还提供了getsippeers接口，用于获取license文件中的sip注册数。
+     
+     
+ 

@@ -1,0 +1,95 @@
+#!/bin/sh
+#-----------------------------------------------------------------
+# the script used for start/stop/restart remote ssh service 
+#-----------------------------------------------------------------
+usage()
+{
+	echo "Usage : $0  [start]|[stop]|[restart]|[status]"
+	echo "Example :"
+	echo "        $0 start"
+}
+if [ $# -ne 1 ]; then 
+		echo "Please check the argument! "
+		usage
+		exit 0
+fi
+check_status()
+{
+	PIDNAME=$1
+	FULLNAME=`ps w |grep "${PIDNAME}" |awk '{print $5}'`
+	for i in ${FULLNAME}; do
+		if [ "`basename $i`" = "$PIDNAME" ]; then
+			return 1
+		else	
+			continue
+		fi
+	done
+   return 2
+}
+export AUTOSSH_PATH='/etc/config/ssh'
+case "$1" in
+		start|Start)  
+				check_status remotessh_client
+				echo -ne "starting remote ssh service ......"
+				
+				server_url=`/my_tools/set_config /etc/config/cloud.conf get  option_value cloud server_url`
+				if [ x"$server_url" = x"" ]; then
+					server_url="cloud.openvox.com.cn"
+				fi
+				
+				enable=`/my_tools/set_config /etc/config/remote_ssh get option_value remote_ssh status`
+				if [ "x$enable" = "xstart" ]; then
+						
+				port=`/my_tools/set_config /etc/config/remote_ssh get option_value remote_ssh port`
+				mport=`/my_tools/set_config /etc/config/remote_ssh get option_value remote_ssh mport`	
+					
+				sshpass -f /etc/config/remote_key  ssh -o "StrictHostKeyChecking=no"  -NCR $port:localhost:12345  cloudclient@$server_url -p 2200 &
+
+				fi
+				if [ "$?" = "0" ] ; then 
+					echo -ne "\t\t\t[\033[32m OK \033[0m]\n"
+				else
+					echo -ne "\t\t\t[\033[31m Failed \033[0m]\n"	
+				fi			
+			;;
+		stop|Stop)
+			#check_status remotessh_client
+			#RET=`echo $?`
+			#if [ "$RET" != "1" ]; then
+			#	echo -ne "remote ssh service status ......"
+			#	echo -ne "\t\t\t[\033[31m Stoped \033[0m]\n"
+			#else 
+				echo -ne "stopping remote ssh service ......"
+				p=`/my_tools/set_config /etc/config/remote_ssh get  option_value remote_ssh port`
+				portstr="$p:localhost:"
+				kill -9 `ps -ef|grep "ssh" |grep $portstr|awk '{print $1}'`	
+				if [ "$?" = "0" ] ; then 
+					echo -ne "\t\t\t[\033[32m OK \033[0m]\n"
+				else
+					echo -ne "\t\t\t[\033[31m Failed \033[0m]\n"	
+				fi			
+			#fi
+			;;
+		restart)
+			echo -ne "restarting remote ssh service status ......"
+			$0 stop
+			$0 start
+			;;
+	
+		status)
+			echo -ne "remote ssh service status ......"
+			check_status remotessh_client
+			RET=`echo $?`
+			if [ "$RET" = "1" ]; then
+				echo -ne "\t\t\t[\033[32m Alive \033[0m]\n"
+			else 
+				echo -ne "\t\t\t[\033[31m Stoped \033[0m]\n"
+			fi
+			;;
+		*) 
+			echo "invalid argument!"
+			usage
+			;;
+esac	
+
+exit 0				

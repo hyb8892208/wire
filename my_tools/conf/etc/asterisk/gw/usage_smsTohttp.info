@@ -1,0 +1,55 @@
+SMS to HTTP
+-----------------------------------------
+
+Usage: http://host:port/path?param1=${phonenumber}&param2=${port}&param3=${portname}&param4=${message}&param5=${time}&
+
+a Parameter Description
+
+1. host
+    Description: HTTP server IP address or domain
+    Example: 172.16.6.171 
+
+2. port
+    Description: HTTP server's port 
+    Example: 80
+
+3. path
+    Description: a path of file that Used to receive and handle request of SMS data
+    Example: smsreceive.php
+
+4. param1:
+    Description: a name of parameter used to handle the value of 'phonenumber' 
+    Example: phonenumber
+
+5. param2
+    Description: a name of parameter used to handle the value of 'port'
+    Example: port
+
+6. param3
+    Description: a name of parameter used to handle the value of 'portname'
+    Example: portname 
+
+7. param4
+    Description: a name of parameter used to handle the value of 'message'
+    Example: message 
+
+8. param5
+    Description: a name of parameter used to handle the value of 'time'
+    Example: time
+
+b Result Description
+	Example: 
+		Type: SMS-Status-Result 
+		Time: 2018-12-29 16:35:46 
+		ID: e3e79a93 
+		Status: Sent 
+		Number: 411 
+		Port: 5
+		
+c Report Description		
+		Type: SMS-Status-Report 
+		Time: 2018/12/29 17:47:34 
+		ID: 
+		Status: Message received on handset 
+		Number: 10086 
+		Port: 1

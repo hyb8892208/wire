@@ -1,0 +1,41 @@
+#!/bin/sh
+ 
+start()
+{
+		if ! ps -ef | grep "sms_reports_to_http.lua" | grep -v grep  > /dev/null 2>&1 ; then
+			SMS_REPORT_SW=`/my_tools/set_config /etc/asterisk/gw/sms.conf get option_value sms_to_http smsreports_to_http_enable`
+			SMS_RESULT_SW=`/my_tools/set_config /etc/asterisk/gw/sms.conf get option_value sms_to_http smsresults_to_http_enable`
+			cd /my_tools/lua/send
+			if [ x"${SMS_REPORT_SW}" != 'off' ]; then 
+				lua sms_reports_to_http.lua > /dev/null 2>&1 &
+			fi
+			
+			if [ x"${SMS_RESULT_SW}" != 'off' ]; then
+				lua sms_reports_to_http.lua > /dev/null 2>&1 &
+			fi
+		fi
+}
+ 
+stop()
+{
+		reportsPID=`ps -ef | grep "sms_reports_to_http.lua" | grep -v grep | awk '{print $1}'`
+		resultsPID=`ps -ef | grep "sms_results_to_http.lua" | grep -v grep | awk '{print $1}'`
+		if [ x"${reportsPID}" != x -o x"${resultsPID}" != x ]; then
+			kill -9 $reportsPID $resultsPID
+		fi
+}
+ 
+case "$1" in
+        start)
+			start
+			;;
+		stop)
+			stop
+			;;
+		restart)
+			stop
+			start
+			;;
+esac
+																													 
+exit 0

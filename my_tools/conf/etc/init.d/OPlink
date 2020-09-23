@@ -1,0 +1,39 @@
+#!/bin/bash
+
+CONF_FILE=/etc/asterisk/simemusvr.conf
+
+function linkstop()
+{
+	/my_tools/keeper "stop:OPlink"
+	kill -9 `pidof OPlink`
+}
+
+function linkstart()
+{
+	switch=`/my_tools/set_config $CONF_FILE get option_value OPlink switch`
+	
+	if [ x"$switch" == x"on" ]; then
+		node_id=`/my_tools/set_config $CONF_FILE get option_value OPlink node_id`
+		community=`/my_tools/set_config $CONF_FILE get option_value OPlink seri`
+		host=`/my_tools/set_config $CONF_FILE get option_value OPlink node_server`
+		/my_tools/OPlink -d OPlink -l $host  -a 10.150.210.$node_id  -c $community  
+		/my_tools/keeper "start:OPlink:/etc/init.d/OPlink start"
+	else
+		linkstop
+	fi
+	
+}
+
+case "$1" in
+    start)
+        linkstart
+        ;;
+    stop)
+        linkstop
+        ;;
+    restart|reload)
+        linkstop
+        linkstart
+        ;;
+esac        
+

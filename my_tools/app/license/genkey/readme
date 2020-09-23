@@ -1,0 +1,53 @@
+﻿two-level-sign目录
+	1.编译
+		make
+	2.作用
+		两级签名 
+   	a. master key  用于对secondary key进行签名和验证
+			i. 命令：./genmasterpair 
+                  Enter new master key password
+                  openvox
+			ii. 输出：
+                  master-privkey-enc
+                  master-privkey-hash
+                  master-privkey-iv
+                  master-pubkey 
+             
+
+		b. secondary key 用于对license文件(密文)进行签名和验证 
+       i.命令： ./gensecondarypair      
+                   Enter new secondary key password
+                   ippbx 
+       ii.输出：
+                  secondary-privkey-enc
+                  secondary-privkey-hash
+                  secondary-privkey-iv
+                  secondary-pubkey
+                  secondary-pubkey-sig
+
+serial目录
+	1.编译
+		make
+	2.作用
+			产生AES key，用于加密serial序列号
+      	i.命令： ./genserialpair 
+                  Enter new serial key password
+                  uc300 
+       	ii.输出：
+                 encrypt-enc
+                 encrypt-hash
+                 encrypt-iv    
+rsa目录
+	 1.编译
+	 		shell脚本，不需要编译
+	 2.作用               
+   		产生RSA key 用于加密license(明文)
+      i: 命令：./genrsakey    
+      ii: 输出：
+                private.pem
+                public.pem
+
+
+当需要改变秘钥时,
+1.进入genkey目录,编译各个子目录，并执行相应命令产生新的秘钥文件
+2.将新的秘钥文件内容(字符串)填入genlicense和anlslicense目录下的相应程序中，重新编译安装genlicense和anlslicense目录

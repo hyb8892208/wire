@@ -1,0 +1,34 @@
+#!/bin/bash
+while true
+do
+	sleep 5
+	enable=`/my_tools/set_config /etc/config/remote_ssh get  option_value remote_ssh status`
+	if [ "x$enable" = "xstart" ]; then
+		p=`/my_tools/set_config /etc/config/remote_ssh get  option_value remote_ssh port`
+		portstr="$p:localhost:"
+		pro=`ps| grep  "$portstr" | grep -v grep`
+		if [ -z "$pro" ]; then
+			/etc/init.d/remotessh restart
+		fi
+	fi
+	enable=`/my_tools/set_config /etc/config/remote_web get  option_value remote_web status`
+	if [ "x$enable" = "xstart" ]; then
+		p=`/my_tools/set_config /etc/config/remote_web get  option_value remote_web port`
+		portstr="$p:localhost:"
+		pro=`ps | grep  "$portstr" | grep -v grep`
+		if [ -z "$pro" ]; then
+			/etc/init.d/remoteweb restart
+		fi
+	fi
+	
+	enable=` /my_tools/set_config /etc/config/cloud.conf get  option_value cloud enable`
+	if [ x"$enable" = x"yes" ]; then
+		if [ -z `pidof cloudMain` ]; then
+			cloudMain  -b   > /dev/null 2>&1 &
+		fi
+		if [ -z `pidof  cloudNat` ]; then
+			cloudNat   > /dev/null 2>&1   &
+		fi
+	fi
+done
+

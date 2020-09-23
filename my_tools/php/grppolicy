@@ -1,0 +1,179 @@
+#!/bin/php
+<?php
+include_once("/www/cgi-bin/inc/define.inc"); 
+include_once("/www/cgi-bin/inc/cdrdb.php"); 
+include_once("/www/cgi-bin/inc/wrcfg.inc"); 
+
+function trim_head($name)
+{
+	global $__SIP_HEAD__;
+
+	//Only sip need trim head.
+	if(substr($name,0,strlen($__SIP_HEAD__)) == $__SIP_HEAD__) { //SIP  sip-sipendpointname
+		$name = substr($name,strlen($__SIP_HEAD__));
+	}
+
+	return $name;
+}
+
+function Ascending($mbs)
+{
+	return $mbs;
+}
+
+function Descending($mbs)
+{
+	krsort($mbs);
+
+	return $mbs;
+}
+
+function getpos($grpname)
+{
+	$path = "/tmp/grppolicy_${grpname}";
+	$fh = @fopen($path, "r");
+	@flock($fh,LOCK_EX);
+
+	$pos = @fgets($fh);
+
+	@flock($fh,LOCK_UN);
+	@fclose($fh);
+
+	return intval($pos);
+}
+
+function setpos($grpname,$value)
+{
+	$path = "/tmp/grppolicy_${grpname}";
+	$fh = @fopen($path, "w");
+	@flock($fh,LOCK_EX);
+
+	@fwrite($fh,$value);
+
+	@flock($fh,LOCK_UN);
+	@fclose($fh);
+}
+
+function Roundrobin($mbs)
+{
+	global $grpname;
+
+	$c = count($mbs);
+	if($c<=0) exit(0);
+	$pos = getpos($grpname);
+	if($pos < 0 || $pos > $c) {
+		$pos = 0;
+	}
+
+	$bhalf = array_slice($mbs,$pos);
+	$thalf = array_slice($mbs,0,$pos);
+
+	$pos ++;
+
+	$pos %= $c;
+
+	setpos($grpname,$pos);
+
+	return array_merge($bhalf,$thalf);
+}
+
+
+function Reverseroundrobin($mbs)
+{
+	krsort($mbs);
+	return Roundrobin($mbs);
+}
+
+
+function Leastrecent($mbs)
+{
+	$db = new CDRDB();
+	$ary2 = array();
+	foreach($mbs as $each) {
+		$name = trim_head($each);
+		$ary2[] = $db->get_call_count_out($name);
+	}
+
+	array_multisort($ary2,SORT_ASC,$mbs);
+
+	return $mbs;
+}
+
+function Fewestcalls($mbs)
+{
+	$db = new CDRDB();
+	$ary2 = array();
+	foreach($mbs as $each) {
+		$name = trim_head($each);
+		$ary2[] = $db->get_callduration_out($name);
+	}
+
+	array_multisort($ary2,SORT_ASC,$mbs);
+
+	return $mbs;
+}
+
+function Random($mbs)
+{
+	shuffle($mbs);
+	return $mbs;
+}
+
+
+//argv[1]:   group-name
+if (!isset($argv[1])) exit(0);
+
+$grpname = $argv[1];
+$grpinfo = get_group_info($grpname);
+$in_mbs = $grpinfo['members'];
+
+switch($grpinfo['policy']){
+case 'ascending': 
+	$out_mbs = Ascending($in_mbs);
+	break;
+case 'descending': 
+	$out_mbs = Descending($in_mbs);
+	break;
+case 'roundrobin': 
+	$out_mbs = Roundrobin($in_mbs);
+	break;
+case 'reverseroundrobin': 
+	$out_mbs = Reverseroundrobin($in_mbs);
+	break;
+case 'leastrecent': 
+	$out_mbs = Leastrecent($in_mbs);
+	break;
+case 'fewestcalls': 
+	$out_mbs = Fewestcalls($in_mbs);
+	break;
+case 'random':
+	$out_mbs = Random($in_mbs);
+	break;
+default:
+	$out_mbs = Descending($in_mbs);
+	break;
+}
+
+
+$devices = '';
+
+foreach($out_mbs as $ch) {
+	$ch_info = get_channel_info($ch);
+
+	if($ch_info['type'] == 'gsm') {
+		$gsm_dialprefix = get_gsm_dialprefix($ch_info['channel']);
+	} else {
+		$gsm_dialprefix = '';
+	}
+
+	$cdr_name = $ch_info['name'];
+	$device = $ch_info['device'];
+
+	$devices .= "$device,0,$cdr_name,$gsm_dialprefix,";
+}
+
+//$devices = rtrim($devices,',');
+echo $devices;
+exit(0);
+
+?>

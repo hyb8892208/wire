@@ -1,0 +1,35 @@
+#!/bin/sh
+ 
+start()
+{
+	if ! ps -ef | grep "ussd_results_to_http.lua" | grep -v grep  > /dev/null 2>&1 ; then
+		USSD_RESULT_SW=`/my_tools/set_config /etc/asterisk/gw/ussd.conf get option_value ussd_to_http ussd_to_http_enable`
+		cd /my_tools/lua/send
+		if [ x"${USSD_RESULT_SW}" != 'off' ]; then 
+			lua ussd_results_to_http.lua > /dev/null 2>&1 &
+		fi
+	fi
+}
+ 
+stop()
+{
+	resultsPID=`ps -ef | grep "ussd_results_to_http.lua" | grep -v grep | awk '{print $1}'`
+	if [ x"${resultsPID}" != x ]; then
+		kill -9 $resultsPID
+	fi
+}
+ 
+case "$1" in
+        start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+esac
+																													 
+exit 0
